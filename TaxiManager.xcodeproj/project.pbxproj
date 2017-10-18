@@ -1,0 +1,542 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0FCDA2A72DB0EBA0C3F633F5 /* Pods_TaxiManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9C0688FB86992E2886AE4A /* Pods_TaxiManager.framework */; };
+		111C30FF1F8B067500EF37E3 /* TelaBuscaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C30FE1F8B067500EF37E3 /* TelaBuscaViewController.swift */; };
+		112830B11F884E3C000972CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112830B01F884E3C000972CB /* AppDelegate.swift */; };
+		112830B31F884E3C000972CB /* TelaInicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112830B21F884E3C000972CB /* TelaInicialViewController.swift */; };
+		112830B61F884E3C000972CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112830B41F884E3C000972CB /* Main.storyboard */; };
+		112830BB1F884E3C000972CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112830B91F884E3C000972CB /* LaunchScreen.storyboard */; };
+		117E24871F963DF90041DCB6 /* TMResultadoBuscaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E24851F963DF90041DCB6 /* TMResultadoBuscaCell.swift */; };
+		117E24881F963DF90041DCB6 /* TMResultadoBuscaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */; };
+		117E248B1F964F870041DCB6 /* ResultadoBusca.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E248A1F964F870041DCB6 /* ResultadoBusca.swift */; };
+		117E248D1F96520A0041DCB6 /* Corrida.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E248C1F96520A0041DCB6 /* Corrida.swift */; };
+		119BCD181F97A366004D92CB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD191F97A366004D92CB /* Alamofire.framework */; };
+		119BCD1A1F97A395004D92CB /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */; };
+		119BCD1C1F97A3FE004D92CB /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1D1F97A3FE004D92CB /* SideMenu.framework */; };
+		11EB8D1A1F8D3B6500D0FDE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D191F8D369900D0FDE4 /* Assets.xcassets */; };
+		11EB8D301F8D4CAE00D0FDE4 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D1D1F8D4C8700D0FDE4 /* Poppins-Black.ttf */; };
+		11EB8D311F8D4CAE00D0FDE4 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D1E1F8D4C8700D0FDE4 /* Poppins-BlackItalic.ttf */; };
+		11EB8D321F8D4CAE00D0FDE4 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D1F1F8D4C8700D0FDE4 /* Poppins-Bold.ttf */; };
+		11EB8D331F8D4CAE00D0FDE4 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D201F8D4C8700D0FDE4 /* Poppins-BoldItalic.ttf */; };
+		11EB8D341F8D4CAE00D0FDE4 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D211F8D4C8700D0FDE4 /* Poppins-ExtraBold.ttf */; };
+		11EB8D351F8D4CAE00D0FDE4 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D221F8D4C8700D0FDE4 /* Poppins-ExtraBoldItalic.ttf */; };
+		11EB8D361F8D4CAE00D0FDE4 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D231F8D4C8700D0FDE4 /* Poppins-ExtraLight.ttf */; };
+		11EB8D371F8D4CAE00D0FDE4 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D241F8D4C8700D0FDE4 /* Poppins-ExtraLightItalic.ttf */; };
+		11EB8D381F8D4CAE00D0FDE4 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D251F8D4C8700D0FDE4 /* Poppins-Italic.ttf */; };
+		11EB8D391F8D4CAE00D0FDE4 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D261F8D4C8700D0FDE4 /* Poppins-Light.ttf */; };
+		11EB8D3A1F8D4CAE00D0FDE4 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D271F8D4C8700D0FDE4 /* Poppins-LightItalic.ttf */; };
+		11EB8D3B1F8D4CAE00D0FDE4 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D281F8D4C8700D0FDE4 /* Poppins-Medium.ttf */; };
+		11EB8D3C1F8D4CAE00D0FDE4 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D291F8D4C8700D0FDE4 /* Poppins-MediumItalic.ttf */; };
+		11EB8D3D1F8D4CAE00D0FDE4 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2A1F8D4C8700D0FDE4 /* Poppins-Regular.ttf */; };
+		11EB8D3E1F8D4CAE00D0FDE4 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2B1F8D4C8700D0FDE4 /* Poppins-SemiBold.ttf */; };
+		11EB8D3F1F8D4CAE00D0FDE4 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2C1F8D4C8700D0FDE4 /* Poppins-SemiBoldItalic.ttf */; };
+		11EB8D401F8D4CAE00D0FDE4 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2D1F8D4C8700D0FDE4 /* Poppins-Thin.ttf */; };
+		11EB8D411F8D4CAE00D0FDE4 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2E1F8D4C8700D0FDE4 /* Poppins-ThinItalic.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		111C30FE1F8B067500EF37E3 /* TelaBuscaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaBuscaViewController.swift; sourceTree = "<group>"; };
+		112830AD1F884E3C000972CB /* TaxiManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaxiManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		112830B01F884E3C000972CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		112830B21F884E3C000972CB /* TelaInicialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaInicialViewController.swift; sourceTree = "<group>"; };
+		112830B51F884E3C000972CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		112830BA1F884E3C000972CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		112830BC1F884E3C000972CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		117E24851F963DF90041DCB6 /* TMResultadoBuscaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMResultadoBuscaCell.swift; sourceTree = "<group>"; };
+		117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMResultadoBuscaCell.xib; sourceTree = "<group>"; };
+		117E248A1F964F870041DCB6 /* ResultadoBusca.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadoBusca.swift; sourceTree = "<group>"; };
+		117E248C1F96520A0041DCB6 /* Corrida.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corrida.swift; sourceTree = "<group>"; };
+		119BCD191F97A366004D92CB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		119BCD1D1F97A3FE004D92CB /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		11EB8D191F8D369900D0FDE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		11EB8D1C1F8D4C8700D0FDE4 /* OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		11EB8D1D1F8D4C8700D0FDE4 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
+		11EB8D1E1F8D4C8700D0FDE4 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
+		11EB8D1F1F8D4C8700D0FDE4 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		11EB8D201F8D4C8700D0FDE4 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
+		11EB8D211F8D4C8700D0FDE4 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		11EB8D221F8D4C8700D0FDE4 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		11EB8D231F8D4C8700D0FDE4 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
+		11EB8D241F8D4C8700D0FDE4 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		11EB8D251F8D4C8700D0FDE4 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		11EB8D261F8D4C8700D0FDE4 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		11EB8D271F8D4C8700D0FDE4 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
+		11EB8D281F8D4C8700D0FDE4 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		11EB8D291F8D4C8700D0FDE4 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
+		11EB8D2A1F8D4C8700D0FDE4 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		11EB8D2B1F8D4C8700D0FDE4 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		11EB8D2C1F8D4C8700D0FDE4 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		11EB8D2D1F8D4C8700D0FDE4 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		11EB8D2E1F8D4C8700D0FDE4 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
+		23741A00D917E0F4A3FBADA6 /* Pods-TaxiManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.debug.xcconfig"; sourceTree = "<group>"; };
+		85CB8ACC30F5206867D086CF /* Pods-TaxiManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.release.xcconfig"; sourceTree = "<group>"; };
+		EB9C0688FB86992E2886AE4A /* Pods_TaxiManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaxiManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		112830AA1F884E3C000972CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				119BCD1C1F97A3FE004D92CB /* SideMenu.framework in Frameworks */,
+				119BCD1A1F97A395004D92CB /* SwiftSpinner.framework in Frameworks */,
+				119BCD181F97A366004D92CB /* Alamofire.framework in Frameworks */,
+				0FCDA2A72DB0EBA0C3F633F5 /* Pods_TaxiManager.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		112830A41F884E3C000972CB = {
+			isa = PBXGroup;
+			children = (
+				112830AF1F884E3C000972CB /* TaxiManager */,
+				112830AE1F884E3C000972CB /* Products */,
+				863B9278B4BAC12E60BF7D9D /* Pods */,
+				CA426495C4FB85F6FDDBCA83 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		112830AE1F884E3C000972CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				112830AD1F884E3C000972CB /* TaxiManager.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		112830AF1F884E3C000972CB /* TaxiManager */ = {
+			isa = PBXGroup;
+			children = (
+				117E24891F963E0B0041DCB6 /* TMResultadoBuscaCell */,
+				11EB8D2F1F8D4C9200D0FDE4 /* Fonts */,
+				112830B01F884E3C000972CB /* AppDelegate.swift */,
+				112830B21F884E3C000972CB /* TelaInicialViewController.swift */,
+				111C30FE1F8B067500EF37E3 /* TelaBuscaViewController.swift */,
+				117E248A1F964F870041DCB6 /* ResultadoBusca.swift */,
+				117E248C1F96520A0041DCB6 /* Corrida.swift */,
+				112830B41F884E3C000972CB /* Main.storyboard */,
+				112830B91F884E3C000972CB /* LaunchScreen.storyboard */,
+				112830BC1F884E3C000972CB /* Info.plist */,
+				11EB8D191F8D369900D0FDE4 /* Assets.xcassets */,
+			);
+			path = TaxiManager;
+			sourceTree = "<group>";
+		};
+		117E24891F963E0B0041DCB6 /* TMResultadoBuscaCell */ = {
+			isa = PBXGroup;
+			children = (
+				117E24851F963DF90041DCB6 /* TMResultadoBuscaCell.swift */,
+				117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */,
+			);
+			path = TMResultadoBuscaCell;
+			sourceTree = "<group>";
+		};
+		11EB8D1B1F8D4C8700D0FDE4 /* Poppins */ = {
+			isa = PBXGroup;
+			children = (
+				11EB8D1C1F8D4C8700D0FDE4 /* OFL.txt */,
+				11EB8D1D1F8D4C8700D0FDE4 /* Poppins-Black.ttf */,
+				11EB8D1E1F8D4C8700D0FDE4 /* Poppins-BlackItalic.ttf */,
+				11EB8D1F1F8D4C8700D0FDE4 /* Poppins-Bold.ttf */,
+				11EB8D201F8D4C8700D0FDE4 /* Poppins-BoldItalic.ttf */,
+				11EB8D211F8D4C8700D0FDE4 /* Poppins-ExtraBold.ttf */,
+				11EB8D221F8D4C8700D0FDE4 /* Poppins-ExtraBoldItalic.ttf */,
+				11EB8D231F8D4C8700D0FDE4 /* Poppins-ExtraLight.ttf */,
+				11EB8D241F8D4C8700D0FDE4 /* Poppins-ExtraLightItalic.ttf */,
+				11EB8D251F8D4C8700D0FDE4 /* Poppins-Italic.ttf */,
+				11EB8D261F8D4C8700D0FDE4 /* Poppins-Light.ttf */,
+				11EB8D271F8D4C8700D0FDE4 /* Poppins-LightItalic.ttf */,
+				11EB8D281F8D4C8700D0FDE4 /* Poppins-Medium.ttf */,
+				11EB8D291F8D4C8700D0FDE4 /* Poppins-MediumItalic.ttf */,
+				11EB8D2A1F8D4C8700D0FDE4 /* Poppins-Regular.ttf */,
+				11EB8D2B1F8D4C8700D0FDE4 /* Poppins-SemiBold.ttf */,
+				11EB8D2C1F8D4C8700D0FDE4 /* Poppins-SemiBoldItalic.ttf */,
+				11EB8D2D1F8D4C8700D0FDE4 /* Poppins-Thin.ttf */,
+				11EB8D2E1F8D4C8700D0FDE4 /* Poppins-ThinItalic.ttf */,
+			);
+			path = Poppins;
+			sourceTree = "<group>";
+		};
+		11EB8D2F1F8D4C9200D0FDE4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				11EB8D1B1F8D4C8700D0FDE4 /* Poppins */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		863B9278B4BAC12E60BF7D9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				23741A00D917E0F4A3FBADA6 /* Pods-TaxiManager.debug.xcconfig */,
+				85CB8ACC30F5206867D086CF /* Pods-TaxiManager.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CA426495C4FB85F6FDDBCA83 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				119BCD1D1F97A3FE004D92CB /* SideMenu.framework */,
+				119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */,
+				119BCD191F97A366004D92CB /* Alamofire.framework */,
+				EB9C0688FB86992E2886AE4A /* Pods_TaxiManager.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		112830AC1F884E3C000972CB /* TaxiManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 112830BF1F884E3C000972CB /* Build configuration list for PBXNativeTarget "TaxiManager" */;
+			buildPhases = (
+				E42B1F49D4E8E887A85949E6 /* [CP] Check Pods Manifest.lock */,
+				112830A91F884E3C000972CB /* Sources */,
+				112830AA1F884E3C000972CB /* Frameworks */,
+				112830AB1F884E3C000972CB /* Resources */,
+				996F257EE5CA1C17B8528ABC /* [CP] Embed Pods Frameworks */,
+				D609767AD60E54EB7D937785 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TaxiManager;
+			productName = TaxiManager;
+			productReference = 112830AD1F884E3C000972CB /* TaxiManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		112830A51F884E3C000972CB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Taxi Manager";
+				TargetAttributes = {
+					112830AC1F884E3C000972CB = {
+						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 112830A81F884E3C000972CB /* Build configuration list for PBXProject "TaxiManager" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 112830A41F884E3C000972CB;
+			productRefGroup = 112830AE1F884E3C000972CB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				112830AC1F884E3C000972CB /* TaxiManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		112830AB1F884E3C000972CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11EB8D361F8D4CAE00D0FDE4 /* Poppins-ExtraLight.ttf in Resources */,
+				11EB8D3F1F8D4CAE00D0FDE4 /* Poppins-SemiBoldItalic.ttf in Resources */,
+				11EB8D3C1F8D4CAE00D0FDE4 /* Poppins-MediumItalic.ttf in Resources */,
+				11EB8D391F8D4CAE00D0FDE4 /* Poppins-Light.ttf in Resources */,
+				11EB8D301F8D4CAE00D0FDE4 /* Poppins-Black.ttf in Resources */,
+				11EB8D321F8D4CAE00D0FDE4 /* Poppins-Bold.ttf in Resources */,
+				11EB8D3D1F8D4CAE00D0FDE4 /* Poppins-Regular.ttf in Resources */,
+				117E24881F963DF90041DCB6 /* TMResultadoBuscaCell.xib in Resources */,
+				11EB8D331F8D4CAE00D0FDE4 /* Poppins-BoldItalic.ttf in Resources */,
+				11EB8D351F8D4CAE00D0FDE4 /* Poppins-ExtraBoldItalic.ttf in Resources */,
+				11EB8D401F8D4CAE00D0FDE4 /* Poppins-Thin.ttf in Resources */,
+				112830BB1F884E3C000972CB /* LaunchScreen.storyboard in Resources */,
+				11EB8D381F8D4CAE00D0FDE4 /* Poppins-Italic.ttf in Resources */,
+				11EB8D411F8D4CAE00D0FDE4 /* Poppins-ThinItalic.ttf in Resources */,
+				11EB8D371F8D4CAE00D0FDE4 /* Poppins-ExtraLightItalic.ttf in Resources */,
+				11EB8D3B1F8D4CAE00D0FDE4 /* Poppins-Medium.ttf in Resources */,
+				11EB8D3A1F8D4CAE00D0FDE4 /* Poppins-LightItalic.ttf in Resources */,
+				11EB8D341F8D4CAE00D0FDE4 /* Poppins-ExtraBold.ttf in Resources */,
+				11EB8D311F8D4CAE00D0FDE4 /* Poppins-BlackItalic.ttf in Resources */,
+				11EB8D3E1F8D4CAE00D0FDE4 /* Poppins-SemiBold.ttf in Resources */,
+				11EB8D1A1F8D3B6500D0FDE4 /* Assets.xcassets in Resources */,
+				112830B61F884E3C000972CB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		996F257EE5CA1C17B8528ABC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D609767AD60E54EB7D937785 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E42B1F49D4E8E887A85949E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		112830A91F884E3C000972CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				112830B31F884E3C000972CB /* TelaInicialViewController.swift in Sources */,
+				112830B11F884E3C000972CB /* AppDelegate.swift in Sources */,
+				117E248D1F96520A0041DCB6 /* Corrida.swift in Sources */,
+				111C30FF1F8B067500EF37E3 /* TelaBuscaViewController.swift in Sources */,
+				117E24871F963DF90041DCB6 /* TMResultadoBuscaCell.swift in Sources */,
+				117E248B1F964F870041DCB6 /* ResultadoBusca.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		112830B41F884E3C000972CB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				112830B51F884E3C000972CB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		112830B91F884E3C000972CB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				112830BA1F884E3C000972CB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		112830BD1F884E3C000972CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		112830BE1F884E3C000972CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		112830C01F884E3C000972CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23741A00D917E0F4A3FBADA6 /* Pods-TaxiManager.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SLC3VZ7589;
+				INFOPLIST_FILE = TaxiManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.taximanager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		112830C11F884E3C000972CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85CB8ACC30F5206867D086CF /* Pods-TaxiManager.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SLC3VZ7589;
+				INFOPLIST_FILE = TaxiManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.taximanager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		112830A81F884E3C000972CB /* Build configuration list for PBXProject "TaxiManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112830BD1F884E3C000972CB /* Debug */,
+				112830BE1F884E3C000972CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		112830BF1F884E3C000972CB /* Build configuration list for PBXNativeTarget "TaxiManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112830C01F884E3C000972CB /* Debug */,
+				112830C11F884E3C000972CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 112830A51F884E3C000972CB /* Project object */;
+}

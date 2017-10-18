@@ -1,0 +1,29 @@
+PODS:
+  - Alamofire (4.5.1)
+  - GoogleMaps (2.4.0):
+    - GoogleMaps/Maps (= 2.4.0)
+  - GoogleMaps/Base (2.4.0)
+  - GoogleMaps/Maps (2.4.0):
+    - GoogleMaps/Base
+  - GooglePlaces (2.4.0):
+    - GoogleMaps/Base (= 2.4.0)
+  - SideMenu (3.0.1)
+  - SwiftSpinner (1.4.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.5)
+  - GoogleMaps
+  - GooglePlaces
+  - SideMenu (= 3.0.1)
+  - SwiftSpinner
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  GoogleMaps: 8436ab5d1c25e36915b2f7416d0c8e3fa2e76c61
+  GooglePlaces: aafe5990fa7951e98e078761bbdaaf236d7e0c65
+  SideMenu: f1fe8a4d23c8ae06d5cb18b21be29851d78fd2f2
+  SwiftSpinner: bf7c13332ad008952a09358cadf24a186510ae31
+
+PODFILE CHECKSUM: d3dc3b943e16ab12e4054f5cd9fe8a2195058e49
+
+COCOAPODS: 1.2.0
