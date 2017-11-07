@@ -1,29 +1,17 @@
 //
-//  TMResultadoBuscaCell.swift
+//  TMCustomTableViewHeaderTableViewCell.swift
 //  TaxiManager
 //
-//  Created by Esdras Martins on 17/10/17.
+//  Created by Esdras Martins on 31/10/17.
 //  Copyright © 2017 Taxi Manager. All rights reserved.
 //
 
 import UIKit
 
-class TMResultadoBuscaCell: UITableViewCell {
+class TMCustomTableViewHeaderTableViewCell: UITableViewCell {
 
-    //MARK: - Outlets
-    
     @IBOutlet weak var imgViewLogo: UIImageView!
-    
-    @IBOutlet weak var labelNome: UILabel!
-    
-    @IBOutlet weak var labelEspera: UILabel!
-    
-    @IBOutlet weak var labelPreco: UILabel!
-    
-    
-    @IBOutlet weak var btnIr: UIButton!
-    
-    @IBOutlet weak var labelNomeModalidade: UILabel!
+    @IBOutlet weak var labelTitulo: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -11,6 +11,7 @@ import CoreLocation
 import MapKit
 import GooglePlaces
 import Alamofire
+import SCLAlertView
 
 
 class TelaBuscaViewController: UIViewController {
@@ -21,7 +22,6 @@ class TelaBuscaViewController: UIViewController {
     @IBOutlet weak var labelDistancia: UILabel!
     @IBOutlet weak var labelDuracao: UILabel!
     @IBOutlet weak var tableViewResultado: UITableView!
-    
     
     //MARK: - Propriedades
     var resumoBusca : ResumoBusca?
@@ -39,14 +39,14 @@ class TelaBuscaViewController: UIViewController {
         
         
         let distanciaFormatada = String(format: "%.1f km", Float((self.resumoBusca?.distanciaCorrida)!) / 1000.0)
-//        print(self.resumoBusca?.arrayCorridas)
-//        self.labelDistancia.text =  "\(Float((self.resumoBusca?.distanciaCorrida)!) / 1000.0) km"
+        //        print(self.resumoBusca?.arrayCorridas)
+        //        self.labelDistancia.text =  "\(Float((self.resumoBusca?.distanciaCorrida)!) / 1000.0) km"
         self.labelDistancia.text = distanciaFormatada
         self.labelDuracao.text =  "\(self.resumoBusca?.duracaoCorrida ?? 00) min"
         self.textFieldPontoOrigem.text = self.resumoBusca?.enderecoOrigem
         self.textFieldPontoDestino.text = self.resumoBusca?.enderecoDestino
         
-    
+        
     }
     
     //MARK: - Metodos
@@ -65,7 +65,37 @@ class TelaBuscaViewController: UIViewController {
         let barButtonItem2 = UIBarButtonItem(customView: btnPerfil)
         self.navigationItem.rightBarButtonItem = barButtonItem2
     }
-
+    
+    func checarAcoesCorrida (corrida : Corrida){
+        
+        print(corrida)
+        let application = UIApplication.shared
+        
+        if corrida.urlDeeplink != nil && application.canOpenURL(corrida.urlDeeplink!){
+            application.open(corrida.urlDeeplink!)
+        }else{
+            
+            let alert = SCLAlertView()
+            
+            if let urlLoja = corrida.urlLoja{
+                
+                alert.addButton("Instalar agora", action: {
+                    UIApplication.shared.open(urlLoja)
+                })
+            }
+            if let urlWeb = corrida.urlWeb{
+                
+                alert.addButton("Solicitar carro", action: {
+                    UIApplication.shared.open(urlWeb)
+                })
+            }
+            
+            alert.showInfo("Você não possui o aplicativo instalado", subTitle: "", closeButtonTitle: "Cancelar", colorStyle: 0x242424)
+            
+        }
+        
+        
+    }
 }
 
 extension TelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
@@ -76,50 +106,37 @@ extension TelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "tmResultadoBusca", for: indexPath) as! TMResultadoBuscaCell
         
         let corrida = self.resumoBusca!.arrayCorridas[indexPath.row]
         cell.labelNome.text = corrida.name
+        cell.labelNomeModalidade.text = corrida.modalityName
         cell.labelPreco.text = corrida.price
-        cell.labelEspera.text = "\(corrida.waitingTime) min"
-//        cell.imgViewLogo.image = UIImage()
+        cell.labelEspera.text = "\(corrida.waitingTime/60) min"
+        cell.imgViewLogo.image = UIImage()
         
-        if(corrida.id == 3){
-            cell.imgViewLogo.image = #imageLiteral(resourceName: "icon99")
-        }else{
-            if let urlLogo = URL(string: corrida.urlLogo){
-                let task = URLSession.shared.dataTask(with: urlLogo) { data, response, error in
-                    guard let data = data, error == nil else { return }
-                    
-                    DispatchQueue.main.async() {
-                        cell.imgViewLogo.image = UIImage(data: data)
-                    }
+        if let urlLogo = corrida.urlLogo {
+            let task = URLSession.shared.dataTask(with: urlLogo) { data, response, error in
+                guard let data = data, error == nil else { return }
+                
+                DispatchQueue.main.async() {
+                    cell.imgViewLogo.image = UIImage(data: data)
                 }
-                task.resume()
             }
+            task.resume()
         }
         
-        
-        
-        
-
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let corrida = self.resumoBusca!.arrayCorridas[indexPath.row]
-    
-        guard let urlApp = URL(string: corrida.url) else{
-            
-            return
-        }
         
-        if(UIApplication.shared.canOpenURL(urlApp)){
-            
-            UIApplication.shared.open(urlApp)
-        }
+        self.checarAcoesCorrida(corrida: corrida)
+        
     }
     
 }
+

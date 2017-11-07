@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  TaxiManager
@@ -20,11 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         GMSServices.provideAPIKey("AIzaSyCsTlz4d57EnfRvHA2sn8BLqsfw1fx2lAM")
-        GMSPlacesClient.provideAPIKey("AIzaSyBpY8v1ce3YYPtTUEyY62Hfo1mciJS6nR4")
+        GMSPlacesClient.provideAPIKey("AIzaSyCsTlz4d57EnfRvHA2sn8BLqsfw1fx2lAM")
         
         
         let statusBar = application.value(forKey: "statusBar") as? UIView
         statusBar?.backgroundColor = UIColor(red: 36/255.0, green: 36/255.0, blue: 36/255.0, alpha: 1.0)
+        
+        if(UserDefaults.standard.value(forKey: "idUsuario") != nil){
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier :"NavigationInicial") as! UINavigationController
+            self.window?.rootViewController = viewController
+            
+        }
     
         return true
     }

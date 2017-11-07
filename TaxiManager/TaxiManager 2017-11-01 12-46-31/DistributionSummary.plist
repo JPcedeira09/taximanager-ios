@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TaxiManager.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>79910A280B25BA00D7C9BCA119E7BFA139BF550D</string>
+				<key>dateExpires</key>
+				<string>18/10/18</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>79910A280B25BA00D7C9BCA119E7BFA139BF550D</string>
+						<key>dateExpires</key>
+						<string>18/10/18</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Alamofire.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>SLC3VZ7589</string>
+						<key>name</key>
+						<string>MOBINT Mobilidade Interatividade Comunic.Entret.Te</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>79910A280B25BA00D7C9BCA119E7BFA139BF550D</string>
+						<key>dateExpires</key>
+						<string>18/10/18</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>ExpandableCell.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>SLC3VZ7589</string>
+						<key>name</key>
+						<string>MOBINT Mobilidade Interatividade Comunic.Entret.Te</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>79910A280B25BA00D7C9BCA119E7BFA139BF550D</string>
+						<key>dateExpires</key>
+						<string>18/10/18</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>SCLAlertView.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>SLC3VZ7589</string>
+						<key>name</key>
+						<string>MOBINT Mobilidade Interatividade Comunic.Entret.Te</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>79910A280B25BA00D7C9BCA119E7BFA139BF550D</string>
+						<key>dateExpires</key>
+						<string>18/10/18</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>SideMenu.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>SLC3VZ7589</string>
+						<key>name</key>
+						<string>MOBINT Mobilidade Interatividade Comunic.Entret.Te</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>79910A280B25BA00D7C9BCA119E7BFA139BF550D</string>
+						<key>dateExpires</key>
+						<string>18/10/18</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>SwiftSpinner.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>SLC3VZ7589</string>
+						<key>name</key>
+						<string>MOBINT Mobilidade Interatividade Comunic.Entret.Te</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>79910A280B25BA00D7C9BCA119E7BFA139BF550D</string>
+						<key>dateExpires</key>
+						<string>18/10/18</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>TextFieldEffects.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>SLC3VZ7589</string>
+						<key>name</key>
+						<string>MOBINT Mobilidade Interatividade Comunic.Entret.Te</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>SLC3VZ7589.com.taximanager</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>SLC3VZ7589</string>
+				<key>get-task-allow</key>
+				<false/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>SLC3VZ7589.com.taximanager</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>TaxiManager.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>532fc687-b110-4472-a00c-7d69c24bb9b9</string>
+				<key>name</key>
+				<string>iOS Team Ad Hoc Provisioning Profile: com.taximanager</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>SLC3VZ7589</string>
+				<key>name</key>
+				<string>MOBINT Mobilidade Interatividade Comunic.Entret.Te</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

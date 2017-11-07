@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -30,22 +31,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="84.666666666666671"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon99" translatesAutoresizingMaskIntoConstraints="NO" id="wAU-8j-WOS">
-                        <rect key="frame" x="28" y="30" width="25" height="25"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wAU-8j-WOS">
+                        <rect key="frame" x="28" y="30.333333333333336" width="25" height="25.000000000000007"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="S99-Hv-Nqa"/>
+                            <constraint firstAttribute="height" constant="25" id="gGL-9R-Zdt"/>
+                        </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vBe-q8-O8J">
-                        <rect key="frame" x="61.000000000000007" y="30.000000000000004" width="50.666666666666679" height="30.333333333333339"/>
+                        <rect key="frame" x="61" y="30.333333333333329" width="49" height="19.666666666666671"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 Taxi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOO-fb-ZU8">
-                                <rect key="frame" x="0.0" y="0.0" width="50.666666666666671" height="16.333333333333336"/>
+                                <rect key="frame" x="0.0" y="0.0" width="49" height="19.666666666666668"/>
                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="14"/>
                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Em 5 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNK-ww-fKu">
-                                <rect key="frame" x="0.0" y="16.333333333333336" width="50.666666666666671" height="14"/>
-                                <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="12"/>
-                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -63,8 +62,20 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ 28,50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naw-VV-7L7">
-                        <rect key="frame" x="189.66666666666663" y="32" width="56.333333333333343" height="21"/>
+                        <rect key="frame" x="190.33333333333337" y="32" width="55.666666666666657" height="21"/>
                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
+                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Taxi Comum" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDT-Sn-QIm">
+                        <rect key="frame" x="61" y="47" width="56" height="12.666666666666664"/>
+                        <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="9"/>
+                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Em 5 min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNK-ww-fKu">
+                        <rect key="frame" x="191" y="47" width="54.333333333333343" height="12.666666666666664"/>
+                        <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="9"/>
                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -74,8 +85,13 @@
                     <constraint firstItem="vBe-q8-O8J" firstAttribute="leading" secondItem="wAU-8j-WOS" secondAttribute="trailing" constant="8" id="9VU-vJ-5lq"/>
                     <constraint firstItem="q54-Hv-7nA" firstAttribute="leading" secondItem="naw-VV-7L7" secondAttribute="trailing" constant="20" id="Bg6-pP-vKN"/>
                     <constraint firstItem="wAU-8j-WOS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GFE-Vr-zGt"/>
+                    <constraint firstItem="qNK-ww-fKu" firstAttribute="trailing" secondItem="naw-VV-7L7" secondAttribute="trailing" id="J5h-CF-jcx"/>
                     <constraint firstItem="q54-Hv-7nA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Jmz-sZ-IjV"/>
                     <constraint firstItem="wAU-8j-WOS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="MDK-dH-uA3"/>
+                    <constraint firstItem="uDT-Sn-QIm" firstAttribute="top" secondItem="qOO-fb-ZU8" secondAttribute="bottom" constant="-3" id="OYq-K4-TSh"/>
+                    <constraint firstItem="qNK-ww-fKu" firstAttribute="top" secondItem="naw-VV-7L7" secondAttribute="bottom" constant="-6" id="OZ5-3v-Ia1"/>
+                    <constraint firstItem="qNK-ww-fKu" firstAttribute="width" secondItem="naw-VV-7L7" secondAttribute="width" constant="-1.3333333333333144" id="WHE-4J-RxW"/>
+                    <constraint firstItem="uDT-Sn-QIm" firstAttribute="leading" secondItem="qOO-fb-ZU8" secondAttribute="leading" id="brP-bP-9xr"/>
                     <constraint firstItem="vBe-q8-O8J" firstAttribute="top" secondItem="wAU-8j-WOS" secondAttribute="top" id="c5I-ux-w1p"/>
                     <constraint firstItem="naw-VV-7L7" firstAttribute="top" secondItem="q54-Hv-7nA" secondAttribute="top" id="oMt-wB-3FC"/>
                     <constraint firstItem="naw-VV-7L7" firstAttribute="height" secondItem="q54-Hv-7nA" secondAttribute="height" constant="1" id="yeZ-IW-J5k"/>
@@ -87,12 +103,10 @@
                 <outlet property="imgViewLogo" destination="wAU-8j-WOS" id="jNG-tX-OOW"/>
                 <outlet property="labelEspera" destination="qNK-ww-fKu" id="1Tj-R7-C95"/>
                 <outlet property="labelNome" destination="qOO-fb-ZU8" id="t3P-M2-n80"/>
+                <outlet property="labelNomeModalidade" destination="uDT-Sn-QIm" id="Un3-F9-uUT"/>
                 <outlet property="labelPreco" destination="naw-VV-7L7" id="fBm-5j-fZk"/>
             </connections>
             <point key="canvasLocation" x="-45" y="127.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="icon99" width="25" height="25"/>
-    </resources>
 </document>

@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "pin.png",
+      "filename" : "icon_recente.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icon_recente@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icon_recente@3x.png",
       "scale" : "3x"
     }
   ],

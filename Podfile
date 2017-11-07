@@ -11,5 +11,7 @@ target 'TaxiManager' do
   pod 'GooglePlaces'
   pod 'Alamofire', '~> 4.5'
   pod 'SwiftSpinner'
-  
+  pod 'SCLAlertView', :git => 'https://github.com/ahmedsafadii/SCLAlertView-Swift.git'
+  pod 'TextFieldEffects', '~> 1.4'
+  pod 'ExpandableCell'
 end
