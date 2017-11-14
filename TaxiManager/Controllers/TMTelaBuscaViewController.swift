@@ -46,6 +46,9 @@ class TelaBuscaViewController: UIViewController {
         self.textFieldPontoOrigem.text = self.resumoBusca?.enderecoOrigem
         self.textFieldPontoDestino.text = self.resumoBusca?.enderecoDestino
         
+        print("========= CORRIDAS ===========")
+        print(self.resumoBusca?.arrayCorridas)
+        
         
     }
     
@@ -59,11 +62,11 @@ class TelaBuscaViewController: UIViewController {
         navigationItem.titleView = imageView
         
         //setup botao perfil
-        let btnPerfil = UIButton(type: .custom)
-        btnPerfil.setImage(#imageLiteral(resourceName: "icon_perfil_header"), for: .normal)
-        btnPerfil.contentHorizontalAlignment = .center
-        let barButtonItem2 = UIBarButtonItem(customView: btnPerfil)
-        self.navigationItem.rightBarButtonItem = barButtonItem2
+//        let btnPerfil = UIButton(type: .custom)
+//        btnPerfil.setImage(#imageLiteral(resourceName: "icon_perfil_header"), for: .normal)
+//        btnPerfil.contentHorizontalAlignment = .center
+//        let barButtonItem2 = UIBarButtonItem(customView: btnPerfil)
+//        self.navigationItem.rightBarButtonItem = barButtonItem2
     }
     
     func checarAcoesCorrida (corrida : Corrida){
@@ -110,8 +113,11 @@ extension TelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "tmResultadoBusca", for: indexPath) as! TMResultadoBuscaCell
         
         let corrida = self.resumoBusca!.arrayCorridas[indexPath.row]
-        cell.labelNome.text = corrida.name
-        cell.labelNomeModalidade.text = corrida.modalityName
+        
+        print("=======CORRIDA=======")
+        print(corrida)
+        cell.labelNome.text = corrida.modalityName
+        cell.labelNomeModalidade.text = corrida.name
         cell.labelPreco.text = corrida.price
         cell.labelEspera.text = "\(corrida.waitingTime/60) min"
         cell.imgViewLogo.image = UIImage()

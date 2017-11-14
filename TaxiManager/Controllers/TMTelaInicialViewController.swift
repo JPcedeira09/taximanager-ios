@@ -13,6 +13,8 @@ import MapKit
 import CoreLocation
 import Alamofire
 import SwiftSpinner
+import Contacts
+import SCLAlertView
 //Open Weather API
 //fddaea8c38c5d8cee66a234b2f812baa
 //api.openweathermap.org/data/2.5/weather?lat=35&lon=139
@@ -75,7 +77,7 @@ class TelaInicialViewController: UIViewController {
         
         self.atualizarPois()
         self.atualizarFavoritos()
-        
+        self.atualizarHistorico()
     }
     
     func atualizarPois(){
@@ -93,25 +95,32 @@ class TelaInicialViewController: UIViewController {
                 
                 if let json = response.result.value as? [String : AnyObject]{
                     
-                    let records = json["records"] as! [[String:Any]]
-                    
-                    var arrayPois : [[String: Any]] = []
-                    for record in records{
+                    if let records = json["records"] as? [[String:Any]]{
                         
-                        var dictionary : [String: Any] = [:]
                         
-                        dictionary["lat"] = record["latitude"] as! Double
-                        dictionary["lng"] = record["longitude"] as! Double
-                        dictionary["zipcode"] = record["zipcode"] as! String
-                        dictionary["city"] = record["city"] as! String
-                        dictionary["state"] = record["state"] as! String
-                        dictionary["address"] = record["address"] as! String
-                        dictionary["name"] = record["mainText"] as! String
+                        var arrayPois : [[String: Any]] = []
+                        for record in records{
+                            
+                            var dictionary : [String: Any] = [:]
+                            
+                            
+                            //                        print(record)
+                            
+                            dictionary["lat"] = record["latitude"] as! Double
+                            dictionary["lng"] = record["longitude"] as! Double
+                            dictionary["zipcode"] = record["zipcode"] as! String
+                            dictionary["city"] = record["city"] as! String
+                            dictionary["state"] = record["state"] as! String
+                            dictionary["address"] = record["address"] as! String
+                            dictionary["name"] = record["mainText"] as! String
+                            
+                            //                        arrayPois.append(dictionary)
+                            arrayPois.insert(dictionary, at: 0)
+                        }
                         
-                        arrayPois.append(dictionary)
+                        defaults.setValue(arrayPois, forKey: "arrayPois")
+                        
                     }
-                    
-                    defaults.setValue(arrayPois, forKey: "arrayPois")
                     
                 }
             }
@@ -134,27 +143,108 @@ class TelaInicialViewController: UIViewController {
                 
                 if let json = response.result.value as? [String : AnyObject]{
                     
-                    let records = json["records"] as! [[String:Any]]
-                    
-                    var arrayFavoritos : [[String: Any]] = []
-                    for record in records{
+                    if let records = json["records"] as? [[String:Any]]{
                         
-                        var dictionary : [String: Any] = [:]
+                        var arrayFavoritos : [[String: Any]] = []
                         
-                        dictionary["lat"] = record["latitude"] as! Double
-                        dictionary["lng"] = record["longitude"] as! Double
-                        dictionary["zipcode"] = record["zipcode"] as! String
-                        dictionary["city"] = record["city"] as! String
-                        dictionary["state"] = record["state"] as! String
-                        dictionary["address"] = record["address"] as! String
-                        dictionary["name"] = record["mainText"] as! String
+                        for record in records{
+                            
+                            var dictionary : [String: Any] = [:]
+                            
+                            dictionary["lat"] = record["latitude"] as! Double
+                            dictionary["lng"] = record["longitude"] as! Double
+                            dictionary["zipcode"] = record["zipcode"] as! String
+                            dictionary["city"] = record["city"] as! String
+                            dictionary["state"] = record["state"] as! String
+                            dictionary["address"] = record["address"] as! String
+                            dictionary["name"] = record["mainText"] as! String
+                            dictionary["id"] = record["id"] as! Double
+                            
+                            
+                            //                        arrayFavoritos.append(dictionary)
+                            arrayFavoritos.insert(dictionary, at: 0)
+                        }
                         
-                        arrayFavoritos.append(dictionary)
+                        defaults.setValue(arrayFavoritos, forKey: "arrayFavoritos")
+                        
                     }
                     
-                    defaults.setValue(arrayFavoritos, forKey: "arrayFavoritos")
+                }
+            }
+            
+        }
+    }
+    
+    func atualizarHistorico(){
+        
+        let defaults = UserDefaults.standard
+        let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
+        var parameters : [String : AnyObject] = [:]
+        
+        let companyId = "\(defaults.value(forKey: "idEmpresa") as! NSNumber)"
+//        parameters["companyid"] = defaults.value(forKey: "idEmpresa") as! NSNumber
+        parameters["employeeId"] = defaults.value(forKey: "employeeId") as! NSNumber
+        
+        print("==================================")
+        print(defaults.value(forKey: "idEmpresa") as! NSNumber)
+        print(defaults.value(forKey: "employeeId") as! NSNumber)
+        print("==================================")
+        
+        let url = "https://api.taximanager.com.br/v1/taximanager/companies/"+companyId+"/travels"
+        
+        Alamofire.request(url, method: HTTPMethod.get, parameters: parameters, headers: headers).responseJSON { (response) in
+            
+            if let err = response.error{
+                
+            }
+            
+            if(response.result.isSuccess){
+                
+                if let json = response.result.value as? [String : AnyObject]{
+                
+                    if let records = json["records"] as? [[String:Any]] {
+                        
+                        
+                        var arrayHistorico : [[String : Any]] = []
+                        
+                        for record in records {
+                            
+                            var registro : [String : Any] = [:]
+                            var playerService = record["playerService"] as! [String : Any]
+                            var player = playerService["player"] as! [String : Any]
+                            var centroDeCustoObj = record["companyCostCentre"] as! [String : Any]
+                            
+                            registro["enderecoOrigem"] = record["startAddress"] as! String
+                            registro["enderecoDestino"] = record["endAddress"] as! String
+                            registro["id"] = record["id"] as! Int
+                            registro["distancia"] = record["distance"] as! NSNumber
+                            registro["valor"] = record["cost"] as! NSNumber
+                            registro["categoriaPlayer"] = playerService["description"] as! String
+                            registro["nomePlayer"] = player["name"] as! String
+                            registro["centroDeCusto"] = centroDeCustoObj["name"] as! String
+                            registro["projeto"] = record["project"] as? String
+                            registro["justificativa"] = ""
+                            registro["dataInicio"] = record["startDate"] as! String
+                            registro["dataFim"] = record["endDate"] as! String
+                            
+                            
+                            arrayHistorico.insert(registro, at: 0)
+                            
+                            
+                            print(registro)
+                        }
+                        print("==================================")
+                        
+                        defaults.setValue(arrayHistorico, forKey: "arrayHistorico")
+                        
+                        
+                        
+                    }
+                    
+                    
                     
                 }
+                
             }
             
         }
@@ -172,7 +262,9 @@ class TelaInicialViewController: UIViewController {
                 
                 var endereco = ""
                 if let plmarks = placemarks {
+                    
                     let firstLocation = plmarks[0]
+//                    firstLocation.addressDictionary["ZIP"] + firstLocation.addressDictionary["PostCodeExtension"]
                     
                     if let thoroughfare = firstLocation.thoroughfare{
                         endereco += thoroughfare
@@ -282,11 +374,13 @@ class TelaInicialViewController: UIViewController {
                     let duracaoFormatada  = Int(duracao["text"]!.components(separatedBy: " ")[0])!
                     let distanciaFormatada = distancia["value"] as! Int
                     
+                    
+                    
                     self.checarPrecos(origem: self.dicOrigem, destino: self.dicDestino, device: [:], distancia: distanciaFormatada, duracao: duracaoFormatada)
-                    //                    print("Status", status)
-                    //                    print("Duracao", duracao)
-                    //                    print("Distancia", distancia)
-                    //
+                                        
+//                                        print("Duracao", duracaoFormatada)
+//                                        print("Distancia", distanciaFormatada)
+                    
                 }
             }
         }
@@ -300,13 +394,21 @@ class TelaInicialViewController: UIViewController {
         let idEmpresa = UserDefaults.standard.value(forKey: "idEmpresa") as! Int
         
         
-        let parametros = ["device" : device, "start" : origem, "end" : destino, "distance" : 3200 , "duration" : 11, "company_id" : idEmpresa, "user_id" : idUsuario] as [String : Any]
+        let parametros = ["device" : device, "start" : origem, "end" : destino, "distance" : distancia , "duration" : duracao, "company_id" : idEmpresa, "user_id" : idUsuario] as [String : Any]
         
         let url = URL(string: "http://estimate.taximanager.com.br/v1/estimates")!
         let autorizationKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTAwMzM4MjU0fQ.B2Nch63Zu0IzJDepVTDXqq8ydbIVDiUmU6vV_7eQocw"
         do
         {
+            
+            
             let body = try JSONSerialization.data(withJSONObject: parametros)
+            
+            print("XXXXXXXXXXXXXXXXXXX")
+            
+            print(parametros)
+            
+            print("XXXXXXXXXXXXXXXXXXX")
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -319,103 +421,110 @@ class TelaInicialViewController: UIViewController {
                 SwiftSpinner.hide()
                 if(error == nil){
                     
-                    let jsonData = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String : AnyObject]
                     
-                    print(jsonData)
-                    //                    print(String(data: data!, encoding: .utf8))
-                    //                    print(response)
-                    //
-                    let origem = jsonData["start"] as! [String : AnyObject]
-                    let destino = jsonData["end"] as! [String : AnyObject]
-                    
-                    guard let endOrigem = origem["address"] as! String? else {
-                        print("falhou end origem")
-                        return
-                    }
-                    
-                    guard let endDestino = destino["address"] as! String? else {
-                        print("falhou end destino")
-                        return
-                    }
-                    
-                    //                    guard let distanciaJson = jsonData["distance"] as! Int? else {
-                    //
-                    //                        print("falhou distancia")
-                    //                        return
-                    //                    }
-                    //                    guard let duracaoJson = jsonData["duration"] as! Int? else {
-                    //
-                    //                        print("falhou duracao")
-                    //                        return
-                    //                    }
-                    let records = jsonData["records"] as! [[String : AnyObject]]
-                    var arrayCorridas : [Corrida] = []
-                    
-                    for record in records{
+                    do{
+                        let jsonData = try JSONSerialization.jsonObject(with: data!, options: []) as! [String : AnyObject]
                         
-                        var novaCorrida = Corrida()
+                        let origem = jsonData["start"] as! [String : AnyObject]
+                        let destino = jsonData["end"] as! [String : AnyObject]
                         
-                        if let alertMessage = record["alert_message"] as? String{
-                            novaCorrida.alertMessage = alertMessage
+                        guard let endOrigem = origem["address"] as! String? else {
+                            print("falhou end origem")
+                            return
                         }
                         
-                        if let id = record["id"] as? Int {
-                            novaCorrida.id = id
+                        guard let endDestino = destino["address"] as! String? else {
+                            print("falhou end destino")
+                            return
                         }
-                        if let name = record["name"] as? String{
+                        
+                        guard let records = jsonData["records"] as? [[String : AnyObject]] else {
                             
-                            novaCorrida.name = name
+                            let alerta = SCLAlertView()
+                            alerta.showInfo("Ops!", subTitle: "Não conseguimos encontrar motoristas para estes endereços.")
+                            return
                         }
                         
-                        if let modality = record["modality"] as? [String : AnyObject]{
+                        var arrayCorridas : [Corrida] = []
+                        
+                        for record in records{
                             
-                            if let name = modality["name"] as? String{
-                                
-                                novaCorrida.modalityName = name
+                            var novaCorrida = Corrida()
+                            
+                            if let alertMessage = record["alert_message"] as? String{
+                                novaCorrida.alertMessage = alertMessage
                             }
-                        }
-                        
-                        if let price = record["price"] as? String {
                             
-                            novaCorrida.price = price
-                        }
-                        
-                        if let waitingTime = record["waiting_time"] as? Int{
+                            if let id = record["id"] as? Int {
+                                novaCorrida.id = id
+                            }
+                            if let name = record["name"] as? String{
+                                
+                                novaCorrida.name = name
+                            }
                             
-                            novaCorrida.waitingTime = waitingTime
-                        }
-                        
-                        if let urlDeepLinkString = record["url"] as? String{
+                            if let modality = record["modality"] as? [String : AnyObject]{
+                                
+                                if let name = modality["name"] as? String{
+                                    
+                                    novaCorrida.modalityName = name
+                                }
+                            }
                             
-                            novaCorrida.urlDeeplink = URL(string: urlDeepLinkString)
-                        }
-                        
-                        if let urlLogoString = record["url_logo"] as? String{
+                            if let price = record["price"] as? String {
+                                
+                                novaCorrida.price = price
+                            }
                             
-                            novaCorrida.urlLogo = URL(string: urlLogoString)
-                        }
-                        
-                        if let urlLojaString = record["url_loja_ios"] as? String{
+                            if let waitingTime = record["waiting_time"] as? Int{
+                                
+                                novaCorrida.waitingTime = waitingTime
+                            }
                             
-                            novaCorrida.urlLoja = URL(string: urlLojaString)
-                        }
-                        
-                        if let urlWebString = record["url_web"] as? String{
+                            if let urlDeepLinkString = record["url"] as? String{
+                                
+                                novaCorrida.urlDeeplink = URL(string: urlDeepLinkString)
+                            }
                             
-                            novaCorrida.urlWeb = URL(string: urlWebString)
+                            if let urlLogoString = record["url_logo"] as? String{
+                                
+                                novaCorrida.urlLogo = URL(string: urlLogoString)
+                            }
+                            
+                            if let urlLojaString = record["url_loja_ios"] as? String{
+                                
+                                novaCorrida.urlLoja = URL(string: urlLojaString)
+                            }
+                            
+                            if let urlWebString = record["url_web"] as? String{
+                                
+                                novaCorrida.urlWeb = URL(string: urlWebString)
+                            }
+                            
+                            
+                            arrayCorridas.append(novaCorrida)
+                            
+                            let resumo = ResumoBusca(enderecoOrigem: endOrigem, enderecoDestino: endDestino, duracaoCorrida: duracao, distanciaCorrida: distancia, arrayCorridas: arrayCorridas)
+                            
+                            self.resumoBusca = resumo
+                            print("========== RESUMO =========")
+                            print(resumo)
+                            DispatchQueue.main.sync {
+                                self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
+                            }
+                            
                         }
                         
                         
-                        arrayCorridas.append(novaCorrida)
                         
+                        
+                    }catch{
+                        
+//                        let alerta = SCLAlertView()
+//                        alerta.showInfo("Não enco", subTitle: <#T##String#>)
+                        print("NAO DEU CERTO PEGAR O NEGOCIO")
                     }
                     
-                    let resumo = ResumoBusca(enderecoOrigem: endOrigem, enderecoDestino: endDestino, duracaoCorrida: duracao, distanciaCorrida: distancia, arrayCorridas: arrayCorridas)
-                    
-                    self.resumoBusca = resumo
-                    DispatchQueue.main.sync {
-                        self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
-                    }
                 }
             }
             
@@ -431,10 +540,15 @@ class TelaInicialViewController: UIViewController {
         
         let btnLocalizacaoUsuario = UIButton(type: .custom)
         btnLocalizacaoUsuario.addTarget(self, action: #selector(self.localizarUsuario), for: UIControlEvents.touchUpInside)
-        btnLocalizacaoUsuario.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        btnLocalizacaoUsuario.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         btnLocalizacaoUsuario.setImage(#imageLiteral(resourceName: "search_minha_loc_icon"), for: .normal)
+        btnLocalizacaoUsuario.contentMode = .scaleAspectFit
+        btnLocalizacaoUsuario.contentHorizontalAlignment = .fill
+        btnLocalizacaoUsuario.contentVerticalAlignment = .fill
         self.textFieldEnderecoOrigem.rightViewMode = .always
         self.textFieldEnderecoOrigem.rightView = btnLocalizacaoUsuario
+
+        
         
     }
     
@@ -446,48 +560,57 @@ extension TelaInicialViewController : MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
-        let location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-        
-        let geocoder = CLGeocoder()
-        
-        // Look up the location and pass it to the completion handler
-        geocoder
-            .reverseGeocodeLocation(location,
-                                    completionHandler: { (placemarks, error) in
-                                        if (error == nil) {
-                                            
-                                            var endereco = ""
-                                            if let plmarks = placemarks {
+        if(!animated){
+    
+            mapaMoveuInicialmente = true
+            let location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+            
+            let geocoder = CLGeocoder()
+            
+            // Look up the location and pass it to the completion handler
+            geocoder
+                .reverseGeocodeLocation(location,
+                                        completionHandler: { (placemarks, error) in
+                                            if (error == nil) {
                                                 
-                                                let firstLocation = plmarks[0]
-                                                
-                                                self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
-                                                self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
-                                                self.dicOrigem.updateValue("\(firstLocation.postalCode!)", forKey: "zipcode")
-                                                self.dicOrigem.updateValue("\(firstLocation.locality!)", forKey: "city")
-                                                self.dicOrigem.updateValue("\(firstLocation.administrativeArea!)", forKey: "state")
-                                                
-                                                //                                                print(firstLocation.locality ?? "")
-                                                //                                                print(firstLocation.administrativeArea ?? "")
-                                                //                                                print(firstLocation.postalCode ?? "")
-                                                //                                                print(firstLocation.subAdministrativeArea ?? "")
-                                                
-                                                if let thoroughfare = firstLocation.thoroughfare{
-                                                    endereco += thoroughfare
+                                                var endereco = ""
+                                                if let plmarks = placemarks {
                                                     
-                                                    if let subThoroughfare = firstLocation.subThoroughfare{
-                                                        endereco += ", " + subThoroughfare
+                                                    let firstLocation = plmarks[0]
+                                                    
+                                                    self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
+                                                    self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
+                                                    self.dicOrigem.updateValue("\(firstLocation.postalCode ?? "00000000")", forKey: "zipcode")
+                                                    self.dicOrigem.updateValue("\(firstLocation.locality!)", forKey: "city")
+                                                    self.dicOrigem.updateValue("\(firstLocation.administrativeArea!)", forKey: "state")
+                                                    
+                                                    //                                                print(firstLocation.locality ?? "")
+                                                    //                                                print(firstLocation.administrativeArea ?? "")
+                                                    //                                                print(firstLocation.postalCode ?? "")
+                                                    //                                                print(firstLocation.subAdministrativeArea ?? "")
+                                                    
+                                                    if let thoroughfare = firstLocation.thoroughfare{
+                                                        endereco += thoroughfare
+                                                        
+                                                        if let subThoroughfare = firstLocation.subThoroughfare{
+                                                            endereco += ", " + subThoroughfare
+                                                        }
                                                     }
+                                                    self.dicOrigem.updateValue(endereco, forKey: "address")
+                                                    
+                                                    self.textFieldEnderecoOrigem.text = endereco
                                                 }
-                                                self.dicOrigem.updateValue(endereco, forKey: "address")
-                                                self.textFieldEnderecoOrigem.text = endereco
                                             }
-                                        }
-                                        else {
-                                            // Error
-                                            
-                                        }
-            })
+                                            else {
+                                                
+                                                print("ERROR AO FAZER DECODING")
+                                                // Error
+                                                
+                                            }
+                })
+            
+        }
+        
         
         
     }
@@ -509,14 +632,16 @@ extension TelaInicialViewController : CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        let localizacao = locations.last!
+
         if(!mapaMoveuInicialmente){
-            let localizacao = locations.last!
+            
             //Criando o span
             let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
             //Criando Região
             let regiao = MKCoordinateRegion(center: localizacao.coordinate, span: span)
             //Setando o mapa a partir da região
-            self.mapView.setRegion(regiao, animated: true)
+            self.mapView.setRegion(regiao, animated: false)
             //Setando que o mapa ja se moveu
             mapaMoveuInicialmente = true
         }
@@ -603,12 +728,6 @@ extension TelaInicialViewController : GMSAutocompleteViewControllerDelegate{
         
         let geocoder = CLGeocoder()
         
-        
-        //        print(place.formattedAddress)
-        for component in place.addressComponents!{
-            
-            print(component.type + ": " + component.name)
-        }
         geocoder.reverseGeocodeLocation(CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude), completionHandler: { (placemarks, error) in
             
             if (error == nil) {

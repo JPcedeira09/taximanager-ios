@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,8 +14,8 @@
         <array key="Poppins-Light.ttf">
             <string>Poppins-Light</string>
         </array>
-        <array key="Poppins-Regular.ttf">
-            <string>Poppins-Regular</string>
+        <array key="Poppins-SemiBold.ttf">
+            <string>Poppins-SemiBold</string>
         </array>
     </customFonts>
     <objects>
@@ -27,51 +28,68 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon99" translatesAutoresizingMaskIntoConstraints="NO" id="fcq-2v-uOc">
-                        <rect key="frame" x="21" y="16" width="16" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="99POP - 21/08/2017 às 21:36 - R$29.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMB-rw-WOD">
-                        <rect key="frame" x="43" y="14" width="177" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99POP - 21/08/2017 às 21:36 - R$29.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMB-rw-WOD">
+                        <rect key="frame" x="29" y="8" width="180" height="29"/>
+                        <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Av. Eng. Arm. de Arruda Pereira, 774 - Jabaquara, SP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chu-Zc-0ee">
-                        <rect key="frame" x="43" y="39" width="275" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Av. Eng. Arm. de Arruda Pereira, 774 - Jabaquara, SP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="chu-Zc-0ee">
+                        <rect key="frame" x="29" y="41" width="338" height="13"/>
                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Av. do Estado, 5533 - Cambuci, São Paulo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufj-4H-vDs">
-                        <rect key="frame" x="43" y="59" width="223" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Av. do Estado, 5533 - Cambuci, São Paulo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ufj-4H-vDs">
+                        <rect key="frame" x="29" y="58.5" width="338" height="13"/>
                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_historico_origem_destino" translatesAutoresizingMaskIntoConstraints="NO" id="Xb2-Uf-5Cj">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_historico_origem_destino" translatesAutoresizingMaskIntoConstraints="NO" id="Xb2-Uf-5Cj">
                         <rect key="frame" x="21" y="41" width="5" height="34"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="6I3-ji-ZPW"/>
+                            <constraint firstAttribute="width" constant="5" id="Zwu-As-tOK"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="5" id="cfz-sy-bkf"/>
+                            <constraint firstAttribute="height" constant="34" id="hJf-MY-7jk"/>
+                        </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okv-x8-yZg">
-                        <rect key="frame" x="297" y="9" width="68" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okv-x8-yZg">
+                        <rect key="frame" x="322" y="8" width="45" height="24"/>
                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="10"/>
                         <state key="normal" title="+Ver mais">
                             <color key="titleColor" red="0.66267138719999996" green="0.66278749699999995" blue="0.66266411540000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="ufj-4H-vDs" secondAttribute="trailing" id="4Lc-7S-agt"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="okv-x8-yZg" secondAttribute="trailing" id="5Hq-pW-SaY"/>
+                    <constraint firstItem="okv-x8-yZg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wMB-rw-WOD" secondAttribute="trailing" constant="5" id="ASH-IL-jUb"/>
+                    <constraint firstItem="Xb2-Uf-5Cj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="13" id="Bxc-HD-1R6"/>
+                    <constraint firstItem="ufj-4H-vDs" firstAttribute="leading" secondItem="chu-Zc-0ee" secondAttribute="leading" id="Xqx-jM-ZiZ"/>
+                    <constraint firstItem="wMB-rw-WOD" firstAttribute="leading" secondItem="Xb2-Uf-5Cj" secondAttribute="leading" constant="8" id="ZDL-VE-0b7"/>
+                    <constraint firstItem="chu-Zc-0ee" firstAttribute="leading" secondItem="wMB-rw-WOD" secondAttribute="leading" id="aCM-4d-Uge"/>
+                    <constraint firstItem="chu-Zc-0ee" firstAttribute="top" secondItem="wMB-rw-WOD" secondAttribute="bottom" constant="4" id="dD7-IS-Wuu"/>
+                    <constraint firstItem="chu-Zc-0ee" firstAttribute="top" secondItem="Xb2-Uf-5Cj" secondAttribute="top" id="f23-c8-E0s"/>
+                    <constraint firstItem="wMB-rw-WOD" firstAttribute="top" secondItem="okv-x8-yZg" secondAttribute="top" id="kMm-H5-ge3"/>
+                    <constraint firstItem="Xb2-Uf-5Cj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="33" id="kk2-FH-VJr"/>
+                    <constraint firstItem="ufj-4H-vDs" firstAttribute="top" secondItem="chu-Zc-0ee" secondAttribute="bottom" constant="4" id="ou4-fc-msc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="chu-Zc-0ee" secondAttribute="trailing" id="tTj-Ug-9AD"/>
+                    <constraint firstItem="okv-x8-yZg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="yOf-wF-qzc"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="labelCorrida" destination="wMB-rw-WOD" id="Sd7-OU-m32"/>
+                <outlet property="labelDestino" destination="ufj-4H-vDs" id="IgT-SC-1Tz"/>
+                <outlet property="labelOrigem" destination="chu-Zc-0ee" id="tLL-T5-Ccg"/>
+            </connections>
             <point key="canvasLocation" x="55.5" y="36"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon99" width="25" height="25"/>
         <image name="icon_historico_origem_destino" width="7" height="35"/>
     </resources>
 </document>

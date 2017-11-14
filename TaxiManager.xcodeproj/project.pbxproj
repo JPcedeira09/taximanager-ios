@@ -24,12 +24,14 @@
 		1177FBDC1FA9A8F500439913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1177FBDB1FA9A8F100439913 /* Assets.xcassets */; };
 		1177FBDF1FA9A92800439913 /* TMFavoritosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1177FBDD1FA9A92700439913 /* TMFavoritosCell.swift */; };
 		1177FBE01FA9A92800439913 /* TMFavoritosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1177FBDE1FA9A92800439913 /* TMFavoritosCell.xib */; };
-		117DBAA01FA24FA800A303E6 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DBA9F1FA24FA800A303E6 /* CustomButton.swift */; };
+		117DBAA01FA24FA800A303E6 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DBA9F1FA24FA800A303E6 /* CustomUI.swift */; };
 		117E24871F963DF90041DCB6 /* TMResultadoBuscaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E24851F963DF90041DCB6 /* TMResultadoBuscaCell.swift */; };
 		117E24881F963DF90041DCB6 /* TMResultadoBuscaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */; };
 		117E248B1F964F870041DCB6 /* ResultadoBusca.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E248A1F964F870041DCB6 /* ResultadoBusca.swift */; };
 		117E248D1F96520A0041DCB6 /* Corrida.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E248C1F96520A0041DCB6 /* Corrida.swift */; };
 		118347891FA27C3400DB3C55 /* TMMenuLateralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118347881FA27C3400DB3C55 /* TMMenuLateralViewController.swift */; };
+		11837E041FB4CDD300CA8DF2 /* Mobilitee_splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 11837E031FB4BE5C00CA8DF2 /* Mobilitee_splash.png */; };
+		119847951FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */; };
 		119BCD181F97A366004D92CB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD191F97A366004D92CB /* Alamofire.framework */; };
 		119BCD1A1F97A395004D92CB /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */; };
 		119BCD1C1F97A3FE004D92CB /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1D1F97A3FE004D92CB /* SideMenu.framework */; };
@@ -56,6 +58,8 @@
 		11EB8D3F1F8D4CAE00D0FDE4 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2C1F8D4C8700D0FDE4 /* Poppins-SemiBoldItalic.ttf */; };
 		11EB8D401F8D4CAE00D0FDE4 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2D1F8D4C8700D0FDE4 /* Poppins-Thin.ttf */; };
 		11EB8D411F8D4CAE00D0FDE4 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2E1F8D4C8700D0FDE4 /* Poppins-ThinItalic.ttf */; };
+		11EE3E131FBB2672007918C6 /* RecuperarSenhaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E121FBB2672007918C6 /* RecuperarSenhaViewController.swift */; };
+		11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E141FBB2933007918C6 /* PrimeiroLoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,12 +81,14 @@
 		1177FBDB1FA9A8F100439913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1177FBDD1FA9A92700439913 /* TMFavoritosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMFavoritosCell.swift; sourceTree = "<group>"; };
 		1177FBDE1FA9A92800439913 /* TMFavoritosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMFavoritosCell.xib; sourceTree = "<group>"; };
-		117DBA9F1FA24FA800A303E6 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		117DBA9F1FA24FA800A303E6 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		117E24851F963DF90041DCB6 /* TMResultadoBuscaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMResultadoBuscaCell.swift; sourceTree = "<group>"; };
 		117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMResultadoBuscaCell.xib; sourceTree = "<group>"; };
 		117E248A1F964F870041DCB6 /* ResultadoBusca.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadoBusca.swift; sourceTree = "<group>"; };
 		117E248C1F96520A0041DCB6 /* Corrida.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corrida.swift; sourceTree = "<group>"; };
 		118347881FA27C3400DB3C55 /* TMMenuLateralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMMenuLateralViewController.swift; sourceTree = "<group>"; };
+		11837E031FB4BE5C00CA8DF2 /* Mobilitee_splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mobilitee_splash.png; sourceTree = "<group>"; };
+		119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMFavoritosAdicionarViewController.swift; sourceTree = "<group>"; };
 		119BCD191F97A366004D92CB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		119BCD1D1F97A3FE004D92CB /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +116,8 @@
 		11EB8D2C1F8D4C8700D0FDE4 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		11EB8D2D1F8D4C8700D0FDE4 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		11EB8D2E1F8D4C8700D0FDE4 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
+		11EE3E121FBB2672007918C6 /* RecuperarSenhaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperarSenhaViewController.swift; sourceTree = "<group>"; };
+		11EE3E141FBB2933007918C6 /* PrimeiroLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeiroLoginViewController.swift; sourceTree = "<group>"; };
 		23741A00D917E0F4A3FBADA6 /* Pods-TaxiManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.debug.xcconfig"; sourceTree = "<group>"; };
 		85CB8ACC30F5206867D086CF /* Pods-TaxiManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.release.xcconfig"; sourceTree = "<group>"; };
 		EB9C0688FB86992E2886AE4A /* Pods_TaxiManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaxiManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,9 +170,10 @@
 				1156BB491FA7C4FD00C2DF4F /* Controllers */,
 				11DB571A1FA112B700A39486 /* Extensions.swift */,
 				112830B01F884E3C000972CB /* AppDelegate.swift */,
-				117DBA9F1FA24FA800A303E6 /* CustomButton.swift */,
+				117DBA9F1FA24FA800A303E6 /* CustomUI.swift */,
 				112830B41F884E3C000972CB /* Main.storyboard */,
 				112830B91F884E3C000972CB /* LaunchScreen.storyboard */,
+				11837E031FB4BE5C00CA8DF2 /* Mobilitee_splash.png */,
 				112830BC1F884E3C000972CB /* Info.plist */,
 				1177FBDB1FA9A8F100439913 /* Assets.xcassets */,
 			);
@@ -183,6 +192,9 @@
 		1156BB491FA7C4FD00C2DF4F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				11EE3E141FBB2933007918C6 /* PrimeiroLoginViewController.swift */,
+				11EE3E121FBB2672007918C6 /* RecuperarSenhaViewController.swift */,
+				119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */,
 				1177FBD91FA9A55C00439913 /* TMFavoritosViewController.swift */,
 				11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */,
 				11A552501F993F03006F9AB6 /* TMLoginViewController.swift */,
@@ -372,6 +384,7 @@
 				11EB8D301F8D4CAE00D0FDE4 /* Poppins-Black.ttf in Resources */,
 				11EB8D321F8D4CAE00D0FDE4 /* Poppins-Bold.ttf in Resources */,
 				1177FBDC1FA9A8F500439913 /* Assets.xcassets in Resources */,
+				11837E041FB4CDD300CA8DF2 /* Mobilitee_splash.png in Resources */,
 				11EB8D3D1F8D4CAE00D0FDE4 /* Poppins-Regular.ttf in Resources */,
 				117E24881F963DF90041DCB6 /* TMResultadoBuscaCell.xib in Resources */,
 				11EB8D331F8D4CAE00D0FDE4 /* Poppins-BoldItalic.ttf in Resources */,
@@ -453,8 +466,9 @@
 				11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */,
 				112830B31F884E3C000972CB /* TMTelaInicialViewController.swift in Sources */,
 				11DB571B1FA112B700A39486 /* Extensions.swift in Sources */,
+				11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */,
 				112830B11F884E3C000972CB /* AppDelegate.swift in Sources */,
-				117DBAA01FA24FA800A303E6 /* CustomButton.swift in Sources */,
+				117DBAA01FA24FA800A303E6 /* CustomUI.swift in Sources */,
 				11E88D1C1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift in Sources */,
 				1156BB481FA7C3D300C2DF4F /* TMHistoricoViewController.swift in Sources */,
 				117E248D1F96520A0041DCB6 /* Corrida.swift in Sources */,
@@ -466,6 +480,8 @@
 				117E248B1F964F870041DCB6 /* ResultadoBusca.swift in Sources */,
 				1177FBDF1FA9A92800439913 /* TMFavoritosCell.swift in Sources */,
 				1177FBDA1FA9A55C00439913 /* TMFavoritosViewController.swift in Sources */,
+				11EE3E131FBB2672007918C6 /* RecuperarSenhaViewController.swift in Sources */,
+				119847951FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift in Sources */,
 				1177FBD61FA9A03000439913 /* TMBuscaEnderecoCell.swift in Sources */,
 				1117BBF51FA7D1750043146D /* TMHistoricoVerMaisCell.swift in Sources */,
 			);
@@ -612,7 +628,7 @@
 				INFOPLIST_FILE = TaxiManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.taximanager;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.taximanager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -634,7 +650,7 @@
 				INFOPLIST_FILE = TaxiManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.taximanager;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.taximanager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;

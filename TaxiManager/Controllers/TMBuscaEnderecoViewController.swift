@@ -8,6 +8,8 @@
 
 import UIKit
 import GooglePlaces
+import Contacts
+import SwiftSpinner
 
 class TMBuscaEnderecoViewController: UIViewController {
     
@@ -27,6 +29,8 @@ class TMBuscaEnderecoViewController: UIViewController {
     
     var selecionouEndereco: ((_ dicionario: [String : Any]) -> Void)?
     
+    var expandedSections : NSMutableSet = [0]
+    
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +42,7 @@ class TMBuscaEnderecoViewController: UIViewController {
         if let arrayRecentes = userDefaults.value(forKey: "arrayRecentes"){
             self.arrayRecentes = arrayRecentes as! [[String : Any]]
         }
-
+        
         if let arrayPois = userDefaults.value(forKey: "arrayPois"){
             self.arrayPois = arrayPois as! [[String : Any]]
         }
@@ -52,10 +56,13 @@ class TMBuscaEnderecoViewController: UIViewController {
         self.fetcher.delegate = self
         self.txtFieldBuscaEndereco.delegate = self
         
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         self.tableView.register(UINib(nibName: "TMCustomTableViewHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "tmHeaderCell")
         
         self.tableView.register(UINib(nibName: "TMBuscaEnderecoCell", bundle: nil), forCellReuseIdentifier: "tmBuscaEnderecoCell")
+        
+        self.txtFieldBuscaEndereco.becomeFirstResponder()
     }
     
     //MARK: - Metodos
@@ -67,6 +74,22 @@ class TMBuscaEnderecoViewController: UIViewController {
         
         fetcher.sourceTextHasChanged(sender.text!)
     }
+        
+    @objc func sectionTapped(_ sender: UIButton) {
+        let section = sender.tag
+        let shouldExpand = !expandedSections.contains(section)
+        if (shouldExpand) {
+//            expandedSections.remove()
+            expandedSections.add(section)
+        } else {
+            expandedSections.remove(section)
+        }
+        self.tableView.reloadData()
+
+        
+        
+    }
+    
 }
 
 extension TMBuscaEnderecoViewController : GMSAutocompleteFetcherDelegate{
@@ -116,16 +139,20 @@ extension TMBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        switch section {
-        case 0:
-            return self.arrayPredicoes.count
-        case 1:
-            return self.arrayRecentes.count
-        case 2:
-            return self.arrayFavoritos.count
-        case 3:
-            return self.arrayPois.count
-        default:
+        if(expandedSections.contains(section)) {
+            switch section {
+            case 0:
+                return self.arrayPredicoes.count
+            case 1:
+                return self.arrayRecentes.count <= 10 ? self.arrayRecentes.count : 10
+            case 2:
+                return self.arrayFavoritos.count
+            case 3:
+                return self.arrayPois.count
+            default:
+                return 0
+            }
+        }else{
             return 0
         }
     }
@@ -156,6 +183,19 @@ extension TMBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
             cell.imgViewLogo.image = nil
             cell.labelTitulo.text = ""
         }
+        
+        if(section != 0){
+         
+            if (expandedSections.contains(section)) {
+                cell.imgViewSeta.image = #imageLiteral(resourceName: "icon_seta_baixo")
+            }else{
+                cell.imgViewSeta.image = #imageLiteral(resourceName: "icon_seta_direita")
+            }
+            
+            cell.btnSection.addTarget(self, action: #selector(sectionTapped), for: .touchUpInside)
+            cell.btnSection.tag = section
+        }
+        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -171,11 +211,9 @@ extension TMBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
             self.resolverDidSelectRecente()
         case 2:
             self.resolverDidSelectFavorito()
-
+            
         case 3:
             self.resolverDidSelectPoi()
-
-//            self.dismiss(animated: true, completion: nil)
             
         default:
             print("defaults")
@@ -187,14 +225,14 @@ extension TMBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
 }
 
 extension TMBuscaEnderecoViewController : UITextFieldDelegate{
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        
-        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            
-            textField.resignFirstResponder()
-            return true
-        }
-        
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }
 
 extension TMBuscaEnderecoViewController{
@@ -220,10 +258,30 @@ extension TMBuscaEnderecoViewController{
             geocoder.reverseGeocodeLocation(localizacao, completionHandler: { (placemarks, error) in
                 
                 if (error == nil) {
-                    var endereco = ""
+                    var endereco = "00000000"
                     if let plmarks = placemarks {
                         let firstLocation = plmarks[0]
                         
+                        var number = "000"
+                        var postalCode = ""
+                        if let zip = firstLocation.addressDictionary?["ZIP"] as? String{
+                            
+                            postalCode = zip
+                            print(firstLocation.addressDictionary)
+                        }
+                        
+                        if let code = firstLocation.addressDictionary?["PostCodeExtension"] as? String{
+                            
+                            postalCode += code
+                            
+                        }else{
+                            
+                            postalCode += "000"
+                        }
+                        
+                        print(postalCode)
+                        
+                        print("!!!!!!!!!!!!!!!!!!!!")
                         if let thoroughfare = firstLocation.thoroughfare{
                             
                             endereco += thoroughfare
@@ -238,14 +296,16 @@ extension TMBuscaEnderecoViewController{
                         
                         dictionaryAddress.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
                         dictionaryAddress.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
-                        dictionaryAddress.updateValue("\(firstLocation.postalCode!)", forKey: "zipcode")
+                        dictionaryAddress.updateValue("\(postalCode)", forKey: "zipcode")
                         dictionaryAddress.updateValue("\(firstLocation.locality!)", forKey: "city")
                         dictionaryAddress.updateValue("\(firstLocation.administrativeArea!)", forKey: "state")
                         dictionaryAddress.updateValue(place?.formattedAddress ?? "", forKey: "address")
-                        
+                        dictionaryAddress.updateValue(number ?? "", forKey: "number")
+                        dictionaryAddress.updateValue(firstLocation.subLocality ?? "", forKey: "district")
+
                         self.selecionouEndereco?(dictionaryAddress)
                         
-                        self.arrayRecentes.append(dictionaryAddress)
+                        self.arrayRecentes.insert(dictionaryAddress, at: 0)
                         
                         UserDefaults.standard.setValue(self.arrayRecentes, forKey: "arrayRecentes")
                         UserDefaults.standard.synchronize()
@@ -273,7 +333,7 @@ extension TMBuscaEnderecoViewController{
     
     func resolverDidSelectPoi(){
         
-         self.selecionouEndereco?(self.arrayPois[self.tableView.indexPathForSelectedRow!.row])
+        self.selecionouEndereco?(self.arrayPois[self.tableView.indexPathForSelectedRow!.row])
         
     }
     

@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Alamofire
 
 class TMFavoritosViewController: UIViewController {
-
+    
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     //MARK: - Propriedades
@@ -28,6 +29,18 @@ class TMFavoritosViewController: UIViewController {
             
             self.arrayFavoritos = favoritos
         }
+        
+        self.tableView.allowsMultipleSelectionDuringEditing = false
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        let defaults = UserDefaults.standard
+        if let favoritos = defaults.value(forKey: "arrayFavoritos") as? [[String : Any]]{
+            
+            self.arrayFavoritos = favoritos
+        }
+        self.tableView.reloadData()
     }
     
     //MARK: - Metodos
@@ -35,7 +48,11 @@ class TMFavoritosViewController: UIViewController {
         
         self.dismiss(animated: true)
     }
+    
+    
 }
+
+
 extension TMFavoritosViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,6 +71,48 @@ extension TMFavoritosViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 105
+        return 85
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if(editingStyle == .delete){
+            
+            
+            let url = "https://api.taximanager.com.br/v1/taximanager/employees/bookmarks/" + "\(self.arrayFavoritos[indexPath.row]["id"] as! Double)"
+            
+            print("DELETEEEEEEE")
+            
+            self.arrayFavoritos.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.bottom)
+            
+            let defaults = UserDefaults.standard
+            let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
+            
+            Alamofire.request(url, method: .delete, parameters: nil, headers: headers).responseJSON(completionHandler: { (response) in
+                
+                
+                print("VOLTOU DO RESPONSE JSON")
+                if let err = response.error{
+                    print(err.localizedDescription)
+                }
+                
+                
+                
+                if(response.result.isSuccess){
+                    
+                    print("SUCESSO")
+                    UserDefaults.standard.setValue(self.arrayFavoritos, forKey: "arrayFavoritos")
+                    
+                }
+                
+            })
+            
+        }
     }
 }

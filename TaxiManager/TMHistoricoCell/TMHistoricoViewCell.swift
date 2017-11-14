@@ -12,11 +12,11 @@ import ExpandableCell
 class TMHistoricoViewCell :  UITableViewCell{
 
     
-//    @IBOutlet weak var imgVieLogo: UIImageView!
-//    @IBOutlet weak var labelCorrida: UILabel!
-//    @IBOutlet weak var labelOrigem: UILabel!
-//    @IBOutlet weak var labelDestino: UILabel!
-//    
+    @IBOutlet weak var imgViewLogo: UIImageView!
+    @IBOutlet weak var labelCorrida: UILabel!
+    @IBOutlet weak var labelOrigem: UILabel!
+    @IBOutlet weak var labelDestino: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

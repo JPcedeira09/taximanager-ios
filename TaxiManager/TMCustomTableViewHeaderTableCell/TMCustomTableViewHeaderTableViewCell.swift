@@ -10,18 +10,13 @@ import UIKit
 
 class TMCustomTableViewHeaderTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var btnSection: UIButton!
     @IBOutlet weak var imgViewLogo: UIImageView!
     @IBOutlet weak var labelTitulo: UILabel!
+    @IBOutlet weak var imgViewSeta: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+    }    
 }

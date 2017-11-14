@@ -10,6 +10,16 @@ import UIKit
 
 class TMHistoricoVerMaisCell: UITableViewCell {
 
+    @IBOutlet weak var lblDistancia: CustomLabel!
+    @IBOutlet weak var lblDuracao: CustomLabel!
+    @IBOutlet weak var lblValor: CustomLabel!
+    @IBOutlet weak var lblFornecedor: CustomLabel!
+    @IBOutlet weak var lblCategoria: CustomLabel!
+    @IBOutlet weak var lblCentroCusto: CustomLabel!
+    @IBOutlet weak var lblProjeto: CustomLabel!
+    @IBOutlet weak var lblJustificativa: CustomLabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
