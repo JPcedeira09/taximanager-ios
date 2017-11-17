@@ -12,7 +12,7 @@ import Moya
 enum MobiliteeProvider {
     
     //MARK: - Methods
-    case estimate(start : MBAddress, end : MBAddress, device : MBDevice, distance : Int, duration : Int, userId : Int, companyId: Int)
+    case estimate(start : MBLocation, end : MBLocation, device : [String : Any], distance : Int, duration : Int, userId : Int, companyId: Int)
     case login(username: String, password: String)
     case getPOIs
     case getBookmarks
@@ -52,8 +52,8 @@ extension MobiliteeProvider : TargetType{
             
             do{
                 
-                let start = try start.asDictionary()
-                let end = try end.asDictionary()
+                let start = try MBAddress(fromLocation: start).asDictionary()
+                let end = try MBAddress(fromLocation: end).asDictionary()
                 let device = [:] as [String : Any]
                 
                 let parameters = ["start" : start,

@@ -18,6 +18,7 @@ struct MBBookmark : MBLocation, Codable{
     var city: String
     var state: String
     var zipcode: String
+    var number: String
     
     //MARK: - Propriedades
     
@@ -25,6 +26,24 @@ struct MBBookmark : MBLocation, Codable{
     var employeeId : Int
     var mainText : String
     var secondaryText : String
-    var number : String
+    
+//    enum CodingKeys : String, CodingKey{
+//        
+//        case latitude = "lat"
+//        case longitude = "lng"
+//        
+//        case address
+//        case district
+//        case city
+//        case state
+//        case zipcode
+//        case number
+//        
+//        case id
+//        case employeeId
+//        case mainText
+//        case secondaryText
+//    }
+    
     
 }

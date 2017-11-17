@@ -22,6 +22,7 @@ struct MBUser : Codable{
     
     var pois : [MBPoi]?
     var bookmarks : [MBBookmark]?
+    var recents : [MBAddress]?
     
     static var currentUser : MBUser?
     
@@ -56,8 +57,8 @@ struct MBUser : Codable{
     
     static func update(){
         
-        getPois()
-        getBookmarks()
+//        getPois()
+//        getBookmarks()
         getHistory()
     }
     
@@ -95,6 +96,8 @@ struct MBUser : Codable{
             case let .success(response):
                 if response.statusCode == 200{
                     do{
+                        
+                        print(try response.mapString())
                         let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
                         
                         MBUser.currentUser?.bookmarks = mbBookmarks

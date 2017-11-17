@@ -17,6 +17,7 @@ class TMHistoricoViewController: UIViewController{
     //MARK: - Propriedades
     
     var arrayHistorico = [[String:Any]]()
+//    var historyList = [MB]
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -109,8 +109,8 @@ extension TMFavoritosAdicionarViewController : UITextFieldDelegate{
                 
                 if let _ = self {
                     
-                    self?.dicFavorito = dicionarioEndereco
-                    self?.txtFieldEndereco.text = dicionarioEndereco["address"] as? String
+//                    self?.dicFavorito = dicionarioEndereco
+//                    self?.txtFieldEndereco.text = dicionarioEndereco["address"] as? String
                 }
             }
             self.present(buscarEnderecoViewController, animated: true, completion: nil)

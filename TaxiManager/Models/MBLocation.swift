@@ -10,7 +10,7 @@
 import Foundation
 
 
-protocol MBLocation {
+protocol MBLocation : Codable {
     
     //Informacoes basicas
     var latitude : Double {get set}
@@ -20,6 +20,7 @@ protocol MBLocation {
     var city : String {get set}
     var state : String {get set}
     var zipcode : String {get set}
+    var number : String {get set}
     
 }
 

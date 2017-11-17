@@ -35,4 +35,41 @@ class TMMenuLateralViewController: UIViewController {
         }
     }
     
+    @IBAction func openComoUsar(_ sender: UIButton) {
+        
+        let stringUrl = "https://s3-sa-east-1.amazonaws.com/mobilitee/IE8/como+usar.pdf"
+        
+        if let url = URL(string: stringUrl){
+            
+            if(UIApplication.shared.canOpenURL(url)){
+                
+                UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
+                    
+                    print("Funfou?  \(result)" )
+                })
+            }
+            
+        }
+        
+        
+        
+    }
+    @IBAction func openPoliticasDeUso(_ sender: UIButton) {
+     
+        let stringUrl = "https://s3-sa-east-1.amazonaws.com/mobilitee/Termo+de+Uso.html"
+        
+        if let url = URL(string: stringUrl){
+            
+            if(UIApplication.shared.canOpenURL(url)){
+                
+                UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
+                    
+                    print("Funfou?  \(result)" )
+                })
+            }
+            
+        }
+    }
+    
+    
 }

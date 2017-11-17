@@ -16,6 +16,7 @@ struct MBAddress : MBLocation, Codable{
     var city: String
     var state: String
     var zipcode: String
+    var number: String
     
     enum CodingKeys : String, CodingKey{
         
@@ -27,5 +28,30 @@ struct MBAddress : MBLocation, Codable{
         case city
         case state
         case zipcode
+        case number
+    }
+    
+    init(fromLocation location: MBLocation){
+        
+        self.latitude = location.latitude
+        self.longitude = location.longitude
+        self.address = location.address
+        self.district = location.district
+        self.city = location.city
+        self.state = location.state
+        self.zipcode = location.zipcode
+        self.number = location.number
+    }
+    
+    init(latitude: Double, longitude: Double, address: String, district: String, city: String, state: String, zipcode: String, number: String){
+        self.latitude = latitude
+        self.longitude = longitude
+        self.address = address
+        self.district = district
+        self.city = city
+        self.state = state
+        self.zipcode = zipcode
+        self.number = number
+        
     }
 }

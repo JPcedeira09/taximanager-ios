@@ -18,6 +18,7 @@ struct MBPoi : MBLocation, Codable{
     var city: String
     var state: String
     var zipcode: String
+    var number: String
     
     //MARK: - propriedades
     

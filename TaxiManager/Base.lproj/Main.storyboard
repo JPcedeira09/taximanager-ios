@@ -625,6 +625,9 @@
                                                 <state key="normal" title="Como usar">
                                                     <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="openComoUsar:" destination="OeN-a8-wP5" eventType="touchUpInside" id="Osz-Hh-PnO"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gY1-41-1u2">
                                                 <rect key="frame" x="20" y="40" width="355" height="29"/>
@@ -632,6 +635,9 @@
                                                 <state key="normal" title="Políticas de uso">
                                                     <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="openPoliticasDeUso:" destination="OeN-a8-wP5" eventType="touchUpInside" id="eQw-aQ-As9"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qsa-7K-hA1">
                                                 <rect key="frame" x="20" y="69.5" width="355" height="29"/>

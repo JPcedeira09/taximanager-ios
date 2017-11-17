@@ -11,6 +11,8 @@
 		1117BBF51FA7D1750043146D /* TMHistoricoVerMaisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1117BBF31FA7D1750043146D /* TMHistoricoVerMaisCell.swift */; };
 		1117BBF61FA7D1750043146D /* TMHistoricoVerMaisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1117BBF41FA7D1750043146D /* TMHistoricoVerMaisCell.xib */; };
 		111C30FF1F8B067500EF37E3 /* TMTelaBuscaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C30FE1F8B067500EF37E3 /* TMTelaBuscaViewController.swift */; };
+		111FB5E11FBF3A5000578185 /* MBRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111FB5E01FBF3A5000578185 /* MBRide.swift */; };
+		111FB5E31FBF67C300578185 /* MBSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111FB5E21FBF67C300578185 /* MBSearchResult.swift */; };
 		112830B11F884E3C000972CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112830B01F884E3C000972CB /* AppDelegate.swift */; };
 		112830B31F884E3C000972CB /* TMTelaInicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112830B21F884E3C000972CB /* TMTelaInicialViewController.swift */; };
 		112830B61F884E3C000972CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112830B41F884E3C000972CB /* Main.storyboard */; };
@@ -73,6 +75,8 @@
 		1117BBF31FA7D1750043146D /* TMHistoricoVerMaisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMHistoricoVerMaisCell.swift; sourceTree = "<group>"; };
 		1117BBF41FA7D1750043146D /* TMHistoricoVerMaisCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMHistoricoVerMaisCell.xib; sourceTree = "<group>"; };
 		111C30FE1F8B067500EF37E3 /* TMTelaBuscaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMTelaBuscaViewController.swift; sourceTree = "<group>"; };
+		111FB5E01FBF3A5000578185 /* MBRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBRide.swift; sourceTree = "<group>"; };
+		111FB5E21FBF67C300578185 /* MBSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSearchResult.swift; sourceTree = "<group>"; };
 		112830AD1F884E3C000972CB /* TaxiManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaxiManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		112830B01F884E3C000972CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		112830B21F884E3C000972CB /* TMTelaInicialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMTelaInicialViewController.swift; sourceTree = "<group>"; };
@@ -207,7 +211,9 @@
 				11EE3E1E1FBB662A007918C6 /* MBAddress.swift */,
 				11EE3E1B1FBB6150007918C6 /* MBDevice.swift */,
 				117E248A1F964F870041DCB6 /* ResultadoBusca.swift */,
+				111FB5E21FBF67C300578185 /* MBSearchResult.swift */,
 				117E248C1F96520A0041DCB6 /* Corrida.swift */,
+				111FB5E01FBF3A5000578185 /* MBRide.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -495,6 +501,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				113A4EE91FBDFFB5005D01FC /* MBBookmark.swift in Sources */,
+				111FB5E11FBF3A5000578185 /* MBRide.swift in Sources */,
 				11EE3E231FBB86D0007918C6 /* MBUser.swift in Sources */,
 				11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */,
 				112830B31F884E3C000972CB /* TMTelaInicialViewController.swift in Sources */,
@@ -512,6 +519,7 @@
 				117E24871F963DF90041DCB6 /* TMResultadoBuscaCell.swift in Sources */,
 				118347891FA27C3400DB3C55 /* TMMenuLateralViewController.swift in Sources */,
 				11EE3E1F1FBB662A007918C6 /* MBAddress.swift in Sources */,
+				111FB5E31FBF67C300578185 /* MBSearchResult.swift in Sources */,
 				11EE3E181FBB5CB5007918C6 /* MobiliteeProvider.swift in Sources */,
 				117E248B1F964F870041DCB6 /* ResultadoBusca.swift in Sources */,
 				1177FBDF1FA9A92800439913 /* TMFavoritosCell.swift in Sources */,

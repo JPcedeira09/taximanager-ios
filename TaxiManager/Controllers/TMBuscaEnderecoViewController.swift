@@ -22,11 +22,11 @@ class TMBuscaEnderecoViewController: UIViewController {
     //MARK: - Propriedades
     var fetcher = GMSAutocompleteFetcher()
     var arrayPredicoes = [GMSAutocompletePrediction]()
-    var arrayRecentes = [[String:Any]]()
+    var arrayRecentes = [MBAddress]()
     var arrayPois = [MBPoi]()
     var arrayFavoritos = [MBBookmark]()
     
-    var selecionouEndereco: ((_ dicionario: [String : Any]) -> Void)?
+    var selecionouEndereco: ((_ dicionario: MBLocation) -> Void)?
     
     var expandedSections : NSMutableSet = [0]
     
@@ -38,8 +38,8 @@ class TMBuscaEnderecoViewController: UIViewController {
         
         let userDefaults = UserDefaults.standard
         
-        if let arrayRecentes = userDefaults.value(forKey: "arrayRecentes"){
-            self.arrayRecentes = arrayRecentes as! [[String : Any]]
+        if let recents = MBUser.currentUser?.recents{
+            self.arrayRecentes = recents
         }
         
         if let mbPois = MBUser.currentUser?.pois{
@@ -127,7 +127,7 @@ extension TMBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
             cell.labelEndereco.attributedText = predicao.attributedFullText
         case 1:
             let recente = self.arrayRecentes[indexPath.row]
-            cell.labelEndereco.text = recente["address"] as? String
+            cell.labelEndereco.text = recente.address
         case 2:
             let favorito = self.arrayFavoritos[indexPath.row]
             cell.labelEndereco.text = favorito.mainText
@@ -191,6 +191,7 @@ extension TMBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
         
         if(section != 0){
          
+            
             if (expandedSections.contains(section)) {
                 cell.imgViewSeta.image = #imageLiteral(resourceName: "icon_seta_baixo")
             }else{
@@ -272,7 +273,7 @@ extension TMBuscaEnderecoViewController{
                         if let zip = firstLocation.addressDictionary?["ZIP"] as? String{
                             
                             postalCode = zip
-                            print(firstLocation.addressDictionary)
+//                            print(firstLocation.addressDictionary)
                         }
                         
                         if let code = firstLocation.addressDictionary?["PostCodeExtension"] as? String{
@@ -284,9 +285,7 @@ extension TMBuscaEnderecoViewController{
                             postalCode += "000"
                         }
                         
-                        print(postalCode)
                         
-                        print("!!!!!!!!!!!!!!!!!!!!")
                         if let thoroughfare = firstLocation.thoroughfare{
                             
                             endereco += thoroughfare
@@ -297,23 +296,30 @@ extension TMBuscaEnderecoViewController{
                             }
                         }
                         
-                        var dictionaryAddress : [String: Any] = [:]
+//                        var dictionaryAddress : [String: Any] = [:]
                         
-                        dictionaryAddress.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
-                        dictionaryAddress.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
-                        dictionaryAddress.updateValue("\(postalCode)", forKey: "zipcode")
-                        dictionaryAddress.updateValue("\(firstLocation.locality!)", forKey: "city")
-                        dictionaryAddress.updateValue("\(firstLocation.administrativeArea!)", forKey: "state")
-                        dictionaryAddress.updateValue(place?.formattedAddress ?? "", forKey: "address")
-                        dictionaryAddress.updateValue(number ?? "", forKey: "number")
-                        dictionaryAddress.updateValue(firstLocation.subLocality ?? "", forKey: "district")
+//                        dictionaryAddress.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
+//                        dictionaryAddress.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
+//                        dictionaryAddress.updateValue("\(postalCode)", forKey: "zipcode")
+//                        dictionaryAddress.updateValue("\(firstLocation.locality!)", forKey: "city")
+//                        dictionaryAddress.updateValue("\(firstLocation.administrativeArea!)", forKey: "state")
+//                        dictionaryAddress.updateValue(place?.formattedAddress ?? "", forKey: "address")
+//                        dictionaryAddress.updateValue(number, forKey: "number")
+//                        dictionaryAddress.updateValue(firstLocation.subLocality ?? "", forKey: "district")
 
-                        self.selecionouEndereco?(dictionaryAddress)
+                        let address = MBAddress(latitude: firstLocation.location!.coordinate.latitude, longitude: firstLocation.location!.coordinate.longitude, address: place?.formattedAddress ?? "", district: firstLocation.subLocality ?? "", city: firstLocation.locality!, state: firstLocation.administrativeArea!, zipcode: postalCode, number: number )
+                        self.selecionouEndereco?(address)
                         
-                        self.arrayRecentes.insert(dictionaryAddress, at: 0)
+                        self.arrayRecentes.append(address)
                         
-                        UserDefaults.standard.setValue(self.arrayRecentes, forKey: "arrayRecentes")
-                        UserDefaults.standard.synchronize()
+                        
+                        do{
+                            MBUser.currentUser?.recents = self.arrayRecentes
+                            let userEncoded = try JSONEncoder().encode(MBUser.currentUser)
+                            UserDefaults.standard.setValue(userEncoded, forKey: "user")
+                            UserDefaults.standard.synchronize()
+                        }catch{}
+
                         self.dismiss(animated: true, completion: nil)
                     }
                 }
@@ -333,17 +339,13 @@ extension TMBuscaEnderecoViewController{
     
     func resolverDidSelectFavorito(){
         
-        do{
-            self.selecionouEndereco?(try self.arrayFavoritos[self.tableView.indexPathForSelectedRow!.row].asDictionary())
-        }catch{}
+        self.selecionouEndereco?(self.arrayFavoritos[self.tableView.indexPathForSelectedRow!.row])
         
     }
     
     func resolverDidSelectPoi(){
-        do{
-            self.selecionouEndereco?(try self.arrayPois[self.tableView.indexPathForSelectedRow!.row].asDictionary())
-        }catch{}
         
+        self.selecionouEndereco?(self.arrayPois[self.tableView.indexPathForSelectedRow!.row])
         
     }
     

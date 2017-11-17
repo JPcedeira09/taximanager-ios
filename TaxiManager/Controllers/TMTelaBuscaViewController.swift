@@ -24,7 +24,8 @@ class TelaBuscaViewController: UIViewController {
     @IBOutlet weak var tableViewResultado: UITableView!
     
     //MARK: - Propriedades
-    var resumoBusca : ResumoBusca?
+//    var resumoBusca : ResumoBusca?
+    var searchResult : MBSearchResult?
     
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -38,16 +39,17 @@ class TelaBuscaViewController: UIViewController {
         self.tableViewResultado.register(UINib(nibName: "TMResultadoBuscaCell", bundle: nil), forCellReuseIdentifier: "tmResultadoBusca")
         
         
-        let distanciaFormatada = String(format: "%.1f km", Float((self.resumoBusca?.distanciaCorrida)!) / 1000.0)
+        let distanciaFormatada = String(format: "%.1f km", Float((self.searchResult?.distance)!) / 1000.0)
         //        print(self.resumoBusca?.arrayCorridas)
         //        self.labelDistancia.text =  "\(Float((self.resumoBusca?.distanciaCorrida)!) / 1000.0) km"
         self.labelDistancia.text = distanciaFormatada
-        self.labelDuracao.text =  "\(self.resumoBusca?.duracaoCorrida ?? 00) min"
-        self.textFieldPontoOrigem.text = self.resumoBusca?.enderecoOrigem
-        self.textFieldPontoDestino.text = self.resumoBusca?.enderecoDestino
+        self.labelDuracao.text =  "\(self.searchResult?.duration ?? 00) min"
+        self.textFieldPontoOrigem.text = self.searchResult?.startAddress.address
+        self.textFieldPontoDestino.text = self.searchResult?.endAddress.address
         
         print("========= CORRIDAS ===========")
-        print(self.resumoBusca?.arrayCorridas)
+//        print(self.resumoBusca?.arrayCorridas)
+        print(searchResult)
         
         
     }
@@ -69,24 +71,30 @@ class TelaBuscaViewController: UIViewController {
 //        self.navigationItem.rightBarButtonItem = barButtonItem2
     }
     
-    func checarAcoesCorrida (corrida : Corrida){
+    func checarAcoesCorrida (corrida : MBRide){
         
         print(corrida)
         let application = UIApplication.shared
         
-        if corrida.urlDeeplink != nil && application.canOpenURL(corrida.urlDeeplink!){
-            application.open(corrida.urlDeeplink!)
+        
+        if let urlDeeplinkString = corrida.urlDeeplink,
+           let urlDeeplink = URL(string: urlDeeplinkString),
+           application.canOpenURL(urlDeeplink){
+            
+            application.open(urlDeeplink)
+        
         }else{
             
             let alert = SCLAlertView()
             
-            if let urlLoja = corrida.urlLoja{
+            if let urlStoreString = corrida.urlStore, let urlStore = URL(string: urlStoreString){
                 
                 alert.addButton("Instalar agora", action: {
-                    UIApplication.shared.open(urlLoja)
+                    UIApplication.shared.open(urlStore)
                 })
             }
-            if let urlWeb = corrida.urlWeb{
+            if let urlWebString = corrida.urlWeb,
+                let urlWeb = URL(string: urlWebString){
                 
                 alert.addButton("Solicitar carro", action: {
                     UIApplication.shared.open(urlWeb)
@@ -105,24 +113,24 @@ extension TelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.resumoBusca!.arrayCorridas.count
+        return self.searchResult!.travels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tmResultadoBusca", for: indexPath) as! TMResultadoBuscaCell
         
-        let corrida = self.resumoBusca!.arrayCorridas[indexPath.row]
+        let corrida = self.searchResult!.travels[indexPath.row]
         
         print("=======CORRIDA=======")
         print(corrida)
-        cell.labelNome.text = corrida.modalityName
+        cell.labelNome.text = corrida.modality.name
         cell.labelNomeModalidade.text = corrida.name
         cell.labelPreco.text = corrida.price
         cell.labelEspera.text = "\(corrida.waitingTime/60) min"
         cell.imgViewLogo.image = UIImage()
         
-        if let urlLogo = corrida.urlLogo {
+        if let urlLogo = URL(string: corrida.urlLogo!) {
             let task = URLSession.shared.dataTask(with: urlLogo) { data, response, error in
                 guard let data = data, error == nil else { return }
                 
@@ -138,7 +146,7 @@ extension TelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let corrida = self.resumoBusca!.arrayCorridas[indexPath.row]
+        let corrida = self.searchResult!.travels[indexPath.row]
         
         print(corrida)
         
