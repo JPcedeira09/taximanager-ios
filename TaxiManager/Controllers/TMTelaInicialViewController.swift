@@ -74,106 +74,156 @@ class TelaInicialViewController: UIViewController {
         self.setupTextFieldOrigem()
         self.atualizarLabelData()
         
+//        self.atualizarPois()
+//        self.atualizarFavoritos()
+//        self.atualizarHistorico()
         
-        self.atualizarPois()
-        self.atualizarFavoritos()
-        self.atualizarHistorico()
+//        self.updatePois()
+        
+        
     }
     
-    func atualizarPois(){
-        let url = "https://api.taximanager.com.br/v1/taximanager/companies/interestpoints"
-        let defaults = UserDefaults.standard
-        let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
-        
-        Alamofire.request(url, method: HTTPMethod.get, parameters: nil, headers: headers).responseJSON { (response) in
-            
-            if let err = response.error{
-                
-            }
-            
-            if(response.result.isSuccess){
-                
-                if let json = response.result.value as? [String : AnyObject]{
-                    
-                    if let records = json["records"] as? [[String:Any]]{
-                        
-                        
-                        var arrayPois : [[String: Any]] = []
-                        for record in records{
-                            
-                            var dictionary : [String: Any] = [:]
-                            
-                            
-                            //                        print(record)
-                            
-                            dictionary["lat"] = record["latitude"] as! Double
-                            dictionary["lng"] = record["longitude"] as! Double
-                            dictionary["zipcode"] = record["zipcode"] as! String
-                            dictionary["city"] = record["city"] as! String
-                            dictionary["state"] = record["state"] as! String
-                            dictionary["address"] = record["address"] as! String
-                            dictionary["name"] = record["mainText"] as! String
-                            
-                            //                        arrayPois.append(dictionary)
-                            arrayPois.insert(dictionary, at: 0)
-                        }
-                        
-                        defaults.setValue(arrayPois, forKey: "arrayPois")
-                        
-                    }
-                    
-                }
-            }
-            
-        }
-    }
+//    func updatePois(){
+//        
+//        MobiliteeProvider.api.request(.getPOIs) { (result) in
+//           
+//            switch result{
+//                
+//            case let .success(response):
+//                if response.statusCode == 200{
+//                    do{
+//                        
+//                        let mbPoi = try response.map([MBPoi].self, atKeyPath: "records")
+//                        print(mbPoi)
+//                        
+//
+//                        print("================DICIONARIO =============")
+////                        let mbUser = MBUser(from: dictionary)
+//                        
+////                        let userEncoded = try JSONEncoder().encode(mbUser)
+////                        UserDefaults.standard.set(userEncoded, forKey: "user")
+//                        
+////                        let defaults = UserDefaults.standard
+////                        defaults.set(mbUser.id, forKey: "idUsuario")
+////                        defaults.set(mbUser.companyId, forKey: "idEmpresa")
+////                        defaults.set(mbUser.firstName, forKey: "nomeUsuario")
+////                        defaults.set(mbUser.lastName, forKey: "sobrenomeUsuario")
+////                        defaults.set(mbUser.employeeId, forKey: "employeeId")
+////                        defaults.set(mbUser.token, forKey: "token")
+////
+////                        defaults.synchronize()
+////
+//                        
+//                        
+//                        
+//                    }catch{
+//                        
+//                        print("caiu no catch")
+//                    }
+//                }
+//            case let .failure(error):
+//                
+//                print(error.localizedDescription)
+//            }
+//        
+//        }
+//        
+//    }
+//    func atualizarPois(){
+//        let url = "https://api.taximanager.com.br/v1/taximanager/companies/interestpoints"
+//        let defaults = UserDefaults.standard
+//        let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
+//        
+//        Alamofire.request(url, method: HTTPMethod.get, parameters: nil, headers: headers).responseJSON { (response) in
+//            
+//            if let err = response.error{
+//                
+//            }
+//            
+//            if(response.result.isSuccess){
+//                
+//                if let json = response.result.value as? [String : AnyObject]{
+//                    
+//                    if let records = json["records"] as? [[String:Any]]{
+//                        
+//                        
+//                        var arrayPois : [[String: Any]] = []
+//                        for record in records{
+//                            
+//                            var dictionary : [String: Any] = [:]
+//                            
+//                            
+//                            //                        print(record)
+//                            
+//                            dictionary["lat"] = record["latitude"] as! Double
+//                            dictionary["lng"] = record["longitude"] as! Double
+//                            dictionary["zipcode"] = record["zipcode"] as! String
+//                            dictionary["city"] = record["city"] as! String
+//                            dictionary["state"] = record["state"] as! String
+//                            dictionary["address"] = record["address"] as! String
+//                            dictionary["name"] = record["mainText"] as! String
+//                            
+//                            //                        arrayPois.append(dictionary)
+//                            arrayPois.insert(dictionary, at: 0)
+//                        }
+//                        
+//                        defaults.setValue(arrayPois, forKey: "arrayPois")
+//                        
+//                    }
+//                    
+//                }
+//            }
+//            
+//        }
+//    }
+//    
+//    func atualizarFavoritos(){
+//        let url = "https://api.taximanager.com.br/v1/taximanager/employees/bookmarks"
+//        let defaults = UserDefaults.standard
+//        let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
+//        
+//        Alamofire.request(url, method: HTTPMethod.get, parameters: nil, headers: headers).responseJSON { (response) in
+//            
+//            if let err = response.error{
+//                
+//            }
+//            
+//            if(response.result.isSuccess){
+//                
+//                if let json = response.result.value as? [String : AnyObject]{
+//                    
+//                    if let records = json["records"] as? [[String:Any]]{
+//                        
+//                        var arrayFavoritos : [[String: Any]] = []
+//                        
+//                        for record in records{
+//                            
+//                            var dictionary : [String: Any] = [:]
+//                            
+//                            dictionary["lat"] = record["latitude"] as! Double
+//                            dictionary["lng"] = record["longitude"] as! Double
+//                            dictionary["zipcode"] = record["zipcode"] as! String
+//                            dictionary["city"] = record["city"] as! String
+//                            dictionary["state"] = record["state"] as! String
+//                            dictionary["address"] = record["address"] as! String
+//                            dictionary["name"] = record["mainText"] as! String
+//                            dictionary["id"] = record["id"] as! Double
+//                            
+//                            
+//                            //                        arrayFavoritos.append(dictionary)
+//                            arrayFavoritos.insert(dictionary, at: 0)
+//                        }
+//                        
+//                        defaults.setValue(arrayFavoritos, forKey: "arrayFavoritos")
+//                        
+//                    }
+//                    
+//                }
+//            }
+//            
+//        }
+//    }
     
-    func atualizarFavoritos(){
-        let url = "https://api.taximanager.com.br/v1/taximanager/employees/bookmarks"
-        let defaults = UserDefaults.standard
-        let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
-        
-        Alamofire.request(url, method: HTTPMethod.get, parameters: nil, headers: headers).responseJSON { (response) in
-            
-            if let err = response.error{
-                
-            }
-            
-            if(response.result.isSuccess){
-                
-                if let json = response.result.value as? [String : AnyObject]{
-                    
-                    if let records = json["records"] as? [[String:Any]]{
-                        
-                        var arrayFavoritos : [[String: Any]] = []
-                        
-                        for record in records{
-                            
-                            var dictionary : [String: Any] = [:]
-                            
-                            dictionary["lat"] = record["latitude"] as! Double
-                            dictionary["lng"] = record["longitude"] as! Double
-                            dictionary["zipcode"] = record["zipcode"] as! String
-                            dictionary["city"] = record["city"] as! String
-                            dictionary["state"] = record["state"] as! String
-                            dictionary["address"] = record["address"] as! String
-                            dictionary["name"] = record["mainText"] as! String
-                            dictionary["id"] = record["id"] as! Double
-                            
-                            
-                            //                        arrayFavoritos.append(dictionary)
-                            arrayFavoritos.insert(dictionary, at: 0)
-                        }
-                        
-                        defaults.setValue(arrayFavoritos, forKey: "arrayFavoritos")
-                        
-                    }
-                    
-                }
-            }
-            
-        }
-    }
     
     func atualizarHistorico(){
         
@@ -348,8 +398,8 @@ class TelaInicialViewController: UIViewController {
         
         SwiftSpinner.show("Verificando as melhores opções...")
         let urlRequest = "https://maps.googleapis.com/maps/api/distancematrix/json"
-        let origins = "\(origem["lat"]!)" + "," + "\(origem["lng"]!)"
-        let destinations = "\(destino["lat"]!)" + "," + "\(destino["lng"]!)"
+        let origins = "\(origem["latitude"]!)" + "," + "\(origem["longitude"]!)"
+        let destinations = "\(destino["latitude"]!)" + "," + "\(destino["longitude"]!)"
         
         let parametros = ["key": "AIzaSyAL4jaoV5Sl42t2XXgOjDRV-vIMGCWBCPI" , "origins" : origins, "destinations": destinations]
         
@@ -504,15 +554,15 @@ class TelaInicialViewController: UIViewController {
                             
                             arrayCorridas.append(novaCorrida)
                             
-                            let resumo = ResumoBusca(enderecoOrigem: endOrigem, enderecoDestino: endDestino, duracaoCorrida: duracao, distanciaCorrida: distancia, arrayCorridas: arrayCorridas)
-                            
-                            self.resumoBusca = resumo
-                            print("========== RESUMO =========")
-                            print(resumo)
-                            DispatchQueue.main.sync {
-                                self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
-                            }
-                            
+                        }
+                        
+                        let resumo = ResumoBusca(enderecoOrigem: endOrigem, enderecoDestino: endDestino, duracaoCorrida: duracao, distanciaCorrida: distancia, arrayCorridas: arrayCorridas)
+                        
+                        self.resumoBusca = resumo
+                        print("========== RESUMO =========")
+                        print(resumo)
+                        DispatchQueue.main.sync {
+                            self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
                         }
                         
                         
@@ -672,8 +722,8 @@ extension TelaInicialViewController : UITextFieldDelegate{
                     self?.dicOrigem = dicionarioEndereco
                     
                     
-                    let lat = dicionarioEndereco["lat"] as! CLLocationDegrees
-                    let lng = dicionarioEndereco["lng"] as! CLLocationDegrees
+                    let lat = dicionarioEndereco["latitude"] as! CLLocationDegrees
+                    let lng = dicionarioEndereco["longitude"] as! CLLocationDegrees
                     let location = CLLocation(latitude: lat, longitude: lng)
                     self?.mapView.setCenter(location.coordinate, animated: true)
                     
@@ -692,8 +742,8 @@ extension TelaInicialViewController : UITextFieldDelegate{
                     
                     self?.dicDestino = dicionarioEndereco
                     
-                    let lat = dicionarioEndereco["lat"] as! CLLocationDegrees
-                    let lng = dicionarioEndereco["lng"] as! CLLocationDegrees
+                    let lat = dicionarioEndereco["latitude"] as! CLLocationDegrees
+                    let lng = dicionarioEndereco["longitude"] as! CLLocationDegrees
                     
                     self?.textFieldEnderecoDestino.text = dicionarioEndereco["address"] as? String
                 }

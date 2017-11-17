@@ -574,7 +574,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nkh-TM-6sY" userLabel="mid">
-                                        <rect key="frame" x="0.0" y="133.5" width="375" height="367"/>
+                                        <rect key="frame" x="0.0" y="133.5" width="375" height="367.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="50L-LX-ju5">
                                                 <rect key="frame" x="20" y="20" width="230" height="30"/>
@@ -610,7 +610,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLx-JR-Gzb" userLabel="down">
-                                        <rect key="frame" x="0.0" y="500.5" width="375" height="166.5"/>
+                                        <rect key="frame" x="0.0" y="501" width="375" height="166"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRA-aa-h9E" userLabel="borda">
                                                 <rect key="frame" x="20" y="0.0" width="355" height="1"/>
@@ -851,7 +851,7 @@
         <!--TMLoginViewController-->
         <scene sceneID="FUm-t6-gdF">
             <objects>
-                <viewController storyboardIdentifier="TMLoginViewController" title="TMLoginViewController" id="4pb-vW-GhI" customClass="TMLoginViewController" customModule="TaxiManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TMLoginViewController" title="TMLoginViewController" id="4pb-vW-GhI" customClass="MBLoginViewController" customModule="TaxiManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LsL-K9-ckn"/>
                         <viewControllerLayoutGuide type="bottom" id="YBY-IP-ax0"/>
@@ -991,8 +991,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="textFieldSenha" destination="y56-cU-QBk" id="kCf-vH-6Gu"/>
-                        <outlet property="textFieldUsuario" destination="nBs-Sg-vgf" id="qaG-Qz-DAZ"/>
+                        <outlet property="textFieldPassword" destination="y56-cU-QBk" id="kCf-vH-6Gu"/>
+                        <outlet property="textFieldUsername" destination="nBs-Sg-vgf" id="qaG-Qz-DAZ"/>
                         <segue destination="586-hh-yAJ" kind="show" identifier="tmTelaPrincipal" id="cOV-fc-2qc"/>
                         <segue destination="P4U-Zm-PFA" kind="show" id="XkX-ff-uCk"/>
                     </connections>

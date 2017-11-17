@@ -15,6 +15,8 @@
 		112830B31F884E3C000972CB /* TMTelaInicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112830B21F884E3C000972CB /* TMTelaInicialViewController.swift */; };
 		112830B61F884E3C000972CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112830B41F884E3C000972CB /* Main.storyboard */; };
 		112830BB1F884E3C000972CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112830B91F884E3C000972CB /* LaunchScreen.storyboard */; };
+		113A4EE91FBDFFB5005D01FC /* MBBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113A4EE81FBDFFB5005D01FC /* MBBookmark.swift */; };
+		113A4EEB1FBE01C8005D01FC /* MBPoi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113A4EEA1FBE01C8005D01FC /* MBPoi.swift */; };
 		1156BB481FA7C3D300C2DF4F /* TMHistoricoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156BB471FA7C3D300C2DF4F /* TMHistoricoViewController.swift */; };
 		1156BB4C1FA7C89100C2DF4F /* TMHistoricoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156BB4A1FA7C89100C2DF4F /* TMHistoricoViewCell.swift */; };
 		1156BB4D1FA7C89100C2DF4F /* TMHistoricoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1156BB4B1FA7C89100C2DF4F /* TMHistoricoViewCell.xib */; };
@@ -35,7 +37,7 @@
 		119BCD181F97A366004D92CB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD191F97A366004D92CB /* Alamofire.framework */; };
 		119BCD1A1F97A395004D92CB /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */; };
 		119BCD1C1F97A3FE004D92CB /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1D1F97A3FE004D92CB /* SideMenu.framework */; };
-		11A552511F993F03006F9AB6 /* TMLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A552501F993F03006F9AB6 /* TMLoginViewController.swift */; };
+		11A552511F993F03006F9AB6 /* MBLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A552501F993F03006F9AB6 /* MBLoginViewController.swift */; };
 		11DB571B1FA112B700A39486 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DB571A1FA112B700A39486 /* Extensions.swift */; };
 		11E88D1C1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */; };
 		11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E88D1D1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift */; };
@@ -60,6 +62,11 @@
 		11EB8D411F8D4CAE00D0FDE4 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2E1F8D4C8700D0FDE4 /* Poppins-ThinItalic.ttf */; };
 		11EE3E131FBB2672007918C6 /* RecuperarSenhaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E121FBB2672007918C6 /* RecuperarSenhaViewController.swift */; };
 		11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E141FBB2933007918C6 /* PrimeiroLoginViewController.swift */; };
+		11EE3E181FBB5CB5007918C6 /* MobiliteeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E171FBB5CB5007918C6 /* MobiliteeProvider.swift */; };
+		11EE3E1A1FBB6005007918C6 /* MBLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E191FBB6005007918C6 /* MBLocation.swift */; };
+		11EE3E1C1FBB6150007918C6 /* MBDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E1B1FBB6150007918C6 /* MBDevice.swift */; };
+		11EE3E1F1FBB662A007918C6 /* MBAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E1E1FBB662A007918C6 /* MBAddress.swift */; };
+		11EE3E231FBB86D0007918C6 /* MBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E221FBB86D0007918C6 /* MBUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +79,8 @@
 		112830B51F884E3C000972CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		112830BA1F884E3C000972CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		112830BC1F884E3C000972CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		113A4EE81FBDFFB5005D01FC /* MBBookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBBookmark.swift; sourceTree = "<group>"; };
+		113A4EEA1FBE01C8005D01FC /* MBPoi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBPoi.swift; sourceTree = "<group>"; };
 		1156BB471FA7C3D300C2DF4F /* TMHistoricoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMHistoricoViewController.swift; sourceTree = "<group>"; };
 		1156BB4A1FA7C89100C2DF4F /* TMHistoricoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMHistoricoViewCell.swift; sourceTree = "<group>"; };
 		1156BB4B1FA7C89100C2DF4F /* TMHistoricoViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMHistoricoViewCell.xib; sourceTree = "<group>"; };
@@ -92,7 +101,7 @@
 		119BCD191F97A366004D92CB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		119BCD1D1F97A3FE004D92CB /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11A552501F993F03006F9AB6 /* TMLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMLoginViewController.swift; sourceTree = "<group>"; };
+		11A552501F993F03006F9AB6 /* MBLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBLoginViewController.swift; sourceTree = "<group>"; };
 		11DB571A1FA112B700A39486 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBuscaEnderecoViewController.swift; sourceTree = "<group>"; };
 		11E88D1D1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMCustomTableViewHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -118,6 +127,12 @@
 		11EB8D2E1F8D4C8700D0FDE4 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
 		11EE3E121FBB2672007918C6 /* RecuperarSenhaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperarSenhaViewController.swift; sourceTree = "<group>"; };
 		11EE3E141FBB2933007918C6 /* PrimeiroLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeiroLoginViewController.swift; sourceTree = "<group>"; };
+		11EE3E171FBB5CB5007918C6 /* MobiliteeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobiliteeProvider.swift; sourceTree = "<group>"; };
+		11EE3E191FBB6005007918C6 /* MBLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBLocation.swift; sourceTree = "<group>"; };
+		11EE3E1B1FBB6150007918C6 /* MBDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBDevice.swift; sourceTree = "<group>"; };
+		11EE3E1D1FBB63E8007918C6 /* estimateSampleData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = estimateSampleData.json; sourceTree = "<group>"; };
+		11EE3E1E1FBB662A007918C6 /* MBAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBAddress.swift; sourceTree = "<group>"; };
+		11EE3E221FBB86D0007918C6 /* MBUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBUser.swift; sourceTree = "<group>"; };
 		23741A00D917E0F4A3FBADA6 /* Pods-TaxiManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.debug.xcconfig"; sourceTree = "<group>"; };
 		85CB8ACC30F5206867D086CF /* Pods-TaxiManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.release.xcconfig"; sourceTree = "<group>"; };
 		EB9C0688FB86992E2886AE4A /* Pods_TaxiManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaxiManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +174,8 @@
 		112830AF1F884E3C000972CB /* TaxiManager */ = {
 			isa = PBXGroup;
 			children = (
+				11EE3E1D1FBB63E8007918C6 /* estimateSampleData.json */,
+				11EE3E161FBB5C93007918C6 /* Providers */,
 				11E88D181FA8C6B500C11196 /* TMHistoricoVerMaisCell */,
 				1156BB4E1FA7C89900C2DF4F /* TMHistoricoCell */,
 				117E24891F963E0B0041DCB6 /* TMResultadoBuscaCell */,
@@ -183,6 +200,12 @@
 		1156BB461FA7C31D00C2DF4F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				11EE3E221FBB86D0007918C6 /* MBUser.swift */,
+				113A4EE81FBDFFB5005D01FC /* MBBookmark.swift */,
+				113A4EEA1FBE01C8005D01FC /* MBPoi.swift */,
+				11EE3E191FBB6005007918C6 /* MBLocation.swift */,
+				11EE3E1E1FBB662A007918C6 /* MBAddress.swift */,
+				11EE3E1B1FBB6150007918C6 /* MBDevice.swift */,
 				117E248A1F964F870041DCB6 /* ResultadoBusca.swift */,
 				117E248C1F96520A0041DCB6 /* Corrida.swift */,
 			);
@@ -197,7 +220,7 @@
 				119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */,
 				1177FBD91FA9A55C00439913 /* TMFavoritosViewController.swift */,
 				11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */,
-				11A552501F993F03006F9AB6 /* TMLoginViewController.swift */,
+				11A552501F993F03006F9AB6 /* MBLoginViewController.swift */,
 				112830B21F884E3C000972CB /* TMTelaInicialViewController.swift */,
 				111C30FE1F8B067500EF37E3 /* TMTelaBuscaViewController.swift */,
 				118347881FA27C3400DB3C55 /* TMMenuLateralViewController.swift */,
@@ -292,6 +315,14 @@
 				11EB8D1B1F8D4C8700D0FDE4 /* Poppins */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		11EE3E161FBB5C93007918C6 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				11EE3E171FBB5CB5007918C6 /* MobiliteeProvider.swift */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 		863B9278B4BAC12E60BF7D9D /* Pods */ = {
@@ -463,8 +494,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				113A4EE91FBDFFB5005D01FC /* MBBookmark.swift in Sources */,
+				11EE3E231FBB86D0007918C6 /* MBUser.swift in Sources */,
 				11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */,
 				112830B31F884E3C000972CB /* TMTelaInicialViewController.swift in Sources */,
+				11EE3E1C1FBB6150007918C6 /* MBDevice.swift in Sources */,
 				11DB571B1FA112B700A39486 /* Extensions.swift in Sources */,
 				11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */,
 				112830B11F884E3C000972CB /* AppDelegate.swift in Sources */,
@@ -473,15 +507,19 @@
 				1156BB481FA7C3D300C2DF4F /* TMHistoricoViewController.swift in Sources */,
 				117E248D1F96520A0041DCB6 /* Corrida.swift in Sources */,
 				111C30FF1F8B067500EF37E3 /* TMTelaBuscaViewController.swift in Sources */,
-				11A552511F993F03006F9AB6 /* TMLoginViewController.swift in Sources */,
+				11A552511F993F03006F9AB6 /* MBLoginViewController.swift in Sources */,
 				1156BB4C1FA7C89100C2DF4F /* TMHistoricoViewCell.swift in Sources */,
 				117E24871F963DF90041DCB6 /* TMResultadoBuscaCell.swift in Sources */,
 				118347891FA27C3400DB3C55 /* TMMenuLateralViewController.swift in Sources */,
+				11EE3E1F1FBB662A007918C6 /* MBAddress.swift in Sources */,
+				11EE3E181FBB5CB5007918C6 /* MobiliteeProvider.swift in Sources */,
 				117E248B1F964F870041DCB6 /* ResultadoBusca.swift in Sources */,
 				1177FBDF1FA9A92800439913 /* TMFavoritosCell.swift in Sources */,
 				1177FBDA1FA9A55C00439913 /* TMFavoritosViewController.swift in Sources */,
 				11EE3E131FBB2672007918C6 /* RecuperarSenhaViewController.swift in Sources */,
 				119847951FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift in Sources */,
+				11EE3E1A1FBB6005007918C6 /* MBLocation.swift in Sources */,
+				113A4EEB1FBE01C8005D01FC /* MBPoi.swift in Sources */,
 				1177FBD61FA9A03000439913 /* TMBuscaEnderecoCell.swift in Sources */,
 				1117BBF51FA7D1750043146D /* TMHistoricoVerMaisCell.swift in Sources */,
 			);

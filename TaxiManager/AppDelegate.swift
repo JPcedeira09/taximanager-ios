@@ -27,8 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let statusBar = application.value(forKey: "statusBar") as? UIView
         statusBar?.backgroundColor = UIColor(red: 36/255.0, green: 36/255.0, blue: 36/255.0, alpha: 1.0)
         
-        if(UserDefaults.standard.value(forKey: "idUsuario") != nil){
+        
+        
+        var currentUser = UserDefaults.standard.value(forKey: "user")
+        if let currentUser = currentUser as? Data{
+           
+            MBUser.currentUser = try? JSONDecoder().decode(MBUser.self, from: currentUser) as MBUser
             
+//            print(MBUser.currentUser)
+            MBUser.update()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier :"NavigationInicial") as! UINavigationController
             self.window?.rootViewController = viewController

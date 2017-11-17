@@ -140,6 +140,8 @@ extension TelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
         
         let corrida = self.resumoBusca!.arrayCorridas[indexPath.row]
         
+        print(corrida)
+        
         self.checarAcoesCorrida(corrida: corrida)
         
     }

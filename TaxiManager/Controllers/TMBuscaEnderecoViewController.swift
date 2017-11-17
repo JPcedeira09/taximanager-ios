@@ -16,7 +16,6 @@ class TMBuscaEnderecoViewController: UIViewController {
     //MARK: - Outlets
     
     @IBOutlet weak var txtFieldBuscaEndereco: UITextField!
-    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -24,8 +23,8 @@ class TMBuscaEnderecoViewController: UIViewController {
     var fetcher = GMSAutocompleteFetcher()
     var arrayPredicoes = [GMSAutocompletePrediction]()
     var arrayRecentes = [[String:Any]]()
-    var arrayPois = [[String:Any]]()
-    var arrayFavoritos = [[String:Any]]()
+    var arrayPois = [MBPoi]()
+    var arrayFavoritos = [MBBookmark]()
     
     var selecionouEndereco: ((_ dicionario: [String : Any]) -> Void)?
     
@@ -43,12 +42,12 @@ class TMBuscaEnderecoViewController: UIViewController {
             self.arrayRecentes = arrayRecentes as! [[String : Any]]
         }
         
-        if let arrayPois = userDefaults.value(forKey: "arrayPois"){
-            self.arrayPois = arrayPois as! [[String : Any]]
+        if let mbPois = MBUser.currentUser?.pois{
+            self.arrayPois = mbPois
         }
         
-        if let arrayFavoritos = userDefaults.value(forKey: "arrayFavoritos"){
-            self.arrayFavoritos = arrayFavoritos as! [[String : Any]]
+        if let arrayFavoritos = MBUser.currentUser?.bookmarks{
+            self.arrayFavoritos = arrayFavoritos
         }
         
         self.tableView.delegate = self
@@ -67,6 +66,10 @@ class TMBuscaEnderecoViewController: UIViewController {
     
     //MARK: - Metodos
     
+    override var canBecomeFirstResponder : Bool{
+        
+        return true
+    }
     @IBAction func fechar(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
@@ -76,6 +79,8 @@ class TMBuscaEnderecoViewController: UIViewController {
     }
         
     @objc func sectionTapped(_ sender: UIButton) {
+        
+        self.becomeFirstResponder()
         let section = sender.tag
         let shouldExpand = !expandedSections.contains(section)
         if (shouldExpand) {
@@ -125,10 +130,10 @@ extension TMBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
             cell.labelEndereco.text = recente["address"] as? String
         case 2:
             let favorito = self.arrayFavoritos[indexPath.row]
-            cell.labelEndereco.text = favorito["name"] as? String
+            cell.labelEndereco.text = favorito.mainText
         case 3:
             let poi = self.arrayPois[indexPath.row]
-            cell.labelEndereco.text = poi["name"] as? String
+            cell.labelEndereco.text = poi.mainText
         default:
             cell.labelEndereco.text = ""
         }
@@ -328,12 +333,17 @@ extension TMBuscaEnderecoViewController{
     
     func resolverDidSelectFavorito(){
         
-        self.selecionouEndereco?(self.arrayFavoritos[self.tableView.indexPathForSelectedRow!.row])
+        do{
+            self.selecionouEndereco?(try self.arrayFavoritos[self.tableView.indexPathForSelectedRow!.row].asDictionary())
+        }catch{}
+        
     }
     
     func resolverDidSelectPoi(){
+        do{
+            self.selecionouEndereco?(try self.arrayPois[self.tableView.indexPathForSelectedRow!.row].asDictionary())
+        }catch{}
         
-        self.selecionouEndereco?(self.arrayPois[self.tableView.indexPathForSelectedRow!.row])
         
     }
     

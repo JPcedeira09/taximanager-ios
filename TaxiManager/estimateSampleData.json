@@ -1,0 +1,80 @@
+{
+    "id": "89ea82c6-d06b-4898-8168-4ebb0e263c91",
+    "start": {
+        "lat": -15.762023,
+        "lng": -47.891636,
+        "address": "Rua Augusta - Consolação, São Paulo - SP, Brasil",
+        "district": "Consolação",
+        "city": "São Paulo",
+        "state": "SP",
+        "zipcode": ""
+    },
+    "end": {
+        "lat": -15.834928,
+        "lng": -47.912829,
+        "address": "Rua Pamplona - Jardim Paulista, São Paulo - SP, Brasil",
+        "district": "",
+        "city": "São Paulo",
+        "state": "SP",
+        "zipcode": ""
+    },
+    "records": [
+        {
+            "id": 3,
+            "name": "99 TAXI",
+            "modality": {
+                "id": "24",
+                "name": "99 TÁXI 30% off",
+                "promotion": {},
+                "coverages": [
+                    {}
+                ],
+                "active": 1,
+                "key_api": "Táxi 30% OFF",
+                "name_api": "turbo-taxi"
+            },
+            "waiting_time": 240,
+            "price": "R$10-14",
+            "uuid": 5465,
+            "alert_message": "Ao carregar o aplicativo 99 verifique os endereços de origem e destino",
+            "index": 12,
+            "url_logo": "https://s3-sa-east-1.amazonaws.com/images.taximanager.com.br/99taxi.png",
+            "url_loja_android": "https://play.google.com/store/apps/details?id=com.taxis99&hl=pt_BR",
+            "url_loja_ios": "https://itunes.apple.com/br/app/99-t%C3%A1xi-e-carro-particular/id553663691?mt=8",
+            "url": "taxis99://call",
+            "url_android": "taxis99://call?startLat=-15.762023&startLng=-47.891636&startName=Rua Augusta - Consolação, São Paulo - SP, Brasil&endLat=:ent_lat&endLng=-47.912829&endName=Rua Pamplona - Jardim Paulista, São Paulo - SP, Brasil"
+        },
+        {
+            "id": 3,
+            "name": "99 TAXI",
+            "modality": {
+                "id": "1",
+                "name": "99 TÁXI",
+                "promotion": {},
+                "price_km": 2.3,
+                "time_km": 300,
+                "coverages": [
+                    {
+                        "zip_code_initial": "00000001",
+                        "zip_code_final": "99999999"
+                    }
+                ],
+                "active": 1,
+                "key_api": "Táxi",
+                "name_api": "regular-taxi"
+            },
+            "waiting_time": 420,
+            "price": "R$16-23",
+            "uuid": 5466,
+            "alert_message": "Ao carregar o aplicativo 99 verifique os endereços de origem e destino",
+            "index": 19.5,
+            "url_logo": "https://s3-sa-east-1.amazonaws.com/images.taximanager.com.br/99taxi.png",
+            "url_loja_android": "https://play.google.com/store/apps/details?id=com.taxis99&hl=pt_BR",
+            "url_loja_ios": "https://itunes.apple.com/br/app/99-t%C3%A1xi-e-carro-particular/id553663691?mt=8",
+            "url": "taxis99://call",
+            "url_android": "taxis99://call?startLat=-15.762023&startLng=-47.891636&startName=Rua Augusta - Consolação, São Paulo - SP, Brasil&endLat=:ent_lat&endLng=-47.912829&endName=Rua Pamplona - Jardim Paulista, São Paulo - SP, Brasil"
+        }
+    ],
+    "duration": 0,
+    "distance": 0
+}

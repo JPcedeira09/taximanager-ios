@@ -22,14 +22,14 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>liguetaxi</string>
 		<string>yetgo</string>
 		<string>cabify</string>
 		<string>easytaxi</string>
 		<string>uber</string>
 		<string>mb</string>
-		<string>wappa</string>
 		<string>taxis99</string>
-		<string>wappdev</string>
+		<string>wappadev</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

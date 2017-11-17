@@ -8,6 +8,12 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (2.4.0):
     - GoogleMaps/Base (= 2.4.0)
+  - Moya (10.0.0):
+    - Moya/Core (= 10.0.0)
+  - Moya/Core (10.0.0):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - Result (3.2.4)
   - SCLAlertView (0.7.0)
   - SideMenu (3.0.1)
   - SwiftSpinner (1.4.1)
@@ -18,6 +24,7 @@ DEPENDENCIES:
   - ExpandableCell
   - GoogleMaps
   - GooglePlaces
+  - Moya
   - SCLAlertView (from `https://github.com/ahmedsafadii/SCLAlertView-Swift.git`)
   - SideMenu (= 3.0.1)
   - SwiftSpinner
@@ -37,11 +44,13 @@ SPEC CHECKSUMS:
   ExpandableCell: 556b3672b7a366f27b2913243037d23138ea7a54
   GoogleMaps: 8436ab5d1c25e36915b2f7416d0c8e3fa2e76c61
   GooglePlaces: aafe5990fa7951e98e078761bbdaaf236d7e0c65
+  Moya: adb58b0f4e58430db43cc6e2f6ebab1836501186
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SideMenu: f1fe8a4d23c8ae06d5cb18b21be29851d78fd2f2
   SwiftSpinner: bf7c13332ad008952a09358cadf24a186510ae31
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
 
-PODFILE CHECKSUM: 0a2575e9691f5b518fcf6ef3e508268e8e92467b
+PODFILE CHECKSUM: 853c52cf19ca776728a6ddd79abdb97307c04927
 
 COCOAPODS: 1.2.0

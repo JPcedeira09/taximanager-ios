@@ -13,6 +13,7 @@ target 'TaxiManager' do
   pod 'SwiftSpinner'
   pod 'SCLAlertView', :git => 'https://github.com/ahmedsafadii/SCLAlertView-Swift.git'
   pod 'TextFieldEffects', '~> 1.4'
-  pod 'ExpandableCell',
+  pod 'ExpandableCell'
   pod 'Moya'
+  
 end
