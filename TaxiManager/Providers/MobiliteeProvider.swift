@@ -64,6 +64,8 @@ extension MobiliteeProvider : TargetType{
                                   "user_id": userId,
                                   "company_id": companyId] as [String : Any]
     
+                print("===== PARAMETROS ESTIMATE ===== ")
+                print(parameters)
                 return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
                 
             }catch{
@@ -79,8 +81,6 @@ extension MobiliteeProvider : TargetType{
             }catch{
                 return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
             }
-            
-            
         default:
             return .requestPlain
         }
@@ -94,9 +94,9 @@ extension MobiliteeProvider : TargetType{
         case .estimate:
             return URL(string: "http://estimate.taximanager.com.br/v1")!
         default:
-            return URL(string: "https://api.taximanager.com.br/v1/taximanager")!
+//            return URL(string: "https://api.taximanager.com.br/v1/taximanager")!
+            return URL(string: "http://ec2-54-207-58-85.sa-east-1.compute.amazonaws.com/v1/taximanager")!
         }
-        
     }
     
     var path: String {
@@ -139,6 +139,8 @@ extension MobiliteeProvider : TargetType{
         case let .login(usuario, senha):
             
             let token = (usuario + ":" + senha).toBase64()
+            
+//          print("TOKEN: ", token)
             return ["Authorization" : "Basic :" + token]
 
         default:
@@ -146,6 +148,5 @@ extension MobiliteeProvider : TargetType{
             return ["Content-Type" : "application/json",
                     "Authorization" : MBUser.currentUser?.token ?? ""]
         }
-        
     }
 }

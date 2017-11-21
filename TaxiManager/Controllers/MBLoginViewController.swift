@@ -54,6 +54,9 @@ class MBLoginViewController: UIViewController {
             case let .success(response):
                 
                 print("Success")
+                
+                print(String(data: response.data, encoding: .utf8))
+                
                 if response.statusCode == 200{
                     print("status 200")
                     do{
@@ -62,6 +65,8 @@ class MBLoginViewController: UIViewController {
                         }
                         
                         let mbUser = MBUser(from: dictionary)
+                        
+                        print(mbUser)
                         let userEncoded = try JSONEncoder().encode(mbUser)
                         
                         MBUser.update()
@@ -151,6 +156,7 @@ class MBLoginViewController: UIViewController {
         let data = try? JSONSerialization.data(withJSONObject: parametros, options: .prettyPrinted)
         
         print(String(data: data!, encoding: .utf8))
+        
         let url = URL(string: "http://estimate.taximanager.com.br/v1/estimates")!
         let autorizationKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTAwMzM4MjU0fQ.B2Nch63Zu0IzJDepVTDXqq8ydbIVDiUmU6vV_7eQocw"
         

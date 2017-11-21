@@ -29,9 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        var currentUser = UserDefaults.standard.value(forKey: "user")
+        let currentUser = UserDefaults.standard.value(forKey: "user")
         if let currentUser = currentUser as? Data{
            
+            print("TEM USUARIO LOGADO")
             MBUser.currentUser = try? JSONDecoder().decode(MBUser.self, from: currentUser) as MBUser
             
 //            print(MBUser.currentUser)
@@ -41,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = viewController
             
         }
+        print("NÃO TEM USUARIO")
     
         return true
     }

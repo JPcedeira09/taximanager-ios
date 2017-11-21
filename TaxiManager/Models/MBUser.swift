@@ -38,11 +38,15 @@ struct MBUser : Codable{
         self.token = userDictionary["token"] as? String ?? ""
         self.firstName = userDictionary["firstName"] as? String ?? ""
         self.lastName = userDictionary["lastName"] as? String ?? ""
-        self.employeeId = userDictionary["employeeId"] as? Int ?? 0
-        let company = userDictionary["companyEmployee"] as? [String : AnyObject] ?? [:]
-        self.companyId = company["companyId"] as? Int ?? 0
+        
+        
+        let company = userDictionary["companyEmployee"] as? [String : Any] ?? [:]
+        self.employeeId = company["id"] as? Int ?? 0
+        
         self.fullName = company["name"] as? String ?? ""
     
+        let companyObj = company["company"] as? [String : Any] ?? [:]
+        self.companyId = companyObj["id"] as? Int ?? 0
         MBUser.currentUser = self
     }
     
@@ -57,22 +61,29 @@ struct MBUser : Codable{
     
     static func update(){
         
-//        getPois()
-//        getBookmarks()
+        getPois()
+        getBookmarks()
         getHistory()
     }
     
     static func getPois(){
         
+        print("GET POIS")
         MobiliteeProvider.api.request(.getPOIs) { (result) in
             
             switch result{
                 
             case let .success(response):
+                
+                print("success")
+                print(String(data: response.data, encoding: .utf8))
+                
                 if response.statusCode == 200{
+                    print("status 200")
                     do{
                         let mbPois = try response.map([MBPoi].self, atKeyPath: "records")
                         MBUser.currentUser?.pois = mbPois
+                        print(mbPois)
                     }catch{
                         
                         print("caiu no catch")
@@ -88,6 +99,8 @@ struct MBUser : Codable{
     }
     
     static func getBookmarks(){
+        
+        print("GET BOOKMARKS")
         
         MobiliteeProvider.api.request(.getBookmarks) { (result) in
             
@@ -118,6 +131,7 @@ struct MBUser : Codable{
     
     static func getHistory(){
         
+        print("GET HISTORY")
         MobiliteeProvider.api.request(.getHistory) { (result) in
             
             switch result{
