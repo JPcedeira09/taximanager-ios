@@ -13,7 +13,7 @@ struct MBRide : Codable{
     var id : Int = 0
     var alertMessage : String?
 //    var averagePrice : Float = 0.0
-    var waitingTime : Int = 0
+    var waitingTime : Int? = 4
     var name : String = ""
     var modality : MBModality
     var price : String = ""

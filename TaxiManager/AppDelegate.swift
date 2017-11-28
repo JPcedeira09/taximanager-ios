@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        GMSServices.provideAPIKey("AIzaSyCsTlz4d57EnfRvHA2sn8BLqsfw1fx2lAM")
-        GMSPlacesClient.provideAPIKey("AIzaSyCsTlz4d57EnfRvHA2sn8BLqsfw1fx2lAM")
+        GMSServices.provideAPIKey("AIzaSyDOebYw-atZqhQxDKX-D5Ps5Dje0f29RSo")
+        GMSPlacesClient.provideAPIKey("AIzaSyDOebYw-atZqhQxDKX-D5Ps5Dje0f29RSo")
         
         
         let statusBar = application.value(forKey: "statusBar") as? UIView
@@ -35,12 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("TEM USUARIO LOGADO")
             MBUser.currentUser = try? JSONDecoder().decode(MBUser.self, from: currentUser) as MBUser
             
-//            print(MBUser.currentUser)
-            MBUser.update()
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier :"NavigationInicial") as! UINavigationController
-            self.window?.rootViewController = viewController
-            
+
+            if let _ = MBUser.currentUser?.firstAccessAt{
+                MBUser.update()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier :"NavigationInicial") as! UINavigationController
+                self.window?.rootViewController = viewController
+            }
         }
         print("NÃO TEM USUARIO")
     

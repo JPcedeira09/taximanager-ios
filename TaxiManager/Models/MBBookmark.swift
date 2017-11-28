@@ -22,8 +22,8 @@ struct MBBookmark : MBLocation, Codable{
     
     //MARK: - Propriedades
     
-    var id : Int
-    var employeeId : Int
+    var id : Int?
+    var employeeId : Int?
     var mainText : String
     var secondaryText : String
     
@@ -45,5 +45,20 @@ struct MBBookmark : MBLocation, Codable{
 //        case secondaryText
 //    }
     
+    init(withLocation location : MBLocation, mainText : String, secondaryText : String){
+        
+        self.latitude = location.latitude
+        self.longitude = location.longitude
+        self.address = location.address
+        self.district = location.district
+        self.city = location.city
+        self.state = location.state
+        self.zipcode = location.zipcode
+        self.number = location.number
+        
+        self.mainText = mainText
+        self.secondaryText = secondaryText
+        
+    }
     
 }

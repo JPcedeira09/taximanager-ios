@@ -19,10 +19,12 @@ struct MBUser : Codable{
     var fullName : String = ""
     var companyId : Int = 0
     var employeeId: Int = 0
+    var firstAccessAt : String?
     
     var pois : [MBPoi]?
     var bookmarks : [MBBookmark]?
     var recents : [MBAddress]?
+    var history : [MBTravel]?
     
     static var currentUser : MBUser?
     
@@ -38,7 +40,7 @@ struct MBUser : Codable{
         self.token = userDictionary["token"] as? String ?? ""
         self.firstName = userDictionary["firstName"] as? String ?? ""
         self.lastName = userDictionary["lastName"] as? String ?? ""
-        
+        self.firstAccessAt = userDictionary["firstAccessAt"] as? String
         
         let company = userDictionary["companyEmployee"] as? [String : Any] ?? [:]
         self.employeeId = company["id"] as? Int ?? 0
@@ -48,6 +50,8 @@ struct MBUser : Codable{
         let companyObj = company["company"] as? [String : Any] ?? [:]
         self.companyId = companyObj["id"] as? Int ?? 0
         MBUser.currentUser = self
+        
+        
     }
     
     static func logout (){
@@ -61,9 +65,12 @@ struct MBUser : Codable{
     
     static func update(){
         
-        getPois()
-        getBookmarks()
-        getHistory()
+        DispatchQueue.global().async {
+            getPois()
+            getBookmarks()
+            getHistory()
+        }
+        
     }
     
     static func getPois(){
@@ -75,15 +82,15 @@ struct MBUser : Codable{
                 
             case let .success(response):
                 
-                print("success")
-                print(String(data: response.data, encoding: .utf8))
+//                print("success")
+//                print(String(data: response.data, encoding: .utf8))
                 
                 if response.statusCode == 200{
                     print("status 200")
                     do{
                         let mbPois = try response.map([MBPoi].self, atKeyPath: "records")
                         MBUser.currentUser?.pois = mbPois
-                        print(mbPois)
+//                        print(mbPois)
                     }catch{
                         
                         print("caiu no catch")
@@ -110,12 +117,12 @@ struct MBUser : Codable{
                 if response.statusCode == 200{
                     do{
                         
-                        print(try response.mapString())
+//                        print(try response.mapString())
                         let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
                         
                         MBUser.currentUser?.bookmarks = mbBookmarks
                         
-                        print(MBUser.currentUser?.bookmarks)
+//                        print(MBUser.currentUser?.bookmarks)
                     }catch{
                         
                         print("caiu no catch")
@@ -139,12 +146,13 @@ struct MBUser : Codable{
             case let .success(response):
                 if response.statusCode == 200{
                     do{
-                        print(try response.mapJSON())
-//                        let mbPois = try response.map([MBPoi].self, atKeyPath: "records")
-//                        MBUser.currentUser?.pois = mbPois
+//                        print(try response.mapJSON())
+                        let mbTravels = try response.map([MBTravel].self, atKeyPath: "records")
+                        MBUser.currentUser?.history = mbTravels
+                        
                     }catch{
                         
-                        print("caiu no catch")
+                        print("caiu no catch HISTORY")
                     }
                 }
             case let .failure(error):

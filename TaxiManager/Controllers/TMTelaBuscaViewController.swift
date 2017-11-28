@@ -19,6 +19,11 @@ class TelaBuscaViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var textFieldPontoOrigem: UITextField!
     @IBOutlet weak var textFieldPontoDestino: UITextField!
+    
+    
+    @IBOutlet weak var labelStartAddress: UILabel!
+    
+    @IBOutlet weak var labelEndAddress: UILabel!
     @IBOutlet weak var labelDistancia: UILabel!
     @IBOutlet weak var labelDuracao: UILabel!
     @IBOutlet weak var tableViewResultado: UITableView!
@@ -44,8 +49,8 @@ class TelaBuscaViewController: UIViewController {
         //        self.labelDistancia.text =  "\(Float((self.resumoBusca?.distanciaCorrida)!) / 1000.0) km"
         self.labelDistancia.text = distanciaFormatada
         self.labelDuracao.text =  "\(self.searchResult?.duration ?? 00) min"
-        self.textFieldPontoOrigem.text = self.searchResult?.startAddress.address
-        self.textFieldPontoDestino.text = self.searchResult?.endAddress.address
+        self.labelStartAddress.text = self.searchResult?.startAddress.address
+        self.labelEndAddress.text = self.searchResult?.endAddress.address
         
         print("========= CORRIDAS ===========")
 //        print(self.resumoBusca?.arrayCorridas)
@@ -59,10 +64,13 @@ class TelaBuscaViewController: UIViewController {
     func setupHeader(){
         
         //Setup imagem taximanager
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "logo_header"))
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "logotipo_fundo_preto.png"))
         imageView.contentMode = .scaleAspectFit
-        navigationItem.titleView = imageView
         
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
+        imageView.frame = titleView.bounds
+        titleView.addSubview(imageView)
+        navigationItem.titleView = titleView
         //setup botao perfil
 //        let btnPerfil = UIButton(type: .custom)
 //        btnPerfil.setImage(#imageLiteral(resourceName: "icon_perfil_header"), for: .normal)
@@ -79,12 +87,14 @@ class TelaBuscaViewController: UIViewController {
         
         if let urlDeeplinkString = corrida.urlDeeplink,
            let urlDeeplink = URL(string: urlDeeplinkString),
-           application.canOpenURL(urlDeeplink){
+            application.canOpenURL(urlDeeplink)
+           {
             
             application.open(urlDeeplink)
         
         }else{
-            
+            print("=== URL DEEPLINK ===")
+            print(corrida.urlDeeplink)
             let alert = SCLAlertView()
             
             if let urlStoreString = corrida.urlStore, let urlStore = URL(string: urlStoreString){
@@ -104,6 +114,7 @@ class TelaBuscaViewController: UIViewController {
             alert.showInfo("Você não possui o aplicativo instalado", subTitle: "", closeButtonTitle: "Cancelar", colorStyle: 0x242424)
             
         }
+        
         
         
     }
@@ -127,7 +138,7 @@ extension TelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
         cell.labelNome.text = corrida.modality.name
         cell.labelNomeModalidade.text = corrida.name
         cell.labelPreco.text = corrida.price
-        cell.labelEspera.text = "\(corrida.waitingTime/60) min"
+        cell.labelEspera.text = "\(corrida.waitingTime ?? 4) min"
         cell.imgViewLogo.image = UIImage()
         
         if let urlLogo = URL(string: corrida.urlLogo!) {

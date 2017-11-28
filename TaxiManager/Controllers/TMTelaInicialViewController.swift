@@ -64,244 +64,21 @@ class TelaInicialViewController: UIViewController {
         self.textFieldEnderecoOrigem.delegate = self
         self.textFieldEnderecoDestino.delegate = self
         
-        //Delegate GMS
-//        self.googlePlacesOrigem.delegate = self
-//        self.googlePlacesDestino.delegate = self
+
         
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "logo_header"))
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "logotipo_fundo_preto.png"))
         imageView.contentMode = .scaleAspectFit
         
-        navigationItem.titleView = imageView
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
+        imageView.frame = titleView.bounds
+        titleView.addSubview(imageView)
+        navigationItem.titleView = titleView
         
         
         self.setupTextFieldOrigem()
         self.atualizarLabelData()
         
-//        self.atualizarPois()
-//        self.atualizarFavoritos()
-//        self.atualizarHistorico()
-        
-//        self.updatePois()
-        
-        
     }
-    
-//    func updatePois(){
-//        
-//        MobiliteeProvider.api.request(.getPOIs) { (result) in
-//           
-//            switch result{
-//                
-//            case let .success(response):
-//                if response.statusCode == 200{
-//                    do{
-//                        
-//                        let mbPoi = try response.map([MBPoi].self, atKeyPath: "records")
-//                        print(mbPoi)
-//                        
-//
-//                        print("================DICIONARIO =============")
-////                        let mbUser = MBUser(from: dictionary)
-//                        
-////                        let userEncoded = try JSONEncoder().encode(mbUser)
-////                        UserDefaults.standard.set(userEncoded, forKey: "user")
-//                        
-////                        let defaults = UserDefaults.standard
-////                        defaults.set(mbUser.id, forKey: "idUsuario")
-////                        defaults.set(mbUser.companyId, forKey: "idEmpresa")
-////                        defaults.set(mbUser.firstName, forKey: "nomeUsuario")
-////                        defaults.set(mbUser.lastName, forKey: "sobrenomeUsuario")
-////                        defaults.set(mbUser.employeeId, forKey: "employeeId")
-////                        defaults.set(mbUser.token, forKey: "token")
-////
-////                        defaults.synchronize()
-////
-//                        
-//                        
-//                        
-//                    }catch{
-//                        
-//                        print("caiu no catch")
-//                    }
-//                }
-//            case let .failure(error):
-//                
-//                print(error.localizedDescription)
-//            }
-//        
-//        }
-//        
-//    }
-//    func atualizarPois(){
-//        let url = "https://api.taximanager.com.br/v1/taximanager/companies/interestpoints"
-//        let defaults = UserDefaults.standard
-//        let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
-//        
-//        Alamofire.request(url, method: HTTPMethod.get, parameters: nil, headers: headers).responseJSON { (response) in
-//            
-//            if let err = response.error{
-//                
-//            }
-//            
-//            if(response.result.isSuccess){
-//                
-//                if let json = response.result.value as? [String : AnyObject]{
-//                    
-//                    if let records = json["records"] as? [[String:Any]]{
-//                        
-//                        
-//                        var arrayPois : [[String: Any]] = []
-//                        for record in records{
-//                            
-//                            var dictionary : [String: Any] = [:]
-//                            
-//                            
-//                            //                        print(record)
-//                            
-//                            dictionary["lat"] = record["latitude"] as! Double
-//                            dictionary["lng"] = record["longitude"] as! Double
-//                            dictionary["zipcode"] = record["zipcode"] as! String
-//                            dictionary["city"] = record["city"] as! String
-//                            dictionary["state"] = record["state"] as! String
-//                            dictionary["address"] = record["address"] as! String
-//                            dictionary["name"] = record["mainText"] as! String
-//                            
-//                            //                        arrayPois.append(dictionary)
-//                            arrayPois.insert(dictionary, at: 0)
-//                        }
-//                        
-//                        defaults.setValue(arrayPois, forKey: "arrayPois")
-//                        
-//                    }
-//                    
-//                }
-//            }
-//            
-//        }
-//    }
-//    
-//    func atualizarFavoritos(){
-//        let url = "https://api.taximanager.com.br/v1/taximanager/employees/bookmarks"
-//        let defaults = UserDefaults.standard
-//        let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
-//        
-//        Alamofire.request(url, method: HTTPMethod.get, parameters: nil, headers: headers).responseJSON { (response) in
-//            
-//            if let err = response.error{
-//                
-//            }
-//            
-//            if(response.result.isSuccess){
-//                
-//                if let json = response.result.value as? [String : AnyObject]{
-//                    
-//                    if let records = json["records"] as? [[String:Any]]{
-//                        
-//                        var arrayFavoritos : [[String: Any]] = []
-//                        
-//                        for record in records{
-//                            
-//                            var dictionary : [String: Any] = [:]
-//                            
-//                            dictionary["lat"] = record["latitude"] as! Double
-//                            dictionary["lng"] = record["longitude"] as! Double
-//                            dictionary["zipcode"] = record["zipcode"] as! String
-//                            dictionary["city"] = record["city"] as! String
-//                            dictionary["state"] = record["state"] as! String
-//                            dictionary["address"] = record["address"] as! String
-//                            dictionary["name"] = record["mainText"] as! String
-//                            dictionary["id"] = record["id"] as! Double
-//                            
-//                            
-//                            //                        arrayFavoritos.append(dictionary)
-//                            arrayFavoritos.insert(dictionary, at: 0)
-//                        }
-//                        
-//                        defaults.setValue(arrayFavoritos, forKey: "arrayFavoritos")
-//                        
-//                    }
-//                    
-//                }
-//            }
-//            
-//        }
-//    }
-    
-    
-//    func atualizarHistorico(){
-//
-//        let defaults = UserDefaults.standard
-//        let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
-//        var parameters : [String : AnyObject] = [:]
-//
-//        let companyId = "\(defaults.value(forKey: "idEmpresa") as! NSNumber)"
-////        parameters["companyid"] = defaults.value(forKey: "idEmpresa") as! NSNumber
-//        parameters["employeeId"] = defaults.value(forKey: "employeeId") as! NSNumber
-//
-////        print("==================================")
-////        print(defaults.value(forKey: "idEmpresa") as! NSNumber)
-////        print(defaults.value(forKey: "employeeId") as! NSNumber)
-////        print("==================================")
-//
-//        let url = "https://api.taximanager.com.br/v1/taximanager/companies/"+companyId+"/travels"
-//
-//        Alamofire.request(url, method: HTTPMethod.get, parameters: parameters, headers: headers).responseJSON { (response) in
-//
-//            if let err = response.error{
-//
-//            }
-//
-//            if(response.result.isSuccess){
-//
-//                if let json = response.result.value as? [String : AnyObject]{
-//
-//                    if let records = json["records"] as? [[String:Any]] {
-//
-//
-//                        var arrayHistorico : [[String : Any]] = []
-//
-//                        for record in records {
-//
-//                            var registro : [String : Any] = [:]
-//                            var playerService = record["playerService"] as! [String : Any]
-//                            var player = playerService["player"] as! [String : Any]
-//                            var centroDeCustoObj = record["companyCostCentre"] as! [String : Any]
-//
-//                            registro["enderecoOrigem"] = record["startAddress"] as! String
-//                            registro["enderecoDestino"] = record["endAddress"] as! String
-//                            registro["id"] = record["id"] as! Int
-//                            registro["distancia"] = record["distance"] as! NSNumber
-//                            registro["valor"] = record["cost"] as! NSNumber
-//                            registro["categoriaPlayer"] = playerService["description"] as! String
-//                            registro["nomePlayer"] = player["name"] as! String
-//                            registro["centroDeCusto"] = centroDeCustoObj["name"] as! String
-//                            registro["projeto"] = record["project"] as? String
-//                            registro["justificativa"] = ""
-//                            registro["dataInicio"] = record["startDate"] as! String
-//                            registro["dataFim"] = record["endDate"] as! String
-//
-//
-//                            arrayHistorico.insert(registro, at: 0)
-//
-//
-//                            print(registro)
-//                        }
-//                        print("==================================")
-//
-//                        defaults.setValue(arrayHistorico, forKey: "arrayHistorico")
-//
-//
-//
-//                    }
-//
-//
-//
-//                }
-//
-//            }
-//
-//        }
-//    }
     
     @objc func localizarUsuario(){
         
@@ -394,7 +171,6 @@ class TelaInicialViewController: UIViewController {
         let dataAtual = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "pt-BR")
-        //        dateFormatter.dateFormat = "EEEE"
         dateFormatter.dateStyle = .full
         
         
@@ -408,7 +184,7 @@ class TelaInicialViewController: UIViewController {
         let origins = "\(start.latitude)" + "," + "\(start.longitude)"
         let destinations = "\(end.latitude)" + "," + "\(end.longitude)"
         
-        let parametros = ["key": "AIzaSyAL4jaoV5Sl42t2XXgOjDRV-vIMGCWBCPI" , "origins" : origins, "destinations": destinations]
+        let parametros = ["key": "AIzaSyDOebYw-atZqhQxDKX-D5Ps5Dje0f29RSo" , "origins" : origins, "destinations": destinations]
         
         Alamofire.request(urlRequest, method: HTTPMethod.get, parameters: parametros).responseJSON { (response) in
             
@@ -444,54 +220,14 @@ class TelaInicialViewController: UIViewController {
         }
     }
     
-//    func checarDistancia(origem : [String : Any], destino : [String : Any]){
-//
-//        SwiftSpinner.show("Verificando as melhores opções...")
-//        let urlRequest = "https://maps.googleapis.com/maps/api/distancematrix/json"
-//        let origins = "\(origem["latitude"]!)" + "," + "\(origem["longitude"]!)"
-//        let destinations = "\(destino["latitude"]!)" + "," + "\(destino["longitude"]!)"
-//
-//        let parametros = ["key": "AIzaSyAL4jaoV5Sl42t2XXgOjDRV-vIMGCWBCPI" , "origins" : origins, "destinations": destinations]
-//
-//        Alamofire.request(urlRequest, method: HTTPMethod.get, parameters: parametros).responseJSON { (response) in
-//
-//            if(response.result.isSuccess){
-//
-//                if let json = response.result.value as? [String : AnyObject]{
-//
-//                    let rows = json["rows"] as! Array<AnyObject>
-//
-//                    //                    print(rows)
-//                    let pre_elements = rows[0] as! [String : AnyObject]
-//                    let elements = pre_elements["elements"] as! [AnyObject]
-//                    let elemento = elements[0] as! [String : AnyObject]
-//
-//                    //Propriedades finais
-//                    let duracao = elemento["duration"] as! [String : AnyObject]
-//                    let distancia = elemento["distance"] as! [String : AnyObject]
-//                    //                    let status = elemento["status"] as! String
-//
-//                    let duracaoFormatada  = Int(duracao["text"]!.components(separatedBy: " ")[0])!
-//                    let distanciaFormatada = distancia["value"] as! Int
-//
-//
-//
-//                    self.checarPrecos(origem: self.dicOrigem, destino: self.dicDestino, device: [:], distancia: distanciaFormatada, duracao: duracaoFormatada)
-//
-////                                        print("Duracao", duracaoFormatada)
-////                                        print("Distancia", distanciaFormatada)
-//
-//                }
-//            }
-//        }
-//    }
-    
     func estimatePrices(startAddress : MBLocation, endAddress : MBLocation, device: [String : String], distance : Int, duration : Int){
         
         
-        
+
         MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, device: device, distance: distance, duration: duration, userId: MBUser.currentUser!.employeeId, companyId: MBUser.currentUser!.companyId)) { (result) in
-            
+//
+//             MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, device: device, distance: distance, duration: duration, userId: 139, companyId: 3)) { (result) in
+        
             SwiftSpinner.hide()
             
             do{
@@ -500,8 +236,9 @@ class TelaInicialViewController: UIViewController {
                 switch(result){
                 case let .success(response):
                     
-                    print(response)
-                    print(String(data: response.data, encoding: .utf8))
+//                    print(response)
+//                    print(String(data: response.data, encoding: .utf8))
+                     print(try result.value?.mapJSON())
                     let travels = try response.map([MBRide].self, atKeyPath: "records")
                     
                     self.searchResult = MBSearchResult(startAddress: startAddress, endAddress: endAddress, duration: duration, distance: distance, travels: travels)
@@ -514,7 +251,7 @@ class TelaInicialViewController: UIViewController {
             }catch{
                 do{
                     
-                        print(try result.value?.mapString())
+                        print(try result.value?.mapJSON())
                 }catch{}
                 
                 print("falhou")
@@ -1016,86 +753,3 @@ extension TelaInicialViewController : UITextFieldDelegate{
         
     }
 }
-
-
-//extension TelaInicialViewController : GMSAutocompleteViewControllerDelegate{
-//
-//    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-//
-//        print("Falhou com erro")
-//        viewController.dismiss(animated: true, completion: nil)
-//    }
-//
-//    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-//
-//        print("Cancelou")
-//        viewController.dismiss(animated: true, completion: nil)
-//    }
-//
-//
-//    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-//
-//        let geocoder = CLGeocoder()
-//
-//        geocoder.reverseGeocodeLocation(CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude), completionHandler: { (placemarks, error) in
-//
-//            if (error == nil) {
-//                var endereco = ""
-//                if let plmarks = placemarks {
-//                    let firstLocation = plmarks[0]
-//
-//                    if let thoroughfare = firstLocation.thoroughfare{
-//
-//                        endereco += thoroughfare
-//
-//                        if let subThoroughfare = firstLocation.subThoroughfare{
-//
-//                            endereco += ", " + subThoroughfare
-//                        }
-//                    }
-//
-//                    if(viewController == self.googlePlacesOrigem){
-//                        self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
-//                        self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
-//                        self.dicOrigem.updateValue("\(firstLocation.postalCode!)", forKey: "zipcode")
-//                        self.dicOrigem.updateValue("\(firstLocation.locality!)", forKey: "city")
-//                        self.dicOrigem.updateValue("\(firstLocation.administrativeArea!)", forKey: "state")
-//                        self.dicOrigem.updateValue(place.formattedAddress ?? "", forKey: "address")
-//
-//                        self.textFieldEnderecoOrigem.text = place.formattedAddress
-//
-//                        self.mapView.setCenter(place.coordinate, animated: true)
-//
-//                    }else if(viewController == self.googlePlacesDestino){
-//                        self.dicDestino.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
-//                        self.dicDestino.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
-//                        self.dicDestino.updateValue("\(firstLocation.postalCode!)", forKey: "zipcode")
-//                        self.dicDestino.updateValue("\(firstLocation.locality!)", forKey: "city")
-//                        self.dicDestino.updateValue("\(firstLocation.administrativeArea!)", forKey: "state")
-//                        self.dicDestino.updateValue(place.formattedAddress ?? "", forKey: "address")
-//
-//                        self.textFieldEnderecoDestino.text = place.formattedAddress
-//                    }
-//
-//                }
-//            }
-//            else {
-//                // An error occurred during geocoding.
-//                print("Não deu certo")
-//
-//            }
-//            viewController.dismiss(animated: true, completion: nil)
-//        })
-//
-//    }
-//
-//    // Turn the network activity indicator on and off again.
-//    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-//    }
-//
-//    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//    }
-//}
-

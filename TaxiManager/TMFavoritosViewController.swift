@@ -87,46 +87,28 @@ extension TMFavoritosViewController : UITableViewDelegate, UITableViewDataSource
         
         if(editingStyle == .delete){
 
-            let bookmarkId = self.arrayFavoritos[indexPath.row].id
-
-            self.arrayFavoritos.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.bottom)
-            
-            MobiliteeProvider.api.request(.deleteBookmark(bookmarkId: bookmarkId), completion: { (result) in
+            if let bookmarkId = self.arrayFavoritos[indexPath.row].id{
+                self.arrayFavoritos.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.bottom)
                 
-                switch(result){
+                MobiliteeProvider.api.request(.deleteBookmark(bookmarkId: bookmarkId), completion: { (result) in
                     
-                    
-                case let .success(response):
-                    print(response.statusCode)
-                    MBUser.currentUser?.bookmarks?.remove(at: indexPath.row)
-                    print(MBUser.currentUser?.bookmarks)
-                case let .failure(error):
-                    
-                    print(error.localizedDescription)
-                }
-            })
-//            let defaults = UserDefaults.standard
-//            let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
+                    switch(result){
+                        
+                        
+                    case let .success(response):
+                        print(response.statusCode)
+                        MBUser.currentUser?.bookmarks?.remove(at: indexPath.row)
+                        print(MBUser.currentUser?.bookmarks)
+                    case let .failure(error):
+                        
+                        print(error.localizedDescription)
+                    }
+                })
+            }
 
-//            Alamofire.request(url, method: .delete, parameters: nil, headers: headers).responseJSON(completionHandler: { (response) in
-//
-//
-//                print("VOLTOU DO RESPONSE JSON")
-//                if let err = response.error{
-//                    print(err.localizedDescription)
-//                }
-//
-//
-//
-//                if(response.result.isSuccess){
-//
-//                    print("SUCESSO")
-//                    UserDefaults.standard.setValue(self.arrayFavoritos, forKey: "arrayFavoritos")
-//
-//                }
-//
-//            })
+            
+
 
         }
     }

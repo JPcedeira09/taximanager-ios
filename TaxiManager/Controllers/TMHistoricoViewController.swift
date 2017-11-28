@@ -16,8 +16,10 @@ class TMHistoricoViewController: UIViewController{
     @IBOutlet weak var tableView: ExpandableTableView!
     //MARK: - Propriedades
     
-    var arrayHistorico = [[String:Any]]()
-//    var historyList = [MB]
+//    var arrayHistorico = [[String:Any]]()
+    
+    
+    var historyList = [MBTravel]()
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +29,10 @@ class TMHistoricoViewController: UIViewController{
         self.tableView.register(UINib(nibName: "TMHistoricoViewCell", bundle: nil), forCellReuseIdentifier: "tmHistoricoCell")
         self.tableView.register(UINib(nibName: "TMHistoricoVerMaisCell", bundle: nil), forCellReuseIdentifier: "tmHistoricoDetalheCell")
         
-        let defaults = UserDefaults.standard
-        if let historico = defaults.value(forKey: "arrayHistorico") as? [[String : Any]]{
+//        let defaults = UserDefaults.standard
+        if let historico = MBUser.currentUser?.history{
             
-            self.arrayHistorico = historico
+            historyList = historico
         }
     }
     //MARK: - Metodos
@@ -53,30 +55,16 @@ extension TMHistoricoViewController : ExpandableDelegate{
         
         let cell = expandableTableView.dequeueReusableCell(withIdentifier: "tmHistoricoDetalheCell") as! TMHistoricoVerMaisCell
         
-        let registro = self.arrayHistorico[indexPath.row]
+        let registro = self.historyList[indexPath.row]
         
-        
-//        registro["id"] = record["id"] as! Int
-//        registro["distancia"] = record["distance"] as! NSNumber
-//        registro["valor"] = record["cost"] as! NSNumber
-//        registro["categoriaPlayer"] = record["description"] as! String
-//        registro["nomePlayer"] = record["name"] as! String
-//        registro["centroDeCusto"] = centroDeCustoObj["name"] as! String
-//        registro["projeto"] = record["project"] as? String
-//        registro["justificativa"] = ""
-//        registro["dataInicio"] = record["startDate"] as! String
-//        registro["dataFim"] = record["endDate"] as! String
-//        registro["enderecoOrigem"] = record["startAddress"] as! String
-//        registro["enderecoDestino"] = record["endAddress"] as! String
-//
-        cell.lblDistancia.text = "\((registro["distancia"] as! NSNumber)) km"
+        cell.lblDistancia.text = "\(registro.distance) km"
         cell.lblDuracao.text = ""
-        cell.lblValor.text = "R$\(registro["valor"] as! NSNumber)"
-        cell.lblFornecedor.text = registro["nomePlayer"] as? String
-        cell.lblCategoria.text = registro["categoriaPlayer"] as? String
-        cell.lblCentroCusto.text = registro["centroDeCusto"] as? String
-        cell.lblProjeto.text = registro["projeto"] as? String
-        cell.lblJustificativa.text = registro["justificativa"] as? String
+        cell.lblValor.text = "R$\(registro.cost)"
+        cell.lblFornecedor.text = registro.player.name
+        cell.lblCategoria.text =  registro.player.category.name
+        cell.lblCentroCusto.text = registro.costCentre.name
+        cell.lblProjeto.text = registro.project ?? ""
+        cell.lblJustificativa.text = ""
         
         return [cell]
     }
@@ -85,18 +73,18 @@ extension TMHistoricoViewController : ExpandableDelegate{
         
         let cell = expandableTableView.dequeueReusableCell(withIdentifier: "tmHistoricoCell") as! TMHistoricoViewCell
         
-        let registro = self.arrayHistorico[indexPath.row]
+        let registro = self.historyList[indexPath.row]
         
-        cell.labelOrigem.text = registro["enderecoOrigem"] as? String
-        cell.labelDestino.text = registro["enderecoDestino"] as? String
-        cell.labelCorrida.text = (registro["categoriaPlayer"] as! String) + " - R$" + "\(registro["valor"] as! NSNumber)"
+        cell.labelOrigem.text = registro.startAddress
+        cell.labelDestino.text = registro.endAddress
+        cell.labelCorrida.text = registro.player.category.name  + " - R$" + "\(registro.cost)"
         return cell
         
     }
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int {
         
-        return arrayHistorico.count
+        return self.historyList.count
     }
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

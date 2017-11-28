@@ -20,6 +20,7 @@ class TMFavoritosAdicionarViewController: UIViewController {
     var dicFavorito : [String: Any] = [:]
     var arrayFavoritos : [[String: Any]] = []
     
+    var bookmarkAddress : MBAddress!
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,53 +45,56 @@ class TMFavoritosAdicionarViewController: UIViewController {
     }
     
     @IBAction func criarFavorito(_ sender: UIButton){
-    
-        let url = "https://api.taximanager.com.br/v1/taximanager/employees/bookmarks"
-        let defaults = UserDefaults.standard
-        let headers : [String:String] = ["Authorization" : defaults.value(forKey: "token") as! String]
-        
-        var parameters : [String:Any] = [:]
-        self.dicFavorito["name"] = self.txtFieldNomeEndereco.text
-        parameters["mainText"] = self.txtFieldNomeEndereco.text
-        parameters["secondaryText"] = self.txtFieldNomeEndereco.text
-        parameters["address"] = self.dicFavorito["address"] as! String
-        parameters["number"] = self.dicFavorito["number"] as! String
-        parameters["district"] = self.dicFavorito["district"] as! String
-        parameters["city"] = self.dicFavorito["city"] as! String
-        parameters["state"] = self.dicFavorito["state"] as! String
-        parameters["zipcode"] = self.dicFavorito["zipcode"] as! String
-        parameters["latitude"] = self.dicFavorito["lat"] as! Double
-        parameters["longitude"] = self.dicFavorito["lng"] as! Double
         
         
-        SwiftSpinner.show("Salvando...", animated: true)
-        
-        Alamofire.request(url, method: HTTPMethod.post, parameters: parameters, headers: headers).responseJSON { (response) in
+ 
+        if(self.bookmarkAddress != nil && self.txtFieldNomeEndereco.text! != ""){
+            let bookmark = MBBookmark(withLocation: self.bookmarkAddress, mainText: self.txtFieldNomeEndereco.text!, secondaryText: self.txtFieldNomeEndereco.text!)
             
+            SwiftSpinner.show("Salvando...", animated: true)
+            MobiliteeProvider.api.request(.postBookmark(bookmark: bookmark), completion: { (result) in
+            
+            MBUser.update()
             SwiftSpinner.hide()
-            self.dismiss(animated: true)
-            if let err = response.error{
+                switch (result){
                 
-            }
-            
-            if(response.result.isSuccess){
-                
-                
-                let jsonData = response.result.value as! [String : Any]
-                
-                let records = jsonData["records"] as! [[String : AnyObject]]
-                var arrayCorridas : [Corrida] = []
-                
-                for record in records{
+                case let .success(response):
                     
-                    self.dicFavorito["id"] = record["id"] as! Double
+                
+                        do{
+                            
+                            //                        print(try response.mapString())
+                            let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
+                            
+                            if(MBUser.currentUser?.bookmarks == nil){
+                                
+                                MBUser.currentUser!.bookmarks = [MBBookmark]()
+                            }
+                            
+                            MBUser.currentUser!.bookmarks! += mbBookmarks
+                            
+                            
+                            
+                            //                        print(MBUser.currentUser?.bookmarks)
+                        }catch{
+                            
+                            print("caiu no catch")
+                        }
+                        
+                        print("Chegou aqui")
+                        self.dismiss(animated: true, completion: nil)
+                    
+                    
+                case let .failure(error):
+                    
+                    print(error.localizedDescription)
+                    self.dismiss(animated: true)
+                
                 }
-                    
                 
-                self.arrayFavoritos.insert(self.dicFavorito, at: 0)
                 
-                defaults.set(self.arrayFavoritos, forKey: "arrayFavoritos")
-            }
+            })
+            
             
         }
     }
@@ -109,8 +113,9 @@ extension TMFavoritosAdicionarViewController : UITextFieldDelegate{
                 
                 if let _ = self {
                     
+                    self?.bookmarkAddress = MBAddress(fromLocation: dicionarioEndereco)
 //                    self?.dicFavorito = dicionarioEndereco
-//                    self?.txtFieldEndereco.text = dicionarioEndereco["address"] as? String
+                    self?.txtFieldEndereco.text = dicionarioEndereco.address as? String
                 }
             }
             self.present(buscarEnderecoViewController, animated: true, completion: nil)

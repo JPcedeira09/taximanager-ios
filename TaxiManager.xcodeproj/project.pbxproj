@@ -40,6 +40,9 @@
 		119BCD1A1F97A395004D92CB /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */; };
 		119BCD1C1F97A3FE004D92CB /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1D1F97A3FE004D92CB /* SideMenu.framework */; };
 		11A552511F993F03006F9AB6 /* MBLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A552501F993F03006F9AB6 /* MBLoginViewController.swift */; };
+		11BB9DC91FC749D600C60E9F /* MBTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BB9DC81FC749D600C60E9F /* MBTravel.swift */; };
+		11BB9DCB1FC7793C00C60E9F /* logotipo_fundo_branco.png in Resources */ = {isa = PBXBuildFile; fileRef = 11BB9DCA1FC7793700C60E9F /* logotipo_fundo_branco.png */; };
+		11BB9DCD1FC7797D00C60E9F /* logotipo_fundo_preto.png in Resources */ = {isa = PBXBuildFile; fileRef = 11BB9DCC1FC7796800C60E9F /* logotipo_fundo_preto.png */; };
 		11DB571B1FA112B700A39486 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DB571A1FA112B700A39486 /* Extensions.swift */; };
 		11E88D1C1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */; };
 		11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E88D1D1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift */; };
@@ -106,6 +109,9 @@
 		119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		119BCD1D1F97A3FE004D92CB /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11A552501F993F03006F9AB6 /* MBLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBLoginViewController.swift; sourceTree = "<group>"; };
+		11BB9DC81FC749D600C60E9F /* MBTravel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTravel.swift; sourceTree = "<group>"; };
+		11BB9DCA1FC7793700C60E9F /* logotipo_fundo_branco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logotipo_fundo_branco.png; sourceTree = "<group>"; };
+		11BB9DCC1FC7796800C60E9F /* logotipo_fundo_preto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logotipo_fundo_preto.png; sourceTree = "<group>"; };
 		11DB571A1FA112B700A39486 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBuscaEnderecoViewController.swift; sourceTree = "<group>"; };
 		11E88D1D1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMCustomTableViewHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -195,6 +201,8 @@
 				112830B41F884E3C000972CB /* Main.storyboard */,
 				112830B91F884E3C000972CB /* LaunchScreen.storyboard */,
 				11837E031FB4BE5C00CA8DF2 /* Mobilitee_splash.png */,
+				11BB9DCC1FC7796800C60E9F /* logotipo_fundo_preto.png */,
+				11BB9DCA1FC7793700C60E9F /* logotipo_fundo_branco.png */,
 				112830BC1F884E3C000972CB /* Info.plist */,
 				1177FBDB1FA9A8F100439913 /* Assets.xcassets */,
 			);
@@ -214,6 +222,7 @@
 				111FB5E21FBF67C300578185 /* MBSearchResult.swift */,
 				117E248C1F96520A0041DCB6 /* Corrida.swift */,
 				111FB5E01FBF3A5000578185 /* MBRide.swift */,
+				11BB9DC81FC749D600C60E9F /* MBTravel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -415,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11EB8D361F8D4CAE00D0FDE4 /* Poppins-ExtraLight.ttf in Resources */,
+				11BB9DCB1FC7793C00C60E9F /* logotipo_fundo_branco.png in Resources */,
 				11EB8D3F1F8D4CAE00D0FDE4 /* Poppins-SemiBoldItalic.ttf in Resources */,
 				11EB8D3C1F8D4CAE00D0FDE4 /* Poppins-MediumItalic.ttf in Resources */,
 				11EB8D391F8D4CAE00D0FDE4 /* Poppins-Light.ttf in Resources */,
@@ -437,6 +447,7 @@
 				11EB8D3A1F8D4CAE00D0FDE4 /* Poppins-LightItalic.ttf in Resources */,
 				11EB8D341F8D4CAE00D0FDE4 /* Poppins-ExtraBold.ttf in Resources */,
 				1177FBD71FA9A03000439913 /* TMBuscaEnderecoCell.xib in Resources */,
+				11BB9DCD1FC7797D00C60E9F /* logotipo_fundo_preto.png in Resources */,
 				11EB8D311F8D4CAE00D0FDE4 /* Poppins-BlackItalic.ttf in Resources */,
 				11EB8D3E1F8D4CAE00D0FDE4 /* Poppins-SemiBold.ttf in Resources */,
 				1156BB4D1FA7C89100C2DF4F /* TMHistoricoViewCell.xib in Resources */,
@@ -503,6 +514,7 @@
 				113A4EE91FBDFFB5005D01FC /* MBBookmark.swift in Sources */,
 				111FB5E11FBF3A5000578185 /* MBRide.swift in Sources */,
 				11EE3E231FBB86D0007918C6 /* MBUser.swift in Sources */,
+				11BB9DC91FC749D600C60E9F /* MBTravel.swift in Sources */,
 				11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */,
 				112830B31F884E3C000972CB /* TMTelaInicialViewController.swift in Sources */,
 				11EE3E1C1FBB6150007918C6 /* MBDevice.swift in Sources */,
@@ -674,7 +686,7 @@
 				INFOPLIST_FILE = TaxiManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.taximanager;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.mobilitee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -696,7 +708,7 @@
 				INFOPLIST_FILE = TaxiManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.taximanager;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.mobilitee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;

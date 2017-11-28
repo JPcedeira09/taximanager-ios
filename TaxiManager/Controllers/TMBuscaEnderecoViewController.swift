@@ -25,18 +25,16 @@ class TMBuscaEnderecoViewController: UIViewController {
     var arrayRecentes = [MBAddress]()
     var arrayPois = [MBPoi]()
     var arrayFavoritos = [MBBookmark]()
-    
     var selecionouEndereco: ((_ dicionario: MBLocation) -> Void)?
-    
     var expandedSections : NSMutableSet = [0]
     
+    var timer : Timer!
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         
-        let userDefaults = UserDefaults.standard
         
         if let recents = MBUser.currentUser?.recents{
             self.arrayRecentes = recents
@@ -62,6 +60,8 @@ class TMBuscaEnderecoViewController: UIViewController {
         self.tableView.register(UINib(nibName: "TMBuscaEnderecoCell", bundle: nil), forCellReuseIdentifier: "tmBuscaEnderecoCell")
         
         self.txtFieldBuscaEndereco.becomeFirstResponder()
+        
+        
     }
     
     //MARK: - Metodos
@@ -75,7 +75,27 @@ class TMBuscaEnderecoViewController: UIViewController {
     }
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
         
-        fetcher.sourceTextHasChanged(sender.text!)
+        if self.timer != nil {
+            
+            self.timer.invalidate()
+        }
+        
+        if let text = sender.text {
+            
+            if text.characters.count >= 4 {
+                
+                self.timer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false, block: { (timer) in
+                    
+                    self.fetcher.sourceTextHasChanged(text)
+                    timer.invalidate()
+                })
+                
+            }
+        }
+        
+        
+        
+        
     }
         
     @objc func sectionTapped(_ sender: UIButton) {
@@ -247,6 +267,7 @@ extension TMBuscaEnderecoViewController{
     func resolverDidSelectPesquisa(){
         
         let predicao = self.arrayPredicoes[tableView.indexPathForSelectedRow!.row]
+        
         let gmsPlaceCliente = GMSPlacesClient()
         gmsPlaceCliente.lookUpPlaceID(predicao.placeID!) { (place, error) in
             
@@ -257,8 +278,22 @@ extension TMBuscaEnderecoViewController{
             
             let geocoder = CLGeocoder()
             
+            
             let localizacao = CLLocation(latitude: place!.coordinate.latitude, longitude: place!.coordinate.longitude)
             
+            
+            var number = "0"
+
+            for component in place!.addressComponents!{
+
+                print(component.type + " - " + component.name)
+                
+                if(component.type == "stree_number"){
+                    
+                    number = component.name
+                }
+            }
+
             
             
             geocoder.reverseGeocodeLocation(localizacao, completionHandler: { (placemarks, error) in
@@ -267,13 +302,12 @@ extension TMBuscaEnderecoViewController{
                     var endereco = "00000000"
                     if let plmarks = placemarks {
                         let firstLocation = plmarks[0]
-                        
-                        var number = "000"
+     
                         var postalCode = ""
                         if let zip = firstLocation.addressDictionary?["ZIP"] as? String{
                             
                             postalCode = zip
-//                            print(firstLocation.addressDictionary)
+
                         }
                         
                         if let code = firstLocation.addressDictionary?["PostCodeExtension"] as? String{
@@ -296,18 +330,7 @@ extension TMBuscaEnderecoViewController{
                             }
                         }
                         
-//                        var dictionaryAddress : [String: Any] = [:]
-                        
-//                        dictionaryAddress.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
-//                        dictionaryAddress.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
-//                        dictionaryAddress.updateValue("\(postalCode)", forKey: "zipcode")
-//                        dictionaryAddress.updateValue("\(firstLocation.locality!)", forKey: "city")
-//                        dictionaryAddress.updateValue("\(firstLocation.administrativeArea!)", forKey: "state")
-//                        dictionaryAddress.updateValue(place?.formattedAddress ?? "", forKey: "address")
-//                        dictionaryAddress.updateValue(number, forKey: "number")
-//                        dictionaryAddress.updateValue(firstLocation.subLocality ?? "", forKey: "district")
-
-                        let address = MBAddress(latitude: firstLocation.location!.coordinate.latitude, longitude: firstLocation.location!.coordinate.longitude, address: place?.formattedAddress ?? "", district: firstLocation.subLocality ?? "", city: firstLocation.locality!, state: firstLocation.administrativeArea!, zipcode: postalCode, number: number )
+                        let address = MBAddress(latitude: firstLocation.location!.coordinate.latitude, longitude: firstLocation.location!.coordinate.longitude, address: predicao.attributedFullText.string, district: firstLocation.subLocality ?? "", city: firstLocation.locality!, state: firstLocation.administrativeArea!, zipcode: postalCode, number: number )
                         self.selecionouEndereco?(address)
                         
                         self.arrayRecentes.append(address)

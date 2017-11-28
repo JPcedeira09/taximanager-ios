@@ -19,9 +19,10 @@ enum MobiliteeProvider {
     case postBookmark(bookmark : MBBookmark)
     case deleteBookmark(bookmarkId : Int)
     case getHistory
+    case patchUser(userId : Int, newPassword : String)
+    case recoveryPassword(username : String)
     
     static let api = MoyaProvider<MobiliteeProvider>()
-    
 }
 
 extension MobiliteeProvider : TargetType{
@@ -81,10 +82,38 @@ extension MobiliteeProvider : TargetType{
             }catch{
                 return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
             }
+            
+        case let .patchUser(userId, newPassword):
+            
+            let now = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            formatter.timeZone = TimeZone(identifier: "America/Sao_Paulo")
+            print(formatter.string(from: now))
+            
+            
+            let parameters = [
+                "id": userId,
+                "password": newPassword,
+                "firstAccessAt": formatter.string(from: now),
+            ] as [String : Any]
+            
+            print("00000000 PARAMETROS 0000000")
+            print(parameters)
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        
+        case let .recoveryPassword(username):
+        
+            let parameters = ["username" : username]
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+            
+        case .getHistory:
+            
+            let parameters = ["employeeId" : MBUser.currentUser!.employeeId]
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         default:
             return .requestPlain
         }
-        
         
     }
     
@@ -92,10 +121,10 @@ extension MobiliteeProvider : TargetType{
         
         switch (self) {
         case .estimate:
-            return URL(string: "http://estimate.taximanager.com.br/v1")!
+            return URL(string: "https://estimate.taximanager.com.br/v1")!
         default:
-//            return URL(string: "https://api.taximanager.com.br/v1/taximanager")!
-            return URL(string: "http://ec2-54-207-58-85.sa-east-1.compute.amazonaws.com/v1/taximanager")!
+            return URL(string: "https://api.taximanager.com.br/v1/taximanager")!
+//            return URL(string: "http://ec2-54-207-58-85.sa-east-1.compute.amazonaws.com/v1/taximanager")!
         }
     }
     
@@ -115,6 +144,10 @@ extension MobiliteeProvider : TargetType{
             return "/employees/bookmarks/\(bookmarkId)"
         case .getHistory:
             return "/companies/\(MBUser.currentUser?.companyId ?? 0)/travels"
+        case .patchUser:
+            return "/users"
+        case .recoveryPassword:
+            return "/users/password/recovery"
             
         }
     }
@@ -127,6 +160,8 @@ extension MobiliteeProvider : TargetType{
             return .post
         case .deleteBookmark:
             return .delete
+        case .patchUser:
+            return .patch
         default:
             return .get
         }

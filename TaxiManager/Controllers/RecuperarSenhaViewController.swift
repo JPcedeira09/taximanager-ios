@@ -7,50 +7,52 @@
 //
 
 import UIKit
+import TextFieldEffects
+import SwiftSpinner
+import SCLAlertView
 
 class RecuperarSenhaViewController: UIViewController {
 
+    @IBOutlet weak var txtFieldUsername: HoshiTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //let start = [
-        //    "lat": -15.762023,
-        //    "lng": -47.891636,
-        //    "address":"Rua Augusta - Consolação, São Paulo - SP, Brasil",
-        //    "district":"Consolação",
-        //    "city":"São Paulo",
-        //    "state":"SP",
-        //    "zipcode":""
-        //    ] as [String : Any]
-        
-//        "end": {
-//            "lat": -15.834928,
-//            "lng": -47.912829,
-//            "address": "Rua Pamplona - Jardim Paulista, São Paulo - SP, Brasil",
-//            "district": "",
-//            "city": "São Paulo",
-//            "state": "SP",
-//            "zipcode": ""
-//        },
-
-
-//
-//        let start = MBAddress(latitude: -15.762023, longitude: -47.891636, address: "Rua Augusta - Consolação, São Paulo - SP, Brasil", district: "Consolação", city: "São Paulo", state: "SP", zipcode: "")
-//
-//        let end = MBAddress(latitude: -15.834928, longitude: -47.912829, address: "Rua Pamplona - Jardim Paulista, São Paulo - SP, Brasil", district: "", city: "São Paulo", state: "SP", zipcode: "")
-//
-//
-//
-//        MobiliteeAPI.api.request(.estimate(start: start, end: end, device: MBDevice(), distance: 3200, duration: 11, userId: 139, companyId: 3 )) { (result) in
-//
-//            print(result.error?.localizedDescription)
-//            print(result.value)
-//        }
+    
     }
     
     
-
+    @IBAction func close(_ sender: CustomButton) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func recuperarSenha(_ sender: UIButton) {
+        
+        SwiftSpinner.show("Enviando...", animated: true)
+        
+        MobiliteeProvider.api.request(.recoveryPassword(username: self.txtFieldUsername.text!)) { (result) in
+            
+            SwiftSpinner.hide()
+            
+            switch (result){
+                
+            case let .success (response):
+                
+                do{
+                    
+                    print(try response.mapJSON())
+                    
+                }catch{}
+            
+            case let .failure (error):
+                
+                print(error.localizedDescription)
+                
+                
+                
+            }
+        }
+        
         
         self.dismiss(animated: true)
     }

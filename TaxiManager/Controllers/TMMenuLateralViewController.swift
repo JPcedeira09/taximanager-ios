@@ -1,4 +1,4 @@
-//
+ //
 //  TMMenuLateralViewController.swift
 //  TaxiManager
 //
@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class TMMenuLateralViewController: UIViewController {
 
@@ -15,8 +16,10 @@ class TMMenuLateralViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let nome = UserDefaults.standard.value(forKey: "nomeUsuario") as? String
-        let sobrenome = UserDefaults.standard.value(forKey: "sobrenomeUsuario") as? String
+        let nome = MBUser.currentUser?.firstName
+        let sobrenome = MBUser.currentUser?.lastName
+        
+        
         
         self.labelNome.text = nome! + " " + sobrenome!
         // Do any additional setup after loading the view.
@@ -24,20 +27,28 @@ class TMMenuLateralViewController: UIViewController {
 
     @IBAction func sair(_ sender: UIButton) {
         
-        let domain = Bundle.main.bundleIdentifier!
-        UserDefaults.standard.removePersistentDomain(forName: domain)
-        UserDefaults.standard.synchronize()
+        let alert = SCLAlertView()
+        alert.addButton("Sair", action: {
+            let domain = Bundle.main.bundleIdentifier!
+            UserDefaults.standard.removePersistentDomain(forName: domain)
+            UserDefaults.standard.synchronize()
+            
+            self.dismiss(animated: true) {
+                guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
+                let rootController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TMLoginViewController")
+                appDel.window?.rootViewController = rootController
+            }
+        })
         
-        self.dismiss(animated: true) {
-            guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
-            let rootController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TMLoginViewController")
-            appDel.window?.rootViewController = rootController
-        }
+        alert.showInfo("Sair", subTitle: "Tem certeza que deseja sair?", closeButtonTitle: "Cancelar")
+        
+        
+        
     }
     
     @IBAction func openComoUsar(_ sender: UIButton) {
         
-        let stringUrl = "https://s3-sa-east-1.amazonaws.com/mobilitee/IE8/como+usar.pdf"
+        let stringUrl = "https://www.mobilitee.com.br/itau/como-usar/"
         
         if let url = URL(string: stringUrl){
             
