@@ -18,7 +18,6 @@ class TMBuscaEnderecoViewController: UIViewController {
     @IBOutlet weak var txtFieldBuscaEndereco: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    
     //MARK: - Propriedades
     var fetcher = GMSAutocompleteFetcher()
     var arrayPredicoes = [GMSAutocompletePrediction]()
@@ -61,7 +60,6 @@ class TMBuscaEnderecoViewController: UIViewController {
         
         self.txtFieldBuscaEndereco.becomeFirstResponder()
         
-        
     }
     
     //MARK: - Metodos
@@ -82,20 +80,16 @@ class TMBuscaEnderecoViewController: UIViewController {
         
         if let text = sender.text {
             
-            if text.characters.count >= 4 {
+            if text.count >= 5 {
                 
-                self.timer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false, block: { (timer) in
+                self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
                     
                     self.fetcher.sourceTextHasChanged(text)
                     timer.invalidate()
+                    
                 })
-                
             }
         }
-        
-        
-        
-        
     }
         
     @objc func sectionTapped(_ sender: UIButton) {
@@ -104,7 +98,9 @@ class TMBuscaEnderecoViewController: UIViewController {
         let section = sender.tag
         let shouldExpand = !expandedSections.contains(section)
         if (shouldExpand) {
-//            expandedSections.remove()
+            
+            // usar o remove() para fechar as sections aberta
+            //expandedSections.remove()
             expandedSections.add(section)
         } else {
             expandedSections.remove(section)
@@ -288,7 +284,7 @@ extension TMBuscaEnderecoViewController{
 
                 print(component.type + " - " + component.name)
                 
-                if(component.type == "stree_number"){
+                if(component.type == "street_number"){
                     
                     number = component.name
                 }

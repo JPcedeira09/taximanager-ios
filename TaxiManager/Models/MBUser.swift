@@ -75,25 +75,22 @@ struct MBUser : Codable{
     
     static func getPois(){
         
-        print("GET POIS")
         MobiliteeProvider.api.request(.getPOIs) { (result) in
             
             switch result{
                 
             case let .success(response):
-                
-//                print("success")
-//                print(String(data: response.data, encoding: .utf8))
-                
+
                 if response.statusCode == 200{
-                    print("status 200")
                     do{
                         let mbPois = try response.map([MBPoi].self, atKeyPath: "records")
                         MBUser.currentUser?.pois = mbPois
-//                        print(mbPois)
+                        
+                        print("===== POIS =====")
+                        print(mbPois)
                     }catch{
                         
-                        print("caiu no catch")
+                        print("caiu no catch POI")
                     }
                 }
             case let .failure(error):
@@ -107,8 +104,6 @@ struct MBUser : Codable{
     
     static func getBookmarks(){
         
-        print("GET BOOKMARKS")
-        
         MobiliteeProvider.api.request(.getBookmarks) { (result) in
             
             switch result{
@@ -117,12 +112,10 @@ struct MBUser : Codable{
                 if response.statusCode == 200{
                     do{
                         
-//                        print(try response.mapString())
                         let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
                         
                         MBUser.currentUser?.bookmarks = mbBookmarks
                         
-//                        print(MBUser.currentUser?.bookmarks)
                     }catch{
                         
                         print("caiu no catch")
@@ -138,7 +131,6 @@ struct MBUser : Codable{
     
     static func getHistory(){
         
-        print("GET HISTORY")
         MobiliteeProvider.api.request(.getHistory) { (result) in
             
             switch result{
@@ -146,13 +138,12 @@ struct MBUser : Codable{
             case let .success(response):
                 if response.statusCode == 200{
                     do{
-//                        print(try response.mapJSON())
                         let mbTravels = try response.map([MBTravel].self, atKeyPath: "records")
                         MBUser.currentUser?.history = mbTravels
                         
                     }catch{
                         
-                        print("caiu no catch HISTORY")
+                        print("caiu no catch")
                     }
                 }
             case let .failure(error):

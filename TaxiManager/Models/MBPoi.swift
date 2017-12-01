@@ -8,6 +8,7 @@
 
 import Foundation
 
+//Ponto de Interesse
 struct MBPoi : MBLocation, Codable{
     
     //MARK: - MBLocation

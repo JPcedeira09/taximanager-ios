@@ -12,7 +12,6 @@ struct MBRide : Codable{
     
     var id : Int = 0
     var alertMessage : String?
-//    var averagePrice : Float = 0.0
     var waitingTime : Int? = 4
     var name : String = ""
     var modality : MBModality
@@ -21,12 +20,12 @@ struct MBRide : Codable{
     var urlLogo : String?
     var urlStore : String?
     var urlWeb : String?
+    var uuid : Int = 0
     
     struct MBModality : Codable {
         
         var id : String
         var name : String
-        
     }
     
     enum CodingKeys : String, CodingKey{
@@ -41,6 +40,6 @@ struct MBRide : Codable{
         case urlLogo = "url_logo"
         case urlStore = "url_loja_ios"
         case urlWeb = "url_web"
-        
+        case uuid
     }
 }

@@ -10,6 +10,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,30 +21,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        FirebaseApp.configure()
+    
         GMSServices.provideAPIKey("AIzaSyDOebYw-atZqhQxDKX-D5Ps5Dje0f29RSo")
         GMSPlacesClient.provideAPIKey("AIzaSyDOebYw-atZqhQxDKX-D5Ps5Dje0f29RSo")
-        
         
         let statusBar = application.value(forKey: "statusBar") as? UIView
         statusBar?.backgroundColor = UIColor(red: 36/255.0, green: 36/255.0, blue: 36/255.0, alpha: 1.0)
         
-        
-        
         let currentUser = UserDefaults.standard.value(forKey: "user")
         if let currentUser = currentUser as? Data{
            
-            print("TEM USUARIO LOGADO")
             MBUser.currentUser = try? JSONDecoder().decode(MBUser.self, from: currentUser) as MBUser
             
-
             if let _ = MBUser.currentUser?.firstAccessAt{
                 MBUser.update()
+                
+                Analytics.setUserProperty(MBUser.currentUser!.fullName, forName: "name")
+                Analytics.setUserID("\(MBUser.currentUser!.id)")
+                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier :"NavigationInicial") as! UINavigationController
                 self.window?.rootViewController = viewController
             }
         }
-        print("NÃO TEM USUARIO")
     
         return true
     }
@@ -69,7 +70,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

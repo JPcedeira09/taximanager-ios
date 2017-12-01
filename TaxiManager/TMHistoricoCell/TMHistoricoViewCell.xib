@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,25 +29,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99POP - 21/08/2017 às 21:36 - R$29.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMB-rw-WOD">
-                        <rect key="frame" x="29" y="8" width="180" height="29"/>
+                        <rect key="frame" x="37" y="11" width="180" height="29"/>
                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Av. Eng. Arm. de Arruda Pereira, 774 - Jabaquara, SP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="chu-Zc-0ee">
-                        <rect key="frame" x="29" y="41" width="338" height="13"/>
+                        <rect key="frame" x="37" y="44" width="322" height="13"/>
                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Av. do Estado, 5533 - Cambuci, São Paulo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ufj-4H-vDs">
-                        <rect key="frame" x="29" y="58.5" width="338" height="13"/>
+                        <rect key="frame" x="37" y="61.5" width="322" height="13"/>
                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_historico_origem_destino" translatesAutoresizingMaskIntoConstraints="NO" id="Xb2-Uf-5Cj">
-                        <rect key="frame" x="21" y="41" width="5" height="34"/>
+                        <rect key="frame" x="29" y="44" width="5" height="34"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="6I3-ji-ZPW"/>
                             <constraint firstAttribute="width" constant="5" id="Zwu-As-tOK"/>
@@ -56,7 +56,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okv-x8-yZg">
-                        <rect key="frame" x="322" y="8" width="45" height="24"/>
+                        <rect key="frame" x="314" y="11" width="45" height="24"/>
                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="10"/>
                         <state key="normal" title="+Ver mais">
                             <color key="titleColor" red="0.66267138719999996" green="0.66278749699999995" blue="0.66266411540000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

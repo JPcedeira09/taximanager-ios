@@ -24,14 +24,7 @@ class TMFavoritosViewController: UIViewController {
         self.tableView.dataSource = self
         
         self.tableView.register(UINib(nibName: "TMFavoritosCell", bundle: nil), forCellReuseIdentifier: "tmFavoritosCell")
-        let defaults = UserDefaults.standard
-        
 
-//        if let favoritos = MBUser.currentUser?.bookmarks{
-//
-//            self.arrayFavoritos = favoritos
-//        }
-        
         self.tableView.allowsMultipleSelectionDuringEditing = false
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -97,9 +90,8 @@ extension TMFavoritosViewController : UITableViewDelegate, UITableViewDataSource
                         
                         
                     case let .success(response):
-                        print(response.statusCode)
                         MBUser.currentUser?.bookmarks?.remove(at: indexPath.row)
-                        print(MBUser.currentUser?.bookmarks)
+
                     case let .failure(error):
                         
                         print(error.localizedDescription)

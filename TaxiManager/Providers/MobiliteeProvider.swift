@@ -12,7 +12,7 @@ import Moya
 enum MobiliteeProvider {
     
     //MARK: - Methods
-    case estimate(start : MBLocation, end : MBLocation, device : [String : Any], distance : Int, duration : Int, userId : Int, companyId: Int)
+    case estimate(start : MBLocation, end : MBLocation, distance : Int, duration : Int, userId : Int, companyId: Int)
     case login(username: String, password: String)
     case getPOIs
     case getBookmarks
@@ -49,13 +49,13 @@ extension MobiliteeProvider : TargetType{
         
         switch(self){
             
-        case let .estimate(start, end, device, distance, duration, userId, companyId):
+        case let .estimate(start, end, distance, duration, userId, companyId):
             
             do{
                 
                 let start = try MBAddress(fromLocation: start).asDictionary()
                 let end = try MBAddress(fromLocation: end).asDictionary()
-                let device = [:] as [String : Any]
+                let device = try MBDevice().asDictionary()
                 
                 let parameters = ["start" : start,
                                   "end" : end,
@@ -65,8 +65,6 @@ extension MobiliteeProvider : TargetType{
                                   "user_id": userId,
                                   "company_id": companyId] as [String : Any]
     
-                print("===== PARAMETROS ESTIMATE ===== ")
-                print(parameters)
                 return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
                 
             }catch{
@@ -121,6 +119,7 @@ extension MobiliteeProvider : TargetType{
         
         switch (self) {
         case .estimate:
+            
             return URL(string: "https://estimate.taximanager.com.br/v1")!
         default:
             return URL(string: "https://api.taximanager.com.br/v1/taximanager")!
@@ -175,7 +174,6 @@ extension MobiliteeProvider : TargetType{
             
             let token = (usuario + ":" + senha).toBase64()
             
-//          print("TOKEN: ", token)
             return ["Authorization" : "Basic :" + token]
 
         default:

@@ -8,21 +8,21 @@
 
 import UIKit
 import SCLAlertView
-
+import MessageUI
 class TMMenuLateralViewController: UIViewController {
 
     @IBOutlet weak var labelNome: UILabel!
+    @IBOutlet weak var btnVersion: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let nome = MBUser.currentUser?.firstName
         let sobrenome = MBUser.currentUser?.lastName
-        
-        
-        
+
         self.labelNome.text = nome! + " " + sobrenome!
-        // Do any additional setup after loading the view.
+
+        self.btnVersion.setTitle(Bundle.main.releaseVersionNumberPretty, for: .normal)
     }
 
     @IBAction func sair(_ sender: UIButton) {
@@ -42,8 +42,6 @@ class TMMenuLateralViewController: UIViewController {
         
         alert.showInfo("Sair", subTitle: "Tem certeza que deseja sair?", closeButtonTitle: "Cancelar")
         
-        
-        
     }
     
     @IBAction func openComoUsar(_ sender: UIButton) {
@@ -56,14 +54,10 @@ class TMMenuLateralViewController: UIViewController {
                 
                 UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
                     
-                    print("Funfou?  \(result)" )
                 })
             }
             
         }
-        
-        
-        
     }
     @IBAction func openPoliticasDeUso(_ sender: UIButton) {
      
@@ -75,7 +69,6 @@ class TMMenuLateralViewController: UIViewController {
                 
                 UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
                     
-                    print("Funfou?  \(result)" )
                 })
             }
             
@@ -83,4 +76,28 @@ class TMMenuLateralViewController: UIViewController {
     }
     
     
-}
+    @IBAction func contactUs(_ sender: UIButton) {
+        
+        if(MFMailComposeViewController.canSendMail()){
+            
+            let mailComposeController = MFMailComposeViewController()
+            mailComposeController.setToRecipients(["contato@mobilitee.com.br"])
+            mailComposeController.setSubject("Suporte Mobilitee")
+            
+            mailComposeController.mailComposeDelegate = self
+            
+            self.present(mailComposeController, animated: true, completion: nil)
+            
+        }
+        
+    }
+ }
+ 
+ 
+ extension TMMenuLateralViewController : MFMailComposeViewControllerDelegate{
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        controller.dismiss(animated: true, completion: nil)
+    }
+ }

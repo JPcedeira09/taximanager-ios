@@ -22,6 +22,7 @@
 		1156BB481FA7C3D300C2DF4F /* TMHistoricoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156BB471FA7C3D300C2DF4F /* TMHistoricoViewController.swift */; };
 		1156BB4C1FA7C89100C2DF4F /* TMHistoricoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156BB4A1FA7C89100C2DF4F /* TMHistoricoViewCell.swift */; };
 		1156BB4D1FA7C89100C2DF4F /* TMHistoricoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1156BB4B1FA7C89100C2DF4F /* TMHistoricoViewCell.xib */; };
+		116D1AD51FCDB5B600B0A477 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 116D1AD41FCDB5B600B0A477 /* GoogleService-Info.plist */; };
 		1177FBD61FA9A03000439913 /* TMBuscaEnderecoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1177FBD41FA9A03000439913 /* TMBuscaEnderecoCell.swift */; };
 		1177FBD71FA9A03000439913 /* TMBuscaEnderecoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1177FBD51FA9A03000439913 /* TMBuscaEnderecoCell.xib */; };
 		1177FBDA1FA9A55C00439913 /* TMFavoritosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1177FBD91FA9A55C00439913 /* TMFavoritosViewController.swift */; };
@@ -31,8 +32,6 @@
 		117DBAA01FA24FA800A303E6 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DBA9F1FA24FA800A303E6 /* CustomUI.swift */; };
 		117E24871F963DF90041DCB6 /* TMResultadoBuscaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E24851F963DF90041DCB6 /* TMResultadoBuscaCell.swift */; };
 		117E24881F963DF90041DCB6 /* TMResultadoBuscaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */; };
-		117E248B1F964F870041DCB6 /* ResultadoBusca.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E248A1F964F870041DCB6 /* ResultadoBusca.swift */; };
-		117E248D1F96520A0041DCB6 /* Corrida.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E248C1F96520A0041DCB6 /* Corrida.swift */; };
 		118347891FA27C3400DB3C55 /* TMMenuLateralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118347881FA27C3400DB3C55 /* TMMenuLateralViewController.swift */; };
 		11837E041FB4CDD300CA8DF2 /* Mobilitee_splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 11837E031FB4BE5C00CA8DF2 /* Mobilitee_splash.png */; };
 		119847951FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */; };
@@ -43,6 +42,7 @@
 		11BB9DC91FC749D600C60E9F /* MBTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BB9DC81FC749D600C60E9F /* MBTravel.swift */; };
 		11BB9DCB1FC7793C00C60E9F /* logotipo_fundo_branco.png in Resources */ = {isa = PBXBuildFile; fileRef = 11BB9DCA1FC7793700C60E9F /* logotipo_fundo_branco.png */; };
 		11BB9DCD1FC7797D00C60E9F /* logotipo_fundo_preto.png in Resources */ = {isa = PBXBuildFile; fileRef = 11BB9DCC1FC7796800C60E9F /* logotipo_fundo_preto.png */; };
+		11D5DBA81FD07D6500330AA9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D5DBA71FD07D6500330AA9 /* Reachability.m */; };
 		11DB571B1FA112B700A39486 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DB571A1FA112B700A39486 /* Extensions.swift */; };
 		11E88D1C1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */; };
 		11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E88D1D1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift */; };
@@ -65,6 +65,7 @@
 		11EB8D3F1F8D4CAE00D0FDE4 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2C1F8D4C8700D0FDE4 /* Poppins-SemiBoldItalic.ttf */; };
 		11EB8D401F8D4CAE00D0FDE4 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2D1F8D4C8700D0FDE4 /* Poppins-Thin.ttf */; };
 		11EB8D411F8D4CAE00D0FDE4 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D2E1F8D4C8700D0FDE4 /* Poppins-ThinItalic.ttf */; };
+		11EC27381FCF45090046699C /* MBContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EC27371FCF45090046699C /* MBContactUsViewController.swift */; };
 		11EE3E131FBB2672007918C6 /* RecuperarSenhaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E121FBB2672007918C6 /* RecuperarSenhaViewController.swift */; };
 		11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E141FBB2933007918C6 /* PrimeiroLoginViewController.swift */; };
 		11EE3E181FBB5CB5007918C6 /* MobiliteeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E171FBB5CB5007918C6 /* MobiliteeProvider.swift */; };
@@ -91,6 +92,7 @@
 		1156BB471FA7C3D300C2DF4F /* TMHistoricoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMHistoricoViewController.swift; sourceTree = "<group>"; };
 		1156BB4A1FA7C89100C2DF4F /* TMHistoricoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMHistoricoViewCell.swift; sourceTree = "<group>"; };
 		1156BB4B1FA7C89100C2DF4F /* TMHistoricoViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMHistoricoViewCell.xib; sourceTree = "<group>"; };
+		116D1AD41FCDB5B600B0A477 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1177FBD41FA9A03000439913 /* TMBuscaEnderecoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBuscaEnderecoCell.swift; sourceTree = "<group>"; };
 		1177FBD51FA9A03000439913 /* TMBuscaEnderecoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMBuscaEnderecoCell.xib; sourceTree = "<group>"; };
 		1177FBD91FA9A55C00439913 /* TMFavoritosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TMFavoritosViewController.swift; path = ../TMFavoritosViewController.swift; sourceTree = "<group>"; };
@@ -100,8 +102,6 @@
 		117DBA9F1FA24FA800A303E6 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
 		117E24851F963DF90041DCB6 /* TMResultadoBuscaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMResultadoBuscaCell.swift; sourceTree = "<group>"; };
 		117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMResultadoBuscaCell.xib; sourceTree = "<group>"; };
-		117E248A1F964F870041DCB6 /* ResultadoBusca.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadoBusca.swift; sourceTree = "<group>"; };
-		117E248C1F96520A0041DCB6 /* Corrida.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corrida.swift; sourceTree = "<group>"; };
 		118347881FA27C3400DB3C55 /* TMMenuLateralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMMenuLateralViewController.swift; sourceTree = "<group>"; };
 		11837E031FB4BE5C00CA8DF2 /* Mobilitee_splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mobilitee_splash.png; sourceTree = "<group>"; };
 		119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMFavoritosAdicionarViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +112,10 @@
 		11BB9DC81FC749D600C60E9F /* MBTravel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTravel.swift; sourceTree = "<group>"; };
 		11BB9DCA1FC7793700C60E9F /* logotipo_fundo_branco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logotipo_fundo_branco.png; sourceTree = "<group>"; };
 		11BB9DCC1FC7796800C60E9F /* logotipo_fundo_preto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logotipo_fundo_preto.png; sourceTree = "<group>"; };
+		11CBD0E11FCE1F10004F507B /* TaxiManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiManager.entitlements; sourceTree = "<group>"; };
+		11D5DBA51FD07D6400330AA9 /* TaxiManager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TaxiManager-Bridging-Header.h"; sourceTree = "<group>"; };
+		11D5DBA61FD07D6500330AA9 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		11D5DBA71FD07D6500330AA9 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		11DB571A1FA112B700A39486 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBuscaEnderecoViewController.swift; sourceTree = "<group>"; };
 		11E88D1D1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMCustomTableViewHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 		11EB8D2C1F8D4C8700D0FDE4 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		11EB8D2D1F8D4C8700D0FDE4 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		11EB8D2E1F8D4C8700D0FDE4 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
+		11EC27371FCF45090046699C /* MBContactUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBContactUsViewController.swift; sourceTree = "<group>"; };
 		11EE3E121FBB2672007918C6 /* RecuperarSenhaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperarSenhaViewController.swift; sourceTree = "<group>"; };
 		11EE3E141FBB2933007918C6 /* PrimeiroLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeiroLoginViewController.swift; sourceTree = "<group>"; };
 		11EE3E171FBB5CB5007918C6 /* MobiliteeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobiliteeProvider.swift; sourceTree = "<group>"; };
@@ -184,6 +189,9 @@
 		112830AF1F884E3C000972CB /* TaxiManager */ = {
 			isa = PBXGroup;
 			children = (
+				11D5DBA91FD07D6C00330AA9 /* Reachability */,
+				116D1AD41FCDB5B600B0A477 /* GoogleService-Info.plist */,
+				11CBD0E11FCE1F10004F507B /* TaxiManager.entitlements */,
 				11EE3E1D1FBB63E8007918C6 /* estimateSampleData.json */,
 				11EE3E161FBB5C93007918C6 /* Providers */,
 				11E88D181FA8C6B500C11196 /* TMHistoricoVerMaisCell */,
@@ -205,6 +213,7 @@
 				11BB9DCA1FC7793700C60E9F /* logotipo_fundo_branco.png */,
 				112830BC1F884E3C000972CB /* Info.plist */,
 				1177FBDB1FA9A8F100439913 /* Assets.xcassets */,
+				11D5DBA51FD07D6400330AA9 /* TaxiManager-Bridging-Header.h */,
 			);
 			path = TaxiManager;
 			sourceTree = "<group>";
@@ -218,9 +227,7 @@
 				11EE3E191FBB6005007918C6 /* MBLocation.swift */,
 				11EE3E1E1FBB662A007918C6 /* MBAddress.swift */,
 				11EE3E1B1FBB6150007918C6 /* MBDevice.swift */,
-				117E248A1F964F870041DCB6 /* ResultadoBusca.swift */,
 				111FB5E21FBF67C300578185 /* MBSearchResult.swift */,
-				117E248C1F96520A0041DCB6 /* Corrida.swift */,
 				111FB5E01FBF3A5000578185 /* MBRide.swift */,
 				11BB9DC81FC749D600C60E9F /* MBTravel.swift */,
 			);
@@ -230,6 +237,7 @@
 		1156BB491FA7C4FD00C2DF4F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				11EC27371FCF45090046699C /* MBContactUsViewController.swift */,
 				11EE3E141FBB2933007918C6 /* PrimeiroLoginViewController.swift */,
 				11EE3E121FBB2672007918C6 /* RecuperarSenhaViewController.swift */,
 				119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */,
@@ -278,6 +286,15 @@
 				117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */,
 			);
 			path = TMResultadoBuscaCell;
+			sourceTree = "<group>";
+		};
+		11D5DBA91FD07D6C00330AA9 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				11D5DBA61FD07D6500330AA9 /* Reachability.h */,
+				11D5DBA71FD07D6500330AA9 /* Reachability.m */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 		11E88D181FA8C6B500C11196 /* TMHistoricoVerMaisCell */ = {
@@ -395,8 +412,13 @@
 				TargetAttributes = {
 					112830AC1F884E3C000972CB = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -438,6 +460,7 @@
 				11E88D201FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.xib in Resources */,
 				11EB8D351F8D4CAE00D0FDE4 /* Poppins-ExtraBoldItalic.ttf in Resources */,
 				11EB8D401F8D4CAE00D0FDE4 /* Poppins-Thin.ttf in Resources */,
+				116D1AD51FCDB5B600B0A477 /* GoogleService-Info.plist in Resources */,
 				112830BB1F884E3C000972CB /* LaunchScreen.storyboard in Resources */,
 				11EB8D381F8D4CAE00D0FDE4 /* Poppins-Italic.ttf in Resources */,
 				11EB8D411F8D4CAE00D0FDE4 /* Poppins-ThinItalic.ttf in Resources */,
@@ -524,7 +547,6 @@
 				117DBAA01FA24FA800A303E6 /* CustomUI.swift in Sources */,
 				11E88D1C1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift in Sources */,
 				1156BB481FA7C3D300C2DF4F /* TMHistoricoViewController.swift in Sources */,
-				117E248D1F96520A0041DCB6 /* Corrida.swift in Sources */,
 				111C30FF1F8B067500EF37E3 /* TMTelaBuscaViewController.swift in Sources */,
 				11A552511F993F03006F9AB6 /* MBLoginViewController.swift in Sources */,
 				1156BB4C1FA7C89100C2DF4F /* TMHistoricoViewCell.swift in Sources */,
@@ -533,12 +555,13 @@
 				11EE3E1F1FBB662A007918C6 /* MBAddress.swift in Sources */,
 				111FB5E31FBF67C300578185 /* MBSearchResult.swift in Sources */,
 				11EE3E181FBB5CB5007918C6 /* MobiliteeProvider.swift in Sources */,
-				117E248B1F964F870041DCB6 /* ResultadoBusca.swift in Sources */,
 				1177FBDF1FA9A92800439913 /* TMFavoritosCell.swift in Sources */,
 				1177FBDA1FA9A55C00439913 /* TMFavoritosViewController.swift in Sources */,
+				11D5DBA81FD07D6500330AA9 /* Reachability.m in Sources */,
 				11EE3E131FBB2672007918C6 /* RecuperarSenhaViewController.swift in Sources */,
 				119847951FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift in Sources */,
 				11EE3E1A1FBB6005007918C6 /* MBLocation.swift in Sources */,
+				11EC27381FCF45090046699C /* MBContactUsViewController.swift in Sources */,
 				113A4EEB1FBE01C8005D01FC /* MBPoi.swift in Sources */,
 				1177FBD61FA9A03000439913 /* TMBuscaEnderecoCell.swift in Sources */,
 				1117BBF51FA7D1750043146D /* TMHistoricoVerMaisCell.swift in Sources */,
@@ -680,15 +703,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = TaxiManager/TaxiManager.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SLC3VZ7589;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = TaxiManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.mobilitee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TaxiManager/TaxiManager-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -702,15 +728,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = TaxiManager/TaxiManager.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = SLC3VZ7589;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = TaxiManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.mobilitee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TaxiManager/TaxiManager-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";

@@ -27,23 +27,6 @@ struct MBBookmark : MBLocation, Codable{
     var mainText : String
     var secondaryText : String
     
-//    enum CodingKeys : String, CodingKey{
-//        
-//        case latitude = "lat"
-//        case longitude = "lng"
-//        
-//        case address
-//        case district
-//        case city
-//        case state
-//        case zipcode
-//        case number
-//        
-//        case id
-//        case employeeId
-//        case mainText
-//        case secondaryText
-//    }
     
     init(withLocation location : MBLocation, mainText : String, secondaryText : String){
         

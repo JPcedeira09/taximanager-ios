@@ -15,6 +15,8 @@ import Alamofire
 import SwiftSpinner
 import Contacts
 import SCLAlertView
+import FirebaseAnalytics
+import Crashlytics
 //Open Weather API
 //fddaea8c38c5d8cee66a234b2f812baa
 //api.openweathermap.org/data/2.5/weather?lat=35&lon=139
@@ -45,7 +47,6 @@ class TelaInicialViewController: UIViewController {
     
     var startAddress : MBLocation?
     var endAddress : MBLocation?
-    var resumoBusca : ResumoBusca?
     var searchResult : MBSearchResult?
     
     //MARK: - View Lifecycle
@@ -63,9 +64,7 @@ class TelaInicialViewController: UIViewController {
         //Textfield
         self.textFieldEnderecoOrigem.delegate = self
         self.textFieldEnderecoDestino.delegate = self
-        
-
-        
+    
         let imageView = UIImageView(image: #imageLiteral(resourceName: "logotipo_fundo_preto.png"))
         imageView.contentMode = .scaleAspectFit
         
@@ -73,7 +72,6 @@ class TelaInicialViewController: UIViewController {
         imageView.frame = titleView.bounds
         titleView.addSubview(imageView)
         navigationItem.titleView = titleView
-        
         
         self.setupTextFieldOrigem()
         self.atualizarLabelData()
@@ -94,7 +92,6 @@ class TelaInicialViewController: UIViewController {
                 if let plmarks = placemarks {
                     
                     let firstLocation = plmarks[0]
-//                    firstLocation.addressDictionary["ZIP"] + firstLocation.addressDictionary["PostCodeExtension"]
                     
                     if let thoroughfare = firstLocation.thoroughfare{
                         endereco += thoroughfare
@@ -123,8 +120,6 @@ class TelaInicialViewController: UIViewController {
         
         if(self.textFieldEnderecoOrigem.text != "" && self.textFieldEnderecoDestino.text != ""){
             
-            
-//            self.checarDistancia(origem: self.dicOrigem, destino: self.dicDestino)
             self.checkDistance(start: self.startAddress!, end: self.endAddress!)
             
             
@@ -192,9 +187,8 @@ class TelaInicialViewController: UIViewController {
                 
                 if let json = response.result.value as? [String : AnyObject]{
                     
-                    let rows = json["rows"] as! Array<AnyObject>
-                    
-                    //                    print(rows)
+                    print(json)
+                    let rows = json["rows"] as! [AnyObject]
                     let pre_elements = rows[0] as! [String : AnyObject]
                     let elements = pre_elements["elements"] as! [AnyObject]
                     let elemento = elements[0] as! [String : AnyObject]
@@ -202,43 +196,26 @@ class TelaInicialViewController: UIViewController {
                     //Propriedades finais
                     let duracao = elemento["duration"] as! [String : AnyObject]
                     let distancia = elemento["distance"] as! [String : AnyObject]
-                    //                    let status = elemento["status"] as! String
                     
                     let duracaoFormatada  = Int(duracao["text"]!.components(separatedBy: " ")[0])!
                     let distanciaFormatada = distancia["value"] as! Int
                     
-                    
-
-                    self.estimatePrices(startAddress: self.startAddress!, endAddress: self.endAddress!, device: [:], distance: distanciaFormatada, duration: duracaoFormatada)
-//                    self.checarPrecos(origem: self.dicOrigem, destino: self.dicDestino, device: [:], distancia: distanciaFormatada, duracao: duracaoFormatada)
-                    
-                    //                                        print("Duracao", duracaoFormatada)
-                    //                                        print("Distancia", distanciaFormatada)
-                    
+                    self.estimatePrices(startAddress: self.startAddress!, endAddress: self.endAddress!, distance: distanciaFormatada, duration: duracaoFormatada)
                 }
             }
         }
     }
     
-    func estimatePrices(startAddress : MBLocation, endAddress : MBLocation, device: [String : String], distance : Int, duration : Int){
+    func estimatePrices(startAddress : MBLocation, endAddress : MBLocation, distance : Int, duration : Int){
         
-        
+        MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, distance: distance, duration: duration, userId: MBUser.currentUser!.employeeId, companyId: MBUser.currentUser!.companyId)) { (result) in
 
-        MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, device: device, distance: distance, duration: duration, userId: MBUser.currentUser!.employeeId, companyId: MBUser.currentUser!.companyId)) { (result) in
-//
-//             MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, device: device, distance: distance, duration: duration, userId: 139, companyId: 3)) { (result) in
-        
             SwiftSpinner.hide()
             
             do{
-                
-                print(result)
                 switch(result){
                 case let .success(response):
                     
-//                    print(response)
-//                    print(String(data: response.data, encoding: .utf8))
-                     print(try result.value?.mapJSON())
                     let travels = try response.map([MBRide].self, atKeyPath: "records")
                     
                     self.searchResult = MBSearchResult(startAddress: startAddress, endAddress: endAddress, duration: duration, distance: distance, travels: travels)
@@ -249,17 +226,8 @@ class TelaInicialViewController: UIViewController {
                 }
                 
             }catch{
-                do{
-                    
-                        print(try result.value?.mapJSON())
-                }catch{}
                 
-                print("falhou")
             }
-            
-            
-            
-            
         }
         //passar user_id e company_id
         
@@ -605,8 +573,8 @@ extension TelaInicialViewController : MKMapViewDelegate{
                                                     self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
                                                     self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
                                                     self.dicOrigem.updateValue("\(firstLocation.postalCode ?? "00000000")", forKey: "zipcode")
-                                                    self.dicOrigem.updateValue("\(firstLocation.locality!)", forKey: "city")
-                                                    self.dicOrigem.updateValue("\(firstLocation.administrativeArea!)", forKey: "state")
+                                                    self.dicOrigem.updateValue("\(firstLocation.locality ?? "")", forKey: "city")
+                                                    self.dicOrigem.updateValue("\(firstLocation.administrativeArea ?? "")", forKey: "state")
                                                     
                                                     //                                                print(firstLocation.locality ?? "")
                                                     //                                                print(firstLocation.administrativeArea ?? "")
@@ -646,9 +614,7 @@ extension TelaInicialViewController : MKMapViewDelegate{
                 })
             
         }
-        
-        
-        
+
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
@@ -701,26 +667,16 @@ extension TelaInicialViewController : UITextFieldDelegate{
                 
                 if let _ = self {
                     
-//                    self?.dicOrigem = dicionarioEndereco
                     self?.startAddress = dicionarioEndereco
-                    
-                    print("========= DICIONARIO ENDERECO =======")
-                    print(dicionarioEndereco)
-                    print("========= DICIONARIO ENDERECO =======")
-//                    let lat = dicionarioEndereco["latitude"] as! CLLocationDegrees
-//                    let lng = dicionarioEndereco["longitude"] as! CLLocationDegrees
-                    
+
                     let lat = dicionarioEndereco.latitude
                     let lng = dicionarioEndereco.longitude
                     let location = CLLocation(latitude: lat, longitude: lng)
                     self?.mapView.setCenter(location.coordinate, animated: true)
-                    
-//                    self?.textFieldEnderecoOrigem.text = dicionarioEndereco["address"] as? String
                     self?.textFieldEnderecoOrigem.text = dicionarioEndereco.address
                 }
                 
             }
-            //            self.present(self.googlePlacesOrigem, animated: true)
             self.present(buscarEnderecoViewController, animated: true, completion: nil)
         }else if (textField == self.textFieldEnderecoDestino){
             
@@ -729,25 +685,12 @@ extension TelaInicialViewController : UITextFieldDelegate{
                 
                 if let _ = self {
                     
-//                    self?.dicDestino = dicionarioEndereco
-                    print("========= DICIONARIO ENDERECO 2 =======")
                     self?.endAddress = dicionarioEndereco
-                    print(dicionarioEndereco)
-                    print("========= DICIONARIO ENDERECO 2 =======")
-//                    let lat = dicionarioEndereco["latitude"] as! CLLocationDegrees
-//                    let lng = dicionarioEndereco["longitude"] as! CLLocationDegrees
-                    
-//                    let lat = dicionarioEndereco.latitude
-//                    let lng = dicionarioEndereco.longitude
-                    
-//                    self?.textFieldEnderecoDestino.text = dicionarioEndereco["address"] as? String
                     self?.textFieldEnderecoDestino.text = dicionarioEndereco.address
                 }
                 
             }
-            //            self.present(self.googlePlacesOrigem, animated: true)
             self.present(buscarEnderecoViewController, animated: true, completion: nil)
-            //            self.present(self.googlePlacesDestino, animated: true)
         }
         return false
         
