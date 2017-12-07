@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftSpinner
 
-class TMFavoritosAdicionarViewController: UIViewController {
+class MBFavoritosAdicionarViewController: UIViewController {
 
     //MARK: - Outlets
     @IBOutlet weak var txtFieldNomeEndereco: UITextField!
@@ -101,14 +101,14 @@ class TMFavoritosAdicionarViewController: UIViewController {
     
 }
 
-extension TMFavoritosAdicionarViewController : UITextFieldDelegate{
+extension MBFavoritosAdicionarViewController : UITextFieldDelegate{
     
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if(textField == self.txtFieldEndereco){
             
-            let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! TMBuscaEnderecoViewController
+            let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! MBBuscaEnderecoViewController
             buscarEnderecoViewController.selecionouEndereco = {[weak self] (dicionarioEndereco) in
                 
                 if let _ = self {

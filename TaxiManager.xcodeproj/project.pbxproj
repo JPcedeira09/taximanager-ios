@@ -24,7 +24,7 @@
 		116D1AD51FCDB5B600B0A477 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 116D1AD41FCDB5B600B0A477 /* GoogleService-Info.plist */; };
 		1177FBD61FA9A03000439913 /* TMBuscaEnderecoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1177FBD41FA9A03000439913 /* TMBuscaEnderecoCell.swift */; };
 		1177FBD71FA9A03000439913 /* TMBuscaEnderecoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1177FBD51FA9A03000439913 /* TMBuscaEnderecoCell.xib */; };
-		1177FBDA1FA9A55C00439913 /* TMFavoritosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1177FBD91FA9A55C00439913 /* TMFavoritosViewController.swift */; };
+		1177FBDA1FA9A55C00439913 /* MBFavoritosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1177FBD91FA9A55C00439913 /* MBFavoritosViewController.swift */; };
 		1177FBDC1FA9A8F500439913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1177FBDB1FA9A8F100439913 /* Assets.xcassets */; };
 		1177FBDF1FA9A92800439913 /* TMFavoritosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1177FBDD1FA9A92700439913 /* TMFavoritosCell.swift */; };
 		1177FBE01FA9A92800439913 /* TMFavoritosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1177FBDE1FA9A92800439913 /* TMFavoritosCell.xib */; };
@@ -32,7 +32,7 @@
 		117E24871F963DF90041DCB6 /* TMResultadoBuscaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117E24851F963DF90041DCB6 /* TMResultadoBuscaCell.swift */; };
 		117E24881F963DF90041DCB6 /* TMResultadoBuscaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */; };
 		118347891FA27C3400DB3C55 /* MBMenuLateralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118347881FA27C3400DB3C55 /* MBMenuLateralViewController.swift */; };
-		119847951FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */; };
+		119847951FB22F0700560E76 /* MBFavoritosAdicionarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119847941FB22F0700560E76 /* MBFavoritosAdicionarViewController.swift */; };
 		119BCD181F97A366004D92CB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD191F97A366004D92CB /* Alamofire.framework */; };
 		119BCD1A1F97A395004D92CB /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */; };
 		119BCD1C1F97A3FE004D92CB /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119BCD1D1F97A3FE004D92CB /* SideMenu.framework */; };
@@ -40,7 +40,7 @@
 		11BB9DC91FC749D600C60E9F /* MBTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BB9DC81FC749D600C60E9F /* MBTravel.swift */; };
 		11D5DBA81FD07D6500330AA9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D5DBA71FD07D6500330AA9 /* Reachability.m */; };
 		11DB571B1FA112B700A39486 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DB571A1FA112B700A39486 /* Extensions.swift */; };
-		11E88D1C1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */; };
+		11E88D1C1FA8D2C100C11196 /* MBBuscaEnderecoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E88D1B1FA8D2C100C11196 /* MBBuscaEnderecoViewController.swift */; };
 		11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E88D1D1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift */; };
 		11E88D201FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11E88D1E1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.xib */; };
 		11EB8D301F8D4CAE00D0FDE4 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EB8D1D1F8D4C8700D0FDE4 /* Poppins-Black.ttf */; };
@@ -111,7 +111,7 @@
 		116D1AD41FCDB5B600B0A477 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1177FBD41FA9A03000439913 /* TMBuscaEnderecoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBuscaEnderecoCell.swift; sourceTree = "<group>"; };
 		1177FBD51FA9A03000439913 /* TMBuscaEnderecoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMBuscaEnderecoCell.xib; sourceTree = "<group>"; };
-		1177FBD91FA9A55C00439913 /* TMFavoritosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TMFavoritosViewController.swift; path = ../TMFavoritosViewController.swift; sourceTree = "<group>"; };
+		1177FBD91FA9A55C00439913 /* MBFavoritosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MBFavoritosViewController.swift; path = ../MBFavoritosViewController.swift; sourceTree = "<group>"; };
 		1177FBDB1FA9A8F100439913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1177FBDD1FA9A92700439913 /* TMFavoritosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMFavoritosCell.swift; sourceTree = "<group>"; };
 		1177FBDE1FA9A92800439913 /* TMFavoritosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMFavoritosCell.xib; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 		117E24851F963DF90041DCB6 /* TMResultadoBuscaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMResultadoBuscaCell.swift; sourceTree = "<group>"; };
 		117E24861F963DF90041DCB6 /* TMResultadoBuscaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMResultadoBuscaCell.xib; sourceTree = "<group>"; };
 		118347881FA27C3400DB3C55 /* MBMenuLateralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBMenuLateralViewController.swift; sourceTree = "<group>"; };
-		119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMFavoritosAdicionarViewController.swift; sourceTree = "<group>"; };
+		119847941FB22F0700560E76 /* MBFavoritosAdicionarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBFavoritosAdicionarViewController.swift; sourceTree = "<group>"; };
 		119BCD191F97A366004D92CB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		119BCD1B1F97A395004D92CB /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		119BCD1D1F97A3FE004D92CB /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +130,7 @@
 		11D5DBA61FD07D6500330AA9 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		11D5DBA71FD07D6500330AA9 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		11DB571A1FA112B700A39486 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBuscaEnderecoViewController.swift; sourceTree = "<group>"; };
+		11E88D1B1FA8D2C100C11196 /* MBBuscaEnderecoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBBuscaEnderecoViewController.swift; sourceTree = "<group>"; };
 		11E88D1D1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMCustomTableViewHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		11E88D1E1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TMCustomTableViewHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		11EB8D1C1F8D4C8700D0FDE4 /* OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
@@ -277,9 +277,9 @@
 				11EC27371FCF45090046699C /* MBContactUsViewController.swift */,
 				11EE3E141FBB2933007918C6 /* PrimeiroLoginViewController.swift */,
 				11EE3E121FBB2672007918C6 /* RecuperarSenhaViewController.swift */,
-				119847941FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift */,
-				1177FBD91FA9A55C00439913 /* TMFavoritosViewController.swift */,
-				11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */,
+				119847941FB22F0700560E76 /* MBFavoritosAdicionarViewController.swift */,
+				1177FBD91FA9A55C00439913 /* MBFavoritosViewController.swift */,
+				11E88D1B1FA8D2C100C11196 /* MBBuscaEnderecoViewController.swift */,
 				11A552501F993F03006F9AB6 /* MBLoginViewController.swift */,
 				111C30FE1F8B067500EF37E3 /* TMTelaBuscaViewController.swift */,
 				118347881FA27C3400DB3C55 /* MBMenuLateralViewController.swift */,
@@ -689,7 +689,7 @@
 				11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */,
 				112830B11F884E3C000972CB /* AppDelegate.swift in Sources */,
 				117DBAA01FA24FA800A303E6 /* CustomUI.swift in Sources */,
-				11E88D1C1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift in Sources */,
+				11E88D1C1FA8D2C100C11196 /* MBBuscaEnderecoViewController.swift in Sources */,
 				1156BB481FA7C3D300C2DF4F /* TMHistoricoViewController.swift in Sources */,
 				111C30FF1F8B067500EF37E3 /* TMTelaBuscaViewController.swift in Sources */,
 				11A552511F993F03006F9AB6 /* MBLoginViewController.swift in Sources */,
@@ -701,10 +701,10 @@
 				111FB5E31FBF67C300578185 /* MBSearchResult.swift in Sources */,
 				11EE3E181FBB5CB5007918C6 /* MobiliteeProvider.swift in Sources */,
 				1177FBDF1FA9A92800439913 /* TMFavoritosCell.swift in Sources */,
-				1177FBDA1FA9A55C00439913 /* TMFavoritosViewController.swift in Sources */,
+				1177FBDA1FA9A55C00439913 /* MBFavoritosViewController.swift in Sources */,
 				11D5DBA81FD07D6500330AA9 /* Reachability.m in Sources */,
 				11EE3E131FBB2672007918C6 /* RecuperarSenhaViewController.swift in Sources */,
-				119847951FB22F0700560E76 /* TMFavoritosAdicionarViewController.swift in Sources */,
+				119847951FB22F0700560E76 /* MBFavoritosAdicionarViewController.swift in Sources */,
 				11EE3E1A1FBB6005007918C6 /* MBLocation.swift in Sources */,
 				11EC27381FCF45090046699C /* MBContactUsViewController.swift in Sources */,
 				113A4EEB1FBE01C8005D01FC /* MBPoi.swift in Sources */,

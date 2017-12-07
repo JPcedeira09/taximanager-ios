@@ -11,7 +11,7 @@ import GooglePlaces
 import Contacts
 import SwiftSpinner
 
-class TMBuscaEnderecoViewController: UIViewController {
+class MBBuscaEnderecoViewController: UIViewController {
     
     //MARK: - Outlets
     
@@ -113,7 +113,7 @@ class TMBuscaEnderecoViewController: UIViewController {
     
 }
 
-extension TMBuscaEnderecoViewController : GMSAutocompleteFetcherDelegate{
+extension MBBuscaEnderecoViewController : GMSAutocompleteFetcherDelegate{
     func didFailAutocompleteWithError(_ error: Error) {
         
         print(error.localizedDescription)
@@ -131,7 +131,7 @@ extension TMBuscaEnderecoViewController : GMSAutocompleteFetcherDelegate{
     
 }
 
-extension TMBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSource{
+extension MBBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -246,7 +246,7 @@ extension TMBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
     }
 }
 
-extension TMBuscaEnderecoViewController : UITextFieldDelegate{
+extension MBBuscaEnderecoViewController : UITextFieldDelegate{
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -257,7 +257,7 @@ extension TMBuscaEnderecoViewController : UITextFieldDelegate{
     
 }
 
-extension TMBuscaEnderecoViewController{
+extension MBBuscaEnderecoViewController{
     
     
     func resolverDidSelectPesquisa(){

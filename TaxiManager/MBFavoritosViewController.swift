@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class TMFavoritosViewController: UIViewController {
+class MBFavoritosViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -50,7 +50,7 @@ class TMFavoritosViewController: UIViewController {
 }
 
 
-extension TMFavoritosViewController : UITableViewDelegate, UITableViewDataSource{
+extension MBFavoritosViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

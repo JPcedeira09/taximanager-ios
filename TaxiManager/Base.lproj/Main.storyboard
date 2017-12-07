@@ -289,7 +289,7 @@
         <!--tmBuscaEndereco-->
         <scene sceneID="Ryl-mb-yVy">
             <objects>
-                <viewController storyboardIdentifier="tmBuscaEndereco" title="tmBuscaEndereco" id="MWT-To-EHD" customClass="TMBuscaEnderecoViewController" customModule="TaxiManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tmBuscaEndereco" title="tmBuscaEndereco" id="MWT-To-EHD" customClass="MBBuscaEnderecoViewController" customModule="TaxiManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WzQ-bL-0fG"/>
                         <viewControllerLayoutGuide type="bottom" id="wHz-U3-WgT"/>
@@ -323,7 +323,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buscar Endereço" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbq-ti-aKG">
-                                        <rect key="frame" x="35" y="68" width="152.5" height="25.5"/>
+                                        <rect key="frame" x="35" y="68" width="138.5" height="21"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -566,7 +566,7 @@
         <!--Favoritos View Controller-->
         <scene sceneID="zMQ-09-ePh">
             <objects>
-                <viewController id="vhC-eO-Uie" customClass="TMFavoritosViewController" customModule="TaxiManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vhC-eO-Uie" customClass="MBFavoritosViewController" customModule="TaxiManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PKd-1i-gmk"/>
                         <viewControllerLayoutGuide type="bottom" id="NhF-nv-a7f"/>
@@ -590,7 +590,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meus Favoritos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kw6-l3-fqf">
-                                        <rect key="frame" x="58" y="97.5" width="135.5" height="25.5"/>
+                                        <rect key="frame" x="58" y="99.5" width="124" height="21"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -903,7 +903,7 @@
         <!--Favoritos Adicionar View Controller-->
         <scene sceneID="hWs-ad-uiJ">
             <objects>
-                <viewController id="KUd-cO-1Kc" customClass="TMFavoritosAdicionarViewController" customModule="TaxiManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KUd-cO-1Kc" customClass="MBFavoritosAdicionarViewController" customModule="TaxiManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2il-qN-PE6"/>
                         <viewControllerLayoutGuide type="bottom" id="RoB-5K-Iat"/>
@@ -927,7 +927,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Novo favorito" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlF-Fn-WjP">
-                                        <rect key="frame" x="35" y="103" width="121.5" height="25.5"/>
+                                        <rect key="frame" x="35" y="103" width="108" height="21"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -943,31 +943,31 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do endereço" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzE-fZ-E89">
-                                <rect key="frame" x="28" y="163.5" width="319" height="15.5"/>
+                                <rect key="frame" x="28" y="163.5" width="319" height="13"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="11"/>
                                 <color key="textColor" red="0.66267138719999996" green="0.66278749699999995" blue="0.66266411540000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mac-iQ-gkB">
-                                <rect key="frame" x="28" y="187" width="319" height="30"/>
+                                <rect key="frame" x="28" y="184.5" width="319" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Endereço" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09q-Nu-adf">
-                                <rect key="frame" x="28" y="233" width="319" height="15.5"/>
+                                <rect key="frame" x="28" y="230.5" width="319" height="13"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="11"/>
                                 <color key="textColor" red="0.66267138719999996" green="0.66278749699999995" blue="0.66266411540000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nEz-O4-AIF">
-                                <rect key="frame" x="28" y="256.5" width="319" height="30"/>
+                                <rect key="frame" x="28" y="251.5" width="319" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSR-VG-yja">
-                                <rect key="frame" x="303" y="294" width="44" height="32"/>
+                                <rect key="frame" x="308" y="289" width="39" height="29"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                 <state key="normal" title="Salvar"/>
                                 <connections>
@@ -975,7 +975,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFQ-SY-Ng6">
-                                <rect key="frame" x="224" y="294" width="65" height="32"/>
+                                <rect key="frame" x="238" y="289" width="56" height="29"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                 <state key="normal" title="Cancelar">
                                     <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>

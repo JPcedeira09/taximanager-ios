@@ -26,7 +26,7 @@ class MBTelaBuscaViewController: UIViewController {
     @IBOutlet weak var tableViewResultado: UITableView!
     
     //MARK: - Propriedades
-//    var resumoBusca : ResumoBusca?
+    //    var resumoBusca : ResumoBusca?
     var searchResult : MBSearchResult?
     
     //MARK: - View Lifecycle
@@ -45,7 +45,7 @@ class MBTelaBuscaViewController: UIViewController {
         self.labelStartAddress.text = self.searchResult?.startAddress.address
         self.labelEndAddress.text = self.searchResult?.endAddress.address
         
-            }
+    }
     
     //MARK: - Metodos
     func setupHeader(){
@@ -65,12 +65,12 @@ class MBTelaBuscaViewController: UIViewController {
         let application = UIApplication.shared
         
         if let urlDeeplinkString = corrida.urlDeeplink,
-           let urlDeeplink = URL(string: urlDeeplinkString),
+            let urlDeeplink = URL(string: urlDeeplinkString),
             application.canOpenURL(urlDeeplink)
-           {
+        {
             
             Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,
-"uuid" : corrida.uuid])
+                                                            "uuid" : corrida.uuid])
             application.open(urlDeeplink)
         }else{
             let alert = SCLAlertView()
@@ -79,7 +79,7 @@ class MBTelaBuscaViewController: UIViewController {
                 
                 alert.addButton("Instalar agora", action: {
                     Analytics.logEvent("openStore", parameters: ["player" : corrida.name,
-                                                                    "uuid" : corrida.uuid])
+                                                                 "uuid" : corrida.uuid])
                     application.open(urlStore)
                 })
             }
@@ -88,7 +88,7 @@ class MBTelaBuscaViewController: UIViewController {
                 
                 alert.addButton("Solicitar carro", action: {
                     Analytics.logEvent("openWeb", parameters: ["player" : corrida.name,
-                                                                    "uuid" : corrida.uuid])
+                                                               "uuid" : corrida.uuid])
                     application.open(urlWeb)
                 })
             }

@@ -669,7 +669,7 @@ extension MBInitialViewViewController : UITextFieldDelegate{
         
         if(textField == self.textFieldEnderecoOrigem){
             
-            let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! TMBuscaEnderecoViewController
+            let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! MBBuscaEnderecoViewController
             buscarEnderecoViewController.selecionouEndereco = {[weak self] (dicionarioEndereco) in
                 
                 if let _ = self {
@@ -687,7 +687,7 @@ extension MBInitialViewViewController : UITextFieldDelegate{
             self.present(buscarEnderecoViewController, animated: true, completion: nil)
         }else if (textField == self.textFieldEnderecoDestino){
             
-            let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! TMBuscaEnderecoViewController
+            let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! MBBuscaEnderecoViewController
             buscarEnderecoViewController.selecionouEndereco = {[weak self] (dicionarioEndereco) in
                 
                 if let _ = self {
