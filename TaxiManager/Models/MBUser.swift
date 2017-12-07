@@ -10,6 +10,7 @@ import Foundation
 
 struct MBUser : Codable{
 
+    // Users infos.
     var username : String = ""
     var id : Int = 0
     var email : String = ""
@@ -21,10 +22,15 @@ struct MBUser : Codable{
     var employeeId: Int = 0
     var firstAccessAt : String?
     
+    // POIS & Adress infos.
     var pois : [MBPoi]?
     var bookmarks : [MBBookmark]?
     var recents : [MBAddress]?
     var history : [MBTravel]?
+    
+    // status employee.
+    var statusID: Int = 0
+    var statusDescription: String = ""
     
     static var currentUser : MBUser?
     
@@ -49,6 +55,11 @@ struct MBUser : Codable{
     
         let companyObj = company["company"] as? [String : Any] ?? [:]
         self.companyId = companyObj["id"] as? Int ?? 0
+        
+        let statusObj = userDictionary["status"] as? [String:Any] ?? [:]
+        self.statusID = statusObj["id"] as? Int ?? 0
+        self.statusDescription = statusObj["description"] as? String ?? ""
+        
         MBUser.currentUser = self
         
         

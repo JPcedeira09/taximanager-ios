@@ -2,7 +2,7 @@
 //  TaxiManagerUITests.swift
 //  TaxiManagerUITests
 //
-//  Created by Esdras Martins on 18/10/17.
+//  Created by Joao Paulo on 07/12/17.
 //  Copyright © 2017 Taxi Manager. All rights reserved.
 //
 
@@ -31,25 +31,6 @@ class TaxiManagerUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        let app = XCUIApplication()
-        let textField = app.textFields["telaInicialTextFieldOrigem"]
-        textField.tap()
-        let searchSearchField = app.navigationBars["searchBar"].searchFields["Search"]
-        searchSearchField.tap()
-        searchSearchField.typeText("Avenida Paulista, 1374")
-        
-        let tablesQuery = app.tables
-        tablesQuery.children(matching: .cell).element(boundBy: 0).staticTexts["Avenida Paulista, 1374"].tap()
-        searchSearchField.tap()
-        
-        let gaUnitedStatesStaticText = tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["GA, United States"]/*[[".cells.staticTexts[\"GA, United States\"]",".staticTexts[\"GA, United States\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        gaUnitedStatesStaticText.tap()
-        gaUnitedStatesStaticText.tap()
-        searchSearchField.typeText("Avenida Ibirapuera")
-        
-                                
-        
     }
     
 }

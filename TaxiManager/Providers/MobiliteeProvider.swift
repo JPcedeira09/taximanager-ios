@@ -2,7 +2,6 @@
 //  MobiliteeEstimate.swift
 //  TaxiManager
 //
-//  Created by Esdras Martins on 14/11/17.
 //  Copyright © 2017 Taxi Manager. All rights reserved.
 //
 

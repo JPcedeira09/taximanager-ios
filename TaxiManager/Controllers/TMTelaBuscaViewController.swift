@@ -2,7 +2,6 @@
 //  TelaBuscaViewController.swift
 //  TaxiManager
 //
-//  Created by Esdras Martins on 08/10/17.
 //  Copyright © 2017 Taxi Manager. All rights reserved.
 //
 
@@ -14,8 +13,7 @@ import Alamofire
 import SCLAlertView
 import FirebaseAnalytics
 
-
-class TelaBuscaViewController: UIViewController {
+class MBTelaBuscaViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var textFieldPontoOrigem: UITextField!
@@ -48,12 +46,9 @@ class TelaBuscaViewController: UIViewController {
         self.labelStartAddress.text = self.searchResult?.startAddress.address
         self.labelEndAddress.text = self.searchResult?.endAddress.address
         
-
-        
-    }
+            }
     
     //MARK: - Metodos
-    
     func setupHeader(){
         
         //Setup imagem taximanager
@@ -76,9 +71,8 @@ class TelaBuscaViewController: UIViewController {
            {
             
             Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,
-                                                            "uuid" : corrida.uuid])
+"uuid" : corrida.uuid])
             application.open(urlDeeplink)
-        
         }else{
             let alert = SCLAlertView()
             
@@ -109,7 +103,7 @@ class TelaBuscaViewController: UIViewController {
     }
 }
 
-extension TelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
+extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

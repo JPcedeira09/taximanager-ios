@@ -31,10 +31,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let currentUser = UserDefaults.standard.value(forKey: "user")
         if let currentUser = currentUser as? Data{
-           
-            MBUser.currentUser = try? JSONDecoder().decode(MBUser.self, from: currentUser) as MBUser
             
-            if let _ = MBUser.currentUser?.firstAccessAt{
+            print("TEM USUARIO LOGADO")
+            MBUser.currentUser = try? JSONDecoder().decode(MBUser.self, from: currentUser) as MBUser
+            let user = MBUser.currentUser
+            
+            if (user?.statusID == 2){
+                print("usuario com status 2")
+                MBUser.logout()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier :"MBLoginViewController")
+                self.window?.rootViewController = viewController
+                
+            }else if (user?.statusID == 3){
+                print("usuario com status 3")
+                MBUser.logout()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier :"MBLoginViewController")
+                self.window?.rootViewController = viewController
+                
+            } else if let _ = MBUser.currentUser?.firstAccessAt{
                 MBUser.update()
                 
                 Analytics.setUserProperty(MBUser.currentUser!.fullName, forName: "name")
@@ -45,9 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController = viewController
             }
         }
-    
+        print("NÃO TEM USUARIO")
         return true
     }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
