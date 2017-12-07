@@ -73,6 +73,7 @@
 		6C7B5A3B1FD96DD200207F66 /* TaxiManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A3A1FD96DD200207F66 /* TaxiManagerUITests.swift */; };
 		6C7B5A431FD9765700207F66 /* MBContactViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A421FD9765700207F66 /* MBContactViewcontroller.swift */; };
 		6C7B5A451FD9804E00207F66 /* MBInitialViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */; };
+		6C7B5A471FD988EA00207F66 /* MBPlayeyChoose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A461FD988EA00207F66 /* MBPlayeyChoose.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +171,7 @@
 		6C7B5A3C1FD96DD200207F66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C7B5A421FD9765700207F66 /* MBContactViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBContactViewcontroller.swift; sourceTree = "<group>"; };
 		6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBInitialViewViewController.swift; sourceTree = "<group>"; };
+		6C7B5A461FD988EA00207F66 /* MBPlayeyChoose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBPlayeyChoose.swift; sourceTree = "<group>"; };
 		85CB8ACC30F5206867D086CF /* Pods-TaxiManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.release.xcconfig"; sourceTree = "<group>"; };
 		EB9C0688FB86992E2886AE4A /* Pods_TaxiManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaxiManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -266,6 +268,7 @@
 				111FB5E21FBF67C300578185 /* MBSearchResult.swift */,
 				111FB5E01FBF3A5000578185 /* MBRide.swift */,
 				11BB9DC81FC749D600C60E9F /* MBTravel.swift */,
+				6C7B5A461FD988EA00207F66 /* MBPlayeyChoose.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */,
 				11EE3E1C1FBB6150007918C6 /* MBDevice.swift in Sources */,
 				11DB571B1FA112B700A39486 /* Extensions.swift in Sources */,
+				6C7B5A471FD988EA00207F66 /* MBPlayeyChoose.swift in Sources */,
 				6C7B5A451FD9804E00207F66 /* MBInitialViewViewController.swift in Sources */,
 				11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */,
 				112830B11F884E3C000972CB /* AppDelegate.swift in Sources */,

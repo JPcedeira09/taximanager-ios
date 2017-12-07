@@ -33,8 +33,6 @@ class MBBuscaEnderecoViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
-        
         if let recents = MBUser.currentUser?.recents{
             self.arrayRecentes = recents
         }

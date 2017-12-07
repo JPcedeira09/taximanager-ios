@@ -129,16 +129,13 @@ extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource
             }
             task.resume()
         }
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let corrida = self.searchResult!.travels[indexPath.row]
-        
         print(corrida)
-        
         self.checarAcoesCorrida(corrida: corrida)
         
     }
