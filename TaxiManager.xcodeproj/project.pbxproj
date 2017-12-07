@@ -14,7 +14,6 @@
 		111FB5E11FBF3A5000578185 /* MBRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111FB5E01FBF3A5000578185 /* MBRide.swift */; };
 		111FB5E31FBF67C300578185 /* MBSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111FB5E21FBF67C300578185 /* MBSearchResult.swift */; };
 		112830B11F884E3C000972CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112830B01F884E3C000972CB /* AppDelegate.swift */; };
-		112830B31F884E3C000972CB /* MBTelaInicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112830B21F884E3C000972CB /* MBTelaInicialViewController.swift */; };
 		112830B61F884E3C000972CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112830B41F884E3C000972CB /* Main.storyboard */; };
 		112830BB1F884E3C000972CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112830B91F884E3C000972CB /* LaunchScreen.storyboard */; };
 		113A4EE91FBDFFB5005D01FC /* MBBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113A4EE81FBDFFB5005D01FC /* MBBookmark.swift */; };
@@ -73,6 +72,7 @@
 		6C7B5A2D1FD96DC800207F66 /* TaxiManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A2C1FD96DC800207F66 /* TaxiManagerTests.swift */; };
 		6C7B5A3B1FD96DD200207F66 /* TaxiManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A3A1FD96DD200207F66 /* TaxiManagerUITests.swift */; };
 		6C7B5A431FD9765700207F66 /* MBContactViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A421FD9765700207F66 /* MBContactViewcontroller.swift */; };
+		6C7B5A451FD9804E00207F66 /* MBInitialViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +100,6 @@
 		111FB5E21FBF67C300578185 /* MBSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSearchResult.swift; sourceTree = "<group>"; };
 		112830AD1F884E3C000972CB /* TaxiManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaxiManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		112830B01F884E3C000972CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		112830B21F884E3C000972CB /* MBTelaInicialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTelaInicialViewController.swift; sourceTree = "<group>"; };
 		112830B51F884E3C000972CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		112830BA1F884E3C000972CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		112830BC1F884E3C000972CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -170,6 +169,7 @@
 		6C7B5A3A1FD96DD200207F66 /* TaxiManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiManagerUITests.swift; sourceTree = "<group>"; };
 		6C7B5A3C1FD96DD200207F66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C7B5A421FD9765700207F66 /* MBContactViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBContactViewcontroller.swift; sourceTree = "<group>"; };
+		6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBInitialViewViewController.swift; sourceTree = "<group>"; };
 		85CB8ACC30F5206867D086CF /* Pods-TaxiManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.release.xcconfig"; sourceTree = "<group>"; };
 		EB9C0688FB86992E2886AE4A /* Pods_TaxiManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaxiManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -281,10 +281,10 @@
 				1177FBD91FA9A55C00439913 /* TMFavoritosViewController.swift */,
 				11E88D1B1FA8D2C100C11196 /* TMBuscaEnderecoViewController.swift */,
 				11A552501F993F03006F9AB6 /* MBLoginViewController.swift */,
-				112830B21F884E3C000972CB /* MBTelaInicialViewController.swift */,
 				111C30FE1F8B067500EF37E3 /* TMTelaBuscaViewController.swift */,
 				118347881FA27C3400DB3C55 /* MBMenuLateralViewController.swift */,
 				1156BB471FA7C3D300C2DF4F /* TMHistoricoViewController.swift */,
+				6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -683,9 +683,9 @@
 				11EE3E231FBB86D0007918C6 /* MBUser.swift in Sources */,
 				11BB9DC91FC749D600C60E9F /* MBTravel.swift in Sources */,
 				11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */,
-				112830B31F884E3C000972CB /* MBTelaInicialViewController.swift in Sources */,
 				11EE3E1C1FBB6150007918C6 /* MBDevice.swift in Sources */,
 				11DB571B1FA112B700A39486 /* Extensions.swift in Sources */,
+				6C7B5A451FD9804E00207F66 /* MBInitialViewViewController.swift in Sources */,
 				11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */,
 				112830B11F884E3C000972CB /* AppDelegate.swift in Sources */,
 				117DBAA01FA24FA800A303E6 /* CustomUI.swift in Sources */,

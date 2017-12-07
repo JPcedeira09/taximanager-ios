@@ -19,7 +19,6 @@ class MBTelaBuscaViewController: UIViewController {
     @IBOutlet weak var textFieldPontoOrigem: UITextField!
     @IBOutlet weak var textFieldPontoDestino: UITextField!
     
-    
     @IBOutlet weak var labelStartAddress: UILabel!
     @IBOutlet weak var labelEndAddress: UILabel!
     @IBOutlet weak var labelDistancia: UILabel!
@@ -97,8 +96,6 @@ class MBTelaBuscaViewController: UIViewController {
             alert.showInfo("Você não possui o aplicativo instalado", subTitle: "", closeButtonTitle: "Cancelar", colorStyle: 0x242424)
             
         }
-        
-        
         
     }
 }

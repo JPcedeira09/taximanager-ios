@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  MBInitialViewViewController.swift
 //  TaxiManager
 //
-//  Created by Esdras Martins on 06/10/17.
+//  Created by Joao Paulo on 07/12/17.
 //  Copyright © 2017 Taxi Manager. All rights reserved.
 //
 
@@ -21,9 +21,8 @@ import Crashlytics
 //fddaea8c38c5d8cee66a234b2f812baa
 //api.openweathermap.org/data/2.5/weather?lat=35&lon=139
 
-class TelaInicialViewController: UIViewController {
-    
-    
+class MBInitialViewViewController: UIViewController {
+
     //MARK: - Outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var imageViewPin: UIImageView!
@@ -64,7 +63,7 @@ class TelaInicialViewController: UIViewController {
         //Textfield
         self.textFieldEnderecoOrigem.delegate = self
         self.textFieldEnderecoDestino.delegate = self
-    
+        
         let imageView = UIImageView(image: #imageLiteral(resourceName: "logotipo_fundo_preto.png"))
         imageView.contentMode = .scaleAspectFit
         
@@ -76,6 +75,12 @@ class TelaInicialViewController: UIViewController {
         self.setupTextFieldOrigem()
         self.atualizarLabelData()
         
+        // User Defaults
+        let currentUser = UserDefaults.standard.value(forKey: "user")
+        if let currentUser = currentUser as? Data{
+            let usuarioInside = try? JSONDecoder().decode(MBUser.self, from: currentUser) as? MBUser
+            print("Usuario inside: \(usuarioInside)")
+        }
     }
     
     @objc func localizarUsuario(){
@@ -113,6 +118,8 @@ class TelaInicialViewController: UIViewController {
             }
         })
         
+        
+        
     }
     
     
@@ -142,9 +149,9 @@ class TelaInicialViewController: UIViewController {
         
         if(segue.identifier == "segueTelaBusca"){
             
-            let buscaViewController = segue.destination as! TelaBuscaViewController
+            let buscaViewController = segue.destination as! MBTelaBuscaViewController
             
-//            buscaViewController.resumoBusca = self.resumoBusca
+            //            buscaViewController.resumoBusca = self.resumoBusca
             buscaViewController.searchResult = self.searchResult
         }
     }
@@ -209,7 +216,7 @@ class TelaInicialViewController: UIViewController {
     func estimatePrices(startAddress : MBLocation, endAddress : MBLocation, distance : Int, duration : Int){
         
         MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, distance: distance, duration: duration, userId: MBUser.currentUser!.employeeId, companyId: MBUser.currentUser!.companyId)) { (result) in
-
+            
             SwiftSpinner.hide()
             
             do{
@@ -231,302 +238,302 @@ class TelaInicialViewController: UIViewController {
         }
         //passar user_id e company_id
         
-//        let employeeId = MBUser.currentUser!.employeeId
-//        let companyId = MBUser.currentUser!.companyId
-//
-//
-//        do
-//        {
-//
-//            let parametros = ["device" : device, "start" : try startAddress.asDictionary(), "end" : try endAddress.asDictionary(), "distance" : distance , "duration" : duration, "company_id" : companyId, "user_id" : employeeId] as [String : Any]
-//
-//            let url = URL(string: "http://estimate.taximanager.com.br/v1/estimates")!
-//            let autorizationKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTAwMzM4MjU0fQ.B2Nch63Zu0IzJDepVTDXqq8ydbIVDiUmU6vV_7eQocw"
-//
-//            let body = try JSONSerialization.data(withJSONObject: parametros)
-//
-////            print("XXXXXXXXXXXXXXXXXXX")
-////
-////            print(parametros)
-////
-////            print("XXXXXXXXXXXXXXXXXXX")
-//            var request = URLRequest(url: url)
-//            request.httpMethod = "POST"
-//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//            request.setValue(autorizationKey, forHTTPHeaderField: "Authorization")
-//            request.httpBody = body
-//            let session = URLSession.shared
-//            let task = session.dataTask(with: request){
-//                (data, response, error) in
-//
-//                SwiftSpinner.hide()
-//                if(error == nil){
-//
-//                    print(String(data: data! ,encoding: .utf8))
-//
-//                    do{
-//                        let jsonData = try JSONSerialization.jsonObject(with: data!, options: []) as! [String : AnyObject]
-//
-//                        let origem = jsonData["start"] as! [String : AnyObject]
-//                        let destino = jsonData["end"] as! [String : AnyObject]
-//
-//                        guard let endOrigem = origem["address"] as! String? else {
-//                            print("falhou end origem")
-//                            return
-//                        }
-//
-//                        guard let endDestino = destino["address"] as! String? else {
-//                            print("falhou end destino")
-//                            return
-//                        }
-//
-//                        guard let records = jsonData["records"] as? [[String : AnyObject]] else {
-//
-//                            let alerta = SCLAlertView()
-//                            alerta.showInfo("Ops!", subTitle: "Não conseguimos encontrar motoristas para estes endereços.")
-//                            return
-//                        }
-//
-//                        var arrayCorridas : [Corrida] = []
-//
-//                        for record in records{
-//
-//                            var novaCorrida = Corrida()
-//
-//                            if let alertMessage = record["alert_message"] as? String{
-//                                novaCorrida.alertMessage = alertMessage
-//                            }
-//
-//                            if let id = record["id"] as? Int {
-//                                novaCorrida.id = id
-//                            }
-//                            if let name = record["name"] as? String{
-//
-//                                novaCorrida.name = name
-//                            }
-//
-//                            if let modality = record["modality"] as? [String : AnyObject]{
-//
-//                                if let name = modality["name"] as? String{
-//
-//                                    novaCorrida.modalityName = name
-//                                }
-//                            }
-//
-//                            if let price = record["price"] as? String {
-//
-//                                novaCorrida.price = price
-//                            }
-//
-//                            if let waitingTime = record["waiting_time"] as? Int{
-//
-//                                novaCorrida.waitingTime = waitingTime
-//                            }
-//
-//                            if let urlDeepLinkString = record["url"] as? String{
-//
-//                                novaCorrida.urlDeeplink = URL(string: urlDeepLinkString)
-//                            }
-//
-//                            if let urlLogoString = record["url_logo"] as? String{
-//
-//                                novaCorrida.urlLogo = URL(string: urlLogoString)
-//                            }
-//
-//                            if let urlLojaString = record["url_loja_ios"] as? String{
-//
-//                                novaCorrida.urlLoja = URL(string: urlLojaString)
-//                            }
-//
-//                            if let urlWebString = record["url_web"] as? String{
-//
-//                                novaCorrida.urlWeb = URL(string: urlWebString)
-//                            }
-//
-//
-//                            arrayCorridas.append(novaCorrida)
-//
-//                        }
-//
-//                        let resumo = ResumoBusca(enderecoOrigem: endOrigem, enderecoDestino: endDestino, duracaoCorrida: duration, distanciaCorrida: distance, arrayCorridas: arrayCorridas)
-//
-//                        self.resumoBusca = resumo
-//                        print("========== RESUMO =========")
-//                        print(resumo)
-//                        DispatchQueue.main.sync {
-//                            self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
-//                        }
-//
-//
-//
-//
-//                    }catch{
-//
-//                        //                        let alerta = SCLAlertView()
-//                        //                        alerta.showInfo("Não enco", subTitle: <#T##String#>)
-//                        print("NAO DEU CERTO PEGAR O NEGOCIO")
-//                    }
-//
-//                }
-//            }
-//
-//            task.resume()
-//
-//
-//        }catch{}
-//
+        //        let employeeId = MBUser.currentUser!.employeeId
+        //        let companyId = MBUser.currentUser!.companyId
+        //
+        //
+        //        do
+        //        {
+        //
+        //            let parametros = ["device" : device, "start" : try startAddress.asDictionary(), "end" : try endAddress.asDictionary(), "distance" : distance , "duration" : duration, "company_id" : companyId, "user_id" : employeeId] as [String : Any]
+        //
+        //            let url = URL(string: "http://estimate.taximanager.com.br/v1/estimates")!
+        //            let autorizationKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTAwMzM4MjU0fQ.B2Nch63Zu0IzJDepVTDXqq8ydbIVDiUmU6vV_7eQocw"
+        //
+        //            let body = try JSONSerialization.data(withJSONObject: parametros)
+        //
+        ////            print("XXXXXXXXXXXXXXXXXXX")
+        ////
+        ////            print(parametros)
+        ////
+        ////            print("XXXXXXXXXXXXXXXXXXX")
+        //            var request = URLRequest(url: url)
+        //            request.httpMethod = "POST"
+        //            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //            request.setValue(autorizationKey, forHTTPHeaderField: "Authorization")
+        //            request.httpBody = body
+        //            let session = URLSession.shared
+        //            let task = session.dataTask(with: request){
+        //                (data, response, error) in
+        //
+        //                SwiftSpinner.hide()
+        //                if(error == nil){
+        //
+        //                    print(String(data: data! ,encoding: .utf8))
+        //
+        //                    do{
+        //                        let jsonData = try JSONSerialization.jsonObject(with: data!, options: []) as! [String : AnyObject]
+        //
+        //                        let origem = jsonData["start"] as! [String : AnyObject]
+        //                        let destino = jsonData["end"] as! [String : AnyObject]
+        //
+        //                        guard let endOrigem = origem["address"] as! String? else {
+        //                            print("falhou end origem")
+        //                            return
+        //                        }
+        //
+        //                        guard let endDestino = destino["address"] as! String? else {
+        //                            print("falhou end destino")
+        //                            return
+        //                        }
+        //
+        //                        guard let records = jsonData["records"] as? [[String : AnyObject]] else {
+        //
+        //                            let alerta = SCLAlertView()
+        //                            alerta.showInfo("Ops!", subTitle: "Não conseguimos encontrar motoristas para estes endereços.")
+        //                            return
+        //                        }
+        //
+        //                        var arrayCorridas : [Corrida] = []
+        //
+        //                        for record in records{
+        //
+        //                            var novaCorrida = Corrida()
+        //
+        //                            if let alertMessage = record["alert_message"] as? String{
+        //                                novaCorrida.alertMessage = alertMessage
+        //                            }
+        //
+        //                            if let id = record["id"] as? Int {
+        //                                novaCorrida.id = id
+        //                            }
+        //                            if let name = record["name"] as? String{
+        //
+        //                                novaCorrida.name = name
+        //                            }
+        //
+        //                            if let modality = record["modality"] as? [String : AnyObject]{
+        //
+        //                                if let name = modality["name"] as? String{
+        //
+        //                                    novaCorrida.modalityName = name
+        //                                }
+        //                            }
+        //
+        //                            if let price = record["price"] as? String {
+        //
+        //                                novaCorrida.price = price
+        //                            }
+        //
+        //                            if let waitingTime = record["waiting_time"] as? Int{
+        //
+        //                                novaCorrida.waitingTime = waitingTime
+        //                            }
+        //
+        //                            if let urlDeepLinkString = record["url"] as? String{
+        //
+        //                                novaCorrida.urlDeeplink = URL(string: urlDeepLinkString)
+        //                            }
+        //
+        //                            if let urlLogoString = record["url_logo"] as? String{
+        //
+        //                                novaCorrida.urlLogo = URL(string: urlLogoString)
+        //                            }
+        //
+        //                            if let urlLojaString = record["url_loja_ios"] as? String{
+        //
+        //                                novaCorrida.urlLoja = URL(string: urlLojaString)
+        //                            }
+        //
+        //                            if let urlWebString = record["url_web"] as? String{
+        //
+        //                                novaCorrida.urlWeb = URL(string: urlWebString)
+        //                            }
+        //
+        //
+        //                            arrayCorridas.append(novaCorrida)
+        //
+        //                        }
+        //
+        //                        let resumo = ResumoBusca(enderecoOrigem: endOrigem, enderecoDestino: endDestino, duracaoCorrida: duration, distanciaCorrida: distance, arrayCorridas: arrayCorridas)
+        //
+        //                        self.resumoBusca = resumo
+        //                        print("========== RESUMO =========")
+        //                        print(resumo)
+        //                        DispatchQueue.main.sync {
+        //                            self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
+        //                        }
+        //
+        //
+        //
+        //
+        //                    }catch{
+        //
+        //                        //                        let alerta = SCLAlertView()
+        //                        //                        alerta.showInfo("Não enco", subTitle: <#T##String#>)
+        //                        print("NAO DEU CERTO PEGAR O NEGOCIO")
+        //                    }
+        //
+        //                }
+        //            }
+        //
+        //            task.resume()
+        //
+        //
+        //        }catch{}
+        //
         
     }
-
-//    func checarPrecos(origem : [String : Any], destino : [String : Any], device: [String : String], distancia : Int, duracao : Int){
-//
-//        //passar user_id e company_id
-//
-//        let idUsuario = UserDefaults.standard.value(forKey: "idUsuario") as! Int
-//        let idEmpresa = UserDefaults.standard.value(forKey: "idEmpresa") as! Int
-//
-//
-//        let parametros = ["device" : device, "start" : origem, "end" : destino, "distance" : distancia , "duration" : duracao, "company_id" : idEmpresa, "user_id" : idUsuario] as [String : Any]
-//
-//        let url = URL(string: "http://estimate.taximanager.com.br/v1/estimates")!
-//        let autorizationKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTAwMzM4MjU0fQ.B2Nch63Zu0IzJDepVTDXqq8ydbIVDiUmU6vV_7eQocw"
-//        do
-//        {
-//
-//
-//            let body = try JSONSerialization.data(withJSONObject: parametros)
-//
-//            print("XXXXXXXXXXXXXXXXXXX")
-//
-//            print(parametros)
-//
-//            print("XXXXXXXXXXXXXXXXXXX")
-//            var request = URLRequest(url: url)
-//            request.httpMethod = "POST"
-//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//            request.setValue(autorizationKey, forHTTPHeaderField: "Authorization")
-//            request.httpBody = body
-//            let session = URLSession.shared
-//            let task = session.dataTask(with: request){
-//                (data, response, error) in
-//
-//                SwiftSpinner.hide()
-//                if(error == nil){
-//
-//
-//                    do{
-//                        let jsonData = try JSONSerialization.jsonObject(with: data!, options: []) as! [String : AnyObject]
-//
-//                        let origem = jsonData["start"] as! [String : AnyObject]
-//                        let destino = jsonData["end"] as! [String : AnyObject]
-//
-//                        guard let endOrigem = origem["address"] as! String? else {
-//                            print("falhou end origem")
-//                            return
-//                        }
-//
-//                        guard let endDestino = destino["address"] as! String? else {
-//                            print("falhou end destino")
-//                            return
-//                        }
-//
-//                        guard let records = jsonData["records"] as? [[String : AnyObject]] else {
-//
-//                            let alerta = SCLAlertView()
-//                            alerta.showInfo("Ops!", subTitle: "Não conseguimos encontrar motoristas para estes endereços.")
-//                            return
-//                        }
-//
-//                        var arrayCorridas : [Corrida] = []
-//
-//                        for record in records{
-//
-//                            var novaCorrida = Corrida()
-//
-//                            if let alertMessage = record["alert_message"] as? String{
-//                                novaCorrida.alertMessage = alertMessage
-//                            }
-//
-//                            if let id = record["id"] as? Int {
-//                                novaCorrida.id = id
-//                            }
-//                            if let name = record["name"] as? String{
-//
-//                                novaCorrida.name = name
-//                            }
-//
-//                            if let modality = record["modality"] as? [String : AnyObject]{
-//
-//                                if let name = modality["name"] as? String{
-//
-//                                    novaCorrida.modalityName = name
-//                                }
-//                            }
-//
-//                            if let price = record["price"] as? String {
-//
-//                                novaCorrida.price = price
-//                            }
-//
-//                            if let waitingTime = record["waiting_time"] as? Int{
-//
-//                                novaCorrida.waitingTime = waitingTime
-//                            }
-//
-//                            if let urlDeepLinkString = record["url"] as? String{
-//
-//                                novaCorrida.urlDeeplink = URL(string: urlDeepLinkString)
-//                            }
-//
-//                            if let urlLogoString = record["url_logo"] as? String{
-//
-//                                novaCorrida.urlLogo = URL(string: urlLogoString)
-//                            }
-//
-//                            if let urlLojaString = record["url_loja_ios"] as? String{
-//
-//                                novaCorrida.urlLoja = URL(string: urlLojaString)
-//                            }
-//
-//                            if let urlWebString = record["url_web"] as? String{
-//
-//                                novaCorrida.urlWeb = URL(string: urlWebString)
-//                            }
-//
-//
-//                            arrayCorridas.append(novaCorrida)
-//
-//                        }
-//
-//                        let resumo = ResumoBusca(enderecoOrigem: endOrigem, enderecoDestino: endDestino, duracaoCorrida: duracao, distanciaCorrida: distancia, arrayCorridas: arrayCorridas)
-//
-//                        self.resumoBusca = resumo
-//                        print("========== RESUMO =========")
-//                        print(resumo)
-//                        DispatchQueue.main.sync {
-//                            self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
-//                        }
-//
-//
-//
-//
-//                    }catch{
-//
-////                        let alerta = SCLAlertView()
-////                        alerta.showInfo("Não enco", subTitle: <#T##String#>)
-//                        print("NAO DEU CERTO PEGAR O NEGOCIO")
-//                    }
-//
-//                }
-//            }
-//
-//            task.resume()
-//
-//
-//        }catch{}
-//
-//
-//    }
+    
+    //    func checarPrecos(origem : [String : Any], destino : [String : Any], device: [String : String], distancia : Int, duracao : Int){
+    //
+    //        //passar user_id e company_id
+    //
+    //        let idUsuario = UserDefaults.standard.value(forKey: "idUsuario") as! Int
+    //        let idEmpresa = UserDefaults.standard.value(forKey: "idEmpresa") as! Int
+    //
+    //
+    //        let parametros = ["device" : device, "start" : origem, "end" : destino, "distance" : distancia , "duration" : duracao, "company_id" : idEmpresa, "user_id" : idUsuario] as [String : Any]
+    //
+    //        let url = URL(string: "http://estimate.taximanager.com.br/v1/estimates")!
+    //        let autorizationKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTAwMzM4MjU0fQ.B2Nch63Zu0IzJDepVTDXqq8ydbIVDiUmU6vV_7eQocw"
+    //        do
+    //        {
+    //
+    //
+    //            let body = try JSONSerialization.data(withJSONObject: parametros)
+    //
+    //            print("XXXXXXXXXXXXXXXXXXX")
+    //
+    //            print(parametros)
+    //
+    //            print("XXXXXXXXXXXXXXXXXXX")
+    //            var request = URLRequest(url: url)
+    //            request.httpMethod = "POST"
+    //            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    //            request.setValue(autorizationKey, forHTTPHeaderField: "Authorization")
+    //            request.httpBody = body
+    //            let session = URLSession.shared
+    //            let task = session.dataTask(with: request){
+    //                (data, response, error) in
+    //
+    //                SwiftSpinner.hide()
+    //                if(error == nil){
+    //
+    //
+    //                    do{
+    //                        let jsonData = try JSONSerialization.jsonObject(with: data!, options: []) as! [String : AnyObject]
+    //
+    //                        let origem = jsonData["start"] as! [String : AnyObject]
+    //                        let destino = jsonData["end"] as! [String : AnyObject]
+    //
+    //                        guard let endOrigem = origem["address"] as! String? else {
+    //                            print("falhou end origem")
+    //                            return
+    //                        }
+    //
+    //                        guard let endDestino = destino["address"] as! String? else {
+    //                            print("falhou end destino")
+    //                            return
+    //                        }
+    //
+    //                        guard let records = jsonData["records"] as? [[String : AnyObject]] else {
+    //
+    //                            let alerta = SCLAlertView()
+    //                            alerta.showInfo("Ops!", subTitle: "Não conseguimos encontrar motoristas para estes endereços.")
+    //                            return
+    //                        }
+    //
+    //                        var arrayCorridas : [Corrida] = []
+    //
+    //                        for record in records{
+    //
+    //                            var novaCorrida = Corrida()
+    //
+    //                            if let alertMessage = record["alert_message"] as? String{
+    //                                novaCorrida.alertMessage = alertMessage
+    //                            }
+    //
+    //                            if let id = record["id"] as? Int {
+    //                                novaCorrida.id = id
+    //                            }
+    //                            if let name = record["name"] as? String{
+    //
+    //                                novaCorrida.name = name
+    //                            }
+    //
+    //                            if let modality = record["modality"] as? [String : AnyObject]{
+    //
+    //                                if let name = modality["name"] as? String{
+    //
+    //                                    novaCorrida.modalityName = name
+    //                                }
+    //                            }
+    //
+    //                            if let price = record["price"] as? String {
+    //
+    //                                novaCorrida.price = price
+    //                            }
+    //
+    //                            if let waitingTime = record["waiting_time"] as? Int{
+    //
+    //                                novaCorrida.waitingTime = waitingTime
+    //                            }
+    //
+    //                            if let urlDeepLinkString = record["url"] as? String{
+    //
+    //                                novaCorrida.urlDeeplink = URL(string: urlDeepLinkString)
+    //                            }
+    //
+    //                            if let urlLogoString = record["url_logo"] as? String{
+    //
+    //                                novaCorrida.urlLogo = URL(string: urlLogoString)
+    //                            }
+    //
+    //                            if let urlLojaString = record["url_loja_ios"] as? String{
+    //
+    //                                novaCorrida.urlLoja = URL(string: urlLojaString)
+    //                            }
+    //
+    //                            if let urlWebString = record["url_web"] as? String{
+    //
+    //                                novaCorrida.urlWeb = URL(string: urlWebString)
+    //                            }
+    //
+    //
+    //                            arrayCorridas.append(novaCorrida)
+    //
+    //                        }
+    //
+    //                        let resumo = ResumoBusca(enderecoOrigem: endOrigem, enderecoDestino: endDestino, duracaoCorrida: duracao, distanciaCorrida: distancia, arrayCorridas: arrayCorridas)
+    //
+    //                        self.resumoBusca = resumo
+    //                        print("========== RESUMO =========")
+    //                        print(resumo)
+    //                        DispatchQueue.main.sync {
+    //                            self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
+    //                        }
+    //
+    //
+    //
+    //
+    //                    }catch{
+    //
+    ////                        let alerta = SCLAlertView()
+    ////                        alerta.showInfo("Não enco", subTitle: <#T##String#>)
+    //                        print("NAO DEU CERTO PEGAR O NEGOCIO")
+    //                    }
+    //
+    //                }
+    //            }
+    //
+    //            task.resume()
+    //
+    //
+    //        }catch{}
+    //
+    //
+    //    }
     
     func setupTextFieldOrigem(){
         
@@ -539,7 +546,7 @@ class TelaInicialViewController: UIViewController {
         btnLocalizacaoUsuario.contentVerticalAlignment = .fill
         self.textFieldEnderecoOrigem.rightViewMode = .always
         self.textFieldEnderecoOrigem.rightView = btnLocalizacaoUsuario
-
+        
         
         
     }
@@ -548,12 +555,12 @@ class TelaInicialViewController: UIViewController {
 
 
 //MARK: - MKMapViewDelegate
-extension TelaInicialViewController : MKMapViewDelegate{
+extension MBInitialViewViewController : MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
         if(!animated){
-    
+            
             mapaMoveuInicialmente = true
             let location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
             
@@ -614,7 +621,7 @@ extension TelaInicialViewController : MKMapViewDelegate{
                 })
             
         }
-
+        
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
@@ -630,12 +637,12 @@ extension TelaInicialViewController : MKMapViewDelegate{
     }
 }
 
-extension TelaInicialViewController : CLLocationManagerDelegate{
+extension MBInitialViewViewController : CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let localizacao = locations.last!
-
+        
         if(!mapaMoveuInicialmente){
             
             //Criando o span
@@ -655,7 +662,7 @@ extension TelaInicialViewController : CLLocationManagerDelegate{
     }
 }
 
-extension TelaInicialViewController : UITextFieldDelegate{
+extension MBInitialViewViewController : UITextFieldDelegate{
     
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -668,7 +675,7 @@ extension TelaInicialViewController : UITextFieldDelegate{
                 if let _ = self {
                     
                     self?.startAddress = dicionarioEndereco
-
+                    
                     let lat = dicionarioEndereco.latitude
                     let lng = dicionarioEndereco.longitude
                     let location = CLLocation(latitude: lat, longitude: lng)
@@ -696,3 +703,4 @@ extension TelaInicialViewController : UITextFieldDelegate{
         
     }
 }
+
