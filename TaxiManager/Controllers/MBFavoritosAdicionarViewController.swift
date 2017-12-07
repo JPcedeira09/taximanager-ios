@@ -91,11 +91,7 @@ class MBFavoritosAdicionarViewController: UIViewController {
                     self.dismiss(animated: true)
                 
                 }
-                
-                
             })
-            
-            
         }
     }
     

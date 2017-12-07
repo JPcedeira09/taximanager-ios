@@ -72,6 +72,7 @@ class MBTelaBuscaViewController: UIViewController {
             Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,
                                                             "uuid" : corrida.uuid])
             application.open(urlDeeplink)
+            
         }else{
             let alert = SCLAlertView()
             
@@ -122,7 +123,6 @@ extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource
         if let urlLogo = URL(string: corrida.urlLogo!) {
             let task = URLSession.shared.dataTask(with: urlLogo) { data, response, error in
                 guard let data = data, error == nil else { return }
-                
                 DispatchQueue.main.async() {
                     cell.imgViewLogo.image = UIImage(data: data)
                 }
@@ -140,5 +140,24 @@ extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource
         
     }
     
+    func sendUser(_ mbInfoPlayer: MBPlayeyChoose){
+        let url = URL(string: "https://estimate.taximanager.com.br/v1/estimate/selected")!
+        let parametros =  mbInfoPlayer.toDict(mbInfoPlayer) as [String:Any]
+        let body = try? JSONSerialization.data(withJSONObject: parametros)
+        
+        print(mbInfoPlayer)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = body
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response,error) in
+            if (error == nil){
+                print("success")
+            }
+        }
+    }
+    
 }
+
 

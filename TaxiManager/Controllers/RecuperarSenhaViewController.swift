@@ -2,7 +2,6 @@
 //  RecuperarSenhaViewController.swift
 //  TaxiManager
 //
-//  Created by Esdras Martins on 14/11/17.
 //  Copyright © 2017 Taxi Manager. All rights reserved.
 //
 
@@ -19,7 +18,6 @@ class RecuperarSenhaViewController: UIViewController {
         super.viewDidLoad()
     
     }
-    
     
     @IBAction func close(_ sender: CustomButton) {
         

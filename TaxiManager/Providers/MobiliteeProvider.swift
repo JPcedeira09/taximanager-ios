@@ -36,18 +36,14 @@ extension MobiliteeProvider : TargetType{
             }
             return data
             
-
         default :
             return Data()
             
         }
-        
     }
     
     var task: Task {
-        
         switch(self){
-            
         case let .estimate(start, end, distance, duration, userId, companyId):
             
             do{
