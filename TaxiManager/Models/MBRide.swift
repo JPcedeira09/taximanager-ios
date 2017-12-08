@@ -20,7 +20,7 @@ struct MBRide : Codable{
     var urlLogo : String?
     var urlStore : String?
     var urlWeb : String?
-    var uuid : Int = 0
+    public var uuid : Int = 0
     
     struct MBModality : Codable {
         

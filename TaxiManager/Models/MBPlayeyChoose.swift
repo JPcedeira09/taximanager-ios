@@ -42,7 +42,7 @@ struct MBPlayeyChoose {
     }
     
     func toDict(_ mbInfoPlayer : MBPlayeyChoose) -> [String: Any]{
-        let parametros = ["user_id" :  mbInfoPlayer.user_id, "company_id" :  mbInfoPlayer.company_id, "selected" : mbInfoPlayer.company_id, "type_open" : mbInfoPlayer.type_open] as [String : Any]
+        let parametros = ["user_id" :  mbInfoPlayer.user_id, "company_id" :  mbInfoPlayer.company_id, "selected" : mbInfoPlayer.selected, "type_open" : mbInfoPlayer.type_open] as [String : Any]
         return parametros
     }
     

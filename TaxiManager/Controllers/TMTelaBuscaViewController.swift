@@ -44,7 +44,6 @@ class MBTelaBuscaViewController: UIViewController {
         self.labelDuracao.text =  "\(self.searchResult?.duration ?? 00) min"
         self.labelStartAddress.text = self.searchResult?.startAddress.address
         self.labelEndAddress.text = self.searchResult?.endAddress.address
-        
     }
     
     //MARK: - Metodos
@@ -69,35 +68,29 @@ class MBTelaBuscaViewController: UIViewController {
             application.canOpenURL(urlDeeplink)
         {
             
-            Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,
-                                                            "uuid" : corrida.uuid])
+            Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,"uuid" : corrida.uuid])
             application.open(urlDeeplink)
             
         }else{
+            
             let alert = SCLAlertView()
             
             if let urlStoreString = corrida.urlStore, let urlStore = URL(string: urlStoreString){
-                
                 alert.addButton("Instalar agora", action: {
-                    Analytics.logEvent("openStore", parameters: ["player" : corrida.name,
-                                                                 "uuid" : corrida.uuid])
+                    Analytics.logEvent("openStore", parameters: ["player" : corrida.name,"uuid" : corrida.uuid])
                     application.open(urlStore)
                 })
             }
-            if let urlWebString = corrida.urlWeb,
-                let urlWeb = URL(string: urlWebString){
+            
+            if let urlWebString = corrida.urlWeb,let urlWeb = URL(string: urlWebString){
                 
                 alert.addButton("Solicitar carro", action: {
-                    Analytics.logEvent("openWeb", parameters: ["player" : corrida.name,
-                                                               "uuid" : corrida.uuid])
+                    Analytics.logEvent("openWeb", parameters: ["player" : corrida.name,"uuid" : corrida.uuid])
                     application.open(urlWeb)
                 })
             }
-            
             alert.showInfo("Você não possui o aplicativo instalado", subTitle: "", closeButtonTitle: "Cancelar", colorStyle: 0x242424)
-            
         }
-        
     }
 }
 
@@ -133,29 +126,28 @@ extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let corrida = self.searchResult!.travels[indexPath.row]
+        let uuid = self.searchResult!.travels[indexPath.row].uuid
+        print("INFO:uuid é \(uuid)")
         print(corrida)
         self.checarAcoesCorrida(corrida: corrida)
-        
+        print(indexPath.row)
+        let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: uuid, type_open: 2 )
+        let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
+        print("INFO: a request tem o UUID\(request)")
     }
     
-    func sendUser(_ mbInfoPlayer: MBPlayeyChoose){
-        let url = URL(string: "https://estimate.taximanager.com.br/v1/estimate/selected")!
-        let parametros =  mbInfoPlayer.toDict(mbInfoPlayer) as [String:Any]
-        let body = try? JSONSerialization.data(withJSONObject: parametros)
-        
+    func seveEstimateSelected( mbInfoPlayer: MBPlayeyChoose)-> Int{
+        let parametros : [String: Any]  =  mbInfoPlayer.toDict(mbInfoPlayer) as [String:Any]
+        let postURL = URL(string:  "https://estimate.taximanager.com.br/v1/estimate/selected")
+        let header = ["Content-Type" : "application/json",
+                      "Authorization" : MBUser.currentUser?.token ?? ""]
+        Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).request
+        print("\n ----------------INFO:REQUEST---------------- \n")
+        print(parametros)
+        print(header)
         print(mbInfoPlayer)
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = body
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { (data, response,error) in
-            if (error == nil){
-                print("success")
-            }
-        }
+        return mbInfoPlayer.selected
     }
     
 }

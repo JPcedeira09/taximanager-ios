@@ -66,7 +66,6 @@ extension MobiliteeProvider : TargetType{
                 return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
             }
         
-        
         case let .postBookmark(bookmark):
             do{
                 let parameters = try bookmark.asDictionary()
