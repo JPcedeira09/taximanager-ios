@@ -31,7 +31,6 @@ struct MBUser : Codable{
     // status employee.
     var statusID: Int = 0
     var statusDescription: String = ""
-    
     static var currentUser : MBUser?
     
     init(from dictionary: [String : Any]){

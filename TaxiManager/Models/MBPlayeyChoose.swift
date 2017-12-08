@@ -10,7 +10,7 @@ import Foundation
 
 struct MBPlayeyChoose {
     
-    /**
+    /** JSON example
      {
      "user_id" : 4,
      "company_id": 3,

@@ -69,6 +69,7 @@
 		11EE3E1C1FBB6150007918C6 /* MBDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E1B1FBB6150007918C6 /* MBDevice.swift */; };
 		11EE3E1F1FBB662A007918C6 /* MBAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E1E1FBB662A007918C6 /* MBAddress.swift */; };
 		11EE3E231FBB86D0007918C6 /* MBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E221FBB86D0007918C6 /* MBUser.swift */; };
+		6C6258891FDB1A9A003C6B2E /* MBUserInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6258881FDB1A9A003C6B2E /* MBUserInside.swift */; };
 		6C7B5A2D1FD96DC800207F66 /* TaxiManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A2C1FD96DC800207F66 /* TaxiManagerTests.swift */; };
 		6C7B5A3B1FD96DD200207F66 /* TaxiManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A3A1FD96DD200207F66 /* TaxiManagerUITests.swift */; };
 		6C7B5A431FD9765700207F66 /* MBContactViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A421FD9765700207F66 /* MBContactViewcontroller.swift */; };
@@ -163,6 +164,7 @@
 		11EE3E1E1FBB662A007918C6 /* MBAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBAddress.swift; sourceTree = "<group>"; };
 		11EE3E221FBB86D0007918C6 /* MBUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBUser.swift; sourceTree = "<group>"; };
 		23741A00D917E0F4A3FBADA6 /* Pods-TaxiManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.debug.xcconfig"; sourceTree = "<group>"; };
+		6C6258881FDB1A9A003C6B2E /* MBUserInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBUserInside.swift; sourceTree = "<group>"; };
 		6C7B5A2A1FD96DC800207F66 /* TaxiManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C7B5A2C1FD96DC800207F66 /* TaxiManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiManagerTests.swift; sourceTree = "<group>"; };
 		6C7B5A2E1FD96DC800207F66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				11EE3E221FBB86D0007918C6 /* MBUser.swift */,
+				6C6258881FDB1A9A003C6B2E /* MBUserInside.swift */,
 				113A4EE81FBDFFB5005D01FC /* MBBookmark.swift */,
 				113A4EEA1FBE01C8005D01FC /* MBPoi.swift */,
 				11EE3E191FBB6005007918C6 /* MBLocation.swift */,
@@ -684,6 +687,7 @@
 				113A4EE91FBDFFB5005D01FC /* MBBookmark.swift in Sources */,
 				111FB5E11FBF3A5000578185 /* MBRide.swift in Sources */,
 				11EE3E231FBB86D0007918C6 /* MBUser.swift in Sources */,
+				6C6258891FDB1A9A003C6B2E /* MBUserInside.swift in Sources */,
 				11BB9DC91FC749D600C60E9F /* MBTravel.swift in Sources */,
 				11E88D1F1FA8E8B200C11196 /* TMCustomTableViewHeaderTableViewCell.swift in Sources */,
 				11EE3E1C1FBB6150007918C6 /* MBDevice.swift in Sources */,
