@@ -196,7 +196,7 @@ class MBInitialViewViewController: UIViewController {
     
     func estimatePrices(startAddress : MBLocation, endAddress : MBLocation, distance : Int, duration : Int){
         
-        MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, distance: distance, duration: duration, userId: MBUser.currentUser!.employeeId, companyId: MBUser.currentUser!.companyId)) { (result) in
+        MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, distance: distance, duration: duration, userId: MBUser.currentUser!.id, companyId: MBUser.currentUser!.companyId)) { (result) in
             
             SwiftSpinner.hide()
             

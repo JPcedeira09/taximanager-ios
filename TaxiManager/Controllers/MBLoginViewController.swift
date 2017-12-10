@@ -22,7 +22,7 @@ class MBLoginViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         self.textFieldUsername.delegate = self
         self.textFieldPassword.delegate = self
         
@@ -48,33 +48,38 @@ class MBLoginViewController: UIViewController {
         
         self.becomeFirstResponder()
         SwiftSpinner.show("Efetuando login...")
-
+        
         MobiliteeProvider.api.request(.login(username: username, password: password)) { (result) in
-
+            
             SwiftSpinner.hide()
             switch result{
-
+                
             case let .success(response):
-
+                
                 if response.statusCode == 200{
                     print("status 200")
-                   
+                    
                     do{
                         guard let dictionary = try response.mapJSON() as? [String : Any] else {
                             return
                         }
-
+                        print("---------------------")
+                        print(dictionary)
+                        print("---------------------")
+                        
                         let mbUser = MBUser(from: dictionary)
+                        
+                        print("O ID do user é :\(mbUser.id)")
+                        print("O ID do employee é :\(mbUser.employeeId)")
 
-                        print(mbUser)
                         let userEncoded = try JSONEncoder().encode(mbUser)
-
+                        
                         MBUser.update()
-
+                        
                         let defaults = UserDefaults.standard
                         defaults.set(userEncoded, forKey: "user")
                         defaults.synchronize()
-
+                        
                         //  INFO: inactive status.
                         if(mbUser.statusID == 2){
                             let alertInativo = SCLAlertView()
@@ -84,7 +89,7 @@ class MBLoginViewController: UIViewController {
                             let alertDemitido = SCLAlertView()
                             alertDemitido.showNotice("Ops...", subTitle: "Ops, seu usuario é inexistente, entre em contato com a área de transporte da sua empresa.")
                             // INFO: first access, enable status.
-
+                            
                         }else if (MBUser.currentUser?.firstAccessAt == nil && mbUser.statusID == 1){
                             
                             let appearance = SCLAlertView.SCLAppearance(
@@ -95,11 +100,11 @@ class MBLoginViewController: UIViewController {
                                 self.performSegue(withIdentifier: "tmPrimeiroAcesso", sender: nil)
                             })
                             alert.showSuccess("Seja bem vindo!", subTitle: "Troque sua senha agora. A nova senha deve conter no mínimo 5 dígitos.")
-                           
+                            
                         }else{
                             self.performSegue(withIdentifier: "tmTelaPrincipal", sender: nil)
                         }
-
+                        
                     }catch{
                         print("Nao conseguiu pegar dicionario")
                     }
@@ -125,8 +130,8 @@ class MBLoginViewController: UIViewController {
         
     }
     //MARK: - IBActions
-@IBAction func logar(_ sender: UIButton) {
-    
+    @IBAction func logar(_ sender: UIButton) {
+        
         if(verificaConteudosTextField()){
             
             self.login(username: self.textFieldUsername.text!, password: self.textFieldPassword.text!)
@@ -146,5 +151,5 @@ extension MBLoginViewController : UITextFieldDelegate {
         
         return true
     }
-
+    
 }
