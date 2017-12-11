@@ -280,6 +280,7 @@
                         <outlet property="viewDestino" destination="lGU-XZ-2M4" id="AbD-4C-eDf"/>
                         <outlet property="viewOrigem" destination="kfm-hL-v9e" id="hYz-15-FWx"/>
                         <segue destination="zGG-g8-ZgL" kind="show" identifier="segueTelaBusca" id="Sqa-BD-j4F"/>
+                        <segue destination="4pb-vW-GhI" kind="show" identifier="MBLoginViewController" id="Dzm-F1-Abc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bM1-Ic-f8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -736,11 +737,11 @@
                         <viewControllerLayoutGuide type="bottom" id="YBY-IP-ax0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ki2-h2-eGR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQ2-nx-jW5">
-                                <rect key="frame" x="29.5" y="183.5" width="316" height="300"/>
+                                <rect key="frame" x="29.5" y="151.5" width="316" height="300"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logotipo_fundo_preto" translatesAutoresizingMaskIntoConstraints="NO" id="9CL-oZ-nPf">
                                         <rect key="frame" x="36" y="20" width="228" height="27"/>
@@ -898,7 +899,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOC-0F-BCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3054" y="-132"/>
+            <point key="canvasLocation" x="-3207" y="-134"/>
         </scene>
         <!--Favoritos Adicionar View Controller-->
         <scene sceneID="hWs-ad-uiJ">
@@ -1026,11 +1027,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ZTC-wP-f5K"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="E3f-dV-VeB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4p-dD-12O" userLabel="Container">
-                                <rect key="frame" x="66" y="208.5" width="243" height="250"/>
+                                <rect key="frame" x="66" y="176.5" width="243" height="250"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logotipo_fundo_preto" translatesAutoresizingMaskIntoConstraints="NO" id="TMu-DX-DPk">
                                         <rect key="frame" x="6.5" y="20" width="230" height="30"/>

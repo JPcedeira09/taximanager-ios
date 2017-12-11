@@ -60,6 +60,7 @@ extension MobiliteeProvider : TargetType{
                                   "user_id": userId,
                                   "company_id": companyId] as [String : Any]
     
+                print("INFO:OS PARAMETROS DA ESTIMATE SÃO = \(parameters)")
                 return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
                 
             }catch{

@@ -52,8 +52,8 @@ class MBInitialViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // func valid id status
-        self.getStatusEmployee()
-        
+      self.getStatusEmployee()
+   
         //Maps config.
         self.mapView.delegate = self
         self.mapView.showsUserLocation = true
@@ -187,16 +187,24 @@ class MBInitialViewViewController: UIViewController {
     }
     
     func estimatePrices(startAddress : MBLocation, endAddress : MBLocation, distance : Int, duration : Int){
-        
-        MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, distance: distance, duration: duration, userId: MBUser.currentUser!.id, companyId: MBUser.currentUser!.companyId)) { (result) in
+      //  print("MOYA URL \(startAddress)/\(endAddress)/\(distance)/\(duration)/\(MBUser.currentUser!.id)/\(MBUser.currentUser!.companyId))")
+      MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, distance: distance, duration: duration, userId: MBUser.currentUser!.id, companyId: MBUser.currentUser!.companyId)) { (result) in
             
             SwiftSpinner.hide()
             
             do{
                 switch(result){
                 case let .success(response):
+                    print(response)
+                    //                    print("----------- INFO: RESPONSE estimatePrices ----------")
+                    //                     print(response)
+                    //                    print("----------- INFO: RESPONSE estimatePrices ----------")
                     
                     let travels = try response.map([MBRide].self, atKeyPath: "records")
+                    
+                    //                    print("----------- INFO: MAPED estimatePrices ----------")
+                    //                    print("INFO: TRAVELS:\(travels)")
+                    //                    print("----------- INFO: MAPED estimatePrices ----------")
                     
                     self.searchResult = MBSearchResult(startAddress: startAddress, endAddress: endAddress, duration: duration, distance: distance, travels: travels)
                     
@@ -223,24 +231,35 @@ class MBInitialViewViewController: UIViewController {
         self.textFieldEnderecoOrigem.rightView = btnLocalizacaoUsuario
     }
     
-    func getStatusEmployee() -> Bool {
+    func getStatusEmployee() {
         let urlRequest = URL(string:  "https://api.taximanager.com.br/v1/taximanager/users/\((MBUser.currentUser?.id)!)")
-        print("\n /n INFO: URL:\(urlRequest)\n /n ")
+
+        // print("\n /n INFO: URL:\(urlRequest)\n /n ")
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
         Alamofire.request(urlRequest!, method: HTTPMethod.get,headers : header).responseJSON { (response) in
-            
             if(response.result.isSuccess){
                 print(response)
                 if let json = response.result.value as? [String : AnyObject]{
                     var mbUser: MBUserInside = MBUserInside(from: json)
                     print("\n ----------------INFO:REQUEST getStatusEmployee---------------- \n")
                     print(mbUser)
+                    print(mbUser.statusID)
                     print("\n ----------------INFO:REQUEST getStatusEmployee---------------- \n")
+                    if(mbUser.statusID == 1){
+                        print("INFO O STATUD DO USER É : \(mbUser.isBlocked)")
+                    }else if (mbUser.statusID == 2 || mbUser.id == 3){
+                        print("INFO O STATUD DO USER É : \(mbUser.isBlocked)")
+                        MBUser.logout()
+                        let alertDemitido = SCLAlertView()
+                        alertDemitido.showNotice("Ops...", subTitle: "Ops, seu usuario foi desautorizado, entre em contato com a área de transporte da sua empresa.")
+                        self.performSegue(withIdentifier: "MBLoginViewController", sender: nil)
+                    }
                 }
-            }
+            }else{
+                print("INFO: ERROR ON REQUEST getStatusEmployee - \(response.error?.localizedDescription)")
+             }
         }
-        return false
     }
 }
 
@@ -262,7 +281,6 @@ extension MBInitialViewViewController : MKMapViewDelegate{
                                                     if let plmarks = placemarks {
                                                         
                                                         let firstLocation = plmarks[0]
-                                                        
                                                         self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
                                                         self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
                                                         self.dicOrigem.updateValue("\(firstLocation.postalCode ?? "00000000")", forKey: "zipcode")

@@ -28,7 +28,8 @@ class MBTelaBuscaViewController: UIViewController {
     //MARK: - Propriedades
     //    var resumoBusca : ResumoBusca?
     var searchResult : MBSearchResult?
-    
+    var indexpathRow:Int?
+    var  uuid : Int?
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +70,10 @@ class MBTelaBuscaViewController: UIViewController {
             
             Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,"uuid" : corrida.uuid])
             application.open(urlDeeplink)
+            print("O indexPath row é : \(self.indexpathRow ?? 0 )")
+            let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 1 )
+            let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
+            print("INFO: a request tem o UUID\(request)")
         }else{
             
             let alert = SCLAlertView()
@@ -76,6 +81,9 @@ class MBTelaBuscaViewController: UIViewController {
                 alert.addButton("Instalar agora", action: {
                     Analytics.logEvent("openStore", parameters: ["player" : corrida.name,"uuid" : corrida.uuid])
                     application.open(urlStore)
+                    let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 2 )
+                    let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
+                    print("O indexPath row é : \(self.indexpathRow ?? 0 )")
                 })
             }
             
@@ -84,6 +92,9 @@ class MBTelaBuscaViewController: UIViewController {
                 alert.addButton("Solicitar carro", action: {
                     Analytics.logEvent("openWeb", parameters: ["player" : corrida.name,"uuid" : corrida.uuid])
                     application.open(urlWeb)
+                    let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 3 )
+                    let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
+                    print("O indexPath row é : \(self.indexpathRow ?? 0 )")
                 })
             }
             alert.showInfo("Você não possui o aplicativo instalado", subTitle: "", closeButtonTitle: "Cancelar", colorStyle: 0x242424)
@@ -122,14 +133,11 @@ extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let corrida = self.searchResult!.travels[indexPath.row]
-        let uuid = self.searchResult!.travels[indexPath.row].uuid
-        print("INFO:uuid é \(uuid)")
+         self.uuid = self.searchResult!.travels[indexPath.row].uuid
+        print("INFO:uuid é \(self.uuid)")
         print(corrida)
         self.checarAcoesCorrida(corrida: corrida)
-        print(indexPath.row)
-        let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: uuid, type_open: 2 )
-        let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
-        print("INFO: a request tem o UUID\(request)")
+        self.indexpathRow = indexPath.row
     }
     
     func seveEstimateSelected( mbInfoPlayer: MBPlayeyChoose)-> Int{

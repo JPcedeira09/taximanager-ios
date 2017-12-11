@@ -204,7 +204,6 @@ extension MBBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
         }
         
         if(section != 0){
-         
             
             if (expandedSections.contains(section)) {
                 cell.imgViewSeta.image = #imageLiteral(resourceName: "icon_seta_baixo")
@@ -231,32 +230,26 @@ extension MBBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
             self.resolverDidSelectRecente()
         case 2:
             self.resolverDidSelectFavorito()
-            
         case 3:
             self.resolverDidSelectPoi()
-            
+        
         default:
             print("defaults")
         }
         
         self.dismiss(animated: true)
-        
     }
 }
 
 extension MBBuscaEnderecoViewController : UITextFieldDelegate{
     
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
     }
-    
 }
 
 extension MBBuscaEnderecoViewController{
-    
     
     func resolverDidSelectPesquisa(){
         
@@ -266,30 +259,22 @@ extension MBBuscaEnderecoViewController{
         gmsPlaceCliente.lookUpPlaceID(predicao.placeID!) { (place, error) in
             
             if let err = error {
-                
                 print(err.localizedDescription)
             }
             
             let geocoder = CLGeocoder()
             
-            
             let localizacao = CLLocation(latitude: place!.coordinate.latitude, longitude: place!.coordinate.longitude)
-            
             
             var number = "0"
 
             for component in place!.addressComponents!{
-
                 print(component.type + " - " + component.name)
-                
                 if(component.type == "street_number"){
-                    
                     number = component.name
                 }
             }
 
-            
-            
             geocoder.reverseGeocodeLocation(localizacao, completionHandler: { (placemarks, error) in
                 
                 if (error == nil) {
@@ -301,34 +286,27 @@ extension MBBuscaEnderecoViewController{
                         if let zip = firstLocation.addressDictionary?["ZIP"] as? String{
                             
                             postalCode = zip
-
                         }
-                        
                         if let code = firstLocation.addressDictionary?["PostCodeExtension"] as? String{
                             
                             postalCode += code
-                            
                         }else{
-                            
                             postalCode += "000"
                         }
-                        
                         
                         if let thoroughfare = firstLocation.thoroughfare{
                             
                             endereco += thoroughfare
                             
                             if let subThoroughfare = firstLocation.subThoroughfare{
-                                
                                 endereco += ", " + subThoroughfare
                             }
                         }
                         
                         let address = MBAddress(latitude: firstLocation.location!.coordinate.latitude, longitude: firstLocation.location!.coordinate.longitude, address: predicao.attributedFullText.string, district: firstLocation.subLocality ?? "", city: firstLocation.locality!, state: firstLocation.administrativeArea!, zipcode: postalCode, number: number )
+                       
                         self.selecionouEndereco?(address)
-                        
                         self.arrayRecentes.append(address)
-                        
                         
                         do{
                             MBUser.currentUser?.recents = self.arrayRecentes
@@ -343,27 +321,21 @@ extension MBBuscaEnderecoViewController{
                 else {
                     // An error occurred during geocoding.
                     print("Não deu certo")
-                    
                 }
             })
         }
     }
     
     func resolverDidSelectRecente(){
-        
         self.selecionouEndereco?(self.arrayRecentes[self.tableView.indexPathForSelectedRow!.row])
     }
     
     func resolverDidSelectFavorito(){
-        
         self.selecionouEndereco?(self.arrayFavoritos[self.tableView.indexPathForSelectedRow!.row])
-        
     }
     
     func resolverDidSelectPoi(){
-        
         self.selecionouEndereco?(self.arrayPois[self.tableView.indexPathForSelectedRow!.row])
-        
     }
     
 }
