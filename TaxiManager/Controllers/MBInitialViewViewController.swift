@@ -51,7 +51,7 @@ class MBInitialViewViewController: UIViewController {
     //MARK: - View Lifecycle.
     override func viewDidLoad() {
         super.viewDidLoad()
- // func valid id status
+        // func valid id status
         self.getStatusEmployee()
         
         //Maps config.
@@ -67,7 +67,6 @@ class MBInitialViewViewController: UIViewController {
         
         let imageView = UIImageView(image: #imageLiteral(resourceName: "logotipo_fundo_preto.png"))
         imageView.contentMode = .scaleAspectFit
-        
         let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
         imageView.frame = titleView.bounds
         titleView.addSubview(imageView)
@@ -87,9 +86,7 @@ class MBInitialViewViewController: UIViewController {
     @objc func localizarUsuario(){
         
         let location = self.locationManager.location!
-        
         let geocoder = CLGeocoder()
-        
         // Look up the location and pass it to the completion handler.
         geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
             if (error == nil) {
@@ -130,10 +127,8 @@ class MBInitialViewViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if(segue.identifier == "segueTelaBusca"){
-            
             let buscaViewController = segue.destination as! MBTelaBuscaViewController
-            
-            //            buscaViewController.resumoBusca = self.resumoBusca
+            //buscaViewController.resumoBusca = self.resumoBusca
             buscaViewController.searchResult = self.searchResult
         }
     }
@@ -142,7 +137,6 @@ class MBInitialViewViewController: UIViewController {
     func pedirAutorizacaoLocalizacaoUsuario(){
         
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedAlways && CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse){
-            
             self.locationManager.requestWhenInUseAuthorization()
         }
         self.locationManager.delegate = self;
@@ -156,7 +150,6 @@ class MBInitialViewViewController: UIViewController {
         dateFormatter.locale = Locale(identifier: "pt-BR")
         dateFormatter.dateStyle = .full
         
-        
         self.labelData.text = dateFormatter.string(from: dataAtual)
     }
     
@@ -168,7 +161,6 @@ class MBInitialViewViewController: UIViewController {
         let destinations = "\(end.latitude)" + "," + "\(end.longitude)"
         
         let parametros = ["key": "AIzaSyDOebYw-atZqhQxDKX-D5Ps5Dje0f29RSo" , "origins" : origins, "destinations": destinations]
-        
         Alamofire.request(urlRequest, method: HTTPMethod.get, parameters: parametros).responseJSON { (response) in
             
             if(response.result.isSuccess){
@@ -212,9 +204,8 @@ class MBInitialViewViewController: UIViewController {
                 case let .failure(error):
                     print(error.localizedDescription)
                 }
-                
             }catch{
-                
+                print(error.localizedDescription)
             }
         }
     }
@@ -243,9 +234,9 @@ class MBInitialViewViewController: UIViewController {
                 print(response)
                 if let json = response.result.value as? [String : AnyObject]{
                     var mbUser: MBUserInside = MBUserInside(from: json)
-                    print("\n ----------------INFO:REQUEST---------------- \n")
+                    print("\n ----------------INFO:REQUEST getStatusEmployee---------------- \n")
                     print(mbUser)
-                    print("\n ----------------INFO:REQUEST---------------- \n")
+                    print("\n ----------------INFO:REQUEST getStatusEmployee---------------- \n")
                 }
             }
         }
@@ -259,55 +250,50 @@ extension MBInitialViewViewController : MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
         if(!animated){
-            
             mapaMoveuInicialmente = true
             let location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-            
             let geocoder = CLGeocoder()
-            
             // Look up the location and pass it to the completion handler.
-            geocoder
-                .reverseGeocodeLocation(location,
-                                        completionHandler: { (placemarks, error) in
-                                            if (error == nil) {
-                                                
-                                                var endereco = ""
-                                                if let plmarks = placemarks {
+            geocoder.reverseGeocodeLocation(location,
+                                            completionHandler: { (placemarks, error) in
+                                                if (error == nil) {
                                                     
-                                                    let firstLocation = plmarks[0]
-                                                    
-                                                    self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
-                                                    self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
-                                                    self.dicOrigem.updateValue("\(firstLocation.postalCode ?? "00000000")", forKey: "zipcode")
-                                                    self.dicOrigem.updateValue("\(firstLocation.locality ?? "")", forKey: "city")
-                                                    self.dicOrigem.updateValue("\(firstLocation.administrativeArea ?? "")", forKey: "state")
-                                                    
-                                                    if let thoroughfare = firstLocation.thoroughfare{
-                                                        endereco += thoroughfare
+                                                    var endereco = ""
+                                                    if let plmarks = placemarks {
                                                         
-                                                        if let subThoroughfare = firstLocation.subThoroughfare{
-                                                            endereco += ", " + subThoroughfare
+                                                        let firstLocation = plmarks[0]
+                                                        
+                                                        self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.latitude), forKey: "lat")
+                                                        self.dicOrigem.updateValue(Double(firstLocation.location!.coordinate.longitude), forKey: "lng")
+                                                        self.dicOrigem.updateValue("\(firstLocation.postalCode ?? "00000000")", forKey: "zipcode")
+                                                        self.dicOrigem.updateValue("\(firstLocation.locality ?? "")", forKey: "city")
+                                                        self.dicOrigem.updateValue("\(firstLocation.administrativeArea ?? "")", forKey: "state")
+                                                        
+                                                        if let thoroughfare = firstLocation.thoroughfare{
+                                                            endereco += thoroughfare
+                                                            
+                                                            if let subThoroughfare = firstLocation.subThoroughfare{
+                                                                endereco += ", " + subThoroughfare
+                                                            }
                                                         }
+                                                        
+                                                        let address = MBAddress(latitude: firstLocation.location?.coordinate.latitude ?? 0.0,
+                                                                                longitude: firstLocation.location?.coordinate.longitude ?? 0.0,
+                                                                                address: endereco,
+                                                                                district: "",
+                                                                                city: firstLocation.locality ?? "",
+                                                                                state: firstLocation.administrativeArea ?? "",
+                                                                                zipcode: firstLocation.postalCode ?? "00000000",
+                                                                                number: "")
+                                                        self.startAddress = address
+                                                        self.dicOrigem.updateValue(endereco, forKey: "address")
+                                                        self.textFieldEnderecoOrigem.text = endereco
                                                     }
-                                                    
-                                                    let address = MBAddress(latitude: firstLocation.location?.coordinate.latitude ?? 0.0,
-                                                                            longitude: firstLocation.location?.coordinate.longitude ?? 0.0,
-                                                                            address: endereco,
-                                                                            district: "",
-                                                                            city: firstLocation.locality ?? "",
-                                                                            state: firstLocation.administrativeArea ?? "",
-                                                                            zipcode: firstLocation.postalCode ?? "00000000",
-                                                                            number: "")
-                                                    
-                                                    self.startAddress = address
-                                                    self.dicOrigem.updateValue(endereco, forKey: "address")
-                                                    self.textFieldEnderecoOrigem.text = endereco
                                                 }
-                                            }
-                                            else {
-                                                print("INFO: Decoding error.")
-                                            }
-                })
+                                                else {
+                                                    print("INFO: Decoding error.")
+                                                }
+            })
         }
     }
     
@@ -342,7 +328,6 @@ extension MBInitialViewViewController : CLLocationManagerDelegate{
 
 extension MBInitialViewViewController : UITextFieldDelegate{
     
-    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         if(textField == self.textFieldEnderecoOrigem){
@@ -359,7 +344,6 @@ extension MBInitialViewViewController : UITextFieldDelegate{
                     self?.mapView.setCenter(location.coordinate, animated: true)
                     self?.textFieldEnderecoOrigem.text = dicionarioEndereco.address
                 }
-                
             }
             
             self.present(buscarEnderecoViewController, animated: true, completion: nil)

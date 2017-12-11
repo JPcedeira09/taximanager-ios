@@ -62,7 +62,6 @@ class MBTelaBuscaViewController: UIViewController {
     func checarAcoesCorrida (corrida : MBRide){
         
         let application = UIApplication.shared
-        
         if let urlDeeplinkString = corrida.urlDeeplink,
             let urlDeeplink = URL(string: urlDeeplinkString),
             application.canOpenURL(urlDeeplink)
@@ -70,11 +69,9 @@ class MBTelaBuscaViewController: UIViewController {
             
             Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,"uuid" : corrida.uuid])
             application.open(urlDeeplink)
-            
         }else{
             
             let alert = SCLAlertView()
-            
             if let urlStoreString = corrida.urlStore, let urlStore = URL(string: urlStoreString){
                 alert.addButton("Instalar agora", action: {
                     Analytics.logEvent("openStore", parameters: ["player" : corrida.name,"uuid" : corrida.uuid])
@@ -97,14 +94,12 @@ class MBTelaBuscaViewController: UIViewController {
 extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return self.searchResult!.travels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tmResultadoBusca", for: indexPath) as! TMResultadoBuscaCell
-        
         let corrida = self.searchResult!.travels[indexPath.row]
         
         cell.labelNome.text = corrida.modality.name
@@ -143,7 +138,7 @@ extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
         Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).request
-        print("\n ----------------INFO:REQUEST---------------- \n")
+        print("\n ----------------INFO:REQUEST seveEstimateSelected---------------- \n")
         print(parametros)
         print(header)
         print(mbInfoPlayer)

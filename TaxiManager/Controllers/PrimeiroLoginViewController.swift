@@ -9,6 +9,7 @@ import UIKit
 import TextFieldEffects
 import SCLAlertView
 import SwiftSpinner
+import FirebaseAnalytics
 
 class PrimeiroLoginViewController: UIViewController {
 
@@ -57,19 +58,20 @@ class PrimeiroLoginViewController: UIViewController {
                             if let _ = dictionary["records"]{
                                 
                                 SCLAlertView().showSuccess("Tudo pronto!", subTitle: "Agora é só acessar usando sua nova senha.")
+                                Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user" : "confirmação da troca de senhas","uuid" : MBUser.currentUser?.id])
                                 self.dismiss(animated: true)
                             }
                         }
                     }catch{
                         
                         SCLAlertView().showSuccess("Ops!", subTitle: "Erro ao alterar a senha.")
+                        Analytics.logEvent("firstAccessFormFinishFail", parameters: ["faill" : "falha em ler o json do Backend","uuid" : MBUser.currentUser?.id])
                         self.dismiss(animated: true)
                     }
                     
-                    
                 case let .failure(error):
-                    
                     SCLAlertView().showSuccess("Ops!", subTitle: "Erro ao alterar a senha.")
+                    Analytics.logEvent("firstAccessFormFinishFail", parameters: ["faill" : "falha de conexao","uuid" : MBUser.currentUser?.id])
                     self.dismiss(animated: true)
                 }
                 

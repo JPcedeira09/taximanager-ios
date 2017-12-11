@@ -10,6 +10,7 @@ import Alamofire
 import SCLAlertView
 import GooglePlaces
 import SwiftSpinner
+import FirebaseAnalytics
 
 class MBLoginViewController: UIViewController {
     
@@ -98,6 +99,7 @@ class MBLoginViewController: UIViewController {
                             let alert = SCLAlertView(appearance: appearance)
                             alert.addButton("Ok", action: {
                                 self.performSegue(withIdentifier: "tmPrimeiroAcesso", sender: nil)
+                                Analytics.logEvent("firstAccessFormStart", parameters: ["user" : "primeiro acesso","uuid" : mbUser.id])
                             })
                             alert.showSuccess("Seja bem vindo!", subTitle: "Troque sua senha agora. A nova senha deve conter no mínimo 5 dígitos.")
                             
