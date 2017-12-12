@@ -56,22 +56,19 @@ class PrimeiroLoginViewController: UIViewController {
                             
                             print(dictionary)
                             if let _ = dictionary["records"]{
-                                
                                 SCLAlertView().showSuccess("Tudo pronto!", subTitle: "Agora é só acessar usando sua nova senha.")
-                                Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user" : "confirmação da troca de senhas","uuid" : MBUser.currentUser?.id])
+                                Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user" : MBUser.currentUser?.username,"id_user":MBUser.currentUser?.id,"email":MBUser.currentUser?.email,"token":MBUser.currentUser?.token,"companyId":MBUser.currentUser?.companyId,"employeeId":MBUser.currentUser?.employeeId,"firstName":MBUser.currentUser?.firstName,"firstAccessAt":MBUser.currentUser?.firstAccessAt!,"statusID":MBUser.currentUser?.statusID,"statusDescription" : MBUser.currentUser?.statusDescription])
                                 self.dismiss(animated: true)
                             }
                         }
                     }catch{
-                        
                         SCLAlertView().showSuccess("Ops!", subTitle: "Erro ao alterar a senha.")
-                        Analytics.logEvent("firstAccessFormFinishFail", parameters: ["faill" : "falha em ler o json do Backend","uuid" : MBUser.currentUser?.id])
                         self.dismiss(animated: true)
                     }
                     
                 case let .failure(error):
                     SCLAlertView().showSuccess("Ops!", subTitle: "Erro ao alterar a senha.")
-                    Analytics.logEvent("firstAccessFormFinishFail", parameters: ["faill" : "falha de conexao","uuid" : MBUser.currentUser?.id])
+                    Analytics.logEvent("AccessFormFinishFail", parameters: ["localizedDescription" : error.localizedDescription,"errorDescription" : error.errorDescription!,"Errorresponse" : error.response!])
                     self.dismiss(animated: true)
                 }
                 

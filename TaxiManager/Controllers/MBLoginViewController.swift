@@ -23,25 +23,20 @@ class MBLoginViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.textFieldUsername.delegate = self
         self.textFieldPassword.delegate = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         self.textFieldPassword.text = ""
     }
     
     override var canBecomeFirstResponder: Bool{
-        
         return true
     }
     
     //MARK: - Metodos
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         self.becomeFirstResponder()
     }
     
@@ -64,15 +59,14 @@ class MBLoginViewController: UIViewController {
                         guard let dictionary = try response.mapJSON() as? [String : Any] else {
                             return
                         }
-                        print("---------------------")
-                        print(dictionary)
-                        print("---------------------")
-                        
+                        //                        print("---------------------")
+                        //                        print(dictionary)
+                        //                        print("---------------------")
                         let mbUser = MBUser(from: dictionary)
                         
-                        print("O ID do user é :\(mbUser.id)")
-                        print("O ID do employee é :\(mbUser.employeeId)")
-
+                        //  print("O ID do user é :\(mbUser.id)")
+                        //  print("O ID do employee é :\(mbUser.employeeId)")
+                        
                         let userEncoded = try JSONEncoder().encode(mbUser)
                         
                         MBUser.update()
@@ -99,7 +93,8 @@ class MBLoginViewController: UIViewController {
                             let alert = SCLAlertView(appearance: appearance)
                             alert.addButton("Ok", action: {
                                 self.performSegue(withIdentifier: "tmPrimeiroAcesso", sender: nil)
-                                Analytics.logEvent("firstAccessFormStart", parameters: ["user" : "primeiro acesso","uuid" : mbUser.id])
+                                
+                                Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user" : mbUser.username,"id_user":mbUser.id,"email":mbUser.email,"token":mbUser.token,"companyId":mbUser.companyId,"employeeId":mbUser.employeeId,"firstName":mbUser.firstName,"firstAccessAt":mbUser.firstAccessAt!,"statusID":mbUser.statusID,"statusDescription" : mbUser.statusDescription])
                             })
                             alert.showSuccess("Seja bem vindo!", subTitle: "Troque sua senha agora. A nova senha deve conter no mínimo 5 dígitos.")
                             
@@ -115,6 +110,7 @@ class MBLoginViewController: UIViewController {
                     alert.showError("Erro", subTitle: "Usuário ou senha inválidos.")
                 }
             case let .failure(error):
+                Analytics.logEvent("AccessFormFinishFail", parameters: ["localizedDescription" : error.localizedDescription,"errorDescription" : error.errorDescription!,"Errorresponse" : error.response!])
                 print(error.localizedDescription)
             }
         }

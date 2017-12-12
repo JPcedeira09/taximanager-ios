@@ -207,7 +207,8 @@ class MBInitialViewViewController: UIViewController {
                     //                    print("----------- INFO: MAPED estimatePrices ----------")
                     
                     self.searchResult = MBSearchResult(startAddress: startAddress, endAddress: endAddress, duration: duration, distance: distance, travels: travels)
-                    
+Analytics.logEvent("resultClick", parameters: ["id" : travels.first?.id,"alertMessage" : travels.first?.alertMessage,"waitingTime" : travels.first?.waitingTime,"name" : travels.first?.name,"price" : travels.first?.price,"urlDeeplink" : travels.first?.urlDeeplink,"urlLogo" : travels.first?.urlLogo,"urlStore" : travels.first?.urlStore,"urlWeb" : travels.first?.urlWeb,"uuid" : travels.first?.uuid,"ModalityID" : travels.first?.modality.id,"ModalityName" : travels.first?.modality.name])
+                   
                     self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
                 case let .failure(error):
                     print(error.localizedDescription)
