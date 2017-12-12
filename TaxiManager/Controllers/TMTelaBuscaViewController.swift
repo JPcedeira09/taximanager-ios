@@ -45,8 +45,17 @@ class MBTelaBuscaViewController: UIViewController {
         self.labelDuracao.text =  "\(self.searchResult?.duration ?? 00) min"
         self.labelStartAddress.text = self.searchResult?.startAddress.address
         self.labelEndAddress.text = self.searchResult?.endAddress.address
+        
+        
     }
     
+    @IBAction func dissmissTelaInicial(_ sender: Any) {
+        self.performSegue(withIdentifier: "TelaInicialSegue", sender: nil)
+        print("---------- Dissmiss ----------")
+        Analytics.logEvent("searchCancelEstimate", parameters: ["user": (MBUser.currentUser?.id)!,"endAddress":(self.searchResult?.endAddress.address)!,"endZipcode":(self.searchResult?.endAddress.zipcode)!,"startAddress":(self.searchResult?.startAddress.address)!,"startZipcode":(self.searchResult?.startAddress.zipcode)!,"msg" : "cancelou a busca"])
+        
+        
+    }
     //MARK: - Metodos
     func setupHeader(){
         
@@ -70,7 +79,7 @@ class MBTelaBuscaViewController: UIViewController {
             
             Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,"uuid" : corrida.uuid,"modalityID":corrida.modality.id,"modalityName":corrida.modality.name])
             application.open(urlDeeplink)
-                 Analytics.logEvent("resultClick", parameters: ["user_id": (MBUser.currentUser?.id)!, "company_id": (MBUser.currentUser?.companyId)!, "selected": self.uuid!, "type_open": 1 ])
+            Analytics.logEvent("resultClick", parameters: ["user_id": (MBUser.currentUser?.id)!, "company_id": (MBUser.currentUser?.companyId)!, "selected": self.uuid!, "type_open": 1 ])
             print("O indexPath row é : \(self.indexpathRow ?? 0 )")
             let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 1 )
             let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
@@ -81,7 +90,7 @@ class MBTelaBuscaViewController: UIViewController {
             if let urlStoreString = corrida.urlStore, let urlStore = URL(string: urlStoreString){
                 alert.addButton("Instalar agora", action: {
                     Analytics.logEvent("openStore", parameters: ["player" : corrida.name,"uuid" : corrida.uuid,"modalityID":corrida.modality.id,"modalityName":corrida.modality.name])
-                      Analytics.logEvent("resultClick", parameters: ["user_id": (MBUser.currentUser?.id)!, "company_id": (MBUser.currentUser?.companyId)!, "selected": self.uuid!, "type_open": 2 ])
+                    Analytics.logEvent("resultClick", parameters: ["user_id": (MBUser.currentUser?.id)!, "company_id": (MBUser.currentUser?.companyId)!, "selected": self.uuid!, "type_open": 2 ])
                     
                     application.open(urlStore)
                     let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 2 )
@@ -94,11 +103,11 @@ class MBTelaBuscaViewController: UIViewController {
                 
                 alert.addButton("Solicitar carro", action: {
                     Analytics.logEvent("openWeb", parameters: ["player" : corrida.name,"uuid" : corrida.uuid,"modalityID":corrida.modality.id,"modalityName":corrida.modality.name])
-                         Analytics.logEvent("resultClick", parameters: ["user_id": (MBUser.currentUser?.id)!, "company_id": (MBUser.currentUser?.companyId)!, "selected": self.uuid!, "type_open": 3 ])
+                    Analytics.logEvent("resultClick", parameters: ["user_id": (MBUser.currentUser?.id)!, "company_id": (MBUser.currentUser?.companyId)!, "selected": self.uuid!, "type_open": 3 ])
                     application.open(urlWeb)
                     let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 3 )
                     let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
-                    print("O indexPath row é : \(self.indexpathRow ?? 0 )")
+                    //   print("O indexPath row é : \(self.indexpathRow ?? 0 )")
                 })
             }
             alert.showInfo("Você não possui o aplicativo instalado", subTitle: "", closeButtonTitle: "Cancelar", colorStyle: 0x242424)
@@ -137,7 +146,7 @@ extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let corrida = self.searchResult!.travels[indexPath.row]
-         self.uuid = self.searchResult!.travels[indexPath.row].uuid
+        self.uuid = self.searchResult!.travels[indexPath.row].uuid
         //print(corrida)
         self.checarAcoesCorrida(corrida: corrida)
         self.indexpathRow = indexPath.row
@@ -155,7 +164,4 @@ extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource
         print(mbInfoPlayer)
         return mbInfoPlayer.selected
     }
-    
 }
-
-
