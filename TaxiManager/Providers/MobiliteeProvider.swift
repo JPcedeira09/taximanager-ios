@@ -84,7 +84,6 @@ extension MobiliteeProvider : TargetType{
             formatter.timeZone = TimeZone(identifier: "America/Sao_Paulo")
             print(formatter.string(from: now))
             
-            
             let parameters = [
                 "id": userId,
                 "password": newPassword,
@@ -107,14 +106,12 @@ extension MobiliteeProvider : TargetType{
         default:
             return .requestPlain
         }
-        
     }
     
     var baseURL: URL {
         
         switch (self) {
         case .estimate:
-            
             return URL(string: "https://estimate.taximanager.com.br/v1")!
         default:
             return URL(string: "https://api.taximanager.com.br/v1/taximanager")!

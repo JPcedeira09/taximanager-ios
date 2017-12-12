@@ -52,8 +52,8 @@ class MBInitialViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // func valid id status
-      self.getStatusEmployee()
-   
+        self.getStatusEmployee()
+        
         //Maps config.
         self.mapView.delegate = self
         self.mapView.showsUserLocation = true
@@ -187,8 +187,8 @@ class MBInitialViewViewController: UIViewController {
     }
     
     func estimatePrices(startAddress : MBLocation, endAddress : MBLocation, distance : Int, duration : Int){
-      //  print("MOYA URL \(startAddress)/\(endAddress)/\(distance)/\(duration)/\(MBUser.currentUser!.id)/\(MBUser.currentUser!.companyId))")
-      MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, distance: distance, duration: duration, userId: MBUser.currentUser!.id, companyId: MBUser.currentUser!.companyId)) { (result) in
+        //  print("MOYA URL \(startAddress)/\(endAddress)/\(distance)/\(duration)/\(MBUser.currentUser!.id)/\(MBUser.currentUser!.companyId))")
+        MobiliteeProvider.api.request(.estimate(start: startAddress, end: endAddress, distance: distance, duration: duration, userId: MBUser.currentUser!.id, companyId: MBUser.currentUser!.companyId)) { (result) in
             
             SwiftSpinner.hide()
             
@@ -207,8 +207,8 @@ class MBInitialViewViewController: UIViewController {
                     //                    print("----------- INFO: MAPED estimatePrices ----------")
                     
                     self.searchResult = MBSearchResult(startAddress: startAddress, endAddress: endAddress, duration: duration, distance: distance, travels: travels)
-Analytics.logEvent("resultClick", parameters: ["id" : travels.first?.id,"alertMessage" : travels.first?.alertMessage,"waitingTime" : travels.first?.waitingTime,"name" : travels.first?.name,"price" : travels.first?.price,"urlDeeplink" : travels.first?.urlDeeplink,"urlLogo" : travels.first?.urlLogo,"urlStore" : travels.first?.urlStore,"urlWeb" : travels.first?.urlWeb,"uuid" : travels.first?.uuid,"ModalityID" : travels.first?.modality.id,"ModalityName" : travels.first?.modality.name])
-                   
+                    Analytics.logEvent("resultClick", parameters: ["id" : travels.first?.id,"alertMessage" : travels.first?.alertMessage,"waitingTime" : travels.first?.waitingTime,"name" : travels.first?.name,"price" : travels.first?.price,"urlDeeplink" : travels.first?.urlDeeplink,"urlLogo" : travels.first?.urlLogo,"urlStore" : travels.first?.urlStore,"urlWeb" : travels.first?.urlWeb,"uuid" : travels.first?.uuid,"ModalityID" : travels.first?.modality.id,"ModalityName" : travels.first?.modality.name])
+                    
                     self.performSegue(withIdentifier: "segueTelaBusca", sender: nil)
                 case let .failure(error):
                     print(error.localizedDescription)
@@ -234,7 +234,7 @@ Analytics.logEvent("resultClick", parameters: ["id" : travels.first?.id,"alertMe
     
     func getStatusEmployee() {
         let urlRequest = URL(string:  "https://api.taximanager.com.br/v1/taximanager/users/\((MBUser.currentUser?.id)!)")
-
+        
         // print("\n /n INFO: URL:\(urlRequest)\n /n ")
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
@@ -259,7 +259,7 @@ Analytics.logEvent("resultClick", parameters: ["id" : travels.first?.id,"alertMe
                 }
             }else{
                 print("INFO: ERROR ON REQUEST getStatusEmployee - \(response.error?.localizedDescription)")
-             }
+            }
         }
     }
 }

@@ -556,8 +556,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="inu-o9-Nqe"/>
                     <connections>
+                        <outlet property="SairButton" destination="qsa-7K-hA1" id="FiE-e8-dPK"/>
                         <outlet property="btnVersion" destination="XMx-Ip-Hmg" id="98H-81-FUO"/>
+                        <outlet property="comoUsarButton" destination="Rw5-x2-Btc" id="DaO-cX-aa3"/>
                         <outlet property="labelNome" destination="YiP-TZ-ePS" id="IFz-Jl-W3p"/>
+                        <outlet property="politicasDeUso" destination="gY1-41-1u2" id="Rm6-Ui-j0N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRb-dd-xdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
