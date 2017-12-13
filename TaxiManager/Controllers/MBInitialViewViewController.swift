@@ -22,6 +22,13 @@ import Crashlytics
 
 class MBInitialViewViewController: UIViewController {
     
+    
+    // text to set the place holder on buscar endereço.
+    var textoDestination: String = ""
+    
+    // set the key value to indentify the flow on the buscar endereço that came from inicitial view controller.
+    let statusDestinationInicial = 1
+    
     //MARK: - Outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var imageViewPin: UIImageView!
@@ -342,7 +349,6 @@ extension MBInitialViewViewController : CLLocationManagerDelegate{
             mapaMoveuInicialmente = true
         }
     }
-    
 }
 
 extension MBInitialViewViewController : UITextFieldDelegate{
@@ -352,10 +358,13 @@ extension MBInitialViewViewController : UITextFieldDelegate{
         if(textField == self.textFieldEnderecoOrigem){
             
             let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! MBBuscaEnderecoViewController
+            buscarEnderecoViewController.textoDestination = "Inserir local de partida"
+
+            buscarEnderecoViewController.destinationViewController = statusDestinationInicial
+            
             buscarEnderecoViewController.selecionouEndereco = {[weak self] (dicionarioEndereco) in
-                
+
                 if let _ = self {
-                    
                     self?.startAddress = dicionarioEndereco
                     let lat = dicionarioEndereco.latitude
                     let lng = dicionarioEndereco.longitude
@@ -369,6 +378,14 @@ extension MBInitialViewViewController : UITextFieldDelegate{
             
         }else if (textField == self.textFieldEnderecoDestino){
             let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! MBBuscaEnderecoViewController
+         
+            // Set the placeholder of the buscar Endereco View controller.
+            buscarEnderecoViewController.textoDestination = "Inserir local de destino"
+            
+            // Set the flow from the initial view controller.
+            buscarEnderecoViewController.destinationViewController = statusDestinationInicial
+            
+            //set the address dict.
             buscarEnderecoViewController.selecionouEndereco = {[weak self] (dicionarioEndereco) in
                 if let _ = self {
                     self?.endAddress = dicionarioEndereco

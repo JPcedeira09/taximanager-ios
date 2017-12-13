@@ -2,7 +2,6 @@
 //  FavoritosAdicionarViewController.swift
 //  TaxiManager
 //
-//  Created by Esdras Martins on 07/11/17.
 //  Copyright © 2017 Taxi Manager. All rights reserved.
 //
 
@@ -12,11 +11,14 @@ import SwiftSpinner
 
 class MBFavoritosAdicionarViewController: UIViewController {
 
-    //MARK: - Outlets
+    // set the key value to indentify the flow on the buscar endereço that came from inicitial view controller.
+    let statusDestinationInicial = 0
+    
+    //MARK: - Outlets.
     @IBOutlet weak var txtFieldNomeEndereco: UITextField!
     @IBOutlet weak var txtFieldEndereco: UITextField!
-    
-    //MARK: - Propriedades
+
+    //MARK: - Properties.
     var dicFavorito : [String: Any] = [:]
     var arrayFavoritos : [[String: Any]] = []
     
@@ -105,8 +107,14 @@ extension MBFavoritosAdicionarViewController : UITextFieldDelegate{
         if(textField == self.txtFieldEndereco){
             
             let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! MBBuscaEnderecoViewController
+
+            // Set the placeholder of the buscar Endereco View controller.
+            buscarEnderecoViewController.textoDestination = "Inserir local para adicionar em favoritos"
+            
+            // Set the flow from the initial view controller.
+            buscarEnderecoViewController.destinationViewController = statusDestinationInicial
+            
             buscarEnderecoViewController.selecionouEndereco = {[weak self] (dicionarioEndereco) in
-                
                 if let _ = self {
                     
                     self?.bookmarkAddress = MBAddress(fromLocation: dicionarioEndereco)

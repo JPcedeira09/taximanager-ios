@@ -299,6 +299,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tHl-bO-W0G">
+                                <rect key="frame" x="0.0" y="133.5" width="375" height="533.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdv-93-L3M">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="133.5"/>
                                 <subviews>
@@ -313,8 +317,8 @@
                                             <action selector="fechar:" destination="MWT-To-EHD" eventType="touchUpInside" id="f6o-fs-PD7"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Inserir local de partida" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rPI-EN-h3c">
-                                        <rect key="frame" x="35" y="95" width="305" height="30"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Inserir local de partida" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rPI-EN-h3c">
+                                        <rect key="frame" x="35" y="108" width="305" height="17"/>
                                         <gestureRecognizers/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="12"/>
@@ -343,10 +347,6 @@
                                     <constraint firstAttribute="height" constant="133.5" id="zUc-Xg-X6O"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tHl-bO-W0G">
-                                <rect key="frame" x="0.0" y="133.5" width="375" height="533.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1886,6 +1886,7 @@
         <image name="search_vertical_bar" width="9" height="49"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Sqa-BD-j4F"/>
         <segue reference="Wsh-fO-y3n"/>
     </inferredMetricsTieBreakers>
 </document>

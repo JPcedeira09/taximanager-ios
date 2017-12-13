@@ -18,6 +18,12 @@ class MBBuscaEnderecoViewController: UIViewController {
     @IBOutlet weak var txtFieldBuscaEndereco: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    // Texto para saber qual o placeholder do txtFieldBuscaEndereco
+    var textoDestination: String?
+    
+    // status para saber qual o fluxo que exibe a MBBuscaEnderecoViewController 0 para fluxo da tela inicial, 1 para fluxo tela de adicionar favoritos.
+    var destinationViewController: Int?
+    
     //MARK: - Propriedades
     var fetcher = GMSAutocompleteFetcher()
     var arrayPredicoes = [GMSAutocompletePrediction]()
@@ -31,6 +37,8 @@ class MBBuscaEnderecoViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("---------- iNFO placeholder:\(textoDestination)-------------")
+        self.txtFieldBuscaEndereco.placeholder = textoDestination
         
         // Do any additional setup after loading the view.
         if let recents = MBUser.currentUser?.recents{
@@ -104,29 +112,18 @@ class MBBuscaEnderecoViewController: UIViewController {
             expandedSections.remove(section)
         }
         self.tableView.reloadData()
-
-        
-        
     }
-    
 }
 
 extension MBBuscaEnderecoViewController : GMSAutocompleteFetcherDelegate{
     func didFailAutocompleteWithError(_ error: Error) {
-        
         print(error.localizedDescription)
     }
     
-    
     func didAutocomplete(with predictions: [GMSAutocompletePrediction]) {
-        
         self.arrayPredicoes = predictions;
         self.tableView.reloadData()
-        
     }
-    
-    
-    
 }
 
 extension MBBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSource{
@@ -135,41 +132,100 @@ extension MBBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tmBuscaEnderecoCell", for: indexPath) as! TMBuscaEnderecoCell
         
-        switch indexPath.section {
+        switch destinationViewController! {
         case 0:
-            let predicao = self.arrayPredicoes[indexPath.row]
-            cell.labelEndereco.attributedText = predicao.attributedFullText
+            switch indexPath.section {
+            case 0:
+                let predicao = self.arrayPredicoes[indexPath.row]
+                cell.labelEndereco.attributedText = predicao.attributedFullText
+            case 1:
+                let recente = self.arrayRecentes[indexPath.row]
+                cell.labelEndereco.text = recente.address
+            case 2:
+                let poi = self.arrayPois[indexPath.row]
+                cell.labelEndereco.text = poi.mainText
+            default:
+                cell.labelEndereco.text = ""
+            }
         case 1:
-            let recente = self.arrayRecentes[indexPath.row]
-            cell.labelEndereco.text = recente.address
-        case 2:
-            let favorito = self.arrayFavoritos[indexPath.row]
-            cell.labelEndereco.text = favorito.mainText
-        case 3:
-            let poi = self.arrayPois[indexPath.row]
-            cell.labelEndereco.text = poi.mainText
+            switch indexPath.section {
+            case 0:
+                let predicao = self.arrayPredicoes[indexPath.row]
+                cell.labelEndereco.attributedText = predicao.attributedFullText
+            case 1:
+                let recente = self.arrayRecentes[indexPath.row]
+                cell.labelEndereco.text = recente.address
+            case 2:
+                let favorito = self.arrayFavoritos[indexPath.row]
+                cell.labelEndereco.text = favorito.mainText
+            case 3:
+                let poi = self.arrayPois[indexPath.row]
+                cell.labelEndereco.text = poi.mainText
+            default:
+                cell.labelEndereco.text = ""
+            }
         default:
-            cell.labelEndereco.text = ""
+            switch indexPath.section {
+            case 0:
+                let predicao = self.arrayPredicoes[indexPath.row]
+                cell.labelEndereco.attributedText = predicao.attributedFullText
+            case 1:
+                let recente = self.arrayRecentes[indexPath.row]
+                cell.labelEndereco.text = recente.address
+            case 2:
+                let favorito = self.arrayFavoritos[indexPath.row]
+                cell.labelEndereco.text = favorito.mainText
+            case 3:
+                let poi = self.arrayPois[indexPath.row]
+                cell.labelEndereco.text = poi.mainText
+            default:
+                cell.labelEndereco.text = ""
+            }
         }
-        
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if(expandedSections.contains(section)) {
+            switch destinationViewController! {
+            case 0:
             switch section {
             case 0:
                 return self.arrayPredicoes.count
             case 1:
                 return self.arrayRecentes.count <= 10 ? self.arrayRecentes.count : 10
             case 2:
-                return self.arrayFavoritos.count
-            case 3:
                 return self.arrayPois.count
             default:
                 return 0
+            }
+            case 1:
+                switch section {
+                case 0:
+                    return self.arrayPredicoes.count
+                case 1:
+                    return self.arrayRecentes.count <= 10 ? self.arrayRecentes.count : 10
+                case 2:
+                    return self.arrayFavoritos.count
+                case 3:
+                    return self.arrayPois.count
+                default:
+                    return 0
+                }
+            default:
+                switch section {
+                case 0:
+                    return self.arrayPredicoes.count
+                case 1:
+                    return self.arrayRecentes.count <= 10 ? self.arrayRecentes.count : 10
+                case 2:
+                    return self.arrayFavoritos.count
+                case 3:
+                    return self.arrayPois.count
+                default:
+                    return 0
+                }
             }
         }else{
             return 0
@@ -177,30 +233,71 @@ extension MBBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
-    }
+        switch destinationViewController! {
+        case 0:
+            return 3
+        case 1:
+            return 4
+        default:
+            return 4
+        }
+        }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tmHeaderCell") as! TMCustomTableViewHeaderTableViewCell
-        
-        switch section {
+        switch destinationViewController! {
         case 0:
-            cell.imgViewLogo.image = nil
-            cell.labelTitulo.text = "Resultado Pesquisa"
+            switch section {
+            case 0:
+                cell.imgViewLogo.image = nil
+                cell.labelTitulo.text = "Resultado Pesquisa"
+            case 1:
+                cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_recente")
+                cell.labelTitulo.text = "Recentes"
+            case 2:
+                cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_poi")
+                cell.labelTitulo.text = "Pontos de Interesse"
+            default:
+                cell.imgViewLogo.image = nil
+                cell.labelTitulo.text = ""
+            }
         case 1:
-            cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_recente")
-            cell.labelTitulo.text = "Recentes"
-        case 2:
-            cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_favoritos")
-            cell.labelTitulo.text = "Favoritos"
-        case 3:
-            cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_poi")
-            cell.labelTitulo.text = "Pontos de Interesse"
-            
+            switch section {
+            case 0:
+                cell.imgViewLogo.image = nil
+                cell.labelTitulo.text = "Resultado Pesquisa"
+            case 1:
+                cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_recente")
+                cell.labelTitulo.text = "Recentes"
+            case 2:
+                cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_favoritos")
+                cell.labelTitulo.text = "Favoritos"
+            case 3:
+                cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_poi")
+                cell.labelTitulo.text = "Pontos de Interesse"
+            default:
+                cell.imgViewLogo.image = nil
+                cell.labelTitulo.text = ""
+            }
         default:
-            cell.imgViewLogo.image = nil
-            cell.labelTitulo.text = ""
+            switch section {
+            case 0:
+                cell.imgViewLogo.image = nil
+                cell.labelTitulo.text = "Resultado Pesquisa"
+            case 1:
+                cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_recente")
+                cell.labelTitulo.text = "Recentes"
+            case 2:
+                cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_favoritos")
+                cell.labelTitulo.text = "Favoritos"
+            case 3:
+                cell.imgViewLogo.image = #imageLiteral(resourceName: "icon_poi")
+                cell.labelTitulo.text = "Pontos de Interesse"
+            default:
+                cell.imgViewLogo.image = nil
+                cell.labelTitulo.text = ""
+            }
         }
         
         if(section != 0){
@@ -210,33 +307,58 @@ extension MBBuscaEnderecoViewController : UITableViewDelegate, UITableViewDataSo
             }else{
                 cell.imgViewSeta.image = #imageLiteral(resourceName: "icon_seta_direita")
             }
-            
             cell.btnSection.addTarget(self, action: #selector(sectionTapped), for: .touchUpInside)
             cell.btnSection.tag = section
         }
-        
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+     
         return 44
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        switch indexPath.section {
-        case 0:
-            self.resolverDidSelectPesquisa()
+        switch destinationViewController! {
+        case 0 :
+            switch indexPath.section {
+            case 0:
+                self.resolverDidSelectPesquisa()
+            case 1:
+                self.resolverDidSelectRecente()
+            case 2:
+                self.resolverDidSelectPoi()
+            default:
+                print("defaults")
+            }
         case 1:
-            self.resolverDidSelectRecente()
-        case 2:
-            self.resolverDidSelectFavorito()
-        case 3:
-            self.resolverDidSelectPoi()
-        
+            switch indexPath.section {
+            case 0:
+                self.resolverDidSelectPesquisa()
+            case 1:
+                self.resolverDidSelectRecente()
+            case 2:
+                self.resolverDidSelectFavorito()
+            case 3:
+                self.resolverDidSelectPoi()
+            default:
+                print("defaults")
+            }
         default:
-            print("defaults")
+            switch indexPath.section {
+            case 0:
+                self.resolverDidSelectPesquisa()
+            case 1:
+                self.resolverDidSelectRecente()
+            case 2:
+                self.resolverDidSelectFavorito()
+            case 3:
+                self.resolverDidSelectPoi()
+            default:
+                print("defaults")
+            }
         }
-        
         self.dismiss(animated: true)
     }
 }
