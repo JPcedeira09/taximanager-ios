@@ -83,16 +83,12 @@ class MBBuscaEnderecoViewController: UIViewController {
             
             self.timer.invalidate()
         }
-        
         if let text = sender.text {
             
             if text.count >= 5 {
-                
                 self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
-                    
                     self.fetcher.sourceTextHasChanged(text)
                     timer.invalidate()
-                    
                 })
             }
         }
@@ -104,7 +100,6 @@ class MBBuscaEnderecoViewController: UIViewController {
         let section = sender.tag
         let shouldExpand = !expandedSections.contains(section)
         if (shouldExpand) {
-            
             // usar o remove() para fechar as sections aberta
             //expandedSections.remove()
             expandedSections.add(section)

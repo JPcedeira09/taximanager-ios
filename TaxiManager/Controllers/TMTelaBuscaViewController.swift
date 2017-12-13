@@ -51,7 +51,7 @@ class MBTelaBuscaViewController: UIViewController {
     
     @IBAction func dissmissTelaInicial(_ sender: Any) {
         self.performSegue(withIdentifier: "TelaInicialSegue", sender: nil)
-        print("---------- Dissmiss ----------")
+        // print("---------- Dissmiss ----------")
         Analytics.logEvent("searchCancelEstimate", parameters: ["user": (MBUser.currentUser?.id)!,"endAddress":(self.searchResult?.endAddress.address)!,"endZipcode":(self.searchResult?.endAddress.zipcode)!,"startAddress":(self.searchResult?.startAddress.address)!,"startZipcode":(self.searchResult?.startAddress.zipcode)!,"msg" : "cancelou a busca"])
         
         
@@ -83,10 +83,11 @@ class MBTelaBuscaViewController: UIViewController {
             print("O indexPath row é : \(self.indexpathRow ?? 0 )")
             let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 1 )
             let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
-            print("INFO: a request tem o UUID\(request)")
+            //print("INFO: a request tem o UUID\(request)")
         }else{
             
             let alert = SCLAlertView()
+            
             if let urlStoreString = corrida.urlStore, let urlStore = URL(string: urlStoreString){
                 alert.addButton("Instalar agora", action: {
                     Analytics.logEvent("openStore", parameters: ["player" : corrida.name,"uuid" : corrida.uuid,"modalityID":corrida.modality.id,"modalityName":corrida.modality.name])
@@ -95,7 +96,8 @@ class MBTelaBuscaViewController: UIViewController {
                     application.open(urlStore)
                     let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 2 )
                     let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
-                    print("O indexPath row é : \(self.indexpathRow ?? 0 )")
+                    //print("INFO: a request tem o UUID\(request)")
+                    //print("O indexPath row é : \(self.indexpathRow ?? 0 )")
                 })
             }
             
@@ -107,9 +109,11 @@ class MBTelaBuscaViewController: UIViewController {
                     application.open(urlWeb)
                     let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 3 )
                     let request = self.seveEstimateSelected(mbInfoPlayer: mbPlayerchosed)
-                    //   print("O indexPath row é : \(self.indexpathRow ?? 0 )")
+                    //print("INFO: a request tem o UUID\(request)")
+                    //print("O indexPath row é : \(self.indexpathRow ?? 0 )")
                 })
             }
+                Analytics.logEvent("searchCancelResult", parameters: ["player" : corrida.name,"uuid" :corrida.uuid,"modalityID":corrida.modality.id,"modalityName":corrida.modality.name])
             alert.showInfo("Você não possui o aplicativo instalado", subTitle: "", closeButtonTitle: "Cancelar", colorStyle: 0x242424)
         }
     }
@@ -158,10 +162,10 @@ extension MBTelaBuscaViewController : UITableViewDelegate, UITableViewDataSource
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
         Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).request
-        print("\n ----------------INFO:REQUEST seveEstimateSelected---------------- \n")
-        print(parametros)
-        print(header)
-        print(mbInfoPlayer)
+        //print("\n ----------------INFO:REQUEST seveEstimateSelected---------------- \n")
+        //print(parametros)
+        //print(header)
+        //print(mbInfoPlayer)
         return mbInfoPlayer.selected
     }
 }
