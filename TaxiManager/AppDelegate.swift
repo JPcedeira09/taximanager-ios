@@ -4,7 +4,7 @@
 //  TaxiManager
 //
 //  Created by Esdras Martins on 06/10/17.
-//  Copyright © 2017 Taxi Manager. All rights reserved.
+//  Copyright © 2017 Taxi Manager. Al}l rights reserved.
 //
 
 import UIKit

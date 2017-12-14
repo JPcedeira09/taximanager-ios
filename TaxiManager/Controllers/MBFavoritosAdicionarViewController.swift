@@ -59,9 +59,7 @@ class MBFavoritosAdicionarViewController: UIViewController {
                 MBUser.update()
                 SwiftSpinner.hide()
                 switch (result){
-                    
                 case let .success(response):
-                    
                     do{
                         let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
                         
@@ -69,18 +67,13 @@ class MBFavoritosAdicionarViewController: UIViewController {
                             
                             MBUser.currentUser!.bookmarks = [MBBookmark]()
                         }
-                        
                         MBUser.currentUser!.bookmarks! += mbBookmarks
-                        
                         //                        print(MBUser.currentUser?.bookmarks)
                     }catch{
-                        
                         print("caiu no catch")
                     }
-                    
                     print("Chegou aqui")
                     self.dismiss(animated: true, completion: nil)
-                    
                 case let .failure(error):
                     print(error.localizedDescription)
                     self.dismiss(animated: true)
@@ -92,7 +85,6 @@ class MBFavoritosAdicionarViewController: UIViewController {
 }
 
 extension MBFavoritosAdicionarViewController : UITextFieldDelegate{
-    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         

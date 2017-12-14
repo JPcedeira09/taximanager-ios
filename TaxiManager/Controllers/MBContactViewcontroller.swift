@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 import Alamofire
 
 class MBContactViewcontroller: UIViewController {
@@ -15,30 +17,34 @@ class MBContactViewcontroller: UIViewController {
     @IBOutlet weak var textFieldMsg: UITextView!
     //@IBOutlet weak var labelMotivo: UILabel!
     @IBOutlet weak var txtFieldSubject: UITextField!
+    @IBOutlet weak var btnEnviarMsg: UIButton!
+    var locationManager = CLLocationManager()
     
     var latitude: Double?
     var longitude: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        txtFieldSubject.placeholder = "Qual o assunto?"
+        let location = self.locationManager.location!
+
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
+        
     //    self.labelMotivo.text = ""
         self.textViewInfo.isEditable = false
+        self.textViewInfo.layer.cornerRadius = 3
         self.textFieldMsg.isEditable = true
-        self.textFieldMsg.layer.borderWidth = 1
+        self.textFieldMsg.layer.borderWidth = 2
         self.textFieldMsg.layer.borderColor = UIColor.gray.cgColor
+        self.textFieldMsg.layer.cornerRadius = 3
+        self.btnEnviarMsg.layer.cornerRadius = 3
     }
     @IBAction func dismissView(_ sender: UIButton) {
                 self.dismiss(animated: true, completion: nil)
     }
-    override var canBecomeFirstResponder: Bool{
-        return true
-    }
-    
-    //MARK: - methods
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.becomeFirstResponder()
-    }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
        // labelMotivo.text = ""
@@ -48,10 +54,15 @@ class MBContactViewcontroller: UIViewController {
     
     @IBAction func enviarMensagem(_ sender: UIButton) {
         var feedback = Feedback(userId: (MBUser.currentUser?.id)!, subject: txtFieldSubject.text!, message: textFieldMsg.text!
-            , platform: "IOS", platformVersion: "11.4", appVersion: "1.4", latitude: latitude!, longitude: longitude!)
-      var mensagem = self.sendFeedBack(feedback: feedback)
+            , platform: "IOS", platformVersion: (Bundle.main.releaseVersionNumber)!, appVersion: Bundle.main.releaseVersionNumberPretty, latitude: latitude!, longitude: longitude!)
         
-        print("A mensagem enviada foi\(mensagem)")
+        print(feedback.toDict(feedback))
+        
+      var mensagem = self.sendFeedBack(feedback: feedback)
+        self.becomeFirstResponder()
+        print("A mensagem enviada foi '\(mensagem)'")
+        self.dismiss(animated: true, completion: nil)
+
       /*  if (self.labelMotivo.text == ""){
             alertComum(message: "Escolha o motivo do seu contato", title: "Motivo do Contato")
         } */
@@ -83,15 +94,30 @@ class MBContactViewcontroller: UIViewController {
     
     func sendFeedBack( feedback: Feedback)-> String{
         let parametros : [String: Any]  =  feedback.toDict(feedback) as [String:Any]
-        let postURL = URL(string:  "https://estimate.taximanager.com.br/v1/feedback")
+        let postURL = URL(string:  "http://api.taximanager.com.br/v1/taximanager/feedback")
+   
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
-        Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).request
-        
+        Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).responseJSON {  response in
+            print(response)
+            }
         return feedback.message
     }
 }
 extension MBContactViewcontroller : UITextFieldDelegate{
+  
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+    self.textFieldMsg.text = ""
+    }
+    
+    override var canBecomeFirstResponder: Bool{
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.becomeFirstResponder()
+        self.textFieldMsg.text = ""
+    }
     
 }
 extension UIViewController {
@@ -100,8 +126,10 @@ extension UIViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let setTipoMSG = UIAlertAction(title: "OK", style: .default) { UIAlertAction in
         }
+        
         alertController.addAction(setTipoMSG)
         self.present(alertController, animated: true, completion: nil)
+        
     }
     
 }

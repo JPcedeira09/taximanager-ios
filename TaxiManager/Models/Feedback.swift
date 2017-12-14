@@ -35,6 +35,7 @@ struct Feedback {
         self.userId = userId
         self.subject = subject
         self.message = message
+        self.platform = platform
         self.platformVersion = platformVersion
         self.appVersion = appVersion
         self.latitude = latitude
@@ -46,6 +47,7 @@ struct Feedback {
         self.userId = serializable["userId"] as? Int ?? 0
         self.subject = serializable["subject"] as? String ?? ""
         self.message = serializable["message"] as? String ?? ""
+        self.platform = serializable["platform"] as? String ?? ""
         self.platformVersion = serializable["platformVersion"] as? String ?? ""
         self.appVersion = serializable["appVersion"] as? String ?? ""
         self.latitude = serializable["latitude"] as? Double ?? 0.0
@@ -53,7 +55,7 @@ struct Feedback {
     }
     
     func toDict(_ feedback : Feedback) -> [String: Any]{
-        let parametros = ["userId" :  feedback.userId, "subject" :  feedback.subject, "message" : feedback.message, "platformVersion" : feedback.platformVersion, "appVersion" : feedback.appVersion, "latitude" : feedback.latitude, "longitude" : feedback.longitude] as [String : Any]
+        let parametros = ["userId" :  feedback.userId, "subject" :  feedback.subject, "message" : feedback.message, "platform" : feedback.platform ,"platformVersion" : feedback.platformVersion, "appVersion" : feedback.appVersion, "latitude" : feedback.latitude, "longitude" : feedback.longitude] as [String : Any]
         return parametros
     }
     

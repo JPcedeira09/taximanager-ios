@@ -96,7 +96,6 @@
                     
                 })
             }
-            
         }
     }
     
@@ -109,10 +108,8 @@
             if(UIApplication.shared.canOpenURL(url)){
                 
                 UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
-                    
                 })
             }
-            
         }
     }
     

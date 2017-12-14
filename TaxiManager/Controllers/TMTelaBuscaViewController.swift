@@ -49,13 +49,15 @@ class MBTelaBuscaViewController: UIViewController {
         
     }
     
+    /**
     @IBAction func dissmissTelaInicial(_ sender: Any) {
         self.performSegue(withIdentifier: "TelaInicialSegue", sender: nil)
         // print("---------- Dissmiss ----------")
         Analytics.logEvent("searchCancelEstimate", parameters: ["user": (MBUser.currentUser?.id)!,"endAddress":(self.searchResult?.endAddress.address)!,"endZipcode":(self.searchResult?.endAddress.zipcode)!,"startAddress":(self.searchResult?.startAddress.address)!,"startZipcode":(self.searchResult?.startAddress.zipcode)!,"msg" : "cancelou a busca"])
         
         
-    }
+    }*/
+    
     //MARK: - Metodos
     func setupHeader(){
         

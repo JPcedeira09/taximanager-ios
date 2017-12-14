@@ -18,6 +18,7 @@ class MBLoginViewController: UIViewController {
     
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
+    @IBOutlet weak var btnEnviar: CustomButton!
     //MARK: - Propriedades
     
     //MARK: - View Lifecycle
@@ -25,6 +26,7 @@ class MBLoginViewController: UIViewController {
         super.viewDidLoad()
         self.textFieldUsername.delegate = self
         self.textFieldPassword.delegate = self
+        btnEnviar.layer.cornerRadius = 2
     }
     
     override func viewWillAppear(_ animated: Bool) {

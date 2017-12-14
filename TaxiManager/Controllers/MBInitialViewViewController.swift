@@ -22,7 +22,6 @@ import Crashlytics
 
 class MBInitialViewViewController: UIViewController {
     
-    
     // text to set the place holder on buscar endereço.
     var textoDestination: String = ""
     
@@ -41,6 +40,8 @@ class MBInitialViewViewController: UIViewController {
     @IBOutlet weak var viewOrigem: UIView!
     @IBOutlet weak var viewDestino: UIView!
     
+    @IBOutlet weak var btnProx: UIButton!
+    
     @IBOutlet weak var blurView: UIVisualEffectView!
     
     //MARK: - Properties.
@@ -58,6 +59,9 @@ class MBInitialViewViewController: UIViewController {
     //MARK: - View Lifecycle.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // layout
+        btnProx.layer.cornerRadius = 2
         // func valid id status
         self.getStatusEmployee()
         
@@ -396,6 +400,7 @@ extension MBInitialViewViewController : UITextFieldDelegate{
         }
         return false
     }
+    
 }
 
 //passar user_id e company_id
