@@ -21,13 +21,25 @@
     @IBOutlet weak var politicasDeUso: UIButton!
     @IBOutlet weak var SairButton: UIButton!
     
+    
+    var stringUrl:String?
+
     func setupRemoteConfigDefaults(){
         let defaultsValuesComoUsar = [
-            "comoUsarButton":"Como usar" as NSObject,
-            "politicasDeUso":"Políticas de uso" as NSObject,
-            "SairButton":"Sair" as NSObject]
+            "terms_of_use":"Como usar" as NSObject,
+            "page_terms_of_use":"Políticas de uso" as NSObject]
         RemoteConfig.remoteConfig().setDefaults(defaultsValuesComoUsar)
     }
+    func updateViewWithValues(){
+        let buttonLabel = RemoteConfig.remoteConfig().configValue(forKey: "terms_of_use").stringValue ?? ""
+        politicasDeUso.setTitle(buttonLabel, for: .normal)
+             let urlRemote = RemoteConfig.remoteConfig().configValue(forKey: "page_terms_of_use").stringValue ?? ""
+        print("INFO BUTTON REMOTE CONFIG:\(urlRemote)")
+
+        stringUrl = urlRemote
+        print("INFO URL REMOTE CONFIG:\(stringUrl)")
+    }
+    
     func fetchRemoteConfig(){
         // FIXE: Remove this before we go into productions!
         let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
@@ -38,6 +50,7 @@
             }
             print("INFO: Firebase Remote Config its ok")
             RemoteConfig.remoteConfig().activateFetched()
+            self.updateViewWithValues()
         }
     }
     override func viewDidLoad() {
@@ -73,7 +86,7 @@
     
     @IBAction func openComoUsar(_ sender: UIButton) {
         
-        let stringUrl = "https://www.mobilitee.com.br/itau/como-usar/"
+        let stringUrl =  "https://www.mobilitee.com.br/itau/como-usar/"
         
         if let url = URL(string: stringUrl){
             
@@ -86,9 +99,10 @@
             
         }
     }
+    
     @IBAction func openPoliticasDeUso(_ sender: UIButton) {
         
-        let stringUrl = "https://s3-sa-east-1.amazonaws.com/mobilitee/Termo+de+Uso.html"
+        let stringUrl = self.stringUrl ?? "https://s3-sa-east-1.amazonaws.com/mobilitee/Termo+de+Uso.html"
         
         if let url = URL(string: stringUrl){
             

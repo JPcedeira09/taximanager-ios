@@ -69,6 +69,7 @@
 		11EE3E1C1FBB6150007918C6 /* MBDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E1B1FBB6150007918C6 /* MBDevice.swift */; };
 		11EE3E1F1FBB662A007918C6 /* MBAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E1E1FBB662A007918C6 /* MBAddress.swift */; };
 		11EE3E231FBB86D0007918C6 /* MBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE3E221FBB86D0007918C6 /* MBUser.swift */; };
+		396014131FE2021B00A5207D /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396014121FE2021B00A5207D /* Feedback.swift */; };
 		6C6258891FDB1A9A003C6B2E /* MBUserInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6258881FDB1A9A003C6B2E /* MBUserInside.swift */; };
 		6C7B5A2D1FD96DC800207F66 /* TaxiManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A2C1FD96DC800207F66 /* TaxiManagerTests.swift */; };
 		6C7B5A3B1FD96DD200207F66 /* TaxiManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A3A1FD96DD200207F66 /* TaxiManagerUITests.swift */; };
@@ -164,6 +165,7 @@
 		11EE3E1E1FBB662A007918C6 /* MBAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBAddress.swift; sourceTree = "<group>"; };
 		11EE3E221FBB86D0007918C6 /* MBUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBUser.swift; sourceTree = "<group>"; };
 		23741A00D917E0F4A3FBADA6 /* Pods-TaxiManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.debug.xcconfig"; sourceTree = "<group>"; };
+		396014121FE2021B00A5207D /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		6C6258881FDB1A9A003C6B2E /* MBUserInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBUserInside.swift; sourceTree = "<group>"; };
 		6C7B5A2A1FD96DC800207F66 /* TaxiManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C7B5A2C1FD96DC800207F66 /* TaxiManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiManagerTests.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				111FB5E01FBF3A5000578185 /* MBRide.swift */,
 				11BB9DC81FC749D600C60E9F /* MBTravel.swift */,
 				6C7B5A461FD988EA00207F66 /* MBPlayeyChoose.swift */,
+				396014121FE2021B00A5207D /* Feedback.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -696,6 +699,7 @@
 				6C7B5A451FD9804E00207F66 /* MBInitialViewViewController.swift in Sources */,
 				11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */,
 				112830B11F884E3C000972CB /* AppDelegate.swift in Sources */,
+				396014131FE2021B00A5207D /* Feedback.swift in Sources */,
 				117DBAA01FA24FA800A303E6 /* CustomUI.swift in Sources */,
 				11E88D1C1FA8D2C100C11196 /* MBBuscaEnderecoViewController.swift in Sources */,
 				1156BB481FA7C3D300C2DF4F /* TMHistoricoViewController.swift in Sources */,

@@ -16,6 +16,9 @@ class MBContactViewcontroller: UIViewController {
     //@IBOutlet weak var labelMotivo: UILabel!
     @IBOutlet weak var txtFieldSubject: UITextField!
     
+    var latitude: Double?
+    var longitude: Double?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     //    self.labelMotivo.text = ""
@@ -41,8 +44,14 @@ class MBContactViewcontroller: UIViewController {
        // labelMotivo.text = ""
     }
     
+    //TODO txt field, longitude e latitude.
     
     @IBAction func enviarMensagem(_ sender: UIButton) {
+        var feedback = Feedback(userId: (MBUser.currentUser?.id)!, subject: txtFieldSubject.text!, message: textFieldMsg.text!
+            , platform: "IOS", platformVersion: "11.4", appVersion: "1.4", latitude: latitude!, longitude: longitude!)
+      var mensagem = self.sendFeedBack(feedback: feedback)
+        
+        print("A mensagem enviada foi\(mensagem)")
       /*  if (self.labelMotivo.text == ""){
             alertComum(message: "Escolha o motivo do seu contato", title: "Motivo do Contato")
         } */
@@ -71,6 +80,16 @@ class MBContactViewcontroller: UIViewController {
      
      self.present(alertController, animated: true, completion: nil)
      }*/
+    
+    func sendFeedBack( feedback: Feedback)-> String{
+        let parametros : [String: Any]  =  feedback.toDict(feedback) as [String:Any]
+        let postURL = URL(string:  "https://estimate.taximanager.com.br/v1/feedback")
+        let header = ["Content-Type" : "application/json",
+                      "Authorization" : MBUser.currentUser?.token ?? ""]
+        Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).request
+        
+        return feedback.message
+    }
 }
 extension MBContactViewcontroller : UITextFieldDelegate{
     
