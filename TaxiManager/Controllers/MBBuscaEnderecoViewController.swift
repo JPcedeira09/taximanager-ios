@@ -65,7 +65,7 @@ class MBBuscaEnderecoViewController: UIViewController {
         self.tableView.register(UINib(nibName: "TMBuscaEnderecoCell", bundle: nil), forCellReuseIdentifier: "tmBuscaEnderecoCell")
         
         self.txtFieldBuscaEndereco.becomeFirstResponder()
-        
+        self.txtFieldBuscaEndereco.layer.cornerRadius = 4
     }
     
     //MARK: - Metodos
