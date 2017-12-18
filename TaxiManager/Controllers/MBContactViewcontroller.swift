@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import Alamofire
+import SwiftSpinner
 
 class MBContactViewcontroller: UIViewController {
     
@@ -28,11 +29,11 @@ class MBContactViewcontroller: UIViewController {
         
         txtFieldSubject.placeholder = "Qual o assunto?"
         let location = self.locationManager.location!
-
+        
         self.latitude = location.coordinate.latitude
         self.longitude = location.coordinate.longitude
         
-    //    self.labelMotivo.text = ""
+        //    self.labelMotivo.text = ""
         self.textViewInfo.isEditable = false
         self.textViewInfo.layer.cornerRadius = 3
         self.textFieldMsg.isEditable = true
@@ -42,30 +43,32 @@ class MBContactViewcontroller: UIViewController {
         self.btnEnviarMsg.layer.cornerRadius = 3
     }
     @IBAction func dismissView(_ sender: UIButton) {
-                self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-       // labelMotivo.text = ""
+        // labelMotivo.text = ""
     }
     
     //TODO txt field, longitude e latitude.
     
     @IBAction func enviarMensagem(_ sender: UIButton) {
+        self.becomeFirstResponder()
         var feedback = Feedback(userId: (MBUser.currentUser?.id)!, subject: txtFieldSubject.text!, message: textFieldMsg.text!
             , platform: "IOS", platformVersion: (Bundle.main.releaseVersionNumber)!, appVersion: Bundle.main.releaseVersionNumberPretty, latitude: latitude!, longitude: longitude!)
         
         print(feedback.toDict(feedback))
         
-      var mensagem = self.sendFeedBack(feedback: feedback)
+        var mensagem = self.sendFeedBack(feedback: feedback)
         self.becomeFirstResponder()
         print("A mensagem enviada foi '\(mensagem)'")
         self.dismiss(animated: true, completion: nil)
-
-      /*  if (self.labelMotivo.text == ""){
-            alertComum(message: "Escolha o motivo do seu contato", title: "Motivo do Contato")
-        } */
+        
+        /*  if (self.labelMotivo.text == ""){
+         alertComum(message: "Escolha o motivo do seu contato", title: "Motivo do Contato")
+         } */
+        
     }
     
     /*
@@ -93,21 +96,23 @@ class MBContactViewcontroller: UIViewController {
      }*/
     
     func sendFeedBack( feedback: Feedback)-> String{
+        SwiftSpinner.show("Enviando mensagem...")
         let parametros : [String: Any]  =  feedback.toDict(feedback) as [String:Any]
         let postURL = URL(string:  "http://api.taximanager.com.br/v1/taximanager/feedback")
-   
+        
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
         Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).responseJSON {  response in
             print(response)
-            }
+            SwiftSpinner.hide()
+        }
         return feedback.message
     }
 }
 extension MBContactViewcontroller : UITextFieldDelegate{
-  
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-    self.textFieldMsg.text = ""
+        self.textFieldMsg.text = ""
     }
     
     override var canBecomeFirstResponder: Bool{
