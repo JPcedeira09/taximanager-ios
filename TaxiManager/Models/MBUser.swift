@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 struct MBUser : Codable{
     
@@ -82,7 +83,6 @@ struct MBUser : Codable{
         MobiliteeProvider.api.request(.getPOIs) { (result) in
             
             switch result{
-                
             case let .success(response):
                 if response.statusCode == 200{
                     do{
@@ -101,40 +101,94 @@ struct MBUser : Codable{
             }
         }
     }
-    
     static func getBookmarks(){
-        
-        MobiliteeProvider.api.request(.getBookmarks) { (result) in
-            
-            switch result{
-                
-            case let .success(response):
-                if response.statusCode == 200{
-                    do{
-                        
-                        let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
-                        MBUser.currentUser?.bookmarks = mbBookmarks
-                        print("------------- MBBookmark -------------")
-                        print(mbBookmarks)
-                        print("------------- MBBookmark -------------")
-                    }catch{
-                        print("iNFO:caiu no catch getBookmarks")
-                        print(error.localizedDescription)
+        let header = ["Content-Type" : "application/json",
+                      "Authorization" : MBUser.currentUser?.token ?? ""]
+        let url = URL(string: "http://api.taximanager.com.br/v1/taximanager/employees/bookmarks")
+        Alamofire.request(
+            url!,
+            method: .get, headers : header)
+            .validate()
+            .responseJSON { (response) -> Void in
+                switch response.result {
+                case .success:
+                    do {
+                         print("------------- MBBookmark RESPONSE -------------")
+                         print(response)
+                         print("------------- MBBookmark RESPONSE -------------")
+
+                        if let json = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as? [[String: Any]]{
+                            var mbBookmarks  : [MBBookmark] = []
+                            print("------------- MBBookmark dentro if -------------")
+                            for response in json {
+                                let bookmark = MBBookmark(serializable: response)
+                                mbBookmarks.append(bookmark)
+                                print(bookmark)
+                            }
+                            print("------------- MBBookmark set if -------------")
+
+                            MBUser.currentUser?.bookmarks = mbBookmarks
+                        }else{
+                            print("------------- MBBookmark else -------------")
+
+                        }
+                    } catch {
+                        print("iNFO: error in JSONSerialization getBookmarks")
                     }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    print("iNFO: error in localizedDescription getBookmarks")
+
                 }
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-            
+                
         }
     }
-    
+    /*
+     static func getBookmarks(){
+     
+     MobiliteeProvider.api.request(.getBookmarks) { (result) in
+     
+     switch result{
+     
+     case let .success(response):
+     if response.statusCode == 200{
+     // print("------------- MBBookmark RESPONSE-------------")
+     //  print(try? response.mapJSON(failsOnEmptyData: true))
+     // print("------------- MBBookmark RESPONSE-------------")
+     
+     do{
+     //let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
+     
+     if let json = try JSONSerialization.jsonObject(with: response, options: .allowFragments) as? [[String: Any]]{
+     var mbBookmarks  : [MBBookmark] = []
+     
+     for response in json {
+     let bookmark = MBBookmark(serializable: response)
+     mbBookmarks.append(bookmark)
+     print(bookmark)
+     }
+     MBUser.currentUser?.bookmarks = mbBookmarks
+     print("------------- MBBookmark -------------")
+     print(mbBookmarks)
+     print("------------- MBBookmark -------------")
+     }else { print("nothing")}
+     
+     }catch{
+     print("iNFO:caiu no catch getBookmarks")
+     print(error.localizedDescription)
+     }
+     }
+     case let .failure(error):
+     print(error.localizedDescription)
+     }
+     }
+     }
+     */
     static func getHistory(){
         
         MobiliteeProvider.api.request(.getHistory) { (result) in
             
             switch result{
-                
             case let .success(response):
                 if response.statusCode == 200{
                     do{
@@ -152,6 +206,7 @@ struct MBUser : Codable{
                 print(error.localizedDescription)
             }
         }
-        
     }
+    
+    //
 }

@@ -49,7 +49,7 @@ class MBFavoritosAdicionarViewController: UIViewController {
     @IBAction func criarFavorito(_ sender: UIButton){
         
         if(self.bookmarkAddress != nil && self.txtFieldNomeEndereco.text! != ""){
-            let bookmark = MBBookmark(withLocation: self.bookmarkAddress, mainText: self.txtFieldNomeEndereco.text!, secondaryText: self.txtFieldNomeEndereco.text!)
+            let bookmark = MBBookmark(withLocation: self.bookmarkAddress, mainText: self.txtFieldNomeEndereco.text!, secondaryText: self.txtFieldNomeEndereco.text!, createdAt : "", createdUser : (MBUser.currentUser?.username)!, updatedAt : "", updatedUser: "")
             
             SwiftSpinner.show("Salvando...", animated: true)
             MobiliteeProvider.api.request(.postBookmark(bookmark: bookmark), completion: { (result) in
