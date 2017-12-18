@@ -61,13 +61,13 @@ class MBLoginViewController: UIViewController {
                         guard let dictionary = try response.mapJSON() as? [String : Any] else {
                             return
                         }
-                        //                        print("---------------------")
-                        //                        print(dictionary)
-                        //                        print("---------------------")
+                        print("INFO DICT LOGIN:---------------------")
+                        print(dictionary)
+                        print("INFO DICT LOGIN:---------------------")
                         let mbUser = MBUser(from: dictionary)
                         
-                        //  print("O ID do user é :\(mbUser.id)")
-                        //  print("O ID do employee é :\(mbUser.employeeId)")
+                        print("O ID do user é :\(mbUser.id)")
+                        print("O ID do employee é :\(mbUser.employeeId)")
                         
                         let userEncoded = try JSONEncoder().encode(mbUser)
                         

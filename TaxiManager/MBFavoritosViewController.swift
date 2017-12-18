@@ -29,10 +29,8 @@ class MBFavoritosViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        
 //        let defaults = UserDefaults.standard
         if let favoritos = MBUser.currentUser?.bookmarks{
-            
             self.arrayFavoritos = favoritos
         }
         

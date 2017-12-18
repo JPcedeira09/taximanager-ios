@@ -60,9 +60,10 @@ class MBInitialViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // layout
+        //Layout.
         btnProx.layer.cornerRadius = 2
-        // func valid id status
+        
+        //Func valid id status.
         self.getStatusEmployee()
         
         //Maps config.
@@ -71,6 +72,7 @@ class MBInitialViewViewController: UIViewController {
         
         //CoreLocation.
         self.pedirAutorizacaoLocalizacaoUsuario()
+        self.localizarUsuario()
         
         //Textfield.
         self.textFieldEnderecoOrigem.delegate = self
