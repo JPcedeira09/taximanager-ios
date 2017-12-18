@@ -9,7 +9,7 @@
 import Foundation
 
 struct MBUser : Codable{
-
+    
     // Users infos.
     var username : String = ""
     var id : Int = 0
@@ -51,7 +51,7 @@ struct MBUser : Codable{
         self.employeeId = company["id"] as? Int ?? 0
         
         self.fullName = company["name"] as? String ?? ""
-    
+        
         let companyObj = company["company"] as? [String : Any] ?? [:]
         self.companyId = companyObj["id"] as? Int ?? 0
         
@@ -61,55 +61,45 @@ struct MBUser : Codable{
         
         MBUser.currentUser = self
         
-        
     }
     
     static func logout (){
-        
         self.currentUser = nil
         let domain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: domain)
         UserDefaults.standard.synchronize()
-        
     }
     
     static func update(){
-        
         DispatchQueue.global().async {
             getPois()
             getBookmarks()
             getHistory()
         }
-        
     }
     
     static func getPois(){
-        
         MobiliteeProvider.api.request(.getPOIs) { (result) in
             
             switch result{
                 
             case let .success(response):
-
                 if response.statusCode == 200{
                     do{
                         let mbPois = try response.map([MBPoi].self, atKeyPath: "records")
                         MBUser.currentUser?.pois = mbPois
-                        
-                        print("===== POIS =====")
+                        print("------------- POIS -------------")
                         print(mbPois)
+                        print("------------- POIS -------------")
                     }catch{
-                        
-                        print("caiu no catch POI")
+                        print("iNFO:caiu no catch getPois")
+                        print(error.localizedDescription)
                     }
                 }
             case let .failure(error):
-                
                 print(error.localizedDescription)
             }
-            
         }
-        
     }
     
     static func getBookmarks(){
@@ -123,16 +113,16 @@ struct MBUser : Codable{
                     do{
                         
                         let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
-                        
                         MBUser.currentUser?.bookmarks = mbBookmarks
-                        
+                        print("------------- MBBookmark -------------")
+                        print(mbBookmarks)
+                        print("------------- MBBookmark -------------")
                     }catch{
-                        
-                        print("caiu no catch")
+                        print("iNFO:caiu no catch getBookmarks")
+                        print(error.localizedDescription)
                     }
                 }
             case let .failure(error):
-                
                 print(error.localizedDescription)
             }
             
@@ -150,14 +140,15 @@ struct MBUser : Codable{
                     do{
                         let mbTravels = try response.map([MBTravel].self, atKeyPath: "records")
                         MBUser.currentUser?.history = mbTravels
-                        
+                        print("------------- MBTravels -------------")
+                        print(mbTravels)
+                        print("------------- MBTravels -------------")
                     }catch{
-                        
-                        print("caiu no catch")
+                        print("iNFO:caiu no catch getBookmarks")
+                        print(error.localizedDescription)
                     }
                 }
             case let .failure(error):
-                
                 print(error.localizedDescription)
             }
         }
