@@ -94,7 +94,19 @@ struct MBBookmark : MBLocation, Codable{
     self.createdUser = serializable["createdUser"] as? String ?? ""
     self.updatedAt = serializable["updatedAt"] as? String ?? ""
     self.updatedUser = ""
-    
     }
     
+    func toDict(_ mbBookmark : MBBookmark)->[String:Any]{
+        let parametros = ["mainText": mbBookmark.mainText,
+        "secondaryText": mbBookmark.secondaryText ,
+        "address": mbBookmark.address,
+        "number": mbBookmark.number,
+        "district": mbBookmark.district,
+        "city": mbBookmark.city,
+        "state": mbBookmark.state,
+        "zipcode": mbBookmark.zipcode,
+        "latitude": mbBookmark.latitude,
+        "longitude": mbBookmark.longitude] as [String : Any]
+        return parametros
+    }
 }

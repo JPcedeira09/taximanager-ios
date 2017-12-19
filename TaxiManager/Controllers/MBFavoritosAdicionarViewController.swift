@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import SwiftSpinner
+import SCLAlertView
 
 class MBFavoritosAdicionarViewController: UIViewController {
     
@@ -42,7 +43,6 @@ class MBFavoritosAdicionarViewController: UIViewController {
     //MARK: - IBActions
     
     @IBAction func fechar(_ sender: UIButton) {
-        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -50,38 +50,83 @@ class MBFavoritosAdicionarViewController: UIViewController {
         
         if(self.bookmarkAddress != nil && self.txtFieldNomeEndereco.text! != ""){
             let bookmark = MBBookmark(withLocation: self.bookmarkAddress, mainText: self.txtFieldNomeEndereco.text!, secondaryText: self.txtFieldNomeEndereco.text!, createdAt : "", createdUser : (MBUser.currentUser?.username)!, updatedAt : "", updatedUser: "")
-            
-            SwiftSpinner.show("Salvando...", animated: true)
-            MobiliteeProvider.api.request(.postBookmark(bookmark: bookmark), completion: { (result) in
-                
-                print("_____________iNFO POST BOOKMARK \(bookmark)")
-                
-                MBUser.update()
-                SwiftSpinner.hide()
-                switch (result){
-                case let .success(response):
-                    do{
-                        let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
-                        
-                        if(MBUser.currentUser?.bookmarks == nil){
-                            
-                            MBUser.currentUser!.bookmarks = [MBBookmark]()
-                        }
-                        MBUser.currentUser!.bookmarks! += mbBookmarks
-                        //                        print(MBUser.currentUser?.bookmarks)
-                    }catch{
-                        print("caiu no catch")
-                    }
-                    print("Chegou aqui")
-                    self.dismiss(animated: true, completion: nil)
-                case let .failure(error):
-                    print(error.localizedDescription)
-                    self.dismiss(animated: true)
-                }
-            })
+            self.postBookmark(bookmark: bookmark)
         }
+        
+        /*
+         MobiliteeProvider.api.request(.postBookmark(bookmark: bookmark), completion: { (result) in
+         
+         print("_____________iNFO POST BOOKMARK \(bookmark)")
+         
+         MBUser.update()
+         SwiftSpinner.hide()
+         switch (result){
+         case let .success(response):
+         do{
+         let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
+         
+         if(MBUser.currentUser?.bookmarks == nil){
+         
+         MBUser.currentUser!.bookmarks = [MBBookmark]()
+         }
+         MBUser.currentUser!.bookmarks! += mbBookmarks
+         //                        print(MBUser.currentUser?.bookmarks)
+         }catch{
+         print("caiu no catch")
+         }
+         print("Chegou aqui")
+         self.dismiss(animated: true, completion: nil)
+         case let .failure(error):
+         print(error.localizedDescription)
+         self.dismiss(animated: true)
+         }
+         })
+         */
     }
     
+    func postBookmark(bookmark: MBBookmark) {
+        SwiftSpinner.show("Salvando...", animated: true)
+        
+        let header = ["Content-Type" : "application/json",
+                      "Authorization" : MBUser.currentUser?.token ?? ""]
+        let postURL = URL(string: "http://api.taximanager.com.br/v1/taximanager/employees/bookmarks")
+        let parametros : [String: Any]  = bookmark.toDict(bookmark) as [String:Any]
+        
+        Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).responseJSON { (response) -> Void in
+            switch response.result {
+            case .success(let data):
+                print("_____________ Salvando iNFO POST BOOKMARK RESPONSE")
+                guard let json = data as? [String : NSObject] else {
+                    return
+                }
+                print(json)
+                if(MBUser.currentUser?.bookmarks == nil){
+                    MBUser.currentUser!.bookmarks = [MBBookmark]()
+                }
+                var mbBookmarks  : [MBBookmark] = []
+                if(json["records"] != nil){
+                    let records = json["records"] as! NSArray
+                    for item in records {
+                        let bookmark = MBBookmark(serializable: item as! [String : Any])
+                        mbBookmarks.append(bookmark)
+                    }
+                    MBUser.currentUser!.bookmarks! += mbBookmarks
+                    //print(data)
+                    print("_____________ Salvando iNFO POST BOOKMARK RESPONSE")
+                    SwiftSpinner.hide()
+                    SCLAlertView().showSuccess("Favorito adicionado!", subTitle: "Agora voce tem um novo favorito.")
+                }
+                self.dismiss(animated: true, completion: nil)
+                
+            case .failure(let error):
+                SwiftSpinner.hide()
+                print(error.localizedDescription)
+                print("iNFO: error in localizedDescription getBookmarks")
+                SCLAlertView().showError("Falha ao adicionar favorito", subTitle: "Tente mais tarde.")
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }
 
 extension MBFavoritosAdicionarViewController : UITextFieldDelegate{

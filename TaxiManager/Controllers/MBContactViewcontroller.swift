@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 import Alamofire
 import SwiftSpinner
+import SCLAlertView
 
 class MBContactViewcontroller: UIViewController {
     
@@ -63,7 +64,6 @@ class MBContactViewcontroller: UIViewController {
         var mensagem = self.sendFeedBack(feedback: feedback)
         self.becomeFirstResponder()
         print("A mensagem enviada foi '\(mensagem)'")
-        self.dismiss(animated: true, completion: nil)
         
         /*  if (self.labelMotivo.text == ""){
          alertComum(message: "Escolha o motivo do seu contato", title: "Motivo do Contato")
@@ -103,8 +103,22 @@ class MBContactViewcontroller: UIViewController {
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
         Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).responseJSON {  response in
-            print(response)
-            SwiftSpinner.hide()
+            
+            switch response.result {
+            case .success(let data):
+                print(response)
+                SwiftSpinner.hide()
+                //TODO Remote Config
+                SCLAlertView().showSuccess("Mensagem enviada!", subTitle: "Obrigado pelo seu feedback .")
+                self.dismiss(animated: true, completion: nil)
+                
+            case .failure(let error):
+                SwiftSpinner.hide()
+                print(error.localizedDescription)
+                print("iNFO: error in localizedDescription getBookmarks")
+                SCLAlertView().showError("Falha ao adicionar favorito", subTitle: "Tente mais tarde.")
+                self.dismiss(animated: true, completion: nil)
+            }
         }
         return feedback.message
     }
