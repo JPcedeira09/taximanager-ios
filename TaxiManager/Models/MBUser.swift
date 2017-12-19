@@ -111,39 +111,74 @@ struct MBUser : Codable{
             .validate()
             .responseJSON { (response) -> Void in
                 switch response.result {
-                case .success:
-                    do {
-                         print("------------- MBBookmark RESPONSE -------------")
-                         print(response)
-                         print("------------- MBBookmark RESPONSE -------------")
-
-                        if let json = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as? [[String: Any]]{
-                            var mbBookmarks  : [MBBookmark] = []
-                            print("------------- MBBookmark dentro if -------------")
-                            for response in json {
-                                let bookmark = MBBookmark(serializable: response)
-                                mbBookmarks.append(bookmark)
-                                print(bookmark)
-                            }
-                            print("------------- MBBookmark set if -------------")
-
-                            MBUser.currentUser?.bookmarks = mbBookmarks
-                        }else{
-                            print("------------- MBBookmark else -------------")
-
-                        }
-                    } catch {
-                        print("iNFO: error in JSONSerialization getBookmarks")
+                case .success(let data):
+                    // First make sure you got back a dictionary if that's what you expect
+                    guard let json = data as? [String : NSObject] else {
+                        return
                     }
+                    var mbBookmarks  : [MBBookmark] = []
+                    let records = json["records"] as! NSArray
+                    for item in records {
+                        let bookmark = MBBookmark(serializable: item as! [String : Any])
+                        print("iNFO BOOKMARK \n :\(bookmark)")
+                        mbBookmarks.append(bookmark)
+                    }
+                    MBUser.currentUser?.bookmarks = mbBookmarks
+
                 case .failure(let error):
                     print(error.localizedDescription)
                     print("iNFO: error in localizedDescription getBookmarks")
-
+                    
                 }
-                
         }
     }
+    
     /*
+     static func getBookmarks(){
+     let header = ["Content-Type" : "application/json",
+     "Authorization" : MBUser.currentUser?.token ?? ""]
+     let url = URL(string: "http://api.taximanager.com.br/v1/taximanager/employees/bookmarks")
+     Alamofire.request(
+     url!,
+     method: .get, headers : header)
+     .validate()
+     .responseJSON { (response) -> Void in
+     switch response.result {
+     case .success:
+     
+     
+     do {
+     print("------------- MBBookmark RESPONSE -------------")
+     print(response)
+     print("------------- MBBookmark RESPONSE -------------")
+     
+     if let json = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as? [[String: Any]]{
+     var mbBookmarks  : [MBBookmark]?
+     print("------------- MBBookmark dentro if -------------")
+     for response in json {
+     let bookmark = MBBookmark(serializable: response)
+     mbBookmarks.append(bookmark)
+     print(bookmark)
+     }
+     print("------------- MBBookmark set if -------------")
+     
+     MBUser.currentUser?.bookmarks = mbBookmarks
+     }else{
+     print("------------- MBBookmark else -------------")
+     
+     }
+     } catch {
+     print("iNFO: error in JSONSerialization getBookmarks")
+     }
+     case .failure(let error):
+     print(error.localizedDescription)
+     print("iNFO: error in localizedDescription getBookmarks")
+     
+     }
+     
+     }
+     }
+     
      static func getBookmarks(){
      
      MobiliteeProvider.api.request(.getBookmarks) { (result) in
