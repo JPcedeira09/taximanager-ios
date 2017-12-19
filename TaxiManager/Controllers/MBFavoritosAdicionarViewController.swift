@@ -117,7 +117,8 @@ class MBFavoritosAdicionarViewController: UIViewController {
                     SCLAlertView().showSuccess("Favorito adicionado!", subTitle: "Agora voce tem um novo favorito.")
                 }
                 self.dismiss(animated: true, completion: nil)
-                
+                SwiftSpinner.hide()
+
             case .failure(let error):
                 SwiftSpinner.hide()
                 print(error.localizedDescription)
