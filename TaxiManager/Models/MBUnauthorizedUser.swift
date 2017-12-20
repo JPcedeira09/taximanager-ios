@@ -26,7 +26,10 @@ struct MBUnauthorizedUser {
     var moreInfo:String?
     
     init(serializable : [String:Any]){
-        
+        self.developerMessage = serializable["developerMessage"] as? String ?? ""
+        self.userMessage = serializable["userMessage"] as? String ?? ""
+        self.errorCode = serializable["errorCode"] as? Int ?? 0
+        self.moreInfo = serializable["moreInfo"] as? String ?? ""
     }
     
     

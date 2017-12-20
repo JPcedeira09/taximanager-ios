@@ -57,6 +57,7 @@ class PrimeiroLoginViewController: UIViewController {
                             if let _ = dictionary["records"]{
                                 SCLAlertView().showSuccess("Tudo pronto!", subTitle: "Agora é só acessar usando sua nova senha.")
                                 Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user_ID" : MBUser.currentUser!.id])
+                            
                                 self.dismiss(animated: true)
                             }
                         }

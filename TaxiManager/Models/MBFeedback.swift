@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct Feedback {
+struct MBFeedback {
     
    /* {
     "userId": 0,
@@ -54,7 +54,7 @@ struct Feedback {
         self.longitude = serializable["longitude"] as? Double ?? 0.0
     }
     
-    func toDict(_ feedback : Feedback) -> [String: Any]{
+    func toDict(_ feedback : MBFeedback) -> [String: Any]{
         let parametros = ["userId" :  feedback.userId, "subject" :  feedback.subject, "message" : feedback.message, "platform" : feedback.platform ,"platformVersion" : feedback.platformVersion, "appVersion" : feedback.appVersion, "latitude" : feedback.latitude, "longitude" : feedback.longitude] as [String : Any]
         return parametros
     }

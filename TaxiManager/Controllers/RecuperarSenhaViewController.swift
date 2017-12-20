@@ -23,75 +23,65 @@ class RecuperarSenhaViewController: UIViewController {
     
     @IBAction func close(_ sender: CustomButton) {
         self.dismiss(animated: true, completion: nil)
-            }
+    }
     
     @IBAction func recuperarSenha(_ sender: UIButton) {
         
         SwiftSpinner.show("Enviando...", animated: true)
         redefinirSenha(username : self.txtFieldUsername.text!)
         SwiftSpinner.hide()
-
+        
         self.dismiss(animated: true)
     }
     
-    func redefinirSenhaMOYA (username : String){
-        MobiliteeProvider.api.request(.recoveryPassword(username: username)) { (result) in
-            
-            switch (result){
-            case let .success (response):
-                do{
-                    SCLAlertView().showSuccess("Sucesso", subTitle: "Envio de redefinição completo")
-                    Analytics.logEvent("forgotPasswordFinishedSuccess", parameters: ["User_digitado": self.txtFieldUsername.text!,"success": "\(try response.mapJSON())" ])
-                    print(try response.mapJSON())
-                }catch{
-                    //SCLAlertView().showError("Falha", subTitle: "Envio de redefinição falhou ao ler o JSON")
-                    Analytics.logEvent("forgotPasswordFinishedSuccessButFailSerialization", parameters: ["User_digitado": self.txtFieldUsername.text!,"Fail": "\(error.localizedDescription)" ])
-                }
-            case let .failure (error):
-                SCLAlertView().showError("Falha", subTitle: "Envio de redefinição falhou")
-                print(error.localizedDescription)
-                Analytics.logEvent("forgotPasswordFinishedFail", parameters: ["User_digitado": self.txtFieldUsername.text!,"Fail": "\(error.localizedDescription)" ])
-            }
-        }
-    }
     func redefinirSenha(username : String){
         let url = URL(string: "https://api.taximanager.com.br/v1/taximanager/users/password/recovery")
         let parameters = ["username" : username]
         let header = ["Content-Type" : "application/json"]
-       let request = Alamofire.request(
+        let request = Alamofire.request(
             url!,
             method: .get, parameters : parameters, headers : header)
             .validate()
             .responseJSON { (response) -> Void in
                 switch response.result {
                 case .success(let data):
-                    guard let json = data as? [String : NSObject] else {
-                        return
-                    }
-                    var developerMessage = "nada"
-                     developerMessage = json["developerMessage"] as! String
-                    
-                    if( developerMessage == "Usuário não encontrado not found"){
-                        print("_______________RESPONSE FAIL REREFINIR SENHA_______________")
-                        print(response.data)
-                        print("_______________RESPONSE FAIL REREFINIR SENHA_______________")
-                        SCLAlertView().showError("Falha", subTitle: "Usuario Inexistente, digite novamente")
-                    }else {
-                        print("_______________RESPONSE SUCCESS REREFINIR SENHA_______________")
-                        print(response.data)
-                        print("_______________RESPONSE SUCCESS REREFINIR SENHA_______________")
+                    guard let json = data as? [String : NSObject] else {return}
+                    let user = MBUser(from: json)
+                    print(user)
+                    if(user.username != "" ){
                         SCLAlertView().showSuccess("Sucesso", subTitle: "Envio de redefinição completo")
-                        Analytics.logEvent("forgotPasswordFinishedSuccess", parameters: ["User_digitado": self.txtFieldUsername.text!,"success": "\(String(describing: response.data))" ])
+                    }else{
+                        SCLAlertView().showError("Falha", subTitle: "Usuario Inexistente, digite novamente")
                     }
                 case .failure(let error):
                     SCLAlertView().showError("Falha", subTitle: "Envio de redefinição falhou")
                     print(error.localizedDescription)
                     Analytics.logEvent("forgotPasswordFinishedFail", parameters: ["User_digitado": self.txtFieldUsername.text!,"Fail": "\(error.localizedDescription)" ])
-                    
                 }
         }
         print(request)
-        self.dismiss(animated: true)
-
     }
 }
+
+/*
+ func redefinirSenhaMOYA (username : String){
+ MobiliteeProvider.api.request(.recoveryPassword(username: username)) { (result) in
+ 
+ switch (result){
+ case let .success (response):
+ do{
+ SCLAlertView().showSuccess("Sucesso", subTitle: "Envio de redefinição completo")
+ Analytics.logEvent("forgotPasswordFinishedSuccess", parameters: ["User_digitado": self.txtFieldUsername.text!,"success": "\(try response.mapJSON())" ])
+ print(try response.mapJSON())
+ }catch{
+ //SCLAlertView().showError("Falha", subTitle: "Envio de redefinição falhou ao ler o JSON")
+ Analytics.logEvent("forgotPasswordFinishedSuccessButFailSerialization", parameters: ["User_digitado": self.txtFieldUsername.text!,"Fail": "\(error.localizedDescription)" ])
+ }
+ case let .failure (error):
+ SCLAlertView().showError("Falha", subTitle: "Envio de redefinição falhou")
+ print(error.localizedDescription)
+ Analytics.logEvent("forgotPasswordFinishedFail", parameters: ["User_digitado": self.txtFieldUsername.text!,"Fail": "\(error.localizedDescription)" ])
+ }
+ }
+ }
+ */

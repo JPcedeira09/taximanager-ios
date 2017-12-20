@@ -158,7 +158,7 @@ class MBContactViewcontroller: UIViewController {
         }else{
             
             self.becomeFirstResponder()
-            var feedback = Feedback(userId: (MBUser.currentUser?.id)!, subject: txtFieldSubject.text!, message: textFieldMsg.text!
+            var feedback = MBFeedback(userId: (MBUser.currentUser?.id)!, subject: txtFieldSubject.text!, message: textFieldMsg.text!
                 , platform: "IOS", platformVersion: (Bundle.main.releaseVersionNumber)!, appVersion: Bundle.main.releaseVersionNumberPretty, latitude: latitude!, longitude: longitude!)
             
             print(feedback.toDict(feedback))
@@ -196,7 +196,7 @@ class MBContactViewcontroller: UIViewController {
      self.present(alertController, animated: true, completion: nil)
      }*/
     
-    func sendFeedBack( feedback: Feedback)-> String{
+    func sendFeedBack( feedback: MBFeedback)-> String{
         let parametros : [String: Any]  =  feedback.toDict(feedback) as [String:Any]
         let postURL = URL(string:  "http://api.taximanager.com.br/v1/taximanager/feedback")
         
