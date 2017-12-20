@@ -131,9 +131,13 @@
     }
     
     @IBAction func openComoUsar(_ sender: UIButton) {
-        
-        let stringUrl =  self.urlHowUse ?? "https://www.mobilitee.com.br/itau/como-usar/"
-        if let url = URL(string: stringUrl){
+        let stringUrl:String?
+        if(self.urlHowUse == ""){
+             stringUrl = "https://www.mobilitee.com.br/itau/como-usar/"
+        }else {
+             stringUrl =  self.urlHowUse
+        }
+        if let url = URL(string: stringUrl!){
             if(UIApplication.shared.canOpenURL(url)){
                 UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
                 })
@@ -142,9 +146,13 @@
     }
     
     @IBAction func openPoliticasDeUso(_ sender: UIButton) {
-        
-        let stringUrl = self.urlTermsOfUse ?? "https://s3-sa-east-1.amazonaws.com/mobilitee/Termo+de+Uso.html"
-        if let url = URL(string: stringUrl){
+        let stringUrl:String?
+        if(self.urlHowUse == ""){
+            stringUrl = "https://mobilitee.com.br/itau/termos-de-uso/"
+        }else {
+            stringUrl =  self.urlTermsOfUse
+        }
+        if let url = URL(string: stringUrl!){
             if(UIApplication.shared.canOpenURL(url)){
                 UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
                 })
