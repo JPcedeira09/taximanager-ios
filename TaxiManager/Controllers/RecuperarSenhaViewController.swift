@@ -28,10 +28,15 @@ class RecuperarSenhaViewController: UIViewController {
     @IBAction func recuperarSenha(_ sender: UIButton) {
         
         SwiftSpinner.show("Enviando...", animated: true)
-        
-        MobiliteeProvider.api.request(.recoveryPassword(username: self.txtFieldUsername.text!)) { (result) in
+        redefinirSenha(username : self.txtFieldUsername.text!)
+        SwiftSpinner.hide()
+
+        self.dismiss(animated: true)
+    }
+    
+    func redefinirSenhaMOYA (username : String){
+        MobiliteeProvider.api.request(.recoveryPassword(username: username)) { (result) in
             
-            SwiftSpinner.hide()
             switch (result){
             case let .success (response):
                 do{
@@ -48,15 +53,14 @@ class RecuperarSenhaViewController: UIViewController {
                 Analytics.logEvent("forgotPasswordFinishedFail", parameters: ["User_digitado": self.txtFieldUsername.text!,"Fail": "\(error.localizedDescription)" ])
             }
         }
-        self.dismiss(animated: true)
     }
-    
-    
-    func redefinirSenha(){
-        let url = URL(string: "http://api.taximanager.com.br/v1/taximanager/employees/bookmarks")
-        Alamofire.request(
+    func redefinirSenha(username : String){
+        let url = URL(string: "https://api.taximanager.com.br/v1/taximanager/users/password/recovery")
+        let parameters = ["username" : username]
+        let header = ["Content-Type" : "application/json"]
+       let request = Alamofire.request(
             url!,
-            method: .get)
+            method: .get, parameters : parameters, headers : header)
             .validate()
             .responseJSON { (response) -> Void in
                 switch response.result {
@@ -64,18 +68,30 @@ class RecuperarSenhaViewController: UIViewController {
                     guard let json = data as? [String : NSObject] else {
                         return
                     }
-                    var mbBookmarks  : [MBBookmark] = []
-                    let records = json["records"] as! NSArray
-                    for item in records {
-                        let bookmark = MBBookmark(serializable: item as! [String : Any])
-                        //  print("iNFO BOOKMARK \n :\(bookmark)")
-                        mbBookmarks.append(bookmark)
+                    var developerMessage = "nada"
+                     developerMessage = json["developerMessage"] as! String
+                    
+                    if( developerMessage == "Usuário não encontrado not found"){
+                        print("_______________RESPONSE FAIL REREFINIR SENHA_______________")
+                        print(response.data)
+                        print("_______________RESPONSE FAIL REREFINIR SENHA_______________")
+                        SCLAlertView().showError("Falha", subTitle: "Usuario Inexistente, digite novamente")
+                    }else {
+                        print("_______________RESPONSE SUCCESS REREFINIR SENHA_______________")
+                        print(response.data)
+                        print("_______________RESPONSE SUCCESS REREFINIR SENHA_______________")
+                        SCLAlertView().showSuccess("Sucesso", subTitle: "Envio de redefinição completo")
+                        Analytics.logEvent("forgotPasswordFinishedSuccess", parameters: ["User_digitado": self.txtFieldUsername.text!,"success": "\(String(describing: response.data))" ])
                     }
-                    MBUser.currentUser?.bookmarks = mbBookmarks
                 case .failure(let error):
+                    SCLAlertView().showError("Falha", subTitle: "Envio de redefinição falhou")
                     print(error.localizedDescription)
-                    print("iNFO: error in localizedDescription getBookmarks")
+                    Analytics.logEvent("forgotPasswordFinishedFail", parameters: ["User_digitado": self.txtFieldUsername.text!,"Fail": "\(error.localizedDescription)" ])
+                    
                 }
         }
+        print(request)
+        self.dismiss(animated: true)
+
     }
 }
