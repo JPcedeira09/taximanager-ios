@@ -22,21 +22,21 @@
     @IBOutlet weak var SairButton: UIButton!
     
     
-    var urlTermsOfUse:String?
-    var urlHowUse:String?
-    var alertLogoutTitle:String?
-    var alertLogoutDescription:String?
+    var urlTermsOfUse:String = ""
+    var urlHowUse:String = ""
+    var alertLogoutTitle:String = ""
+    var alertLogoutDescription:String = ""
     
     func updateViewWithValues(){
         //Remote Config button terms of use.
         let buttonTerms = RemoteConfig.remoteConfig().configValue(forKey: "button_terms_of_use").stringValue ?? ""
         politicasDeUso.setTitle(buttonTerms, for: .normal)
         print("iNFO button terms of use:\(buttonTerms)")
-
+        
         //Remote config url terms of use
         let urlTerms = RemoteConfig.remoteConfig().configValue(forKey: "url_terms_of_use").stringValue ?? ""
         urlTermsOfUse = urlTerms
-        print("iNFO url terms of use remote config:\(urlTermsOfUse ?? "urls")")
+        print("iNFO url terms of use remote config:\(urlTermsOfUse)")
         
         //Remote config button how use.
         let buttonHow = RemoteConfig.remoteConfig().configValue(forKey: "button_how_use").stringValue ?? ""
@@ -46,17 +46,17 @@
         //Remote config url how use.
         let urlUse = RemoteConfig.remoteConfig().configValue(forKey: "urls_how_use").stringValue ?? ""
         urlHowUse = urlUse
-        print("iNFO url how use remote config:\(urlHowUse ?? "urls")")
+        print("iNFO url how use remote config:\(urlHowUse)")
         
         //Remote config logout Alert Title.
         let alertTitleLogout = RemoteConfig.remoteConfig().configValue(forKey: "logout_alert_title").stringValue ?? ""
         alertLogoutTitle = alertTitleLogout
-        print("iNFO alert logout title remote config:\(alertLogoutTitle ?? "title")")
+        print("iNFO alert logout title remote config:\(alertLogoutTitle)")
         
         //Remote config url how use.
         let alertDescriptionLogout = RemoteConfig.remoteConfig().configValue(forKey: "logout_alert_description").stringValue ?? ""
         alertLogoutDescription = alertDescriptionLogout
-        print("iNFO alert logout description remote config:\(alertLogoutDescription ?? "description")")
+        print("iNFO alert logout description remote config:\(alertLogoutDescription)")
     }
     
     func fetchRemoteConfig(){
@@ -100,21 +100,33 @@
     @IBAction func sair(_ sender: UIButton) {
         
         let alert = SCLAlertView()
-        alert.addButton("Sair", action: {
-            let domain = Bundle.main.bundleIdentifier!
-            UserDefaults.standard.removePersistentDomain(forName: domain)
-            UserDefaults.standard.synchronize()
-            
-            self.dismiss(animated: true) {
-                guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
-                let rootController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TMLoginViewController")
-                appDel.window?.rootViewController = rootController
-            }
-        })
-        if(self.alertLogoutTitle! == "" || self.alertLogoutDescription! == ""){
+        
+        if(self.alertLogoutTitle == "" || self.alertLogoutDescription == ""){
+            alert.addButton("Sair", action: {
+                let domain = Bundle.main.bundleIdentifier!
+                UserDefaults.standard.removePersistentDomain(forName: domain)
+                UserDefaults.standard.synchronize()
+                self.dismiss(animated: true) {
+                    guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
+                    let rootController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TMLoginViewController")
+                    appDel.window?.rootViewController = rootController
+                }
+            })
             alert.showInfo("Sair", subTitle: "Tem certeza que deseja sair?", closeButtonTitle: "Cancelar")
         }else{
-            alert.showInfo(self.alertLogoutTitle!, subTitle: self.alertLogoutDescription!, closeButtonTitle: "Cancelar")
+            alert.addButton("Sair", action: {
+                let domain = Bundle.main.bundleIdentifier!
+                UserDefaults.standard.removePersistentDomain(forName: domain)
+                UserDefaults.standard.synchronize()
+                
+                
+                self.dismiss(animated: true) {
+                    guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
+                    let rootController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TMLoginViewController")
+                    appDel.window?.rootViewController = rootController
+                }
+            })
+            alert.showInfo(self.alertLogoutTitle, subTitle: self.alertLogoutDescription, closeButtonTitle: "Cancelar")
         }
     }
     
@@ -141,17 +153,17 @@
     }
     
     // Depreciado
-   
     /* @IBAction func contactUs(_ sender: UIButton) {
-        if(MFMailComposeViewController.canSendMail()){
-            let mailComposeController = MFMailComposeViewController()
-            mailComposeController.setToRecipients(["contato@mobilitee.com.br"])
-            mailComposeController.setSubject("Suporte Mobilitee")
-            mailComposeController.mailComposeDelegate = self
-            self.present(mailComposeController, animated: true, completion: nil)
-        }
-    }*/
+     if(MFMailComposeViewController.canSendMail()){
+     let mailComposeController = MFMailComposeViewController()
+     mailComposeController.setToRecipients(["contato@mobilitee.com.br"])
+     mailComposeController.setSubject("Suporte Mobilitee")
+     mailComposeController.mailComposeDelegate = self
+     self.present(mailComposeController, animated: true, completion: nil)
+     }
+     }*/
  }
+ 
  extension MBMenuLateralViewController : MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)

@@ -27,14 +27,16 @@ class MBFavoritosViewController: UIViewController {
         self.tableView.register(UINib(nibName: "TMFavoritosCell", bundle: nil), forCellReuseIdentifier: "tmFavoritosCell")
         
         self.tableView.allowsMultipleSelectionDuringEditing = false
-    }
+     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         // let defaults = UserDefaults.standard
         if let favoritos = MBUser.currentUser?.bookmarks{
+            MBUser.getBookmarks()
             MBUser.update()
             self.arrayFavoritos = favoritos
+            tableView.reloadData()
         }
         print(self.arrayFavoritos)
         self.tableView.reloadData()

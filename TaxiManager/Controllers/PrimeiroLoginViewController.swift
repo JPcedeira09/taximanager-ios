@@ -12,20 +12,20 @@ import SwiftSpinner
 import FirebaseAnalytics
 
 class PrimeiroLoginViewController: UIViewController {
-
+    
     @IBOutlet weak var txtFieldUsuario: HoshiTextField!
     @IBOutlet weak var txtFieldSenha: HoshiTextField!
     @IBOutlet weak var txtFieldConfirmarSenha: HoshiTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     @IBAction func enviar(_ sender: UIButton) {
         
         if(txtFieldSenha.text!.characters.count  < 5 ||
@@ -48,7 +48,6 @@ class PrimeiroLoginViewController: UIViewController {
                 
                 switch result{
                     
-                    
                 case let .success(response):
                     
                     do{
@@ -57,7 +56,7 @@ class PrimeiroLoginViewController: UIViewController {
                             print(dictionary)
                             if let _ = dictionary["records"]{
                                 SCLAlertView().showSuccess("Tudo pronto!", subTitle: "Agora é só acessar usando sua nova senha.")
-                                Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user" : MBUser.currentUser?.username,"id_user":MBUser.currentUser?.id,"email":MBUser.currentUser?.email,"token":MBUser.currentUser?.token,"companyId":MBUser.currentUser?.companyId,"employeeId":MBUser.currentUser?.employeeId,"firstName":MBUser.currentUser?.firstName,"firstAccessAt":MBUser.currentUser?.firstAccessAt!,"statusID":MBUser.currentUser?.statusID,"statusDescription" : MBUser.currentUser?.statusDescription])
+                                Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user_ID" : MBUser.currentUser!.id])
                                 self.dismiss(animated: true)
                             }
                         }

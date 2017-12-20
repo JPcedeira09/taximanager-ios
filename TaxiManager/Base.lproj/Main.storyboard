@@ -620,7 +620,7 @@
                                     <constraint firstItem="kw6-l3-fqf" firstAttribute="leading" secondItem="dfZ-1h-FI8" secondAttribute="trailing" constant="8" id="vgV-5M-QQ4"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="i0V-rr-bCV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i0V-rr-bCV">
                                 <rect key="frame" x="0.0" y="133.5" width="375" height="533.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -742,7 +742,7 @@
                         <viewControllerLayoutGuide type="bottom" id="YBY-IP-ax0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ki2-h2-eGR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQ2-nx-jW5">

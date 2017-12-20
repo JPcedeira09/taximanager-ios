@@ -162,9 +162,11 @@ class MBContactViewcontroller: UIViewController {
                 , platform: "IOS", platformVersion: (Bundle.main.releaseVersionNumber)!, appVersion: Bundle.main.releaseVersionNumberPretty, latitude: latitude!, longitude: longitude!)
             
             print(feedback.toDict(feedback))
-            
+            SwiftSpinner.show("Enviando mensagem...")
             let mensagem = self.sendFeedBack(feedback: feedback)
             self.becomeFirstResponder()
+            SwiftSpinner.hide()
+
             print("A mensagem enviada foi '\(mensagem)'")
             self.dismiss(animated: true, completion: nil)
         }
@@ -195,7 +197,6 @@ class MBContactViewcontroller: UIViewController {
      }*/
     
     func sendFeedBack( feedback: Feedback)-> String{
-        SwiftSpinner.show("Enviando mensagem...")
         let parametros : [String: Any]  =  feedback.toDict(feedback) as [String:Any]
         let postURL = URL(string:  "http://api.taximanager.com.br/v1/taximanager/feedback")
         
@@ -206,7 +207,6 @@ class MBContactViewcontroller: UIViewController {
             switch response.result {
             case .success(let data):
                 print(response)
-                SwiftSpinner.hide()
                 
                 if(self.alertSuccessSendFeedbackTitle == "" || self.alertSuccessSendFeedbackDescription == ""){
                     SCLAlertView().showSuccess("Mensagem enviada!", subTitle: "Obrigado pelo seu feedback .")
@@ -215,7 +215,6 @@ class MBContactViewcontroller: UIViewController {
                 }
                 
             case .failure(let error):
-                SwiftSpinner.hide()
                 print(error.localizedDescription)
                 print("iNFO: error in localizedDescription getBookmarks")
                 

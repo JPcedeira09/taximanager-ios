@@ -29,63 +29,31 @@ class MBFavoritosAdicionarViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         self.txtFieldEndereco.delegate = self
-        
         let defaults = UserDefaults.standard
         if let favoritos = defaults.value(forKey: "arrayFavoritos") as? [[String : Any]]{
-            
             self.arrayFavoritos = favoritos
         }
     }
-    //MARK: - Metodos
     
     //MARK: - IBActions
-    
     @IBAction func fechar(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func criarFavorito(_ sender: UIButton){
-        
         if(self.bookmarkAddress != nil && self.txtFieldNomeEndereco.text! != ""){
             let bookmark = MBBookmark(withLocation: self.bookmarkAddress, mainText: self.txtFieldNomeEndereco.text!, secondaryText: self.txtFieldNomeEndereco.text!, createdAt : "", createdUser : (MBUser.currentUser?.username)!, updatedAt : "", updatedUser: "")
+            
+            SwiftSpinner.show("Salvando...", animated: true)
             self.postBookmark(bookmark: bookmark)
+            self.dismiss(animated: true, completion: nil)
+            SwiftSpinner.hide()
         }
-        
-        /*
-         MobiliteeProvider.api.request(.postBookmark(bookmark: bookmark), completion: { (result) in
-         
-         print("_____________iNFO POST BOOKMARK \(bookmark)")
-         
-         MBUser.update()
-         SwiftSpinner.hide()
-         switch (result){
-         case let .success(response):
-         do{
-         let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
-         
-         if(MBUser.currentUser?.bookmarks == nil){
-         
-         MBUser.currentUser!.bookmarks = [MBBookmark]()
-         }
-         MBUser.currentUser!.bookmarks! += mbBookmarks
-         //                        print(MBUser.currentUser?.bookmarks)
-         }catch{
-         print("caiu no catch")
-         }
-         print("Chegou aqui")
-         self.dismiss(animated: true, completion: nil)
-         case let .failure(error):
-         print(error.localizedDescription)
-         self.dismiss(animated: true)
-         }
-         })
-         */
     }
     
+    //MARK: - Metodos
     func postBookmark(bookmark: MBBookmark) {
-        SwiftSpinner.show("Salvando...", animated: true)
         
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
@@ -113,18 +81,13 @@ class MBFavoritosAdicionarViewController: UIViewController {
                     MBUser.currentUser!.bookmarks! += mbBookmarks
                     //print(data)
                     print("_____________ Salvando iNFO POST BOOKMARK RESPONSE")
-                    SwiftSpinner.hide()
                     SCLAlertView().showSuccess("Favorito adicionado!", subTitle: "Agora voce tem um novo favorito.")
                 }
-                self.dismiss(animated: true, completion: nil)
-                SwiftSpinner.hide()
 
             case .failure(let error):
-                SwiftSpinner.hide()
                 print(error.localizedDescription)
                 print("iNFO: error in localizedDescription getBookmarks")
                 SCLAlertView().showError("Falha ao adicionar favorito", subTitle: "Tente mais tarde.")
-                self.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -155,5 +118,34 @@ extension MBFavoritosAdicionarViewController : UITextFieldDelegate{
             self.present(buscarEnderecoViewController, animated: true, completion: nil)
         }
     }
-    
 }
+
+/*
+ MobiliteeProvider.api.request(.postBookmark(bookmark: bookmark), completion: { (result) in
+ 
+ print("_____________iNFO POST BOOKMARK \(bookmark)")
+ 
+ MBUser.update()
+ SwiftSpinner.hide()
+ switch (result){
+ case let .success(response):
+ do{
+ let mbBookmarks = try response.map([MBBookmark].self, atKeyPath: "records")
+ 
+ if(MBUser.currentUser?.bookmarks == nil){
+ 
+ MBUser.currentUser!.bookmarks = [MBBookmark]()
+ }
+ MBUser.currentUser!.bookmarks! += mbBookmarks
+ //                        print(MBUser.currentUser?.bookmarks)
+ }catch{
+ print("caiu no catch")
+ }
+ print("Chegou aqui")
+ self.dismiss(animated: true, completion: nil)
+ case let .failure(error):
+ print(error.localizedDescription)
+ self.dismiss(animated: true)
+ }
+ })
+ */

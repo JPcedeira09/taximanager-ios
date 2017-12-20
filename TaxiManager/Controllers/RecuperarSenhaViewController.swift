@@ -10,6 +10,7 @@ import TextFieldEffects
 import SwiftSpinner
 import SCLAlertView
 import FirebaseAnalytics
+import Alamofire
 
 class RecuperarSenhaViewController: UIViewController {
     
@@ -34,10 +35,11 @@ class RecuperarSenhaViewController: UIViewController {
             switch (result){
             case let .success (response):
                 do{
-                    SCLAlertView().showError("Sucesso", subTitle: "Envio de redefinição completo")
+                    SCLAlertView().showSuccess("Sucesso", subTitle: "Envio de redefinição completo")
                     Analytics.logEvent("forgotPasswordFinishedSuccess", parameters: ["User_digitado": self.txtFieldUsername.text!,"success": "\(try response.mapJSON())" ])
+                    print(try response.mapJSON())
                 }catch{
-                    SCLAlertView().showError("Falha", subTitle: "Envio de redefinição falhou ao ler o JSON")
+                    //SCLAlertView().showError("Falha", subTitle: "Envio de redefinição falhou ao ler o JSON")
                     Analytics.logEvent("forgotPasswordFinishedSuccessButFailSerialization", parameters: ["User_digitado": self.txtFieldUsername.text!,"Fail": "\(error.localizedDescription)" ])
                 }
             case let .failure (error):
@@ -49,4 +51,31 @@ class RecuperarSenhaViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    
+    func redefinirSenha(){
+        let url = URL(string: "http://api.taximanager.com.br/v1/taximanager/employees/bookmarks")
+        Alamofire.request(
+            url!,
+            method: .get)
+            .validate()
+            .responseJSON { (response) -> Void in
+                switch response.result {
+                case .success(let data):
+                    guard let json = data as? [String : NSObject] else {
+                        return
+                    }
+                    var mbBookmarks  : [MBBookmark] = []
+                    let records = json["records"] as! NSArray
+                    for item in records {
+                        let bookmark = MBBookmark(serializable: item as! [String : Any])
+                        //  print("iNFO BOOKMARK \n :\(bookmark)")
+                        mbBookmarks.append(bookmark)
+                    }
+                    MBUser.currentUser?.bookmarks = mbBookmarks
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    print("iNFO: error in localizedDescription getBookmarks")
+                }
+        }
+    }
 }

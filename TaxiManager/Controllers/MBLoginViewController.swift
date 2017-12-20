@@ -96,7 +96,7 @@ class MBLoginViewController: UIViewController {
                             alert.addButton("Ok", action: {
                                 self.performSegue(withIdentifier: "tmPrimeiroAcesso", sender: nil)
                                 
-                                Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user" : mbUser.username,"id_user":mbUser.id,"email":mbUser.email,"token":mbUser.token,"companyId":mbUser.companyId,"employeeId":mbUser.employeeId,"firstName":mbUser.firstName,"firstAccessAt":mbUser.firstAccessAt!,"statusID":mbUser.statusID,"statusDescription" : mbUser.statusDescription])
+                                Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user" : username])
                             })
                             alert.showSuccess("Seja bem vindo!", subTitle: "Troque sua senha agora. A nova senha deve conter no mínimo 5 dígitos.")
                             
