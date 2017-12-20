@@ -87,7 +87,7 @@
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //setupRemoteConfigDefaults()
+        setupRemoteConfigDefaults()
         fetchRemoteConfig()
         
         let nome = MBUser.currentUser?.firstName

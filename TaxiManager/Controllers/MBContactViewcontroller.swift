@@ -107,7 +107,7 @@ class MBContactViewcontroller: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Remote Config.
-        //setupRemoteConfigDefaults()
+        setupRemoteConfigDefaults()
         fetchRemoteConfig()
         
         self.textFieldMsg.delegate = self
