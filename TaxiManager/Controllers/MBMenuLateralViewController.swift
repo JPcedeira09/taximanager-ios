@@ -27,12 +27,6 @@
     var alertLogoutTitle:String?
     var alertLogoutDescription:String?
     
-    func setupRemoteConfigDefaults(){
-        let defaultsValuesComoUsar = [
-            "terms_of_use":"Como usar" as NSObject,
-            "page_terms_of_use":"Políticas de uso" as NSObject]
-        RemoteConfig.remoteConfig().setDefaults(defaultsValuesComoUsar)
-    }
     func updateViewWithValues(){
         //Remote Config button terms of use.
         let buttonTerms = RemoteConfig.remoteConfig().configValue(forKey: "button_terms_of_use").stringValue ?? ""
@@ -73,15 +67,27 @@
                 print("INFO: Error fetching values- \(error?.localizedDescription ?? "erro!")")
                 return
             }
-            
             print("INFO: Firebase Remote Config its ok")
             RemoteConfig.remoteConfig().activateFetched()
             self.updateViewWithValues()
         }
     }
+    
+    func setupRemoteConfigDefaults(){
+        let defaultsValuesComoUsar = [
+            "button_terms_of_use":"Termos de Uso" as NSObject,
+            "url_terms_of_use":"https://mobilitee.com.br/itau/termos-de-uso/" as NSObject,
+            "urls_how_use":"https://mobilitee.com.br/itau/como-usar/" as NSObject,
+            "button_how_use":"Como Usar" as NSObject,
+            "logout_alert_title":"Sair!" as NSObject,
+            "logout_alert_description":"Você deseja sair?" as NSObject,
+            ]
+        RemoteConfig.remoteConfig().setDefaults(defaultsValuesComoUsar)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRemoteConfigDefaults()
+        //setupRemoteConfigDefaults()
         fetchRemoteConfig()
         
         let nome = MBUser.currentUser?.firstName
@@ -134,8 +140,9 @@
         }
     }
     
-    @IBAction func contactUs(_ sender: UIButton) {
-        
+    // Depreciado
+   
+    /* @IBAction func contactUs(_ sender: UIButton) {
         if(MFMailComposeViewController.canSendMail()){
             let mailComposeController = MFMailComposeViewController()
             mailComposeController.setToRecipients(["contato@mobilitee.com.br"])
@@ -143,9 +150,8 @@
             mailComposeController.mailComposeDelegate = self
             self.present(mailComposeController, animated: true, completion: nil)
         }
-    }
+    }*/
  }
- 
  extension MBMenuLateralViewController : MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)

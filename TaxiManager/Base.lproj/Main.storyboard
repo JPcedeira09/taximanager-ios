@@ -468,7 +468,6 @@
                                                     <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="contactUs:" destination="OeN-a8-wP5" eventType="touchUpInside" id="h7Q-v9-gUe"/>
                                                     <segue destination="K66-35-mPL" kind="presentation" id="sQf-MR-3aS"/>
                                                 </connections>
                                             </button>
@@ -743,7 +742,7 @@
                         <viewControllerLayoutGuide type="bottom" id="YBY-IP-ax0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ki2-h2-eGR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQ2-nx-jW5">
