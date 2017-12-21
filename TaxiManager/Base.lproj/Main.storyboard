@@ -258,7 +258,7 @@
                     <navigationItem key="navigationItem" id="lTj-gQ-2My">
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title=" " id="EqV-NL-kVx"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" width="8" style="plain" id="dDL-aw-7Xb">
+                        <barButtonItem key="leftBarButtonItem" width="8" style="plain" id="dDL-aw-7Xb">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8cc-kE-cl2">
                                 <rect key="frame" x="16" y="11" width="65" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -268,6 +268,7 @@
                                 </connections>
                             </button>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="8Dq-LL-tix"/>
                     </navigationItem>
                     <connections>
                         <outlet property="blurView" destination="QJF-Db-0kr" id="DqS-DS-2it"/>
@@ -319,9 +320,12 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rPI-EN-h3c">
-                                        <rect key="frame" x="35" y="108" width="305" height="17"/>
+                                        <rect key="frame" x="35" y="100" width="305" height="25"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="lKW-Ea-iG7"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -330,7 +334,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buscar Endereço" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbq-ti-aKG">
-                                        <rect key="frame" x="35" y="68" width="152.5" height="25.5"/>
+                                        <rect key="frame" x="35" y="68" width="152.5" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -339,12 +343,12 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Pbq-ti-aKG" firstAttribute="top" secondItem="qct-cz-RhK" secondAttribute="bottom" id="3FY-Re-TUU"/>
-                                    <constraint firstItem="rPI-EN-h3c" firstAttribute="centerX" secondItem="rdv-93-L3M" secondAttribute="centerX" id="87x-Pn-PYy"/>
-                                    <constraint firstItem="rPI-EN-h3c" firstAttribute="leading" secondItem="rdv-93-L3M" secondAttribute="leading" constant="35" id="BKL-v6-hfT"/>
-                                    <constraint firstAttribute="bottom" secondItem="rPI-EN-h3c" secondAttribute="bottom" constant="8" id="Tur-Z9-Jd8"/>
+                                    <constraint firstAttribute="bottom" secondItem="rPI-EN-h3c" secondAttribute="bottom" constant="8.5" id="EnS-fH-1Y9"/>
+                                    <constraint firstItem="rPI-EN-h3c" firstAttribute="leading" secondItem="rdv-93-L3M" secondAttribute="leading" constant="35" id="FcD-m9-hq6"/>
+                                    <constraint firstAttribute="trailing" secondItem="rPI-EN-h3c" secondAttribute="trailing" constant="35" id="NgV-1J-VO8"/>
                                     <constraint firstItem="qct-cz-RhK" firstAttribute="leading" secondItem="rdv-93-L3M" secondAttribute="leading" constant="35" id="YDr-Bj-kGw"/>
                                     <constraint firstItem="qct-cz-RhK" firstAttribute="top" secondItem="rdv-93-L3M" secondAttribute="top" constant="35" id="aoR-R8-xOG"/>
-                                    <constraint firstAttribute="trailing" secondItem="rPI-EN-h3c" secondAttribute="trailing" constant="35" id="dVY-W7-bi9"/>
+                                    <constraint firstItem="rPI-EN-h3c" firstAttribute="top" secondItem="Pbq-ti-aKG" secondAttribute="bottom" constant="14.5" id="p3a-C4-rwS"/>
                                     <constraint firstItem="Pbq-ti-aKG" firstAttribute="leading" secondItem="qct-cz-RhK" secondAttribute="leading" id="ym8-Uk-EcV"/>
                                     <constraint firstAttribute="height" constant="133.5" id="zUc-Xg-X6O"/>
                                 </constraints>
@@ -368,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f5x-mO-aO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4144" y="-941"/>
+            <point key="canvasLocation" x="-4144.8000000000002" y="-941.37931034482767"/>
         </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="6KH-ab-1Ep">
@@ -742,7 +746,7 @@
                         <viewControllerLayoutGuide type="bottom" id="YBY-IP-ax0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ki2-h2-eGR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQ2-nx-jW5">
@@ -1198,11 +1202,11 @@
                         <viewControllerLayoutGuide type="bottom" id="MVf-xs-zix"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PAh-eQ-728">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajV-d3-wYo" userLabel="Container">
-                                <rect key="frame" x="50" y="126.5" width="275" height="350"/>
+                                <rect key="frame" x="50" y="158.5" width="275" height="350"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logotipo_fundo_preto" translatesAutoresizingMaskIntoConstraints="NO" id="oxO-dA-Ynb">
                                         <rect key="frame" x="22.5" y="20" width="230" height="30"/>
