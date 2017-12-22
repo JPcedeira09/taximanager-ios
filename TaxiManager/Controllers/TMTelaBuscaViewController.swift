@@ -33,11 +33,9 @@ class MBTelaBuscaViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setupHeader()
         self.tableViewResultado.delegate = self
         self.tableViewResultado.dataSource = self
-        
         self.tableViewResultado.register(UINib(nibName: "TMResultadoBuscaCell", bundle: nil), forCellReuseIdentifier: "tmResultadoBusca")
         
         let distanciaFormatada = String(format: "%.1f km", Float((self.searchResult?.distance)!) / 1000.0)
@@ -45,8 +43,6 @@ class MBTelaBuscaViewController: UIViewController {
         self.labelDuracao.text =  "\(self.searchResult?.duration ?? 00) min"
         self.labelStartAddress.text = self.searchResult?.startAddress.address
         self.labelEndAddress.text = self.searchResult?.endAddress.address
-        
-        
     }
     
     /**
@@ -72,15 +68,16 @@ class MBTelaBuscaViewController: UIViewController {
     }
     
     func checarAcoesCorrida (corrida : MBRide){
+        print("URL DEEPLINK:\(corrida.urlDeeplink)")
         
         let application = UIApplication.shared
         if let urlDeeplinkString = corrida.urlDeeplink,
             let urlDeeplink = URL(string: urlDeeplinkString),
             application.canOpenURL(urlDeeplink)
         {
-            
-            Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,"uuid" : corrida.uuid,"modalityID":corrida.modality.id,"modalityName":corrida.modality.name])
             application.open(urlDeeplink)
+
+            Analytics.logEvent("openDeepLink", parameters: ["player" : corrida.name,"uuid" : corrida.uuid,"modalityID":corrida.modality.id,"modalityName":corrida.modality.name])
             Analytics.logEvent("resultClick", parameters: ["user_id": (MBUser.currentUser?.id)!, "company_id": (MBUser.currentUser?.companyId)!, "selected": self.uuid!, "type_open": 1 ])
             print("O indexPath row é : \(self.indexpathRow ?? 0 )")
             let  mbPlayerchosed = MBPlayeyChoose(user_id: (MBUser.currentUser?.id)!, company_id: (MBUser.currentUser?.companyId)!, selected: self.uuid!, type_open: 1 )
