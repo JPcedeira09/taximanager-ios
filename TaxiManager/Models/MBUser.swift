@@ -106,7 +106,8 @@ struct MBUser : Codable{
     static func getBookmarks(){
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
-        let url = URL(string: "http://api.taximanager.com.br/v1/taximanager/employees/bookmarks")
+        
+        let url = URL(string: "https://api.taximanager.com.br/v1/taximanager/employees/bookmarks")
         Alamofire.request(
             url!,
             method: .get, headers : header)

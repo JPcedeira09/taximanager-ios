@@ -126,8 +126,8 @@ class MBContactViewcontroller: UIViewController {
         self.textFieldMsg.layer.borderColor = UIColor.gray.cgColor
         self.textFieldMsg.layer.cornerRadius = 3
         self.btnEnviarMsg.layer.cornerRadius = 3
-        
-    
+
+        self.txtFieldSubject.text = ""
     }
     
     @IBAction func dismissView(_ sender: UIButton) {
@@ -140,36 +140,24 @@ class MBContactViewcontroller: UIViewController {
     
     //TODO txt field, longitude e latitude.
     @IBAction func enviarMensagem(_ sender: UIButton) {
+        SwiftSpinner.show("Enviando mensagem...")
+        print("----------------")
+        print(self.txtFieldSubject.text!)
+        print(self.textFieldMsg.text!)
+        print("----------------")
         
-        
-        if (self.textViewInfo.text! == "" ){
-            if(self.TitleAlertNoSubjectFeedback == "" || self.DescriptionAlertNoSubjectFeedback == ""){
-                alertComum(message: "Atenção!", title: "Diga-nos o motivo do contato!")
-            }else{
-                alertComum(message: self.TitleAlertNoSubjectFeedback, title: self.DescriptionAlertNoSubjectFeedback)
-            }
-        }
-        if (self.textFieldMsg.text! == "") {
-            if(self.TitleAlertNoMSGFeedback == "" || self.DescriptionalertNoMSGFeedback == ""){
-                alertComum(message: "Atenção!", title: "Diga-nos o que achou!")
-            }else{
-                alertComum(message: self.TitleAlertNoMSGFeedback, title: self.DescriptionalertNoMSGFeedback)
-            }
+        if(txtFieldSubject.text!.characters.count < 2 || textFieldMsg.text!.characters.count < 2 || textFieldMsg.text! == "Digite aqui sua mensagem."){
+            SCLAlertView().showError("Atenção!", subTitle: "Preencha todos os campos para nos enviar um bom feedback.")
+            SwiftSpinner.hide()
         }else{
-            
-            self.becomeFirstResponder()
             var feedback = MBFeedback(userId: (MBUser.currentUser?.id)!, subject: txtFieldSubject.text!, message: textFieldMsg.text!
                 , platform: "IOS", platformVersion: (Bundle.main.releaseVersionNumber)!, appVersion: Bundle.main.releaseVersionNumberPretty, latitude: latitude!, longitude: longitude!)
-            
             print(feedback.toDict(feedback))
-            SwiftSpinner.show("Enviando mensagem...")
-            let mensagem = self.sendFeedBack(feedback: feedback)
-            self.becomeFirstResponder()
+            self.sendFeedBack(feedback: feedback)
             SwiftSpinner.hide()
-
-            print("A mensagem enviada foi '\(mensagem)'")
             self.dismiss(animated: true, completion: nil)
         }
+        
     }
     
     /*
@@ -198,10 +186,11 @@ class MBContactViewcontroller: UIViewController {
     
     func sendFeedBack( feedback: MBFeedback)-> String{
         let parametros : [String: Any]  =  feedback.toDict(feedback) as [String:Any]
-        let postURL = URL(string:  "http://api.taximanager.com.br/v1/taximanager/feedback")
+        let postURL = URL(string:  "https://api.taximanager.com.br/v1/taximanager/feedback")
         
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
+        
         Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).responseJSON {  response in
             
             switch response.result {
@@ -209,17 +198,19 @@ class MBContactViewcontroller: UIViewController {
                 print(response)
                 
                 if(self.alertSuccessSendFeedbackTitle == "" || self.alertSuccessSendFeedbackDescription == ""){
+                    
                     SCLAlertView().showSuccess("Mensagem enviada!", subTitle: "Obrigado pelo seu feedback .")
                 }else{
                     SCLAlertView().showSuccess(self.alertSuccessSendFeedbackTitle, subTitle: self.alertSuccessSendFeedbackDescription)
                 }
-                
             case .failure(let error):
                 print(error.localizedDescription)
                 print("iNFO: error in localizedDescription getBookmarks")
                 
                 if(self.alertFailSendFeedbackTitle == "" || self.alertFailSendFeedbackDescription == ""){
-                    SCLAlertView().showError("Falha ao adicionar favorito", subTitle: "Tente mais tarde.")
+                    
+                    SCLAlertView().showError(
+                        "Falha ao adicionar favorito", subTitle: "Tente mais tarde.")
                 }else{
                     SCLAlertView().showError(self.alertFailSendFeedbackTitle, subTitle: self.alertFailSendFeedbackDescription)
                 }
@@ -231,17 +222,29 @@ class MBContactViewcontroller: UIViewController {
 
 extension MBContactViewcontroller : UITextFieldDelegate, UITextViewDelegate{
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        txtFieldSubject.resignFirstResponder()
+        return true
+    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
+            return true
+        }
+        textFieldMsg.resignFirstResponder()
+        return false
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
-            textFieldMsg.text = ""
-            textFieldMsg.textColor = UIColor.black
+        textFieldMsg.text = ""
+        textFieldMsg.textColor = UIColor.black
         
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textFieldMsg.text.isEmpty {
-            textFieldMsg.text = "Digite aqui sua mensagem"
+            textFieldMsg.text = "Digite aqui sua mensagem."
             textFieldMsg.textColor = UIColor.lightGray
-        
+            
         }
     }
     override var canBecomeFirstResponder: Bool{

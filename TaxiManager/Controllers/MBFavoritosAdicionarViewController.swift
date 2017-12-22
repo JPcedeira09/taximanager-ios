@@ -57,7 +57,7 @@ class MBFavoritosAdicionarViewController: UIViewController {
         
         let header = ["Content-Type" : "application/json",
                       "Authorization" : MBUser.currentUser?.token ?? ""]
-        let postURL = URL(string: "http://api.taximanager.com.br/v1/taximanager/employees/bookmarks")
+        let postURL = URL(string: "https://api.taximanager.com.br/v1/taximanager/employees/bookmarks")
         let parametros : [String: Any]  = bookmark.toDict(bookmark) as [String:Any]
         
         Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).responseJSON { (response) -> Void in
