@@ -17,6 +17,7 @@ class MBBuscaEnderecoViewController: UIViewController {
     
     @IBOutlet weak var txtFieldBuscaEndereco: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var labelEnd: UILabel!
     
     // Texto para saber qual o placeholder do txtFieldBuscaEndereco
     var textoDestination: String?
@@ -37,9 +38,10 @@ class MBBuscaEnderecoViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print("---------- iNFO placeholder:\(textoDestination)-------------")
         self.txtFieldBuscaEndereco.placeholder = textoDestination
-        
+        self.labelEnd.text = "Buscar Endereço"
         // Do any additional setup after loading the view.
         if let recents = MBUser.currentUser?.recents{
             self.arrayRecentes = recents
@@ -71,18 +73,19 @@ class MBBuscaEnderecoViewController: UIViewController {
     //MARK: - Metodos
     
     override var canBecomeFirstResponder : Bool{
-        
         return true
     }
+    
     @IBAction func fechar(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
+    
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
         
         if self.timer != nil {
-            
             self.timer.invalidate()
         }
+        
         if let text = sender.text {
             
             if text.count >= 5 {

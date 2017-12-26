@@ -8,6 +8,8 @@
 	<array>
 		<string>applinks:mobilitee.com.br</string>
 		<string>applinks:www.mobilitee.com.br</string>
+		<string>applinks:www.taximanager.com.br</string>
+		<string>applinks:taximanager.com.br</string>
 	</array>
 </dict>
 </plist>

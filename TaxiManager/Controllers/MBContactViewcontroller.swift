@@ -25,7 +25,8 @@ class MBContactViewcontroller: UIViewController {
     //Properties to send location of the feedback.
     var latitude: Double?
     var longitude: Double?
-    
+    var remoteConfig: RemoteConfig!
+
     //Properties RemoteConfig.
     var alertSuccessSendFeedbackTitle:String = ""
     var alertSuccessSendFeedbackDescription:String = ""
@@ -77,7 +78,11 @@ class MBContactViewcontroller: UIViewController {
     func fetchRemoteConfig(){
         // FIXE: Remove this before we go into productions!
         let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
-        RemoteConfig.remoteConfig().fetch(withExpirationDuration: 0) { (status, error) in
+        var expirationDuration = 2400
+        if remoteConfig.configSettings.isDeveloperModeEnabled {
+            expirationDuration = 0
+        }
+        RemoteConfig.remoteConfig().fetch(withExpirationDuration: TimeInterval(expirationDuration)) { (status, error) in
             guard error == nil else {
                 print("INFO: Error fetching values- \(error?.localizedDescription ?? "erro!")")
                 return
@@ -102,12 +107,14 @@ class MBContactViewcontroller: UIViewController {
             "alertNoMSGFeedbackTitle":"Atenção" as NSObject,
             "alertNoMSGFeedbackDescription":"Diga-nos o que achou" as NSObject
         ]
-        //RemoteConfig.remoteConfig().setDefaults(defaultsValuesComoUsar)
+        RemoteConfig.remoteConfig().setDefaults(defaultsValuesComoUsar)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Remote Config.
+        remoteConfig = RemoteConfig.remoteConfig()
+
         setupRemoteConfigDefaults()
         fetchRemoteConfig()
         
@@ -147,8 +154,19 @@ class MBContactViewcontroller: UIViewController {
         print(self.textFieldMsg.text!)
         print("----------------")
         
-        if(txtFieldSubject.text!.characters.count < 2 || textFieldMsg.text!.characters.count < 2 || textFieldMsg.text! == "Digite aqui sua mensagem."){
-            SCLAlertView().showError("Atenção!", subTitle: "Preencha todos os campos para nos enviar um bom feedback.")
+        if(txtFieldSubject.text!.characters.count < 2){
+            if(self.TitleAlertNoSubjectFeedback != "" && self.DescriptionAlertNoSubjectFeedback != ""){
+            SCLAlertView().showError(self.TitleAlertNoSubjectFeedback, subTitle: self.DescriptionAlertNoSubjectFeedback)
+            }else{
+            SCLAlertView().showError("", subTitle: "")
+            }
+                SwiftSpinner.hide()
+        }else if (textFieldMsg.text!.characters.count < 2 || textFieldMsg.text! == "Digite aqui sua mensagem."){
+            if(self.TitleAlertNoMSGFeedback != "" && self.DescriptionalertNoMSGFeedback != ""){
+                SCLAlertView().showError(self.TitleAlertNoMSGFeedback, subTitle: self.DescriptionalertNoMSGFeedback)
+            }else{
+                SCLAlertView().showError("", subTitle: "")
+            }
             SwiftSpinner.hide()
         }else{
             var feedback = MBFeedback(userId: (MBUser.currentUser?.id)!, subject: txtFieldSubject.text!, message: textFieldMsg.text!
@@ -198,7 +216,6 @@ class MBContactViewcontroller: UIViewController {
                 print(response)
                 
                 if(self.alertSuccessSendFeedbackTitle == "" || self.alertSuccessSendFeedbackDescription == ""){
-                    
                     SCLAlertView().showSuccess("Mensagem enviada!", subTitle: "Obrigado pelo seu feedback .")
                 }else{
                     SCLAlertView().showSuccess(self.alertSuccessSendFeedbackTitle, subTitle: self.alertSuccessSendFeedbackDescription)

@@ -62,8 +62,13 @@
     
     func fetchRemoteConfig(){
         // FIXE: Remove this before we go into productions!
-        // let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
-        RemoteConfig.remoteConfig().fetch(withExpirationDuration: 0) { (status, error) in
+         let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
+        
+        var expirationDuration = 2400
+        if remoteConfig.configSettings.isDeveloperModeEnabled {
+            expirationDuration = 0
+        }
+        RemoteConfig.remoteConfig().fetch(withExpirationDuration: TimeInterval(expirationDuration)) { (status, error) in
             
             if status == .success {
                 print("Config fetched!")
