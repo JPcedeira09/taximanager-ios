@@ -20,7 +20,7 @@ import Crashlytics
 //fddaea8c38c5d8cee66a234b2f812baa
 //api.openweathermap.org/data/2.5/weather?lat=35&lon=139
 
-class MBInitialViewViewController: UIViewController {
+class MBInitialViewViewController: UIViewController, CLLocationManagerDelegate {
     
     // text to set the place holder on buscar endereço.
     var textoDestination: String = ""
@@ -73,6 +73,7 @@ class MBInitialViewViewController: UIViewController {
         //CoreLocation.
         self.pedirAutorizacaoLocalizacaoUsuario()
         self.localizarUsuario()
+        self.locationManager.delegate = self
         
         //Textfield.
         self.textFieldEnderecoOrigem.delegate = self
@@ -98,10 +99,14 @@ class MBInitialViewViewController: UIViewController {
     
     @objc func localizarUsuario(){
         
-        let location = self.locationManager.location!
+        let location = self.locationManager.location
         let geocoder = CLGeocoder()
+        print("---------------------localização---------------------")
+        print(location ?? "sem localização")
+        print("---------------------localização---------------------")
+
         // Look up the location and pass it to the completion handler.
-        geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+        geocoder.reverseGeocodeLocation(location!, completionHandler: { (placemarks, error) in
             if (error == nil) {
                 var endereco = ""
                 if let plmarks = placemarks {
@@ -152,17 +157,31 @@ class MBInitialViewViewController: UIViewController {
         if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedAlways && CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse){
             self.locationManager.requestWhenInUseAuthorization()
         }
-        self.locationManager.delegate = self;
+        self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let localizacao = locations.last!
+        if(!mapaMoveuInicialmente){
+            
+            //span created.
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            //region created.
+            let regiao = MKCoordinateRegion(center: localizacao.coordinate, span: span)
+            //set the map on region.
+            self.mapView.setRegion(regiao, animated: false)
+            //set the moved map.
+            mapaMoveuInicialmente = true
+        }
+    }
     func atualizarLabelData (){
         
         let dataAtual = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "pt-BR")
         dateFormatter.dateStyle = .full
-        
         self.labelData.text = dateFormatter.string(from: dataAtual)
     }
     
@@ -338,24 +357,7 @@ extension MBInitialViewViewController : MKMapViewDelegate{
     }
 }
 
-extension MBInitialViewViewController : CLLocationManagerDelegate{
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let localizacao = locations.last!
-        if(!mapaMoveuInicialmente){
-            
-            //span created.
-            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-            //region created.
-            let regiao = MKCoordinateRegion(center: localizacao.coordinate, span: span)
-            //set the map on region.
-            self.mapView.setRegion(regiao, animated: false)
-            //set the moved map.
-            mapaMoveuInicialmente = true
-        }
-    }
-}
+
 
 extension MBInitialViewViewController : UITextFieldDelegate{
     
@@ -365,11 +367,11 @@ extension MBInitialViewViewController : UITextFieldDelegate{
             
             let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! MBBuscaEnderecoViewController
             buscarEnderecoViewController.textoDestination = "Inserir local de partida"
-
+            
             buscarEnderecoViewController.destinationViewController = statusDestinationInicial
             
             buscarEnderecoViewController.selecionouEndereco = {[weak self] (dicionarioEndereco) in
-
+                
                 if let _ = self {
                     self?.startAddress = dicionarioEndereco
                     let lat = dicionarioEndereco.latitude
@@ -384,7 +386,7 @@ extension MBInitialViewViewController : UITextFieldDelegate{
             
         }else if (textField == self.textFieldEnderecoDestino){
             let buscarEnderecoViewController = storyboard?.instantiateViewController(withIdentifier: "tmBuscaEndereco") as! MBBuscaEnderecoViewController
-         
+            
             // Set the placeholder of the buscar Endereco View controller.
             buscarEnderecoViewController.textoDestination = "Inserir local de destino"
             

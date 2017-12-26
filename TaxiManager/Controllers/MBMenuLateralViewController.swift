@@ -26,6 +26,7 @@
     var urlHowUse:String = ""
     var alertLogoutTitle:String = ""
     var alertLogoutDescription:String = ""
+    var remoteConfig: RemoteConfig!
     
     func updateViewWithValues(){
         //Remote Config button terms of use.
@@ -61,15 +62,18 @@
     
     func fetchRemoteConfig(){
         // FIXE: Remove this before we go into productions!
-        let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
+        // let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
         RemoteConfig.remoteConfig().fetch(withExpirationDuration: 0) { (status, error) in
-            guard error == nil else {
-                print("INFO: Error fetching values- \(error?.localizedDescription ?? "erro!")")
-                return
+            
+            if status == .success {
+                print("Config fetched!")
+                self.remoteConfig.activateFetched()
+                self.updateViewWithValues()
+                print("INFO: Firebase Remote Config its ok")
+            } else {
+                print("Config not fetched")
+                print("iNFO_Error: \(error!.localizedDescription)")
             }
-            print("INFO: Firebase Remote Config its ok")
-            RemoteConfig.remoteConfig().activateFetched()
-            self.updateViewWithValues()
         }
     }
     
@@ -87,6 +91,7 @@
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        remoteConfig = RemoteConfig.remoteConfig()
         setupRemoteConfigDefaults()
         fetchRemoteConfig()
         
@@ -119,7 +124,6 @@
                 UserDefaults.standard.removePersistentDomain(forName: domain)
                 UserDefaults.standard.synchronize()
                 
-                
                 self.dismiss(animated: true) {
                     guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
                     let rootController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TMLoginViewController")
@@ -133,9 +137,9 @@
     @IBAction func openComoUsar(_ sender: UIButton) {
         let stringUrl:String?
         if(self.urlHowUse == ""){
-             stringUrl = "https://www.mobilitee.com.br/itau/como-usar/"
+            stringUrl = "https://www.mobilitee.com.br/itau/como-usar/"
         }else {
-             stringUrl =  self.urlHowUse
+            stringUrl =  self.urlHowUse
         }
         if let url = URL(string: stringUrl!){
             if(UIApplication.shared.canOpenURL(url)){
@@ -159,17 +163,6 @@
             }
         }
     }
-    
-    // Depreciado
-    /* @IBAction func contactUs(_ sender: UIButton) {
-     if(MFMailComposeViewController.canSendMail()){
-     let mailComposeController = MFMailComposeViewController()
-     mailComposeController.setToRecipients(["contato@mobilitee.com.br"])
-     mailComposeController.setSubject("Suporte Mobilitee")
-     mailComposeController.mailComposeDelegate = self
-     self.present(mailComposeController, animated: true, completion: nil)
-     }
-     }*/
  }
  
  extension MBMenuLateralViewController : MFMailComposeViewControllerDelegate{
@@ -177,3 +170,14 @@
         controller.dismiss(animated: true, completion: nil)
     }
  }
+ 
+ // Depreciado
+ /* @IBAction func contactUs(_ sender: UIButton) {
+  if(MFMailComposeViewController.canSendMail()){
+  let mailComposeController = MFMailComposeViewController()
+  mailComposeController.setToRecipients(["contato@mobilitee.com.br"])
+  mailComposeController.setSubject("Suporte Mobilitee")
+  mailComposeController.mailComposeDelegate = self
+  self.present(mailComposeController, animated: true, completion: nil)
+  }
+  }*/

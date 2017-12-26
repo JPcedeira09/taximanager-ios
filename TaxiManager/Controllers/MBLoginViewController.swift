@@ -103,7 +103,6 @@ class MBLoginViewController: UIViewController {
                         }else{
                             self.performSegue(withIdentifier: "tmTelaPrincipal", sender: nil)
                         }
-                        
                     }catch{
                         print("Nao conseguiu pegar dicionario")
                     }

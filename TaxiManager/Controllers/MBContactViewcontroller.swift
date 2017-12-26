@@ -87,6 +87,7 @@ class MBContactViewcontroller: UIViewController {
             self.updateViewWithValues()
         }
     }
+    
     func setupRemoteConfigDefaults(){
         let defaultsValuesComoUsar = [
             //Remote Config Alerts Mensagens sobre o envio.
@@ -101,7 +102,7 @@ class MBContactViewcontroller: UIViewController {
             "alertNoMSGFeedbackTitle":"Atenção" as NSObject,
             "alertNoMSGFeedbackDescription":"Diga-nos o que achou" as NSObject
         ]
-        RemoteConfig.remoteConfig().setDefaults(defaultsValuesComoUsar)
+        //RemoteConfig.remoteConfig().setDefaults(defaultsValuesComoUsar)
     }
     
     override func viewDidLoad() {
@@ -126,7 +127,7 @@ class MBContactViewcontroller: UIViewController {
         self.textFieldMsg.layer.borderColor = UIColor.gray.cgColor
         self.textFieldMsg.layer.cornerRadius = 3
         self.btnEnviarMsg.layer.cornerRadius = 3
-
+        
         self.txtFieldSubject.text = ""
     }
     
@@ -157,7 +158,6 @@ class MBContactViewcontroller: UIViewController {
             SwiftSpinner.hide()
             self.dismiss(animated: true, completion: nil)
         }
-        
     }
     
     /*
@@ -237,16 +237,15 @@ extension MBContactViewcontroller : UITextFieldDelegate, UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
         textFieldMsg.text = ""
         textFieldMsg.textColor = UIColor.black
-        
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textFieldMsg.text.isEmpty {
             textFieldMsg.text = "Digite aqui sua mensagem."
             textFieldMsg.textColor = UIColor.lightGray
-            
         }
     }
+    
     override var canBecomeFirstResponder: Bool{
         return true
     }

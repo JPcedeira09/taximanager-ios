@@ -59,16 +59,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             } else if let _ = MBUser.currentUser?.firstAccessAt{
                 MBUser.update()
-                
+                print("NÃO TEM USUARIO")
+
                 Analytics.setUserProperty(MBUser.currentUser!.fullName, forName: "name")
                 Analytics.setUserID("\(MBUser.currentUser!.id)")
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier :"NavigationInicial") as! UINavigationController
                 self.window?.rootViewController = viewController
+                
             }
+            
+
         }
-        print("NÃO TEM USUARIO")
 
         return true
     }
