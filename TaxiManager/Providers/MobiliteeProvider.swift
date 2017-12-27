@@ -38,7 +38,6 @@ extension MobiliteeProvider : TargetType{
             
         default :
             return Data()
-            
         }
     }
     
@@ -122,7 +121,6 @@ extension MobiliteeProvider : TargetType{
     var path: String {
         
         switch(self){
-            
         case .estimate :
             return "/estimates"
         case .login:
@@ -161,15 +159,10 @@ extension MobiliteeProvider : TargetType{
     var headers: [String : String]? {
         
         switch(self){
-
         case let .login(usuario, senha):
-            
             let token = (usuario + ":" + senha).toBase64()
-            
             return ["Authorization" : "Basic :" + token]
-
         default:
-
             return ["Content-Type" : "application/json",
                     "Authorization" : MBUser.currentUser?.token ?? ""]
         }

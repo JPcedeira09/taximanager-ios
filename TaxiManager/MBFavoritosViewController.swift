@@ -100,3 +100,24 @@ extension MBFavoritosViewController : UITableViewDelegate, UITableViewDataSource
         }
     }
 }
+
+/*
+ let header = ["Content-Type" : "application/json",
+ "Authorization" : MBUser.currentUser?.token ?? ""]
+ let postURL = URL(string: "https://api.taximanager.com.br/v1/taximanager/employees/bookmarks/\(bookmarkId)")
+ print(postURL!)
+ Alamofire.request(postURL!, method: .delete, headers: header).responseJSON { (response) -> Void in
+ switch response.result {
+ case .success:
+ print("_____________success delete BOOKMARK_____________")
+ MBUser.currentUser?.bookmarks?.remove(at: indexPath.row)
+ print("_____________success delete BOOKMARK_____________")
+ SCLAlertView().showSuccess("Deletado!", subTitle: "Seu favorito foi deletado com sucesso.")
+ 
+ case .failure(let error):
+ print(error.localizedDescription)
+ print("iNFO: error in localizedDescription getBookmarks")
+ SCLAlertView().showError("Falha ao deletar seu favorito", subTitle: "Tente mais tarde.")
+ }
+ }
+ */

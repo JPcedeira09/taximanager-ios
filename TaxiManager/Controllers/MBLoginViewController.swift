@@ -84,7 +84,7 @@ class MBLoginViewController: UIViewController {
                             //  INFO: fired status.
                         }else if (mbUser.statusID == 3){
                             let alertDemitido = SCLAlertView()
-                            alertDemitido.showNotice("Ops...", subTitle: "Ops, seu usuario é inexistente, entre em contato com a área de transporte da sua empresa.")
+                            alertDemitido.showNotice("Ops...", subTitle: "Ops, seu usuario não está abilitado, entre em contato com a área de transporte da sua empresa.")
                             // INFO: first access, enable status.
                             
                         }else if (MBUser.currentUser?.firstAccessAt == nil && mbUser.statusID == 1){
