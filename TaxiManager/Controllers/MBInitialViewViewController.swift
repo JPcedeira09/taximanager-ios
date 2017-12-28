@@ -127,7 +127,9 @@ class MBInitialViewViewController: UIViewController, CLLocationManagerDelegate {
                 print("INFO: location error.")
             }
         })
-        }
+           }else{
+    print("sem localização")
+    }
     }
     
     @IBAction func btnProximoPasso(_ sender: UIButton) {
