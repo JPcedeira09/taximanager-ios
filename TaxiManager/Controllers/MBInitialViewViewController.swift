@@ -104,9 +104,11 @@ class MBInitialViewViewController: UIViewController, CLLocationManagerDelegate {
         print("---------------------localização---------------------")
         print(location ?? "sem localização")
         print("---------------------localização---------------------")
-
+        
+        if (location?.coordinate.latitude != 0.0 && location?.coordinate.longitude != 0.0 && location != nil) {
+            print(location as Any)
         // Look up the location and pass it to the completion handler.
-        geocoder.reverseGeocodeLocation(location!, completionHandler: { (placemarks, error) in
+            geocoder.reverseGeocodeLocation(location!, completionHandler: { (placemarks, error) in
             if (error == nil) {
                 var endereco = ""
                 if let plmarks = placemarks {
@@ -125,6 +127,7 @@ class MBInitialViewViewController: UIViewController, CLLocationManagerDelegate {
                 print("INFO: location error.")
             }
         })
+        }
     }
     
     @IBAction func btnProximoPasso(_ sender: UIButton) {
