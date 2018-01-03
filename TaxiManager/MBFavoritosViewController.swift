@@ -86,16 +86,11 @@ extension MBFavoritosViewController : UITableViewDelegate, UITableViewDataSource
                     switch(result){
                     case let .success(response):
                         MBUser.currentUser?.bookmarks?.remove(at: indexPath.row)
-                        
                     case let .failure(error):
-                        
                         print(error.localizedDescription)
                     }
                 })
             }
-            
-            
-            
             
         }
     }

@@ -289,7 +289,10 @@ class MBInitialViewViewController: UIViewController, CLLocationManagerDelegate {
                     }else if (mbUser.statusID == 2 || mbUser.id == 3){
                         print("INFO O STATUD DO USER É : \(mbUser.isBlocked)")
                         MBUser.logout()
-                        let alertDemitido = SCLAlertView()
+                        let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                        let alertDemitido = SCLAlertView(appearance: appearance)
+                        alertDemitido.addButton("Fechar", action: {self.dismiss(animated: true)})
+                        alertDemitido.showError("Falha", subTitle: "Envio de redefinição falhou")
                         alertDemitido.showNotice("Ops...", subTitle: "Ops, seu usuario foi desautorizado, entre em contato com a área de transporte da sua empresa.")
                         self.performSegue(withIdentifier: "MBLoginViewController", sender: nil)
                     }

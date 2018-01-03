@@ -26,7 +26,7 @@ class MBContactViewcontroller: UIViewController {
     var latitude: Double?
     var longitude: Double?
     var remoteConfig: RemoteConfig!
-
+    
     //Properties RemoteConfig.
     var alertSuccessSendFeedbackTitle:String = ""
     var alertSuccessSendFeedbackDescription:String = ""
@@ -76,6 +76,7 @@ class MBContactViewcontroller: UIViewController {
     }
     
     func fetchRemoteConfig(){
+        
         // FIXE: Remove this before we go into productions!
         let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
         var expirationDuration = 2400
@@ -114,7 +115,7 @@ class MBContactViewcontroller: UIViewController {
         super.viewDidLoad()
         // Remote Config.
         remoteConfig = RemoteConfig.remoteConfig()
-
+        
         setupRemoteConfigDefaults()
         fetchRemoteConfig()
         
@@ -154,26 +155,34 @@ class MBContactViewcontroller: UIViewController {
         print(self.textFieldMsg.text!)
         print("----------------")
         
-        if(txtFieldSubject.text!.characters.count < 2){
+        if(txtFieldSubject.text!.characters.count < 1){
             if(self.TitleAlertNoSubjectFeedback != "" && self.DescriptionAlertNoSubjectFeedback != ""){
-            SCLAlertView().showError(self.TitleAlertNoSubjectFeedback, subTitle: self.DescriptionAlertNoSubjectFeedback)
-            }else{
-            SCLAlertView().showError("", subTitle: "")
-            }
-                SwiftSpinner.hide()
-        }else if (textFieldMsg.text!.characters.count < 2 || textFieldMsg.text! == "Digite aqui sua mensagem."){
-            if(self.TitleAlertNoMSGFeedback != "" && self.DescriptionalertNoMSGFeedback != ""){
-                SCLAlertView().showError(self.TitleAlertNoMSGFeedback, subTitle: self.DescriptionalertNoMSGFeedback)
+                SCLAlertView().showError(self.TitleAlertNoSubjectFeedback, subTitle: self.DescriptionAlertNoSubjectFeedback)
             }else{
                 SCLAlertView().showError("", subTitle: "")
             }
+            SwiftSpinner.hide()
+        }else if (textFieldMsg.text!.characters.count < 1 || textFieldMsg.text! == "Digite aqui sua mensagem."){
+            if(self.TitleAlertNoMSGFeedback != "" && self.DescriptionalertNoMSGFeedback != ""){
+                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                let alertView = SCLAlertView(appearance: appearance)
+                alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                alertView.showError(self.TitleAlertNoMSGFeedback, subTitle: self.DescriptionalertNoMSGFeedback)
+                
+            }else{
+                
+                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                let alertView = SCLAlertView(appearance: appearance)
+                alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                alertView.showError("Atenção!", subTitle: "Digite a mensagem que deseja nos passar")
+            }
+            
             SwiftSpinner.hide()
         }else{
             var feedback = MBFeedback(userId: (MBUser.currentUser?.id)!, subject: txtFieldSubject.text!, message: textFieldMsg.text!
                 , platform: "IOS", platformVersion: (Bundle.main.releaseVersionNumber)!, appVersion: Bundle.main.releaseVersionNumberPretty, latitude: latitude!, longitude: longitude!)
             print(feedback.toDict(feedback))
             self.sendFeedBack(feedback: feedback)
-
         }
     }
     
@@ -211,81 +220,43 @@ class MBContactViewcontroller: UIViewController {
         Alamofire.request(postURL!, method: .post, parameters:parametros , encoding: JSONEncoding.default, headers: header).validate(contentType: ["application/json"]).responseJSON {  response in
             
             SwiftSpinner.hide()
-
             
             switch response.result {
             case .success(let data):
-                print(response)
-                
+                print(data)
                 
                 let feedbackTitle = self.alertSuccessSendFeedbackTitle != "" ? self.alertSuccessSendFeedbackTitle : "Enviada!"
                 let feedbackDescription = self.alertSuccessSendFeedbackDescription != "" ? self.alertSuccessSendFeedbackDescription : "A mensagem foi enviada com sucesso!"
                 
-                let alert = SCLAlertView().showSuccess(feedbackTitle, subTitle: feedbackDescription)
-                alert.setDismissBlock {
-                    self.dismiss(animated: true)
-                }
+                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                let alertView = SCLAlertView(appearance: appearance)
+                alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                alertView.showSuccess(feedbackTitle, subTitle: feedbackDescription)
                 
-//
-//                if(self.alertSuccessSendFeedbackTitle == "" || self.alertSuccessSendFeedbackDescription == ""){
-//
-//
-//                    let appearance = SCLAlertView.SCLAppearance(
-//                        showCloseButton: false
-//                    )
-//
-//                    var alerta = SCLAlertView(appearance: appearance)
-//                    alerta.addButton("Fechar", action: {
-//                        print("PASSOU NO DISMISS BLOCK")
-//                        self.dismiss(animated: true, completion: nil)
-//
-//
-//
-//                    })
-//                    alerta.showSuccess("Mensagem enviada!", subTitle:"Obrigado pelo seu feedback.")
-////                    var alert = SCLAlertView().showSuccess("Mensagem enviada!", subTitle: "Obrigado pelo seu feedback .")
-////
-////
-//////                    alert.setDismissBlock {
-////
-////                        print("PASSOU NO DISMISS BLOCK")
-////                        self.dismiss(animated: true, completion: nil)
-//////                    }
-//
-//
-//
-//                }else{
-//                    let alert = SCLAlertView().showSuccess(self.alertSuccessSendFeedbackTitle, subTitle: self.alertSuccessSendFeedbackDescription)
-//
-//                    alert.setDismissBlock {
-//                        self.dismiss(animated: true)
-//                    }
-//
-////                    let appearance = SCLAlertView.SCLAppearance(
-////                        showCloseButton: false
-////                    )
-////
-////                    var alerta = SCLAlertView(appearance: appearance)
-////                    alerta.addButton("Fechar", action: {
-////                        print("PASSOU NO DISMISS BLOCK")
-////                        self.dismiss(animated: true, completion: nil)
-////
-////
-////
-////                    })
-////                    alerta.showSuccess(self.alertSuccessSendFeedbackTitle, subTitle:self.alertSuccessSendFeedbackDescription)
-//                }
+                //                alertView.addButton("Second Button") {
+                //                    print("Second button tapped")
+                //                }
+                //                alertView.setDismissBlock {
+                //                    self.dismiss(animated: true)
+                //                }
+                
             case .failure(let error):
                 print(error.localizedDescription)
                 print("iNFO: error in localizedDescription getBookmarks")
                 
                 if(self.alertFailSendFeedbackTitle == "" || self.alertFailSendFeedbackDescription == ""){
                     
-                    SCLAlertView().showError(
-                        "Falha ao adicionar favorito", subTitle: "Tente mais tarde.")
-                }else{
-                    let alert = SCLAlertView().showError(self.alertFailSendFeedbackTitle, subTitle: self.alertFailSendFeedbackDescription)
+                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                    let alertView = SCLAlertView(appearance: appearance)
+                    alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                    alertView.showError("Falha ao adicionar favorito", subTitle: "Tente mais tarde.")
                     
+                }else{
+                    
+                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                    let alertView = SCLAlertView(appearance: appearance)
+                    alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                    alertView.showError(self.alertFailSendFeedbackTitle, subTitle: self.alertFailSendFeedbackDescription)
                 }
             }
         }

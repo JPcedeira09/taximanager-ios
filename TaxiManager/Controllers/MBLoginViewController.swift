@@ -79,11 +79,20 @@ class MBLoginViewController: UIViewController {
                         
                         //  INFO: inactive status.
                         if(mbUser.statusID == 2){
-                            let alertInativo = SCLAlertView()
+                            
+                            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                            let alertInativo = SCLAlertView(appearance: appearance)
+                            alertInativo.addButton("Fechar", action: {self.dismiss(animated: true)})
+                            alertInativo.showError("Falha", subTitle: "Envio de redefinição falhou")
                             alertInativo.showNotice("Ops...", subTitle: "Ops, seu usuário não está ativo. Por favor, entre em contato com a área de transporte da sua empresa.")
                             //  INFO: fired status.
+                            
                         }else if (mbUser.statusID == 3){
-                            let alertDemitido = SCLAlertView()
+                            
+                            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                            let alertDemitido = SCLAlertView(appearance: appearance)
+                            alertDemitido.addButton("Fechar", action: {self.dismiss(animated: true)})
+                            alertDemitido.showError("Falha", subTitle: "Envio de redefinição falhou")
                             alertDemitido.showNotice("Ops...", subTitle: "Ops, seu usuario não está abilitado, entre em contato com a área de transporte da sua empresa.")
                             // INFO: first access, enable status.
                             
@@ -93,7 +102,7 @@ class MBLoginViewController: UIViewController {
                                 showCloseButton: false
                             )
                             let alert = SCLAlertView(appearance: appearance)
-                            alert.addButton("Ok", action: {
+                            alert.addButton("Fechar", action: {
                                 self.performSegue(withIdentifier: "tmPrimeiroAcesso", sender: nil)
                                 
                                 Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user" : username])
@@ -107,8 +116,11 @@ class MBLoginViewController: UIViewController {
                         print("Nao conseguiu pegar dicionario")
                     }
                 }else{
-                    let alert = SCLAlertView()
-                    alert.showError("Erro", subTitle: "Usuário ou senha inválidos.")
+                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                    let alertView = SCLAlertView(appearance: appearance)
+                    alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                    alertView.showError("Falha", subTitle: "Envio de redefinição falhou")
+                    alertView.showError("Erro!", subTitle: "Usuário ou senha inválidos.")
                 }
             case let .failure(error):
                 Analytics.logEvent("AccessFormFinishFail", parameters: ["localizedDescription" : error.localizedDescription,"errorDescription" : error.errorDescription!,"Errorresponse" : error.response!])

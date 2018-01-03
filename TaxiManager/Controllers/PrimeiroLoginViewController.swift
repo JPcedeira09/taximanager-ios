@@ -19,7 +19,6 @@ class PrimeiroLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,12 +31,17 @@ class PrimeiroLoginViewController: UIViewController {
             txtFieldConfirmarSenha.text!.characters.count < 5
             ){
             
-            SCLAlertView().showInfo("Ops!", subTitle: "A senha deve conter 5 dígitos ao menos.")
+            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+            let alertView = SCLAlertView(appearance: appearance)
+            alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+            alertView.showInfo("Ops!", subTitle: "A senha deve conter 5 dígitos ao menos.")
+            //print("Preencha todos os campos")
             
-            print("Preencha todos os campos")
         }else if( txtFieldSenha.text != txtFieldConfirmarSenha.text){
-            
-            SCLAlertView().showInfo("Ops!", subTitle: "A senha digitada deve ser igual nos dois campos.")
+            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+            let alertView = SCLAlertView(appearance: appearance)
+            alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+            alertView.showInfo("Ops!", subTitle: "A senha digitada deve ser igual nos dois campos.")
             
         }else{
             
@@ -47,7 +51,6 @@ class PrimeiroLoginViewController: UIViewController {
                 SwiftSpinner.hide()
                 
                 switch result{
-                    
                 case let .success(response):
                     
                     do{
@@ -55,23 +58,32 @@ class PrimeiroLoginViewController: UIViewController {
                             
                             print(dictionary)
                             if let _ = dictionary["records"]{
-                                SCLAlertView().showSuccess("Tudo pronto!", subTitle: "Agora é só acessar usando sua nova senha.")
+                                
+                                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                                let alertView = SCLAlertView(appearance: appearance)
+                                alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                                alertView.showSuccess("Tudo pronto!", subTitle: "Agora é só acessar usando sua nova senha.")
                                 Analytics.logEvent("firstAccessFormFinishSuccess", parameters: ["user_ID" : MBUser.currentUser!.id])
                             
                                 self.dismiss(animated: true)
                             }
                         }
                     }catch{
-                        SCLAlertView().showSuccess("Ops!", subTitle: "Erro ao alterar a senha.")
+                        let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                        let alertView = SCLAlertView(appearance: appearance)
+                        alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                        alertView.showSuccess("Ops!", subTitle: "Erro ao alterar a senha.")
                         self.dismiss(animated: true)
                     }
                     
                 case let .failure(error):
-                    SCLAlertView().showSuccess("Ops!", subTitle: "Erro ao alterar a senha.")
+                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                    let alertView = SCLAlertView(appearance: appearance)
+                    alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                    alertView.showSuccess("Ops!", subTitle: "Erro ao alterar a senha.")
                     Analytics.logEvent("AccessFormFinishFail", parameters: ["localizedDescription" : error.localizedDescription,"errorDescription" : error.errorDescription!,"Errorresponse" : error.response!])
                     self.dismiss(animated: true)
                 }
-                
             })
         }
         

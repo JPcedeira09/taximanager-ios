@@ -81,13 +81,21 @@ class MBFavoritosAdicionarViewController: UIViewController {
                     MBUser.currentUser!.bookmarks! += mbBookmarks
                     //print(data)
                     print("_____________ Salvando iNFO POST BOOKMARK RESPONSE")
-                    SCLAlertView().showSuccess("Favorito adicionado!", subTitle: "Agora voce tem um novo favorito.")
+                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                    let alertView = SCLAlertView(appearance: appearance)
+                    alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                    alertView.showError("Falha", subTitle: "Envio de redefinição falhou")
+                    alertView.showSuccess("Favorito adicionado!", subTitle: "Agora voce tem um novo favorito.")
                 }
 
             case .failure(let error):
                 print(error.localizedDescription)
                 print("iNFO: error in localizedDescription getBookmarks")
-                SCLAlertView().showError("Falha ao adicionar favorito", subTitle: "Tente mais tarde.")
+                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                let alertView = SCLAlertView(appearance: appearance)
+                alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                alertView.showError("Falha", subTitle: "Envio de redefinição falhou")
+                alertView.showError("Falha ao adicionar favorito", subTitle: "Tente mais tarde.")
             }
         }
     }

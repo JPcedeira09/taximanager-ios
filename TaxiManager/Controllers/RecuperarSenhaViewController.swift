@@ -45,16 +45,30 @@ class RecuperarSenhaViewController: UIViewController {
             .responseJSON { (response) -> Void in
                 switch response.result {
                 case .success(let data):
+                    
                     guard let json = data as? [String : NSObject] else {return}
                     let user = MBUser(from: json)
                     print(user)
+                    
                     if(user.username != "" ){
-                        SCLAlertView().showSuccess("Sucesso", subTitle: "Envio de redefinição completo")
+                        let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                        let alertView = SCLAlertView(appearance: appearance)
+                        alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                        alertView.showSuccess("Sucesso", subTitle: "Envio de redefinição completo")
+                        
                     }else{
-                        SCLAlertView().showError("Falha", subTitle: "Usuario Inexistente, digite novamente")
+                        
+                        let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                        let alertView = SCLAlertView(appearance: appearance)
+                        alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                        alertView.showError("Falha", subTitle: "Usuario Inexistente, digite novamente")
                     }
+                    
                 case .failure(let error):
-                    SCLAlertView().showError("Falha", subTitle: "Envio de redefinição falhou")
+                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                    let alertView = SCLAlertView(appearance: appearance)
+                    alertView.addButton("Fechar", action: {self.dismiss(animated: true)})
+                    alertView.showError("Falha", subTitle: "Envio de redefinição falhou")
                     print(error.localizedDescription)
                     Analytics.logEvent("forgotPasswordFinishedFail", parameters: ["User_digitado": self.txtFieldUsername.text!,"Fail": "\(error.localizedDescription)" ])
                 }
