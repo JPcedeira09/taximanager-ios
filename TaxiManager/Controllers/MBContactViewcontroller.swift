@@ -14,7 +14,8 @@ import SwiftSpinner
 import SCLAlertView
 import FirebaseRemoteConfig
 
-class MBContactViewcontroller: UIViewController {
+class MBContactViewcontroller: UIViewController , CLLocationManagerDelegate {
+    
     @IBOutlet weak var textViewInfo: UITextView!
     @IBOutlet weak var textFieldMsg: UITextView!
     //@IBOutlet weak var labelMotivo: UILabel!

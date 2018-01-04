@@ -78,6 +78,7 @@
 		6C7B5A451FD9804E00207F66 /* MBInitialViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */; };
 		6C7B5A471FD988EA00207F66 /* MBPlayeyChoose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A461FD988EA00207F66 /* MBPlayeyChoose.swift */; };
 		6CF95D791FFE6572009090C7 /* MBSobreOAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF95D781FFE6572009090C7 /* MBSobreOAppViewController.swift */; };
+		6CF95D7C1FFEAC84009090C7 /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF95D7B1FFEAC84009090C7 /* DiskStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBInitialViewViewController.swift; sourceTree = "<group>"; };
 		6C7B5A461FD988EA00207F66 /* MBPlayeyChoose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBPlayeyChoose.swift; sourceTree = "<group>"; };
 		6CF95D781FFE6572009090C7 /* MBSobreOAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSobreOAppViewController.swift; sourceTree = "<group>"; };
+		6CF95D7B1FFEAC84009090C7 /* DiskStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskStatus.swift; sourceTree = "<group>"; };
 		85CB8ACC30F5206867D086CF /* Pods-TaxiManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.release.xcconfig"; sourceTree = "<group>"; };
 		EB9C0688FB86992E2886AE4A /* Pods_TaxiManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaxiManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -238,6 +240,7 @@
 		112830AF1F884E3C000972CB /* TaxiManager */ = {
 			isa = PBXGroup;
 			children = (
+				6CF95D7A1FFEAC77009090C7 /* Utils */,
 				11D5DBA91FD07D6C00330AA9 /* Reachability */,
 				11EE3E161FBB5C93007918C6 /* Providers */,
 				11E88D181FA8C6B500C11196 /* TMHistoricoVerMaisCell */,
@@ -425,6 +428,14 @@
 				6C7B5A3C1FD96DD200207F66 /* Info.plist */,
 			);
 			path = TaxiManagerUITests;
+			sourceTree = "<group>";
+		};
+		6CF95D7A1FFEAC77009090C7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6CF95D7B1FFEAC84009090C7 /* DiskStatus.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		863B9278B4BAC12E60BF7D9D /* Pods */ = {
@@ -706,6 +717,7 @@
 				6C001FFD1FEAEBA100B5AA49 /* MBUnauthorizedUser.swift in Sources */,
 				11DB571B1FA112B700A39486 /* Extensions.swift in Sources */,
 				6C7B5A471FD988EA00207F66 /* MBPlayeyChoose.swift in Sources */,
+				6CF95D7C1FFEAC84009090C7 /* DiskStatus.swift in Sources */,
 				6C7B5A451FD9804E00207F66 /* MBInitialViewViewController.swift in Sources */,
 				11EE3E151FBB2933007918C6 /* PrimeiroLoginViewController.swift in Sources */,
 				112830B11F884E3C000972CB /* AppDelegate.swift in Sources */,
