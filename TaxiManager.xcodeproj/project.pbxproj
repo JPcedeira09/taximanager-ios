@@ -77,6 +77,7 @@
 		6C7B5A431FD9765700207F66 /* MBContactViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A421FD9765700207F66 /* MBContactViewcontroller.swift */; };
 		6C7B5A451FD9804E00207F66 /* MBInitialViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */; };
 		6C7B5A471FD988EA00207F66 /* MBPlayeyChoose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B5A461FD988EA00207F66 /* MBPlayeyChoose.swift */; };
+		6CF95D791FFE6572009090C7 /* MBSobreOAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF95D781FFE6572009090C7 /* MBSobreOAppViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +179,7 @@
 		6C7B5A421FD9765700207F66 /* MBContactViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBContactViewcontroller.swift; sourceTree = "<group>"; };
 		6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBInitialViewViewController.swift; sourceTree = "<group>"; };
 		6C7B5A461FD988EA00207F66 /* MBPlayeyChoose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBPlayeyChoose.swift; sourceTree = "<group>"; };
+		6CF95D781FFE6572009090C7 /* MBSobreOAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSobreOAppViewController.swift; sourceTree = "<group>"; };
 		85CB8ACC30F5206867D086CF /* Pods-TaxiManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiManager/Pods-TaxiManager.release.xcconfig"; sourceTree = "<group>"; };
 		EB9C0688FB86992E2886AE4A /* Pods_TaxiManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaxiManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -297,6 +299,7 @@
 				118347881FA27C3400DB3C55 /* MBMenuLateralViewController.swift */,
 				1156BB471FA7C3D300C2DF4F /* TMHistoricoViewController.swift */,
 				6C7B5A441FD9804E00207F66 /* MBInitialViewViewController.swift */,
+				6CF95D781FFE6572009090C7 /* MBSobreOAppViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				11EE3E1F1FBB662A007918C6 /* MBAddress.swift in Sources */,
 				111FB5E31FBF67C300578185 /* MBSearchResult.swift in Sources */,
 				11EE3E181FBB5CB5007918C6 /* MobiliteeProvider.swift in Sources */,
+				6CF95D791FFE6572009090C7 /* MBSobreOAppViewController.swift in Sources */,
 				1177FBDF1FA9A92800439913 /* TMFavoritosCell.swift in Sources */,
 				1177FBDA1FA9A55C00439913 /* MBFavoritosViewController.swift in Sources */,
 				11D5DBA81FD07D6500330AA9 /* Reachability.m in Sources */,
